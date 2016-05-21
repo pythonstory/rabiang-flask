@@ -60,3 +60,11 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+
+# SQLite3 for test database
+*.sqlite3
+
+# settings for production and local
+project/config/settings/production.py
+project/config/settings/local.py
