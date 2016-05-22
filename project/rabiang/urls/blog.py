@@ -2,12 +2,21 @@ from django.conf.urls import include, url
 from .. import views
 
 urlpatterns = [
-    # url(r'^(?P<site>[-\w]+)/page/$', views.page_show, name='page_show'),
-    url(r'^show/$', views.page_show),
+    # ex) /www/blog/2016-05-23/what-is-this
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
+        views.blog_show, name='blog_show'),
+
+    # ex) /www/blog/list
+    url(r'^list/$',
+        views.blog_list, name='blog_list'),
+
+    # ex) /www/blog/archive/2016/05/
+    url(r'^archive/(?P<year>\d{4})/(?P<month>\d{2})/$',
+        views.blog_archive, name='blog_archive'),
+
 ]
 
 """
-/www/blog/slug
 /www/account/login
 /www/account/login-proc
 /www/account/logout
