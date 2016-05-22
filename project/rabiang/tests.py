@@ -7,7 +7,6 @@ class ThemeModelTest(TestCase):
         theme = Theme(name='rabiang theme')
         self.assertEqual(str(theme), theme.name)
 
-
     def test_theme_save_read(self):
         theme = Theme(name='rabiang theme')
         theme.save()
@@ -39,5 +38,3 @@ class ThemeModelTest(TestCase):
         t1.save()
 
         self.assertEqual(Theme.objects.get(id=1).name, 'another theme')
-
-
