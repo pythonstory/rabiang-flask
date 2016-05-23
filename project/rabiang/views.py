@@ -1,9 +1,26 @@
-from django.shortcuts import render
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseNotFound
 
+from .models import Site
 
 def page_show(request, site, slug):
-    return HttpResponse('page show' + site + slug)
+    # site & theme
+    try:
+        site = Site.objects.get(name=site)
+    except Site.DoesNotExist:
+        return HttpResponseNotFound('<h1>Page not found</h1>')
+
+    # module
+
+    # layout
+
+    # menu
+
+    # breadcrumb
+
+    # content
+
+    return HttpResponse(
+        'page show {} {} {}'.format(site, site.theme.name, slug))
 
 
 def blog_show(request, site, year, month, day, slug):
