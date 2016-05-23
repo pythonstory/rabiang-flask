@@ -19,8 +19,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.default_index, name='default_index'),
-    url(r'^(?P<site>\w+)/page/', include('rabiang.urls.page', namespace='page', app_name='page')),
-    url(r'^(?P<site>\w+)/board/', include('rabiang.urls.board', namespace='board', app_name='board')),
-    url(r'^(?P<site>\w+)/blog/', include('rabiang.urls.blog', namespace='blog', app_name='blog')),
+    url(r'^page/', include('rabiang.urls.page', namespace='page', app_name='page')),
+    url(r'^board/', include('rabiang.urls.board', namespace='board', app_name='board')),
+    url(r'^blog/', include('rabiang.urls.blog', namespace='blog', app_name='blog')),
     url(r'^admin/', admin.site.urls),
 ]

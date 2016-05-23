@@ -1,65 +1,61 @@
-from django.http.response import HttpResponse, HttpResponseNotFound
+from django.http.response import HttpResponse
+from django.shortcuts import get_object_or_404, render
 
-from .models import Site
+from .models import Module
 
-def page_show(request, site, slug):
-    # site & theme
-    try:
-        site = Site.objects.get(name=site)
-    except Site.DoesNotExist:
-        return HttpResponseNotFound('<h1>Page not found</h1>')
 
-    # module
+def page_show(request, slug):
+    module = get_object_or_404(Module, slug=slug)
 
-    # layout
+    site = module.site
+    theme = module.theme
+    layout = module.layout
 
-    # menu
+    menu = layout.menu
+    documents = module.documents
 
-    # breadcrumb
+    context = {'site': site, 'theme': theme, 'layout': layout, 'menu': menu,
+               'documents': documents}
+    return render(request, 'default/page/show.html', context)
 
-    # content
 
+def blog_show(request, year, month, day, slug):
     return HttpResponse(
-        'page show {} {} {}'.format(site, site.theme.name, slug))
+        'blog show {} {} {} {}'.format(year, month, day, slug))
 
 
-def blog_show(request, site, year, month, day, slug):
+def blog_list(request):
+    return HttpResponse('blog list')
+
+
+def blog_archive(request, year, month):
     return HttpResponse(
-        'blog show {} {} {} {} {}'.format(site, year, month, day, slug))
+        'blog archive {} {}'.format(year, month))
 
 
-def blog_list(request, site):
-    return HttpResponse('blog list {}'.format(site))
+def board_list(request):
+    return HttpResponse('board list {}')
 
 
-def blog_archive(request, site, year, month):
-    return HttpResponse(
-        'blog archive {} {} {}'.format(site, year, month))
+def board_show(request):
+    return HttpResponse('board show {}')
 
 
-def board_list(request, site):
-    return HttpResponse('board list {}'.format(site))
+def board_create(request):
+    return HttpResponse('board create {}')
 
 
-def board_show(request, site):
-    return HttpResponse('board show {}'.format(site))
+def board_edit(request):
+    return HttpResponse('board edit {}')
 
 
-def board_create(request, site):
-    return HttpResponse('board create {}'.format(site))
+def board_save(request):
+    return HttpResponse('board save {}')
 
 
-def board_edit(request, site):
-    return HttpResponse('board edit {}'.format(site))
+def board_update(request):
+    return HttpResponse('board update {}')
 
 
-def board_save(request, site):
-    return HttpResponse('board save {}'.format(site))
-
-
-def board_update(request, site):
-    return HttpResponse('board update {}'.format(site))
-
-
-def board_delete(request, site):
-    return HttpResponse('board delete {}'.format(site))
+def board_delete(request):
+    return HttpResponse('board delete {}')

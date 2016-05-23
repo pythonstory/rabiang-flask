@@ -23,7 +23,7 @@ class Theme(models.Model):
 class Layout(models.Model):
     name = models.CharField(max_length=255)
     site = models.ForeignKey(Site, related_name='layouts')
-    menus = models.ManyToManyField('Menu')
+    menu = models.ManyToManyField('Menu')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -42,7 +42,7 @@ class Menu(models.Model):
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=512)
     menu = models.ForeignKey(Menu, related_name='menuItems')
     parent = models.ForeignKey('self', null=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,6 +54,7 @@ class MenuItem(models.Model):
 
 class Module(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=512)
     site = models.ForeignKey(Site, related_name='modules')
     theme = models.ForeignKey(Theme, related_name='modules')
     layout = models.ForeignKey(Layout, related_name='modules')
