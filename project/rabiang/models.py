@@ -1,8 +1,18 @@
 from django.db import models
 
 
+class Site(models.Model):
+    name = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Theme(models.Model):
     name = models.CharField(max_length=255)
+    site = models.ForeignKey(Site, related_name='themes')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -12,18 +22,10 @@ class Theme(models.Model):
 
 class Layout(models.Model):
     name = models.CharField(max_length=255)
+    site = models.ForeignKey(Site, related_name='layouts')
+    menus = models.ManyToManyField('Menu')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Site(models.Model):
-    name = models.CharField(max_length=255)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    theme = models.ForeignKey(Theme, related_name='sites')
 
     def __str__(self):
         return self.name
@@ -42,7 +44,7 @@ class MenuItem(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     menu = models.ForeignKey(Menu, related_name='menuItems')
-    parent = models.ForeignKey('self')
+    parent = models.ForeignKey('self', null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -74,8 +76,16 @@ class Document(models.Model):
 
 class Comment(models.Model):
     document = models.ForeignKey(Document, related_name='comments')
+    parent = models.ForeignKey('self', null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return 'commeted at {}'.format(self.created)
+
+
+class Attachment(models.Model):
+    document = models.ForeignKey(Document, related_name='files')
+    name = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
