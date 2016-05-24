@@ -1,49 +1,48 @@
-from django.http.response import HttpResponse, HttpResponseNotFound
-from django.shortcuts import get_object_or_404, render
-from django.views.generic import View
+from django.http.response import HttpResponse
+from django.views.generic import View, DetailView
 
 from .models import Module
 
 
-class PageShowView(View):
-    def get(self, request, *args, **kwargs):
-        module = get_object_or_404(Module, slug=kwargs['slug'])
+class PageShowView(DetailView):
+    model = Module
 
-        theme = module.theme
+    def get_queryset(self):
+        qs = super(PageShowView, self).get_queryset()
+        return qs.filter(slug=self.kwargs['slug'])
 
-        menu = theme.menu.all()
+    def get_context_data(self, **kwargs):
+        context = super(PageShowView, self).get_context_data(**kwargs)
+        context['page'] = self.object
+        context['document'] = self.object.documents.all()[0]
+        context['menu'] = self.object.theme.menu.all()
+        return context
 
-        try:
-            # constraint: page has one document.
-            document = module.documents.all()[0]
-        except IndexError:
-            return HttpResponseNotFound('<h1>Document does not exist.</h1>')
-
-        context = {'theme': theme, 'menu': menu,
-                   'document': document}
-        return render(request, 'default/page/show.html', context)
+    def get_template_names(self):
+        return self.object.theme.name + '/page/show.html'
 
 
-class BlogShowView(View):
-    def get(self, request, *args, **kwargs):
-        module = get_object_or_404(Module, created__year=kwargs['year'],
-                                   created__month=kwargs['month'],
-                                   created__day=kwargs['day'],
-                                   slug=kwargs['slug'])
+class BlogShowView(DetailView):
+    model = Module
+    template_name = 'default/blog/show.html'
 
-        theme = module.theme
+    def get_queryset(self):
+        qs = super(BlogShowView, self).get_queryset()
 
-        menu = theme.menu.all()
+        return qs.filter(created__year=self.kwargs['year'],
+                         created__month=self.kwargs['month'],
+                         created__day=self.kwargs['day'],
+                         slug=self.kwargs['slug'])
 
-        try:
-            # constraint: blog has one document.
-            document = module.documents.all()[0]
-        except IndexError:
-            return HttpResponseNotFound('<h1>Document does not exist.</h1>')
+    def get_context_data(self, **kwargs):
+        context = super(BlogShowView, self).get_context_data(**kwargs)
+        context['page'] = self.object
+        context['document'] = self.object.documents.all()[0]
+        context['menu'] = self.object.theme.menu.all()
+        return context
 
-        context = {'theme': theme, 'menu': menu,
-                   'document': document}
-        return render(request, 'default/blog/show.html', context)
+    def get_template_names(self):
+        return self.object.theme.name + '/blog/show.html'
 
 
 class BlogListView(View):

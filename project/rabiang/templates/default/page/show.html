@@ -1,7 +1,6 @@
-{% extends theme.name|add:"/layout/base.html" %}
+{% extends page.theme.name|add:"/layout/base.html" %}
 {% block content %}
-{{ site.name }}
-{{ theme.name }}
-{{ menu }}
+{{ page.name }}
 {{ document }}
+{{ menu }}
 {% endblock content %}

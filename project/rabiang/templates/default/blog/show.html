@@ -1,7 +1,4 @@
-{% extends theme.name|add:"/layout/base.html" %}
+{% extends blog.theme.name|add:"/layout/base.html" %}
 {% block content %}
-{{ site.name }}
-{{ theme.name }}
-{{ menu }}
-{{ document }}
+{{ blog.name }}
 {% endblock content %}
