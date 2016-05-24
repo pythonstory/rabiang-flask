@@ -24,7 +24,6 @@ class PageShowView(DetailView):
 
 class BlogShowView(DetailView):
     model = Module
-    template_name = 'default/blog/show.html'
 
     def get_queryset(self):
         qs = super(BlogShowView, self).get_queryset()
@@ -36,7 +35,7 @@ class BlogShowView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BlogShowView, self).get_context_data(**kwargs)
-        context['page'] = self.object
+        context['blog'] = self.object
         context['document'] = self.object.documents.all()[0]
         context['menu'] = self.object.theme.menu.all()
         return context
