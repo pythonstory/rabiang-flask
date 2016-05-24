@@ -1,60 +1,102 @@
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
+from django.views.generic import View
 
 from .models import Module
 
 
-def page_show(request, slug):
-    module = get_object_or_404(Module, slug=slug)
+class PageShowView(View):
+    def get(self, request, *args, **kwargs):
+        module = get_object_or_404(Module, slug=kwargs['slug'])
 
-    site = module.site
-    theme = module.theme
+        theme = module.theme
 
-    menu = theme.menu
-    documents = module.documents
+        menu = theme.menu.all()
 
-    context = {'site': site, 'theme': theme, 'menu': menu,
-               'documents': documents}
-    return render(request, 'default/page/show.html', context)
+        try:
+            # constraint: page has one document.
+            document = module.documents.all()[0]
+        except IndexError:
+            return HttpResponseNotFound('<h1>Document does not exist.</h1>')
 
-
-def blog_show(request, year, month, day, slug):
-    return HttpResponse(
-        'blog show {} {} {} {}'.format(year, month, day, slug))
-
-
-def blog_list(request):
-    return HttpResponse('blog list')
+        context = {'theme': theme, 'menu': menu,
+                   'document': document}
+        return render(request, 'default/page/show.html', context)
 
 
-def blog_archive(request, year, month):
-    return HttpResponse(
-        'blog archive {} {}'.format(year, month))
+class BlogShowView(View):
+    def get(self, request, *args, **kwargs):
+        module = get_object_or_404(Module, created__year=kwargs['year'],
+                                   created__month=kwargs['month'],
+                                   created__day=kwargs['day'],
+                                   slug=kwargs['slug'])
+
+        theme = module.theme
+
+        menu = theme.menu.all()
+
+        try:
+            # constraint: blog has one document.
+            document = module.documents.all()[0]
+        except IndexError:
+            return HttpResponseNotFound('<h1>Document does not exist.</h1>')
+
+        context = {'theme': theme, 'menu': menu,
+                   'document': document}
+        return render(request, 'default/blog/show.html', context)
 
 
-def board_list(request):
-    return HttpResponse('board list {}')
+class BlogListView(View):
+    def get(self, request, *args, **kwargs):
+        # Business logic goes here.
+        return HttpResponse('blog list')
 
 
-def board_show(request):
-    return HttpResponse('board show {}')
+class BlogArchiveView(View):
+    def get(self, request, *args, **kwargs):
+        # Business logic goes here.
+
+        return HttpResponse(
+            'blog archive {} {}'.format(kwargs['year'], kwargs['month']))
 
 
-def board_create(request):
-    return HttpResponse('board create {}')
+class BoardListView(View):
+    def get(self, request, *args, **kwargs):
+        # Business logic goes here.
+        return HttpResponse('board list')
 
 
-def board_edit(request):
-    return HttpResponse('board edit {}')
+class BoardShowView(View):
+    def get(self, request, *args, **kwargs):
+        # Business logic goes here.
+        return HttpResponse('board show')
 
 
-def board_save(request):
-    return HttpResponse('board save {}')
+class BoardCreateView(View):
+    def get(self, request, *args, **kwargs):
+        # Business logic goes here.
+        return HttpResponse('board create')
 
 
-def board_update(request):
-    return HttpResponse('board update {}')
+class BoardEditView(View):
+    def get(self, request, *args, **kwargs):
+        # Business logic goes here.
+        return HttpResponse('board edit')
 
 
-def board_delete(request):
-    return HttpResponse('board delete {}')
+class BoardSaveView(View):
+    def get(selfself, request, *args, **kwargs):
+        # Business logic goes here.
+        return HttpResponse('board save')
+
+
+class BoardUpdateView(View):
+    def get(selfself, request, *args, **kwargs):
+        # Business logic goes here.
+        return HttpResponse('board update')
+
+
+class BoardDeleteView(View):
+    def get(selfself, request, *args, **kwargs):
+        # Business logic goes here.
+        return HttpResponse('board delete')

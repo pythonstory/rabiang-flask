@@ -15,14 +15,16 @@ class ThemeModelTest(TestCase):
         theme = Theme(name='default', site=site)
         theme.save()
 
-        themes = site.themes
+        themes = site.themes.all()
 
         self.assertEqual(themes[0].name, 'default')
         self.assertEqual(len(themes), 1)
 
-    """
+
     def test_theme_delete(self):
-        theme = Theme(name='rabiang theme')
+        site = Site(name='www')
+        site.save()
+        theme = Theme(name='default', site=site)
         theme.save()
 
         Theme.objects.get(id=1).delete()
@@ -32,15 +34,16 @@ class ThemeModelTest(TestCase):
         self.assertEqual(len(themes), 0)
 
     def test_theme_update(self):
-        theme = Theme(name='rabiang theme')
+        site = Site(name='www')
+        site.save()
+        theme = Theme(name='default', site=site)
         theme.save()
 
         t1 = Theme.objects.get(id=1)
 
-        self.assertEqual(t1.name, 'rabiang theme')
+        self.assertEqual(t1.name, 'default')
 
-        t1.name = 'another theme'
+        t1.name = 'main'
         t1.save()
 
-        self.assertEqual(Theme.objects.get(id=1).name, 'another theme')
-    """
+        self.assertEqual(Theme.objects.get(id=1).name, 'main')
