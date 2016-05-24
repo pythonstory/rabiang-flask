@@ -1,5 +1,7 @@
+{% extends theme.name|add:"/layout/base.html" %}
+{% block content %}
 {{ site.name }}
 {{ theme.name }}
-{{ layout.name }}
 {{ menu }}
 {{ documents }}
+{% endblock content %}

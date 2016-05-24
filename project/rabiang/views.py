@@ -9,12 +9,11 @@ def page_show(request, slug):
 
     site = module.site
     theme = module.theme
-    layout = module.layout
 
-    menu = layout.menu
+    menu = theme.menu
     documents = module.documents
 
-    context = {'site': site, 'theme': theme, 'layout': layout, 'menu': menu,
+    context = {'site': site, 'theme': theme, 'menu': menu,
                'documents': documents}
     return render(request, 'default/page/show.html', context)
 

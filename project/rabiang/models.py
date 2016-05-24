@@ -13,16 +13,6 @@ class Site(models.Model):
 class Theme(models.Model):
     name = models.CharField(max_length=255)
     site = models.ForeignKey(Site, related_name='themes')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Layout(models.Model):
-    name = models.CharField(max_length=255)
-    site = models.ForeignKey(Site, related_name='layouts')
     menu = models.ManyToManyField('Menu')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -57,7 +47,6 @@ class Module(models.Model):
     slug = models.SlugField(max_length=512)
     site = models.ForeignKey(Site, related_name='modules')
     theme = models.ForeignKey(Theme, related_name='modules')
-    layout = models.ForeignKey(Layout, related_name='modules')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
