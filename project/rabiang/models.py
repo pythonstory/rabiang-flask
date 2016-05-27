@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 
@@ -43,6 +44,14 @@ class MenuItem(models.Model):
 
 
 class Module(models.Model):
+    MODULE_CHOICES = (
+        ('page', 'page'),
+        ('blog', 'blog'),
+        ('board', 'board'),
+    )
+
+    module = models.CharField(max_length=10, choices=MODULE_CHOICES,
+                              default='page')
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=512)
     site = models.ForeignKey(Site, related_name='modules')
@@ -52,6 +61,17 @@ class Module(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        # TODO: other modules case
+        if self.module == 'blog':
+            return reverse('blog:blog_show',
+                           args=[self.publish.year,
+                                 self.publish.strftime('%m'),
+                                 self.publish.strftime('%d'),
+                                 self.slug])
+        elif self.module == 'page':
+            return reverse('page_show', args=[self.slug])
 
 
 class Document(models.Model):
