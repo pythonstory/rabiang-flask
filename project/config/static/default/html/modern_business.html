@@ -300,10 +300,10 @@ YUI().use(
     'aui-dropdown',
     'aui-carousel',
         function(Y) {
-            var navbarButton = Y.one(".navbar-toggle");
+            var navbarToggle = Y.one(".navbar-toggle");
             var navbarCollapse = Y.one(".navbar-collapse");
 
-            navbarButton.on('click', function (e) {
+            navbarToggle.on('click', function (e) {
                 if (navbarCollapse.hasClass("in")) {
                     navbarCollapse.removeClass("in");
                     navbarCollapse.setStyle("height", "0px");
