@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from .models import Theme, Site
 
 
@@ -7,7 +8,6 @@ class ThemeModelTest(TestCase):
         site = Site(name='www')
         theme = Theme(name='default', site=site)
         self.assertEqual(str(theme), theme.name)
-
 
     def test_theme_save_read(self):
         site = Site(name='www')
@@ -19,7 +19,6 @@ class ThemeModelTest(TestCase):
 
         self.assertEqual(themes[0].name, 'default')
         self.assertEqual(len(themes), 1)
-
 
     def test_theme_delete(self):
         site = Site(name='www')

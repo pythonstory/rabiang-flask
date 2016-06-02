@@ -9,4 +9,3 @@ admin.site.register(MenuItem)
 admin.site.register(Module)
 admin.site.register(Document)
 admin.site.register(Comment)
-
