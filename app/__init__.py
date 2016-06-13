@@ -40,6 +40,9 @@ def create_app(config=None, app_name=None):
     from app.blueprints.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
+    from app.blueprints.forum import forum as forum_blueprint
+    app.register_blueprint(forum_blueprint, url_prefix='/forum')
+
     return app
 
 

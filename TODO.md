@@ -1,4 +1,4 @@
-page, article, journal, post, document, 
+page, article, journal, post, document, messages
 
 
 
@@ -12,7 +12,20 @@ URI
 /page/<slug>/edit : edit page form GET / save POST
 /page/<slug>/delete : delete page GET / delete POST
 
+/forum/<name>/list?page=7&q=keyword
+/forum/<name>/show?id=9
+/forum/<name>/create
+/forum/<name>/edit?id=9
+/forum/<name>/delete?id=9
 
+/shop/product/<slug>
+/shop/brand
+/shop/vendor
+/shop/pay
+/shop/cart
+/shop/bookmark
+
+/poll
 
 /auth
 
@@ -22,6 +35,8 @@ URI
 
 method
 
-index
-list
-
+index -> list
+detail
+create
+edit
+delete
