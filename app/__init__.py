@@ -34,8 +34,8 @@ def create_app(config=None, app_name=None):
     from app.blueprints.main import main as main_blueprint
     app.register_blueprint(main_blueprint, url_prefix='/')
 
-    from app.blueprints.blog import blog as blog_blueprint
-    app.register_blueprint(blog_blueprint, url_prefix='/blog')
+    from app.blueprints.page import page as page_blueprint
+    app.register_blueprint(page_blueprint, url_prefix='/page')
 
     from app.blueprints.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
