@@ -12,16 +12,18 @@ babel = Babel()
 
 
 def create_app(config=None, app_name=None):
+    # Flask 앱 생성
     app_name = app_name or __name__
     app = Flask(app_name)
 
+    # 주요 설정 로드
     app.config.from_object(config)
 
     # Flask 확장 초기화
     db.init_app(app)
     babel.init_app(app)
 
-    # Logging 설정
+    # Logging Rotating File 설정
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
     handler = logging.handlers.RotatingFileHandler(app.config['LOGGING_LOCATION'])
     handler.setLevel(app.config['LOGGING_LEVEL'])
