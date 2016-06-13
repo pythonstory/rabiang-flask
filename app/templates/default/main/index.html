@@ -1,12 +1,21 @@
-{% extends "default/base.html" %}
+{% extends "default/columns-2.html" %}
 
 {% block title %}Rabiang :: Home{% endblock %}
 
 {% block page_content %}
-<div class="row">
-    <div class="col-md-12">
-        <a href="{{ url_for('main.index') }}">{{ _('Home') }}</a>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ url_for('main.index') }}">{{ _('Home') }}</a>
+        </div>
     </div>
-</div>
+{% endblock %}
+
+{% block sidebar %}
+    <!-- Side Widget Well -->
+    <div class="well">
+        <h4>Side Widget Well</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus
+            laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+    </div>
 {% endblock %}
 

@@ -37,12 +37,12 @@
 
 {% include 'default/navigation.html' %}
 
-<div class="container">
-    {% block page_content %}{% endblock %}
-    <hr>
+{% block layout %}{% endblock %}
 
+<div class="container">
+    <hr>
     <footer>
-        <p>&copy; Company 2016</p>
+        <p>&copy; Pythonstory 2016</p>
     </footer>
 </div> <!-- /container -->
 

@@ -1,0 +1,18 @@
+{% extends "default/base.html" %}
+
+{% block layout %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Content Column -->
+            <div class="col-lg-8">
+                {% block page_content %}{% endblock %}
+            </div>
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+                {% block sidebar %}{% endblock %}
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+{% endblock %}
