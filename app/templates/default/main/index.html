@@ -1,0 +1,12 @@
+{% extends "default/base.html" %}
+
+{% block title %}Flask-Boilerplate :: Home{% endblock %}
+
+{% block page_content %}
+<div class="row">
+    <div class="col-md-12">
+        <a href="{{ url_for('main.index') }}">{{ _('Home') }}</a>
+    </div>
+</div>
+{% endblock %}
+
