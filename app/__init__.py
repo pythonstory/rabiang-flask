@@ -30,8 +30,13 @@ def create_app(config=None, app_name=None):
 
     # 블루프린트 모듈 등록
     from app.blueprints.main import main as main_blueprint
-
     app.register_blueprint(main_blueprint, url_prefix='/')
+
+    from app.blueprints.blog import blog as blog_blueprint
+    app.register_blueprint(blog_blueprint, url_prefix='/blog')
+
+    from app.blueprints.auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     return app
 
