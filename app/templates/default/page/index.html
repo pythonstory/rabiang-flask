@@ -3,7 +3,6 @@
 {% block title %}Rabiang :: Blog{% endblock %}
 
 {% block page_content %}
-
     {% for post in posts %}
         <h2>
             <a href="{{ url_for('page.detail', slug=post.slug) }}">{{ post.title }}</a>
@@ -19,8 +18,8 @@
         <img class="img-responsive" src="http://placehold.it/900x300" alt="">
         <hr>
         <p>{{ post.body | truncate(255) }}</p>
-        <a class="btn btn-primary" href="{{ url_for('page.detail', slug=post.slug) }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
+        <a class="btn btn-primary" href="{{ url_for('page.detail', slug=post.slug) }}">Read More
+            <span class="glyphicon glyphicon-chevron-right"></span></a>
         <hr>
     {% endfor %}
 

@@ -3,31 +3,27 @@
 {% block title %}Edit a post{% endblock %}
 
 {% block page_content %}
-    <div class="row">
-        <div class="col-md-12">
-            <form action="{{ url_for('page.create') }}" method="post" class="form-horizontal">
-                {{ form.csrf_token }}
+    <form action="{{ url_for('page.create') }}" method="post" class="form-horizontal">
+        {{ form.csrf_token }}
 
-                <div class="form-group">
-                    {{ form.title.label(class='col-sm-2 control-label') }}
-                    <div class="col-sm-10">
-                        {{ form.title(class='form-control') }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    {{ form.body.label(class='col-sm-2 control-label') }}
-                    <div class="col-sm-10">
-                        {{ form.body(class='form-control') }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Save</button>
-
-                        <a href="{{ url_for('page.index') }}" class="btn">Cancel</a>
-                    </div>
-                </div>
-            </form>
+        <div class="form-group">
+            {{ form.title.label(class='col-sm-2 control-label') }}
+            <div class="col-sm-10">
+                {{ form.title(class='form-control') }}
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            {{ form.body.label(class='col-sm-2 control-label') }}
+            <div class="col-sm-10">
+                {{ form.body(class='form-control') }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Save</button>
+
+                <a href="{{ url_for('page.index') }}" class="btn">Cancel</a>
+            </div>
+        </div>
+    </form>
 {% endblock %}
