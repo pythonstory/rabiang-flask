@@ -31,8 +31,11 @@ class Comment(db.Model):
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
     modified_timestamp = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    post = db.relationship('Post', backref='comments')
+
     def __init__(self, *args, **kwargs):
         super(Comment, self).__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<Comment: %s>' % self.title
+        return '<Comment: %s>' % self.body

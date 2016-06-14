@@ -1,0 +1,12 @@
+{% extends "default/columns-1.html" %}
+
+{% block title %}Rabiang :: Detail{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            {{ post.title }} {{ post.body }} {{ post.created_timestamp }} {{ post.modified_timestamp }}
+        </div>
+    </div>
+{% endblock %}
+

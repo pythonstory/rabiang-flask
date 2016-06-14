@@ -9,8 +9,8 @@ URI
 /page/tag/<slug> : page list with tag
 /page/<slug> : detail
 /page/create: new page form GET / save POST
-/page/<slug>/edit : edit page form GET / save POST
-/page/<slug>/delete : delete page GET / delete POST
+/page/<int:id>/edit : edit page form GET / save POST
+/page/<int:id>/delete : delete page GET / delete POST
 
 /forum/<name>/list?page=7&q=keyword
 /forum/<name>/show?id=9
@@ -35,7 +35,7 @@ URI
 
 method
 
-index -> list
+index
 detail
 create
 edit

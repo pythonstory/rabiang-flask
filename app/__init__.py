@@ -5,10 +5,12 @@ import logging.handlers
 from flask import Flask, g, request, current_app
 from flask_babel import Babel
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CsrfProtect
 
 # Flask 확장 선언
 db = SQLAlchemy()
 babel = Babel()
+csrf = CsrfProtect()
 
 
 def create_app(config=None, app_name=None):
@@ -22,6 +24,7 @@ def create_app(config=None, app_name=None):
     # Flask 확장 초기화
     db.init_app(app)
     babel.init_app(app)
+    csrf.init_app(app)
 
     # Logging Rotating File 설정
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])

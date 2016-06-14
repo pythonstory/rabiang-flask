@@ -3,6 +3,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+SECRET_KEY = 'YOU MUST SPECIFY YOUR OWN SECRET KEY.'
+
 DEBUG = True
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///%s/app.db' % BASE_DIR
