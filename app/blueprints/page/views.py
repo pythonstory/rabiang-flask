@@ -11,9 +11,11 @@ from .models import Post
 
 @page.route('/', methods=['GET', 'POST'])
 @page.route('/index', methods=['GET', 'POST'])
-@page.route('/index/<int:page>', methods=['GET', 'POST'])
-def index(page=1):
-    return render_template('default/auth/index.html')
+@page.route('/index/<int:pos>', methods=['GET', 'POST'])
+def index(pos=1):
+    posts = Post.query.paginate(1, 10, False).items
+
+    return render_template('default/page/index.html', posts=posts)
 
 
 @page.route('/<slug>')

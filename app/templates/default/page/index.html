@@ -1,12 +1,36 @@
-{% extends "default/columns-1.html" %}
+{% extends "default/columns-2.html" %}
 
 {% block title %}Rabiang :: Blog{% endblock %}
 
 {% block page_content %}
-    <div class="row">
-        <div class="col-md-12">
-            <a href="{{ url_for('main.index') }}">{{ _('Home') }}</a>
-        </div>
-    </div>
-{% endblock %}
 
+    {% for post in posts %}
+        <h2>
+            <a href="{{ url_for('page.detail', slug=post.slug) }}">{{ post.title }}</a>
+        </h2>
+        <p class="lead">
+            by <a href="index.php">author</a>
+        </p>
+        <p>
+            <span class="glyphicon glyphicon-time"></span> Posted on {{ post.created_timestamp }}
+            / Modified on {{ post.modified_timestamp }}
+        </p>
+        <hr>
+        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+        <hr>
+        <p>{{ post.body | truncate(255) }}</p>
+        <a class="btn btn-primary" href="{{ url_for('page.detail', slug=post.slug) }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+        <hr>
+    {% endfor %}
+
+    <!-- Pager -->
+    <ul class="pager">
+        <li class="previous">
+            <a href="#">&larr; Older</a>
+        </li>
+        <li class="next">
+            <a href="#">Newer &rarr;</a>
+        </li>
+    </ul>
+{% endblock %}

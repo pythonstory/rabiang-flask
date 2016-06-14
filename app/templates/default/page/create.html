@@ -1,4 +1,4 @@
-{% extends "default/columns-1.html" %}
+{% extends "default/columns-2.html" %}
 
 {% block title %}Write a new post{% endblock %}
 
@@ -10,14 +10,32 @@
 
                 <div class="form-group">
                     {{ form.title.label(class='col-sm-2 control-label') }}
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         {{ form.title(class='form-control') }}
+                    </div>
+                    <div class="col-sm-4">
+                        {% if form.title.errors %}
+                            <ul class="alert alert-danger">
+                                {% for error in form.title.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="form-group">
                     {{ form.body.label(class='col-sm-2 control-label') }}
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         {{ form.body(class='form-control') }}
+                    </div>
+                    <div class="col-sm-4">
+                        {% if form.body.errors %}
+                            <ul class="alert alert-danger">
+                                {% for error in form.body.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="form-group">

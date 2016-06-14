@@ -4,19 +4,25 @@ page, article, journal, post, document, messages
 
 URI
 
+blog
+
 /page : page list
 /page/tag : tag list
 /page/tag/<slug> : page list with tag
 /page/<slug> : detail
 /page/create: new page form GET / save POST
-/page/<int:id>/edit : edit page form GET / save POST
-/page/<int:id>/delete : delete page GET / delete POST
+/page/edit/<int:id> : edit page form GET / save POST
+/page/delete/<int:id> : delete page GET / delete POST
 
-/forum/<name>/list?page=7&q=keyword
-/forum/<name>/show?id=9
+board
+
+/forum/<name>/index?page=7&q=keyword
+/forum/<name>/detail?id=9
 /forum/<name>/create
 /forum/<name>/edit?id=9
 /forum/<name>/delete?id=9
+
+cart
 
 /shop/product/<slug>
 /shop/brand
@@ -40,3 +46,8 @@ detail
 create
 edit
 delete
+
+
+- form valid error
+- slug unique check
+- trailers
