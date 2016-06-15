@@ -11,9 +11,9 @@ from .models import Post
 
 @page.route('/', methods=['GET', 'POST'])
 @page.route('/index', methods=['GET', 'POST'])
-@page.route('/index/<int:pos>', methods=['GET', 'POST'])
-def index(pos=1):
-    posts = Post.query.paginate(1, 10, False).items
+@page.route('/index/<int:page_id>', methods=['GET', 'POST'])
+def index(page_id=1):
+    posts = Post.query.paginate(page_id, 10, False).items
 
     return render_template('default/page/index.html', posts=posts)
 
@@ -24,9 +24,9 @@ def detail(slug):
     return render_template('default/page/detail.html', post=post)
 
 
-@page.route('/<int:pid>')
-def detail_pid(pid):
-    post = Post.query.filter(Post.id == pid).first_or_404()
+@page.route('/<int:post_id>')
+def detail_post_id(post_id):
+    post = Post.query.filter(Post.id == post_id).first_or_404()
     return render_template('default/page/detail.html', post=post)
 
 
@@ -49,9 +49,9 @@ def create():
     return render_template('default/page/create.html', form=form)
 
 
-@page.route('/edit/<int:pid>', methods=['GET', 'POST'])
-def edit(pid):
-    post = Post.query.get_or_404(pid)
+@page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
+def edit(post_id):
+    post = Post.query.get_or_404(post_id)
 
     form = PostForm(obj=post)
 
@@ -69,8 +69,8 @@ def edit(pid):
     return render_template('default/page/edit.html', form=form)
 
 
-@page.route('/delete/<int:pid>', methods=['GET', 'POST'])
-def delete(pid):
+@page.route('/delete/<int:post_id>', methods=['GET', 'POST'])
+def delete(post_id):
     if request.method == 'POST':
         pass
     else:

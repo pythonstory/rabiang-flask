@@ -23,29 +23,6 @@
         <hr>
     {% endfor %}
 
-    <!-- Pagination -->
-    <nav>
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="First">
-                    <span aria-hidden="true">First</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">Prev</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    {% include 'default/page/pagination.html' %}
+
 {% endblock %}
