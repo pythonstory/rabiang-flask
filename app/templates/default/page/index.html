@@ -23,13 +23,29 @@
         <hr>
     {% endfor %}
 
-    <!-- Pager -->
-    <ul class="pager">
-        <li class="previous">
-            <a href="#">&larr; Older</a>
-        </li>
-        <li class="next">
-            <a href="#">Newer &rarr;</a>
-        </li>
-    </ul>
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="First">
+                    <span aria-hidden="true">First</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">Prev</span>
+                </a>
+            </li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}

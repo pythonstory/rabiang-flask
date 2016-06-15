@@ -49,5 +49,6 @@ delete
 
 
 - form valid error
+- flash message
 - slug unique check
-- trailers
+- breadcrumbs / trailers
