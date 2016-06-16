@@ -2,7 +2,10 @@
 
 from datetime import datetime
 
+from flask import url_for
+
 from app import db
+from app.utils.html import slugify
 
 
 class Post(db.Model):
@@ -15,6 +18,15 @@ class Post(db.Model):
 
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
     modified_timestamp = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+    def generate_slug(self):
+        self.slug = slugify(self.title)
+
+    def get_slug_url(self):
+        return url_for('page.detail_slug', slug=self.slug)
+
+    def get_permanent_url(self):
+        return url_for('page.detail_post_id', post_id=self.id)
 
     def __init__(self, *args, **kwargs):
         super(Post, self).__init__(*args, **kwargs)
