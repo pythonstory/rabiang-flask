@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 
-from flask import render_template, current_app
-from flask_babel import gettext, format_datetime
+from flask import render_template
 
 from . import forum
 

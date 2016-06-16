@@ -50,6 +50,10 @@ create
 edit
 delete
 
+import
+
+always use absolute package path but relative path for current directory
+
 
 - form valid error
 - slug unique check
