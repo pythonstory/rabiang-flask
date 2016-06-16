@@ -53,6 +53,8 @@ delete
 
 - form valid error
 - slug unique check
+- form label - i18n
+- date formatting (posted on, modified on)
 - breadcrumbs / trailers
 - pagination : parameterized
 - babel select lang html

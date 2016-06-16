@@ -1,12 +1,10 @@
 {% extends "default/columns-2.html" %}
 
-{% block title %}Write a new post{% endblock %}
+{% block title %}{{ _('Write a new post') }}{% endblock %}
 
 {% block page_content %}
-
     <form action="{{ url_for('page.create') }}" method="post" class="form-horizontal">
         {{ form.csrf_token }}
-
         <div class="form-group">
             {{ form.title.label(class='col-sm-2 control-label') }}
             <div class="col-sm-6">
@@ -40,7 +38,6 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
-
                 <a href="{{ url_for('page.index') }}" class="btn btn-default">{{ _('Cancel') }}</a>
             </div>
         </div>

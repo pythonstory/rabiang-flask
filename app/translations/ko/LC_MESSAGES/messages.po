@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-17 07:12+0900\n"
+"POT-Creation-Date: 2016-06-17 07:24+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -23,6 +23,14 @@ msgstr ""
 #: app/templates/default/main/index.html:8
 msgid "Home"
 msgstr "시작화면"
+
+#: app/blueprints/page/forms.py:10
+msgid "Title"
+msgstr "제목"
+
+#: app/blueprints/page/forms.py:11
+msgid "Body"
+msgstr "본문"
 
 #: app/blueprints/page/views.py:46
 msgid "You wrote a new post."
@@ -48,6 +56,7 @@ msgstr "쓰기"
 msgid "Auth"
 msgstr "인증"
 
+#: app/templates/default/auth/login.html:28
 #: app/templates/default/navigation.html:46
 msgid "Login"
 msgstr "로그인"
@@ -88,12 +97,16 @@ msgstr "태그"
 msgid "Blog Archives"
 msgstr "글보관함"
 
-#: app/templates/default/page/create.html:42
+#: app/templates/default/page/create.html:3
+msgid "Write a new post"
+msgstr "블로그 새 글 작성"
+
+#: app/templates/default/page/create.html:40
 #: app/templates/default/page/edit.html:23
 msgid "Save"
 msgstr "저장"
 
-#: app/templates/default/page/create.html:44
+#: app/templates/default/page/create.html:41
 #: app/templates/default/page/delete.html:12
 #: app/templates/default/page/edit.html:25
 msgid "Cancel"
