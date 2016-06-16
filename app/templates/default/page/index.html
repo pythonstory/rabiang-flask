@@ -11,8 +11,9 @@
             by <a href="index.php">author</a>
         </p>
         <p>
-            <span class="glyphicon glyphicon-time"></span> Posted on {{ post.created_timestamp }}
-            / Modified on {{ post.modified_timestamp }}
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            Posted on {{ post.created_timestamp | datetimeformat(format='medium') }} <br />
+            Modified on {{ post.modified_timestamp | datetimeformat(format='medium') }}
         </p>
         <hr>
         <img class="img-responsive" src="http://placehold.it/900x300" alt="">

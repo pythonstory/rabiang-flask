@@ -39,6 +39,13 @@
 {% include 'default/navigation.html' %}
 {% include 'default/breadcrumb.html' %}
 
+{% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="alert alert-dismissable alert-{{ category }}">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+{% endfor %}
+
 {% block layout %}{% endblock %}
 
 <div class="container">

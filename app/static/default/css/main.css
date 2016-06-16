@@ -6,14 +6,12 @@ body {
     padding-bottom: 20px;
 }
 
+.sidebar_list_style {
+    list-style-type: none;
+    padding-left: 20px;
+}
 
-
-
-
-
-
-
-
-
-
-
+.sidebar_list_style_outer {
+    list-style-type: none;
+    padding-left: 0px;
+}

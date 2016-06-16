@@ -26,7 +26,7 @@ def detail(slug):
 
 @page.route('/<int:post_id>')
 def detail_post_id(post_id):
-    post = Post.query.filter(Post.id == post_id).first_or_404()
+    post = Post.query.get_or_404(post_id)
     return render_template('default/page/detail.html', post=post)
 
 
