@@ -1,28 +1,49 @@
 <!-- Pagination -->
 <nav class="text-center">
     <ul class="pagination">
+        {% if posts.has_prev %}
+            <li>
+                <a href="{{ url_for('page.index', page_num=1) }}" aria-label="First">
+                    <span aria-hidden="true">First</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('page.index', page_num=posts.prev_num) }}" aria-label="Previous">
+                    <span aria-hidden="true">Prev</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="disabled">
+                <a href="#" aria-label="First"><span aria-hidden="true">First</span></a>
+            </li>
+            <li class="disabled">
+                <a href="#" aria-label="Previous"><span aria-hidden="true">Prev</span></a>
+            </li>
+        {% endif %}
+        {% for page in posts.iter_pages() %}
+            {% if page %}
+                {% if page != posts.page %}
+                    <li><a href="{{ url_for('page.index', page_num=page) }}">{{ page }}</a></li>
+                {% else %}
+                    <li class="active"><a href="#">{{ page }} <span class="sr-only">(current)</span></a></li>
+                {% endif %}
+            {% else %}
+                <span class=ellipsis>…</span>
+            {% endif %}
+        {% endfor %}
+        {% if posts.has_next %}
+            <li>
+                <a href="{{ url_for('page.index', page_num=posts.next_num) }}" aria-label="Next">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="disabled">
+                <a href="#" aria-label="Next"><span aria-hidden="true">Next</span></a>
+            </li>
+        {% endif %}
         <li>
-            <a href="#" aria-label="First">
-                <span aria-hidden="true">First</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" aria-label="Previous">
-                <span aria-hidden="true">Prev</span>
-            </a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next">
-                <span aria-hidden="true">Next</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" aria-label="Next">
+            <a href="#" aria-label="Last">
                 <span aria-hidden="true">Last</span>
             </a>
         </li>

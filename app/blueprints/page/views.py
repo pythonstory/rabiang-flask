@@ -11,9 +11,9 @@ from .models import Post
 
 @page.route('/', methods=['GET', 'POST'])
 @page.route('/index', methods=['GET', 'POST'])
-@page.route('/index/<int:page_id>', methods=['GET', 'POST'])
-def index(page_id=1):
-    posts = Post.query.paginate(page_id, 10, False).items
+@page.route('/index/<int:page_num>', methods=['GET', 'POST'])
+def index(page_num=1):
+    posts = Post.query.paginate(page_num, 2, False)
 
     return render_template('default/page/index.html', posts=posts)
 

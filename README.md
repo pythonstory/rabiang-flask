@@ -1,6 +1,8 @@
-# Flask-boilerplate
+# Rabiang
 
-## Requirements
+## Installation
+
+### Requirements
 
 * Flask
 * Flask-script

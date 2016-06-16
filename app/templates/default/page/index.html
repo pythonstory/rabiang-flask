@@ -3,7 +3,7 @@
 {% block title %}Rabiang :: Blog{% endblock %}
 
 {% block page_content %}
-    {% for post in posts %}
+    {% for post in posts.items %}
         <h2>
             <a href="{{ url_for('page.detail', slug=post.slug) }}">{{ post.title }}</a>
         </h2>

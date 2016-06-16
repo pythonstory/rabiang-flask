@@ -52,3 +52,5 @@ delete
 - flash message
 - slug unique check
 - breadcrumbs / trailers
+- pagination : parameterized
+- page delete action
