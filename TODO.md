@@ -54,3 +54,10 @@ delete
 - breadcrumbs / trailers
 - pagination : parameterized
 - babel select lang html
+
+
+- user authentication
+- registration
+- email confirmation
+- storing password
+- forgot password
