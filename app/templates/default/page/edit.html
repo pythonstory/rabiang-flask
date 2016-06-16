@@ -8,7 +8,7 @@
         <div class="form-group">
             {{ form.title.label(class='col-sm-2 control-label') }}
             <div class="col-sm-6">
-                {{ form.title(class='form-control') }}
+                {{ form.title(class='form-control', id="post_title") }}
             </div>
             <div class="col-sm-6">
                 {% if form.title.errors %}
@@ -23,7 +23,7 @@
         <div class="form-group">
             {{ form.slug.label(class='col-sm-2 control-label') }}
             <div class="col-sm-6">
-                {{ form.slug(class='form-control') }}
+                {{ form.slug(class='form-control', id="post_slug") }}
             </div>
             <div class="col-sm-6">
                 {% if form.slug.errors %}
@@ -58,4 +58,24 @@
             </div>
         </div>
     </form>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        YUI().use(
+                'aui-node',
+                function (Y) {
+                    var title = Y.one('#post_title');
+                    var slug = Y.one('#post_slug');
+
+                    title.on(
+                            'keyup',
+                            function () {
+                                // slugify title automatically
+                                slug.val(title.val().toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));
+                            }
+                    );
+                }
+        );
+    </script>
 {% endblock %}

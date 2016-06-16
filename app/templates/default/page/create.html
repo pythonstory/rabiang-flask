@@ -71,7 +71,6 @@
                             'keyup',
                             function () {
                                 // slugify title automatically
-                                console.log(title.val().toLowerCase())
                                 slug.val(title.val().toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));
                             }
                     );
