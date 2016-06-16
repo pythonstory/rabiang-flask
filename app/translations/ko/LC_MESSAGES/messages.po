@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-12 02:56+0900\n"
+"POT-Creation-Date: 2016-06-17 05:14+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -18,7 +18,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: app/main/views.py:10
+#: app/blueprints/main/views.py:13 app/templates/default/auth/index.html:8
+#: app/templates/default/forum/index.html:8
+#: app/templates/default/main/index.html:8
 msgid "Home"
 msgstr "시작화면"
+
+#: app/blueprints/page/views.py:46
+msgid "You wrote a new post."
+msgstr "새 게시물을 작성했습니다."
+
+#: app/blueprints/page/views.py:66
+msgid "You edited your post."
+msgstr "게시물을 수정했습니다."
+
+#: app/templates/default/navigation.html:28
+msgid "Blog"
+msgstr "블로그"
+
+#: app/templates/default/navigation.html:32
+msgid "List"
+msgstr "목록"
+
+#: app/templates/default/navigation.html:35
+msgid "Write"
+msgstr "쓰기"
+
+#: app/templates/default/sidebar.html:3
+msgid "Blog Search"
+msgstr "블로그 검색"
+
+#: app/templates/default/sidebar.html:17
+msgid "Blog Category"
+msgstr "블로그 카테고리"
+
+#: app/templates/default/sidebar.html:29
+msgid "Recent Posts"
+msgstr "최근 게시물"
+
+#: app/templates/default/sidebar.html:37
+msgid "Recent Comments"
+msgstr "최근 댓글"
+
+#: app/templates/default/sidebar.html:45
+msgid "Tag"
+msgstr "태그"
+
+#: app/templates/default/sidebar.html:51
+msgid "Blog Archives"
+msgstr "글보관함"
+
+#: app/templates/default/page/create.html:42
+#: app/templates/default/page/edit.html:23
+msgid "Save"
+msgstr "저장"
+
+#: app/templates/default/page/create.html:44
+#: app/templates/default/page/delete.html:12
+#: app/templates/default/page/edit.html:25
+msgid "Cancel"
+msgstr "취소"
+
+#: app/templates/default/page/delete.html:10
+msgid "Delete this post?"
+msgstr "게시물을 정말로 삭제합니까?"
+
+#: app/templates/default/page/delete.html:11
+#: app/templates/default/page/detail.html:36
+msgid "Delete"
+msgstr "삭제"
+
+#: app/templates/default/page/detail.html:35
+msgid "Edit"
+msgstr "수정"
+
+#: app/templates/default/page/pagination.html:7
+#: app/templates/default/page/pagination.html:17
+msgid "First"
+msgstr "처음"
+
+#: app/templates/default/page/pagination.html:12
+#: app/templates/default/page/pagination.html:20
+msgid "Prev"
+msgstr "이전"
+
+#: app/templates/default/page/pagination.html:35
+#: app/templates/default/page/pagination.html:40
+msgid "Next"
+msgstr "다음"
+
+#: app/templates/default/page/pagination.html:45
+msgid "Last"
+msgstr "마지막"
 

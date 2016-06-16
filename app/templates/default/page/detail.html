@@ -31,9 +31,12 @@
 
     <!-- Post Content -->
     {{ post.body }}
+
+    <hr>
+
     <div>
-        <a href="{{ url_for('page.edit', post_id=post.id) }}">Edit</a>
-        <a href="{{ url_for('page.delete', post_id=post.id ) }}">Delete</a>
+        <a class="btn btn-primary" href="{{ url_for('page.edit', post_id=post.id) }}">{{ _('Edit') }}</a>
+        <a class="btn btn-danger"href="{{ url_for('page.delete', post_id=post.id ) }}">{{ _('Delete') }}</a>
     </div>
     <hr>
 

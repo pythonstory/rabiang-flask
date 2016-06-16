@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template, request, redirect, url_for, flash
+from flask_babel import gettext
 
 from app import db
 from app.utils.html import slugify
@@ -42,7 +43,7 @@ def create():
         db.session.add(post)
         db.session.commit()
 
-        flash('You wrote a new post.', 'success')
+        flash(gettext('You wrote a new post.'), 'success')
 
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
@@ -62,7 +63,7 @@ def edit(post_id):
         db.session.add(post)
         db.session.commit()
 
-        flash('You edited your post.', 'success')
+        flash(gettext('You edited your post.'), 'success')
 
         return redirect(url_for('page.detail_slug', slug=post.slug))
 

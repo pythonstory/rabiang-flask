@@ -4,20 +4,20 @@
         {% if posts.has_prev %}
             <li>
                 <a href="{{ url_for('page.index', page_num=1) }}" aria-label="First">
-                    <span aria-hidden="true">First</span>
+                    <span aria-hidden="true">{{ _('First') }}</span>
                 </a>
             </li>
             <li>
                 <a href="{{ url_for('page.index', page_num=posts.prev_num) }}" aria-label="Previous">
-                    <span aria-hidden="true">Prev</span>
+                    <span aria-hidden="true">{{ _('Prev') }}</span>
                 </a>
             </li>
         {% else %}
             <li class="disabled">
-                <a href="#" aria-label="First"><span aria-hidden="true">First</span></a>
+                <a href="#" aria-label="First"><span aria-hidden="true">{{ _('First') }}</span></a>
             </li>
             <li class="disabled">
-                <a href="#" aria-label="Previous"><span aria-hidden="true">Prev</span></a>
+                <a href="#" aria-label="Previous"><span aria-hidden="true">{{ _('Prev') }}</span></a>
             </li>
         {% endif %}
         {% for page in posts.iter_pages(left_edge=0, left_current=5, right_current=5, right_edge=0) %}
@@ -32,17 +32,17 @@
         {% if posts.has_next %}
             <li>
                 <a href="{{ url_for('page.index', page_num=posts.next_num) }}" aria-label="Next">
-                    <span aria-hidden="true">Next</span>
+                    <span aria-hidden="true">{{ _('Next') }}</span>
                 </a>
             </li>
         {% else %}
             <li class="disabled">
-                <a href="#" aria-label="Next"><span aria-hidden="true">Next</span></a>
+                <a href="#" aria-label="Next"><span aria-hidden="true">{{ _('Next') }}</span></a>
             </li>
         {% endif %}
         <li>
             <a href="#" aria-label="Last">
-                <span aria-hidden="true">Last</span>
+                <span aria-hidden="true">{{ _('Last') }}</span>
             </a>
         </li>
     </ul>
