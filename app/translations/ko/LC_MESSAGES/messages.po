@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-17 05:14+0900\n"
+"POT-Creation-Date: 2016-06-17 07:12+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -32,17 +32,37 @@ msgstr "새 게시물을 작성했습니다."
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
-#: app/templates/default/navigation.html:28
+#: app/templates/default/navigation.html:29
 msgid "Blog"
 msgstr "블로그"
 
-#: app/templates/default/navigation.html:32
+#: app/templates/default/navigation.html:33
 msgid "List"
 msgstr "목록"
 
-#: app/templates/default/navigation.html:35
+#: app/templates/default/navigation.html:36
 msgid "Write"
 msgstr "쓰기"
+
+#: app/templates/default/navigation.html:42
+msgid "Auth"
+msgstr "인증"
+
+#: app/templates/default/navigation.html:46
+msgid "Login"
+msgstr "로그인"
+
+#: app/templates/default/navigation.html:49
+msgid "Logout"
+msgstr "로그아웃"
+
+#: app/templates/default/navigation.html:52
+msgid "Sign up"
+msgstr "회원가입"
+
+#: app/templates/default/navigation.html:55
+msgid "Delete Account"
+msgstr "회원탈퇴"
 
 #: app/templates/default/sidebar.html:3
 msgid "Blog Search"
@@ -84,11 +104,11 @@ msgid "Delete this post?"
 msgstr "게시물을 정말로 삭제합니까?"
 
 #: app/templates/default/page/delete.html:11
-#: app/templates/default/page/detail.html:36
+#: app/templates/default/page/detail.html:39
 msgid "Delete"
 msgstr "삭제"
 
-#: app/templates/default/page/detail.html:35
+#: app/templates/default/page/detail.html:38
 msgid "Edit"
 msgstr "수정"
 
@@ -106,8 +126,4 @@ msgstr "이전"
 #: app/templates/default/page/pagination.html:40
 msgid "Next"
 msgstr "다음"
-
-#: app/templates/default/page/pagination.html:45
-msgid "Last"
-msgstr "마지막"
 

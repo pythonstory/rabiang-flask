@@ -4,7 +4,7 @@
 
 * Custom config file support
     * ```config_production.py``` for production
-    * ````config_testing.py``` for testing
+    * ```config_testing.py``` for testing
 * Structure with blueprint
     * templates and static folders
     * theme supported
@@ -25,6 +25,7 @@
 * Flask-SQLAlchemy
 * Flask-WTP
 * Flask-Babel
+* Flask-Login
 
 ### Translations
 

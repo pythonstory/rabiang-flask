@@ -38,9 +38,11 @@ cart
 
 /auth/login
 /auth/logout
+/auth/register
+/auth/unregister
 
 
-method
+basic methods
 
 index
 detail
@@ -55,6 +57,10 @@ delete
 - pagination : parameterized
 - babel select lang html
 
+- comments
+- widget MVC
+- blueprint dynamic import
+- import (circular?)
 
 - user authentication
 - registration
