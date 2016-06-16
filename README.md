@@ -1,15 +1,5 @@
 # Rabiang
 
-## Installation
-
-### Requirements
-
-* Flask
-* Flask-script
-* Flask-SQLAlchemy
-* Flask-WTP
-* Flask-Babel
-
 ## Features
 
 * Custom config file support
@@ -22,8 +12,39 @@
 * i18n / l10n support
 * Unit Test
 * Logging support
+* MIT License
 
-## Configuration and Run
+## Installation
+
+### Requirements
+
+* Flask
+* Flask-script
+* Flask-SQLAlchemy
+* Flask-WTP
+* Flask-Babel
+
+### Translations
+
+* Extract message strings
+
+```
+pybabel extract -F babel.cfg -o messages.pot app
+```
+ 
+ * Update message PO file
+
+```
+pybabel update -i messages.pot -d app/translations
+```
+
+* Compile message file
+
+```
+pybabel compile -d app/translations
+```
+
+### Configuration and Run
 
 It is not recommended to use ```config.py``` for your production server.
 
@@ -35,7 +56,7 @@ python manage.py -c config_production runserver
 
 If you not specify ```-c``` option, it will import the default ```config.py```.
 
-## Commands
+## Helper Commands
 
 ### runserver
 
