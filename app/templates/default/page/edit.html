@@ -5,17 +5,49 @@
 {% block page_content %}
     <form action="{{ url_for('page.create') }}" method="post" class="form-horizontal">
         {{ form.csrf_token }}
-
         <div class="form-group">
             {{ form.title.label(class='col-sm-2 control-label') }}
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 {{ form.title(class='form-control') }}
+            </div>
+            <div class="col-sm-6">
+                {% if form.title.errors %}
+                    <ul class="alert alert-danger">
+                        {% for error in form.title.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.slug.label(class='col-sm-2 control-label') }}
+            <div class="col-sm-6">
+                {{ form.slug(class='form-control') }}
+            </div>
+            <div class="col-sm-6">
+                {% if form.slug.errors %}
+                    <ul class="alert alert-danger">
+                        {% for error in form.slug.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         </div>
         <div class="form-group">
             {{ form.body.label(class='col-sm-2 control-label') }}
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 {{ form.body(class='form-control') }}
+            </div>
+            <div class="col-sm-6">
+                {% if form.body.errors %}
+                    <ul class="alert alert-danger">
+                        {% for error in form.body.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         </div>
         <div class="form-group">

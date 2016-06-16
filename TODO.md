@@ -57,6 +57,7 @@ always use absolute package path but relative path for current directory
 
 - form valid error
 - slug unique check
+- slug 한글 문제
 - form label - i18n
 - date formatting (posted on, modified on)
 - breadcrumbs / trailers

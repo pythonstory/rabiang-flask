@@ -8,4 +8,5 @@ from wtforms.validators import DataRequired
 
 class PostForm(Form):
     title = StringField(lazy_gettext('Title'), validators=[DataRequired()])
+    slug = StringField(lazy_gettext('Slug'), validators=[DataRequired()])
     body = TextAreaField(lazy_gettext('Body'), validators=[DataRequired()])

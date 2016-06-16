@@ -4,7 +4,6 @@ from flask import render_template, request, redirect, url_for, flash
 from flask_babel import gettext
 
 from app import db
-from app.utils.html import slugify
 from . import page
 from .forms import PostForm
 from .models import Post
@@ -38,7 +37,6 @@ def create():
     if form.validate_on_submit():
         post = Post()
         form.populate_obj(post)
-        post.slug = slugify(post.title)
 
         db.session.add(post)
         db.session.commit()
@@ -58,7 +56,6 @@ def edit(post_id):
 
     if form.validate_on_submit():
         form.populate_obj(post)
-        post.slug = slugify(post.title)
 
         db.session.add(post)
         db.session.commit()
