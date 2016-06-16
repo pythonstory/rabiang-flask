@@ -8,7 +8,9 @@
 * Structure with blueprint
     * templates and static folders
     * theme supported
-* AlloyUI support
+* AlloyUI 3 support
+    * Bootstrap 3
+    * YUI 3
 * i18n / l10n support
 * Unit Test
 * Logging support

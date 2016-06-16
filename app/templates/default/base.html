@@ -26,7 +26,7 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="/static/default/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="{{ url_for('static', filename='default/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
     <![endif]-->
 </head>
 <body>
@@ -58,7 +58,7 @@
 
 <!-- AUI -->
 <script src="//cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
-<script src="/static/default/js/main.js"></script>
+<script src="{{ url_for('static', filename='default/js/main.js') }}"></script>
 {% block extra_scripts %}{% endblock %}
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
