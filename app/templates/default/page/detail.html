@@ -18,7 +18,7 @@
     <!-- Date/Time -->
     <p>
         <i class="fa fa-calendar" aria-hidden="true"></i>
-        Posted on {{ post.created_timestamp | datetimeformat(format='medium') }} <br />
+        Posted on {{ post.created_timestamp | datetimeformat(format='medium') }} <br/>
         Modified on {{ post.modified_timestamp | datetimeformat(format='medium') }}
     </p>
 
@@ -31,6 +31,10 @@
 
     <!-- Post Content -->
     {{ post.body }}
+    <div>
+        <a href="{{ url_for('page.edit', post_id=post.id) }}">Edit</a>
+        <a href="{{ url_for('page.delete', post_id=post.id ) }}">Delete</a>
+    </div>
     <hr>
 
     <!-- Blog Comments -->

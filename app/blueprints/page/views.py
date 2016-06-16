@@ -19,7 +19,7 @@ def index(page_num=1):
 
 
 @page.route('/<slug>')
-def detail(slug):
+def detail_slug(slug):
     post = Post.query.filter(Post.slug == slug).first_or_404()
     return render_template('default/page/detail.html', post=post)
 
@@ -44,7 +44,7 @@ def create():
 
         flash('You wrote a new post.', 'success')
 
-        return redirect(url_for('page.detail', slug=post.slug))
+        return redirect(url_for('page.detail_slug', slug=post.slug))
 
     return render_template('default/page/create.html', form=form)
 
@@ -64,14 +64,26 @@ def edit(post_id):
 
         flash('You edited your post.', 'success')
 
-        return redirect(url_for('page.detail', slug=post.slug))
+        return redirect(url_for('page.detail_slug', slug=post.slug))
 
     return render_template('default/page/edit.html', form=form)
 
 
 @page.route('/delete/<int:post_id>', methods=['GET', 'POST'])
 def delete(post_id):
+    post = Post.query.get_or_404(post_id)
+
+    form = PostForm(obj=post)
+
     if request.method == 'POST':
-        pass
+        db.session.delete(post)
+        db.session.commit()
+
+        return redirect(url_for('page.index'))
     else:
-        pass
+        return render_template('default/page/delete.html', form=form, post=post)
+
+
+@page.route('/user/<username>')
+def user(username):
+    return "username"

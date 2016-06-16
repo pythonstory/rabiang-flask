@@ -1,0 +1,15 @@
+{% extends "default/columns-2.html" %}
+
+{% block title %}Delete a post{% endblock %}
+
+{% block page_content %}
+    <form action="{{ url_for('page.delete', post_id=post.id) }}" method="post">
+        {{ form.csrf_token }}
+
+        <fieldset>
+            <legend>Delete this entry?</legend>
+            <button class="btn btn-danger" type="submit">Delete</button>
+            <a class="btn" href="{{ url_for('page.detail_post_id', post_id=post.id) }}">Cancel</a>
+        </fieldset>
+    </form>
+{% endblock %}
