@@ -2,6 +2,7 @@
 
 from flask import render_template, request, redirect, url_for, flash
 from flask_babel import gettext
+from flask_login import login_required
 
 from app import db
 from . import page
@@ -31,6 +32,7 @@ def detail_post_id(post_id):
 
 
 @page.route('/create', methods=['GET', 'POST'])
+@login_required
 def create():
     form = PostForm()
 
@@ -49,6 +51,7 @@ def create():
 
 
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
+@login_required
 def edit(post_id):
     post = Post.query.get_or_404(post_id)
 
@@ -68,6 +71,7 @@ def edit(post_id):
 
 
 @page.route('/delete/<int:post_id>', methods=['GET', 'POST'])
+@login_required
 def delete(post_id):
     post = Post.query.get_or_404(post_id)
 
@@ -84,4 +88,4 @@ def delete(post_id):
 
 @page.route('/user/<username>')
 def user(username):
-    return "username"
+    return username

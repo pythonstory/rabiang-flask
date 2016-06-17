@@ -10,7 +10,7 @@
                     <h3 class="panel-title">Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="{{ url_for('auth.login') }}" method="post">
+                    <form action="{{ url_for('auth.login', next=request.args.get('next', '')) }}" method="post">
                         {{ form.csrf_token }}
                         <fieldset>
                             <div class="form-group">

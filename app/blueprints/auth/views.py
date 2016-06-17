@@ -4,8 +4,9 @@ from flask import request, redirect, url_for, render_template, flash
 from flask_babel import gettext
 from flask_login import login_user, logout_user, login_required
 
+from app import db
 from . import auth
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from .models import User
 
 
@@ -43,12 +44,27 @@ def logout():
     return redirect(url_for('main.index'))
 
 
-@auth.route('/register')
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
-    return "register"
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        user = User()
+        form.populate_obj(user)
+
+        user.generate_slug()
+
+        db.session.add(user)
+        db.session.commit()
+
+        flash(gettext('You can now login.'), 'success')
+
+        return redirect(url_for('auth.login'))
+
+    return render_template('default/auth/register.html', form=form)
 
 
-@auth.route('/unregister')
+@auth.route('/unregister', methods=['GET', 'POST'])
 @login_required
 def unregister():
     return "unregister"
