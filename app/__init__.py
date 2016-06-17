@@ -4,6 +4,7 @@ import logging.handlers
 
 from flask import Flask, g, request, current_app
 from flask_babel import Babel
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
 
@@ -11,6 +12,9 @@ from flask_wtf.csrf import CsrfProtect
 db = SQLAlchemy()
 babel = Babel()
 csrf = CsrfProtect()
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
 
 
 def create_app(config=None, app_name=None):
@@ -25,6 +29,7 @@ def create_app(config=None, app_name=None):
     db.init_app(app)
     babel.init_app(app)
     csrf.init_app(app)
+    login_manager.init_app(app)
 
     # Logging Rotating File 설정
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])

@@ -32,7 +32,7 @@
 * Extract message strings
 
 ```
-pybabel extract -F babel.cfg -o messages.pot app
+pybabel extract -F babel.cfg -k lazy_gettext -o messages.pot app
 ```
  
  * Update message PO file
@@ -73,6 +73,7 @@ If you not specify ```-c``` option, it will import the default ```config.py```.
 
 ## References
 
-* Flask Web Development - Chapter 7, Miguel Grinberg, O'Reilly
+* Flask Web Development, Miguel Grinberg, O'Reilly
+* Learning Flask Framework, Matt Copperwaite & Charles Leifer, Packtpub
 * [How to Structure Large Flask Applications](https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications)
 * [Modular Applications with Blueprints](http://flask.pocoo.org/docs/0.11/blueprints/#blueprints)

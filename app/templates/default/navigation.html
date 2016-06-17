@@ -42,18 +42,22 @@
                         {{ _('Auth') }} <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('auth.register') }}">{{ _('Sign up') }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('auth.unregister') }}">{{ _('Delete Account') }}</a>
-                        </li>
+                        {% if current_user.is_authenticated %}
+                            <li>
+                                <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('auth.unregister') }}">{{ _('Delete Account') }}</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('auth.register') }}">{{ _('Sign up') }}</a>
+                            </li>
+                        {% endif %}
+
                     </ul>
                 </li>
                 <li class="dropdown">

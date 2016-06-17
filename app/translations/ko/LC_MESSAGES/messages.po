@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-17 07:24+0900\n"
+"POT-Creation-Date: 2016-06-17 22:10+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -17,6 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+
+#: app/blueprints/auth/forms.py:9
+msgid "Email"
+msgstr "이메일"
+
+#: app/blueprints/auth/forms.py:10
+msgid "Password"
+msgstr "비밀번호"
+
+#: app/blueprints/auth/forms.py:11
+msgid "Keep me logged in"
+msgstr "로그인 유지"
+
+#: app/blueprints/auth/forms.py:12 app/templates/default/auth/login.html:28
+#: app/templates/default/navigation.html:54
+msgid "Login"
+msgstr "로그인"
+
+#: app/blueprints/auth/views.py:27
+msgid "You successfully logged in"
+msgstr "로그인하셨습니다."
+
+#: app/blueprints/auth/views.py:31
+msgid "Invalid username or password"
+msgstr "아이디 또는 비밀번호를 잘못 입력하셨습니다."
+
+#: app/blueprints/auth/views.py:41
+msgid "You have been logged out"
+msgstr "로그아웃하셨습니다."
 
 #: app/blueprints/main/views.py:13 app/templates/default/auth/index.html:8
 #: app/templates/default/forum/index.html:8
@@ -29,14 +58,18 @@ msgid "Title"
 msgstr "제목"
 
 #: app/blueprints/page/forms.py:11
+msgid "Slug"
+msgstr "슬러그"
+
+#: app/blueprints/page/forms.py:12
 msgid "Body"
 msgstr "본문"
 
-#: app/blueprints/page/views.py:46
+#: app/blueprints/page/views.py:44
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:66
+#: app/blueprints/page/views.py:63
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
@@ -56,22 +89,17 @@ msgstr "쓰기"
 msgid "Auth"
 msgstr "인증"
 
-#: app/templates/default/auth/login.html:28
-#: app/templates/default/navigation.html:46
-msgid "Login"
-msgstr "로그인"
-
-#: app/templates/default/navigation.html:49
+#: app/templates/default/navigation.html:47
 msgid "Logout"
 msgstr "로그아웃"
 
-#: app/templates/default/navigation.html:52
-msgid "Sign up"
-msgstr "회원가입"
-
-#: app/templates/default/navigation.html:55
+#: app/templates/default/navigation.html:50
 msgid "Delete Account"
 msgstr "회원탈퇴"
+
+#: app/templates/default/navigation.html:57
+msgid "Sign up"
+msgstr "회원가입"
 
 #: app/templates/default/sidebar.html:3
 msgid "Blog Search"
@@ -101,14 +129,14 @@ msgstr "글보관함"
 msgid "Write a new post"
 msgstr "블로그 새 글 작성"
 
-#: app/templates/default/page/create.html:40
-#: app/templates/default/page/edit.html:23
+#: app/templates/default/page/create.html:55
+#: app/templates/default/page/edit.html:55
 msgid "Save"
 msgstr "저장"
 
-#: app/templates/default/page/create.html:41
+#: app/templates/default/page/create.html:56
 #: app/templates/default/page/delete.html:12
-#: app/templates/default/page/edit.html:25
+#: app/templates/default/page/edit.html:57
 msgid "Cancel"
 msgstr "취소"
 
