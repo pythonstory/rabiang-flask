@@ -1,8 +1,8 @@
-# Code Conventions
+# Code/Naming Conventions
 
-## PEP8
+## Python3/Flask
 
-## Naming Conventions
+### PEP8
 
 ### Route and methods
 
@@ -16,3 +16,9 @@ Basic Structure
 | /create | index | GET/POST |
 | /edit/<unique_id> | edit | GET/POST |
 | /delete/<unique_id> | index | GET/POST |
+
+## HTML
+
+### Jinja2 Template
+
+## Javascript
