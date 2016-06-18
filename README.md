@@ -1,7 +1,16 @@
 # Rabiang
 
+This application is currently being developed so that the following features are supported.
+
+We are planning on initial release in September or October 2016.
+
 ## Features
 
+* Blog
+    * WYSIWYG editor and Markdown
+* Cart
+* Authentication
+* Role-based Access Control
 * Custom config file support
     * ```config_production.py``` for production
     * ```config_testing.py``` for testing
