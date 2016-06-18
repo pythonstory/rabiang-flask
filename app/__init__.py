@@ -17,39 +17,74 @@ login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 
 
-def create_app(config=None, app_name=None):
+def create_app(config=None, app_name=None, blueprints=None):
     # Create Flask App instance
     app_name = app_name or __name__
+
     app = Flask(app_name)
 
     # Load App configuration
     app.config.from_object(config)
 
+    configure_hook(app)
+    configure_blueprints(app, blueprints)
+    configure_extensions(app)
+    configure_logging(app)
+    configure_error_handlers(app)
+    configure_cli(app)
+
+    return app
+
+
+def configure_hook(app):
+    @app.before_request
+    def before_request():
+        pass
+
+
+def configure_blueprints(app, blueprints):
+    """Configure blueprints in views."""
+    for blueprint in blueprints:
+        app.register_blueprint(blueprint)
+
+
+def configure_extensions(app):
     # Initialize Flask Extensions
     db.init_app(app)
     babel.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
 
-    # Logging Setup (Rotating File)
+    @babel.localeselector
+    def get_locale():
+        # If logged in, load user locale settings.
+        user = getattr(g, 'user', None)
+
+        if user is not None:
+            return user.locale
+
+        # Otherwise, choose the language from user browser.
+        return request.accept_languages.best_match(current_app.config['BABEL_LANGUAGES'].keys())
+
+    @babel.timezoneselector
+    def get_timezone():
+        user = getattr(g, 'user', None)
+
+        if user is not None:
+            return user.timezone
+
+
+def configure_logging(app):
+    """Configure rotating file(info) logging."""
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
     handler = logging.handlers.RotatingFileHandler(app.config['LOGGING_LOCATION'])
     handler.setLevel(app.config['LOGGING_LEVEL'])
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
 
-    # Register blueprint modules
-    from app.blueprints.main import main as main_blueprint
-    app.register_blueprint(main_blueprint, url_prefix='/')
 
-    from app.blueprints.page import page as page_blueprint
-    app.register_blueprint(page_blueprint, url_prefix='/page')
-
-    from app.blueprints.auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint, url_prefix='/auth')
-
-    from app.blueprints.forum import forum as forum_blueprint
-    app.register_blueprint(forum_blueprint, url_prefix='/forum')
+def configure_error_handlers(app):
+    # http://flask.pocoo.org/docs/latest/errorhandling/
 
     @app.errorhandler(404)
     def page_not_found(e):
@@ -59,24 +94,9 @@ def create_app(config=None, app_name=None):
     def internal_server_error(e):
         return render_template('default/500.html'), 500
 
-    return app
 
-
-@babel.localeselector
-def get_locale():
-    # If logged in, load user locale settings.
-    user = getattr(g, 'user', None)
-
-    if user is not None:
-        return user.locale
-
-    # Otherwise, choose the language from user browser.
-    return request.accept_languages.best_match(current_app.config['BABEL_LANGUAGES'].keys())
-
-
-@babel.timezoneselector
-def get_timezone():
-    user = getattr(g, 'user', None)
-
-    if user is not None:
-        return user.timezone
+def configure_cli(app):
+    @app.cli.command()
+    def initdb():
+        db.drop_all()
+        db.create_all()
