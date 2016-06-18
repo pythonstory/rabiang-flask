@@ -2,16 +2,11 @@
 import logging
 import logging.handlers
 
-from flask import Flask, g, request, current_app
+from flask import Flask, g, request, current_app, render_template
 from flask_babel import Babel
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
-
-from app.blueprints.auth import auth as auth_blueprint
-from app.blueprints.forum import forum as forum_blueprint
-from app.blueprints.main import main as main_blueprint
-from app.blueprints.page import page as page_blueprint
 
 # Flask 확장 선언
 db = SQLAlchemy()
@@ -44,10 +39,25 @@ def create_app(config=None, app_name=None):
     app.logger.addHandler(handler)
 
     # 블루프린트 모듈 등록
+    from app.blueprints.main import main as main_blueprint
     app.register_blueprint(main_blueprint, url_prefix='/')
+
+    from app.blueprints.page import page as page_blueprint
     app.register_blueprint(page_blueprint, url_prefix='/page')
+
+    from app.blueprints.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+    from app.blueprints.forum import forum as forum_blueprint
     app.register_blueprint(forum_blueprint, url_prefix='/forum')
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('default/404.html'), 404
+
+    @app.errorhandler(500)
+    def internal_server_error(e):
+        return render_template('default/500.html'), 500
 
     return app
 
