@@ -1,6 +1,5 @@
 page, article, journal, post, document, messages
 
-
 cart
 
 /shop/product/<slug>
@@ -11,19 +10,6 @@ cart
 /shop/bookmark
 
 /poll
-
-basic methods
-
-index
-detail
-create
-edit
-delete
-
-import
-
-always use absolute package path but relative path for current directory
-
 
 - form valid error
 - slug unique check
@@ -38,16 +24,17 @@ always use absolute package path but relative path for current directory
 - blueprint dynamic import
 - import (circular?)
 
+- error page -> 테마/사이트 무관하게 만들 것
+
 
 - id: username or email (preferences)
 - verify_password function must be overridden.
 
-- registration
 - email confirmation
 - storing password
 - forgot password
 
-- config/factory pattern refactoring
+- config/factory pattern refactoring / 블루프린트 로딩 refactoring
 - 회원가입 절차 (약관동의/본인인증/정보입력/이메일 인증/가입완료)
 
 * Mail

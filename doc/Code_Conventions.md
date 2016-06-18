@@ -4,6 +4,9 @@
 
 ### PEP8
 
+* import
+    * always use absolute package path but relative path for current directory
+
 ### Route and methods
 
 Basic Structure

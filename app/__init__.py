@@ -8,7 +8,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
 
-# Flask 확장 선언
+# Flask Extensions can be references as global variable.
 db = SQLAlchemy()
 babel = Babel()
 csrf = CsrfProtect()
@@ -18,27 +18,27 @@ login_manager.login_view = 'auth.login'
 
 
 def create_app(config=None, app_name=None):
-    # Flask 앱 생성
+    # Create Flask App instance
     app_name = app_name or __name__
     app = Flask(app_name)
 
-    # 주요 설정 로드
+    # Load App configuration
     app.config.from_object(config)
 
-    # Flask 확장 초기화
+    # Initialize Flask Extensions
     db.init_app(app)
     babel.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
 
-    # Logging Rotating File 설정
+    # Logging Setup (Rotating File)
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
     handler = logging.handlers.RotatingFileHandler(app.config['LOGGING_LOCATION'])
     handler.setLevel(app.config['LOGGING_LEVEL'])
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
 
-    # 블루프린트 모듈 등록
+    # Register blueprint modules
     from app.blueprints.main import main as main_blueprint
     app.register_blueprint(main_blueprint, url_prefix='/')
 
@@ -64,13 +64,13 @@ def create_app(config=None, app_name=None):
 
 @babel.localeselector
 def get_locale():
-    # 로그인한 사용자는 사용자 로케일 설정을 따른다.
+    # If logged in, load user locale settings.
     user = getattr(g, 'user', None)
 
     if user is not None:
         return user.locale
 
-    # 사용자 브라우저에서 가장 적합한 언어를 선택한다.
+    # Otherwise, choose the language from user browser.
     return request.accept_languages.best_match(current_app.config['BABEL_LANGUAGES'].keys())
 
 
