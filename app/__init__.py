@@ -13,18 +13,13 @@ db = SQLAlchemy()
 babel = Babel()
 csrf = CsrfProtect()
 login_manager = LoginManager()
-login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.login'
 
 
 def create_app(config=None, app_name=None, blueprints=None):
     # Create Flask App instance
     app_name = app_name or __name__
-
     app = Flask(app_name)
-
-    # Load App configuration
-    app.config.from_object(config)
+    app.config.from_pyfile(config)
 
     configure_hook(app)
     configure_blueprints(app, blueprints)
@@ -49,11 +44,14 @@ def configure_blueprints(app, blueprints):
 
 
 def configure_extensions(app):
-    # Initialize Flask Extensions
+    """Initialize Flask Extensions."""
     db.init_app(app)
     babel.init_app(app)
     csrf.init_app(app)
+
     login_manager.init_app(app)
+    login_manager.session_protection = 'strong'
+    login_manager.login_view = 'auth.login'
 
     @babel.localeselector
     def get_locale():
