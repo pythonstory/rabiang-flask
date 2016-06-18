@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from flask_babel import lazy_gettext
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
