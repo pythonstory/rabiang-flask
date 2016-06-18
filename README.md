@@ -12,8 +12,8 @@ We are planning on initial release in September or October 2016.
 * Authentication
 * Role-based Access Control
 * Custom config file support
-    * ```config_production.py``` for production
-    * ```config_testing.py``` for testing
+    * ```production.cfg``` for production
+    * ```testing.cfg``` for testing
 * Structure with blueprint
     * templates and static folders
     * theme supported
@@ -29,8 +29,8 @@ We are planning on initial release in September or October 2016.
 
 Rabiang is based on Flask/Python3, and it requires the following packages:
 
-* Flask
-* Flask-SQLAlchemy with SQLAlchemy
-* Flask-WTP with WTForms
-* Flask-Babel with Babel and pytz
-* Flask-Login
+* **Flask**
+* **Flask-SQLAlchemy** with **SQLAlchemy**
+* **Flask-WTP** with **WTForms**
+* **Flask-Babel** with **Babel** and **pytz**
+* **Flask-Login**
