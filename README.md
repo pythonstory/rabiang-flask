@@ -16,9 +16,9 @@
 * Logging support
 * MIT License
 
-## Installation
+## Requirements
 
-### Requirements
+Rabiang is based on Flask/Python3, and it requires the following packages:
 
 * Flask
 * Flask-script
@@ -26,26 +26,6 @@
 * Flask-WTP
 * Flask-Babel
 * Flask-Login
-
-### Translations
-
-* Extract message strings
-
-```
-pybabel extract -F babel.cfg -k lazy_gettext -o messages.pot app
-```
- 
- * Update message PO file
-
-```
-pybabel update -i messages.pot -d app/translations
-```
-
-* Compile message file
-
-```
-pybabel compile -d app/translations
-```
 
 ### Configuration and Run
 
@@ -64,16 +44,3 @@ If you not specify ```-c``` option, it will import the default ```config.py```.
 ### runserver
 
 ### shell
-
-## TODO
-
-* Mail
-* Flask-migrate
-* db.create_all(), db.drop_all() command
-
-## References
-
-* Flask Web Development, Miguel Grinberg, O'Reilly
-* Learning Flask Framework, Matt Copperwaite & Charles Leifer, Packtpub
-* [How to Structure Large Flask Applications](https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications)
-* [Modular Applications with Blueprints](http://flask.pocoo.org/docs/0.11/blueprints/#blueprints)
