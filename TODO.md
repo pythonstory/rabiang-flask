@@ -38,5 +38,6 @@ cart
 - 회원가입 절차 (약관동의/본인인증/정보입력/이메일 인증/가입완료)
 
 * Mail
+* celery
 * Flask-migrate
-* db.create_all(), db.drop_all() command
+* Fixtures

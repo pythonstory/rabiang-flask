@@ -98,3 +98,10 @@ def configure_cli(app):
     def initdb():
         db.drop_all()
         db.create_all()
+
+    @app.cli.command()
+    def test():
+        """Run the unit tests."""
+        import unittest
+        tests = unittest.TestLoader().discover('tests')
+        unittest.TextTestRunner(verbosity=2).run(tests)
