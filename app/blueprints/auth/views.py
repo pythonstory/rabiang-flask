@@ -51,8 +51,6 @@ def register():
         user = User()
         form.populate_obj(user)
 
-        user.generate_slug()
-
         db.session.add(user)
         db.session.commit()
 
