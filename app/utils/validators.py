@@ -11,6 +11,10 @@ class Unique(object):
         self.message = message
 
     def __call__(self, form, field):
+        # If form field and existing data field match, it doesn't validate.
+        if field.object_data == field.data:
+            return
+
         check = self.model.query.filter(self.field == field.data).first()
 
         if check:
