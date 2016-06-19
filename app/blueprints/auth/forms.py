@@ -21,12 +21,12 @@ class RegisterForm(Form):
     email = StringField(lazy_gettext('Email'),
                         validators=[DataRequired(), Email(),
                                     Unique(User, User.email,
-                                           message='There is already an account with that email.')])
+                                           message=lazy_gettext('There is already an account with that email.'))])
     password = PasswordField(lazy_gettext('Password'),
-                             validators=[DataRequired(), StrongPassword(message='Weak Password')])
+                             validators=[DataRequired(), StrongPassword(message=lazy_gettext('Weak Password'))])
     password_repeat = PasswordField(lazy_gettext('Password'),
                                     validators=[DataRequired()])
     username = StringField(lazy_gettext('Username'),
                            validators=[DataRequired(),
                                        Unique(User, User.username,
-                                              message='There is already an account with that username.')])
+                                              message=lazy_gettext('There is already an account with that username.'))])

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-20 00:53+0900\n"
+"POT-Creation-Date: 2016-06-20 04:20+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -18,32 +18,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: app/blueprints/auth/forms.py:9 app/blueprints/auth/forms.py:16
+#: app/blueprints/auth/forms.py:12 app/blueprints/auth/forms.py:21
 #: app/templates/default/auth/login.html:17
 msgid "Email"
 msgstr "이메일"
 
-#: app/blueprints/auth/forms.py:10 app/blueprints/auth/forms.py:17
-#: app/blueprints/auth/forms.py:18 app/templates/default/auth/login.html:20
+#: app/blueprints/auth/forms.py:14 app/blueprints/auth/forms.py:25
+#: app/blueprints/auth/forms.py:27 app/templates/default/auth/login.html:25
 msgid "Password"
 msgstr "비밀번호"
 
-#: app/blueprints/auth/forms.py:11 app/templates/default/auth/login.html:24
+#: app/blueprints/auth/forms.py:16 app/templates/default/auth/login.html:34
 msgid "Keep me logged in"
 msgstr "로그인 유지"
 
-#: app/blueprints/auth/forms.py:12 app/templates/default/auth/login.html:28
+#: app/blueprints/auth/forms.py:17 app/templates/default/auth/login.html:38
 #: app/templates/default/navigation.html:54
 msgid "Login"
 msgstr "로그인"
 
-#: app/blueprints/auth/forms.py:19
+#: app/blueprints/auth/forms.py:24
+msgid "There is already an account with that email."
+msgstr "이미 사용 중인 이메일입니다."
+
+#: app/blueprints/auth/forms.py:26
+msgid "Weak Password"
+msgstr "좀 더 강력한 비밀번호를 입력하세요."
+
+#: app/blueprints/auth/forms.py:29
 msgid "Username"
 msgstr "아이디"
 
+#: app/blueprints/auth/forms.py:32
+msgid "There is already an account with that username."
+msgstr "이미 사용 중인 아이디입니다."
+
 #: app/blueprints/auth/views.py:27
 msgid "You successfully logged in"
-msgstr "로그인하셨습니다."
+msgstr "로그인했습니다."
 
 #: app/blueprints/auth/views.py:31
 msgid "Invalid username or password"
@@ -51,11 +63,11 @@ msgstr "아이디 또는 비밀번호를 잘못 입력하셨습니다."
 
 #: app/blueprints/auth/views.py:41
 msgid "You have been logged out"
-msgstr "로그아웃하셨습니다."
+msgstr "로그아웃했습니다. 이제 컴퓨터를 떠나도 좋습니다."
 
 #: app/blueprints/auth/views.py:59
 msgid "You can now login."
-msgstr "이제 로그인할 수 있습니다."
+msgstr "로그인하세요."
 
 #: app/blueprints/main/views.py:13 app/templates/default/auth/index.html:8
 #: app/templates/default/forum/index.html:8
@@ -63,23 +75,27 @@ msgstr "이제 로그인할 수 있습니다."
 msgid "Home"
 msgstr "시작화면"
 
-#: app/blueprints/page/forms.py:9
+#: app/blueprints/page/forms.py:12
 msgid "Title"
 msgstr "제목"
 
-#: app/blueprints/page/forms.py:10
+#: app/blueprints/page/forms.py:13
 msgid "Slug"
 msgstr "슬러그"
 
-#: app/blueprints/page/forms.py:11
+#: app/blueprints/page/forms.py:15
+msgid "Duplicate slug"
+msgstr "중복된 슬러그입니다."
+
+#: app/blueprints/page/forms.py:16
 msgid "Body"
 msgstr "본문"
 
-#: app/blueprints/page/views.py:45
+#: app/blueprints/page/views.py:46
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:65
+#: app/blueprints/page/views.py:66
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
