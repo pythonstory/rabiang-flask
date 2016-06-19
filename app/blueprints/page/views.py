@@ -66,7 +66,7 @@ def edit(post_id):
 
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
-    return render_template('default/page/edit.html', form=form)
+    return render_template('default/page/edit.html', form=form, post_id=post_id)
 
 
 @page.route('/delete/<int:post_id>', methods=['GET', 'POST'])

@@ -13,11 +13,21 @@
                     <form action="{{ url_for('auth.login', next=request.args.get('next', '')) }}" method="post">
                         {{ form.csrf_token }}
                         <fieldset>
-                            <div class="form-group">
+                            <div class="form-group{% if form.email.errors %} has-error{% endif %}">
                                 {{ form.email(class='form-control', placeholder=_('Email'), autofocus='') }}
+                                {% if form.email.errors %}
+                                    {% for error in form.email.errors %}
+                                        <span class="help-block">{{ error }}</span>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{% if form.email.errors %} has-error{% endif %}">
                                 {{ form.password(class='form-control', placeholder=_('Password')) }}
+                                {% if form.password.errors %}
+                                    {% for error in form.password.errors %}
+                                        <span class="help-block">{{ error }}</span>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                             <div class="checkbox">
                                 <label>
