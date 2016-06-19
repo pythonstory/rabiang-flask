@@ -16,7 +16,8 @@ class Post(db.Model):
     body = db.Column(db.Text)
 
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
-    modified_timestamp = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    modified_timestamp = db.Column(db.DateTime, default=datetime.now,
+                                   onupdate=datetime.now)
 
     def generate_slug(self):
         self.slug = slugify(self.title)
@@ -40,7 +41,8 @@ class Comment(db.Model):
     body = db.Column(db.Text)
 
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
-    modified_timestamp = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    modified_timestamp = db.Column(db.DateTime, default=datetime.now,
+                                   onupdate=datetime.now)
 
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     post = db.relationship('Post', backref='comments')
