@@ -31,7 +31,7 @@ class User(UserMixin, db.Model):
         super(User, self).__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<User: %s>' % self.username
+        return '<User: %r>' % self.username
 
 
 @login_manager.user_loader

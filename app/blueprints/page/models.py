@@ -31,7 +31,7 @@ class Post(db.Model):
         super(Post, self).__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<Post: %s>' % self.title
+        return '<Post: %r>' % self.title
 
 
 class Comment(db.Model):
@@ -49,4 +49,4 @@ class Comment(db.Model):
         super(Comment, self).__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<Comment: %s>' % self.body
+        return '<Comment: %r>' % self.body
