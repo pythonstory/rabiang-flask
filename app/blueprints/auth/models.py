@@ -15,12 +15,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True)
     password = db.Column(db.String(255))
     password_hash = db.Column(db.String(255))
-    slug = db.Column(db.String(100), unique=True)
     active = db.Column(db.Boolean, default=True)
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
-
-    def generate_slug(self):
-        self.slug = slugify(self.username)
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
