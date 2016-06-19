@@ -7,7 +7,7 @@ from app.blueprints.forum import forum
 from app.blueprints.main import main
 from app.blueprints.page import page
 
-config = os.path.dirname(__file__) + '/' + (os.getenv('FLASK_CONFIG') or 'test.cfg')
+config = os.path.join(os.path.dirname(__file__), (os.getenv('FLASK_CONFIG') or 'test.cfg'))
 blueprints = [main, page, auth, forum]
 
 app = create_app(config=config, blueprints=blueprints)

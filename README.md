@@ -12,8 +12,7 @@ We are planning on initial release in September or October 2016.
 * Authentication
 * Role-based Access Control
 * Custom config file support
-    * ```production.cfg``` for production
-    * ```testing.cfg``` for testing
+    * ```test.cfg``` is provided, but you **must** have your own settings.
 * Structure with blueprint
     * templates and static folders
     * theme supported

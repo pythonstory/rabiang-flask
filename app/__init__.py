@@ -96,6 +96,7 @@ def configure_error_handlers(app):
 def configure_cli(app):
     @app.cli.command()
     def initdb():
+        """Initialize database setup."""
         db.drop_all()
         db.create_all()
 
