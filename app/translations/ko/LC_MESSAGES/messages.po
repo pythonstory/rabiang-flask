@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-20 04:20+0900\n"
+"POT-Creation-Date: 2016-06-20 04:46+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -18,38 +18,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: app/blueprints/auth/forms.py:12 app/blueprints/auth/forms.py:21
+#: app/blueprints/auth/forms.py:12 app/blueprints/auth/forms.py:28
 #: app/templates/default/auth/login.html:17
 msgid "Email"
 msgstr "이메일"
 
-#: app/blueprints/auth/forms.py:14 app/blueprints/auth/forms.py:25
-#: app/blueprints/auth/forms.py:27 app/templates/default/auth/login.html:25
+#: app/blueprints/auth/forms.py:18 app/blueprints/auth/forms.py:36
+#: app/blueprints/auth/forms.py:43 app/templates/default/auth/login.html:25
 msgid "Password"
 msgstr "비밀번호"
 
-#: app/blueprints/auth/forms.py:16 app/templates/default/auth/login.html:34
+#: app/blueprints/auth/forms.py:23 app/templates/default/auth/login.html:34
 msgid "Keep me logged in"
 msgstr "로그인 유지"
 
-#: app/blueprints/auth/forms.py:17 app/templates/default/auth/login.html:38
+#: app/blueprints/auth/forms.py:24 app/templates/default/auth/login.html:38
 #: app/templates/default/navigation.html:54
 msgid "Login"
 msgstr "로그인"
 
-#: app/blueprints/auth/forms.py:24
+#: app/blueprints/auth/forms.py:34
 msgid "There is already an account with that email."
 msgstr "이미 사용 중인 이메일입니다."
 
-#: app/blueprints/auth/forms.py:26
+#: app/blueprints/auth/forms.py:40
 msgid "Weak Password"
 msgstr "좀 더 강력한 비밀번호를 입력하세요."
 
-#: app/blueprints/auth/forms.py:29
+#: app/blueprints/auth/forms.py:46
+msgid "Password must match"
+msgstr "입력한 비밀번호가 서로 일치하지 않습니다."
+
+#: app/blueprints/auth/forms.py:50
 msgid "Username"
 msgstr "아이디"
 
-#: app/blueprints/auth/forms.py:32
+#: app/blueprints/auth/forms.py:55
 msgid "There is already an account with that username."
 msgstr "이미 사용 중인 아이디입니다."
 

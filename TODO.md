@@ -11,8 +11,6 @@ cart
 
 /poll
 
-- form valid error
-- slug unique check
 - slug 한글 문제
 - date formatting (posted on, modified on)
 - breadcrumbs / trailers
@@ -22,7 +20,6 @@ cart
 - comments
 - widget MVC
 - blueprint dynamic import
-- import (circular?)
 
 - error page -> 테마/사이트 무관하게 만들 것
 

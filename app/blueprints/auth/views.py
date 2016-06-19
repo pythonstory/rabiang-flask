@@ -66,4 +66,15 @@ def register():
 @auth.route('/unregister', methods=['GET', 'POST'])
 @login_required
 def unregister():
-    return "unregister"
+    return 'unregister'
+
+
+@auth.route('/change-password')
+@login_required
+def change_password():
+    return 'change password'
+
+
+@auth.route('/reset-password')
+def reset_password():
+    return 'reset password'
