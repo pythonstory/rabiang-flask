@@ -19,6 +19,9 @@ class Post(db.Model):
     modified_timestamp = db.Column(db.DateTime, default=datetime.now,
                                    onupdate=datetime.now)
 
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship('User', backref=db.backref('posts', lazy='dynamic'))
+
     def generate_slug(self):
         self.slug = slugify(self.title)
 

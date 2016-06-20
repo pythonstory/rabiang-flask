@@ -7,13 +7,11 @@
         <h2>
             <a href="{{ url_for('page.detail_slug', slug=post.slug) }}">{{ post.title }}</a>
         </h2>
-        <p class="lead">
-            by <a href="index.php">author</a>
-        </p>
         <p>
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-            Posted on {{ post.created_timestamp | datetimeformat(format='medium') }} <br />
-            Modified on {{ post.modified_timestamp | datetimeformat(format='medium') }}
+            <span><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</span>
+            <span><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</span>
+            <span><i class="fa fa-folder" aria-hidden="true"></i> category</span>
+            <span><i class="fa fa-comments" aria-hidden="true"></i> 19</span>
         </p>
         <hr>
         <img class="img-responsive" src="http://placehold.it/900x300" alt="">

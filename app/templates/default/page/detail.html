@@ -8,18 +8,12 @@
     <!-- Title -->
     <h1>{{ post.title }}</h1>
 
-    <!-- Author -->
-    <p class="lead">
-        by <a href="#">author</a>
-    </p>
-
-    <hr>
-
-    <!-- Date/Time -->
+    <!-- Date/Time, Author ... -->
     <p>
-        <i class="fa fa-calendar" aria-hidden="true"></i>
-        Posted on {{ post.created_timestamp | datetimeformat(format='medium') }} <br/>
-        Modified on {{ post.modified_timestamp | datetimeformat(format='medium') }}
+        <span><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</span>
+        <span><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</span>
+        <span><i class="fa fa-folder" aria-hidden="true"></i> category</span>
+        <span><i class="fa fa-comments" aria-hidden="true"></i> 19</span>
     </p>
 
     <hr>

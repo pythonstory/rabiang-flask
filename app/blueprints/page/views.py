@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, request, redirect, url_for, flash
 from flask_babel import gettext
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from app import db
 from . import page
@@ -39,6 +39,7 @@ def create():
     if form.validate_on_submit():
         post = Post()
         form.populate_obj(post)
+        post.author = current_user
 
         db.session.add(post)
         db.session.commit()
