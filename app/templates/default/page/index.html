@@ -7,18 +7,33 @@
         <h2>
             <a href="{{ url_for('page.detail_slug', slug=post.slug) }}">{{ post.title }}</a>
         </h2>
-        <ul class="list-inline">
-            <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</li>
-            <li><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</li>
-            <li><i class="fa fa-folder" aria-hidden="true"></i> category</li>
-            <li><i class="fa fa-comments" aria-hidden="true"></i> 19</li>
-        </ul>
+        <p class="lead">
+            <ul class="list-inline">
+                <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</li>
+                <li><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</li>
+                <li><i class="fa fa-folder" aria-hidden="true"></i> category</li>
+                <li><i class="fa fa-comments" aria-hidden="true"></i> 19</li>
+            </ul>
+        </p>
+        <p>
+            <span class="label label-default">keyword</span>
+            <span class="label label-default">tag</span>
+            <span class="label label-default">post</span>
+            <span class="label label-default">keyword</span>
+            <span class="label label-default">tag</span>
+            <span class="label label-default">post</span>
+            <span class="label label-default">keyword</span>
+            <span class="label label-default">tag</span>
+            <span class="label label-default">post</span>
+        </p>
         <hr>
         <img class="img-responsive" src="http://placehold.it/900x300" alt="">
         <hr>
         <p>{{ post.body | truncate(255) }}</p>
-        <a class="btn btn-info" href="{{ url_for('page.detail_slug', slug=post.slug) }}">
-            Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+        <p class="lead">
+            <a class="btn btn-info" href="{{ url_for('page.detail_slug', slug=post.slug) }}">
+                Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </p>
         <hr>
     {% endfor %}
 

@@ -8,13 +8,26 @@
     <!-- Title -->
     <h1>{{ post.title }}</h1>
 
-    <!-- Date/Time, Author ... -->
-    <ul class="list-inline">
-        <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</li>
-        <li><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</li>
-        <li><i class="fa fa-folder" aria-hidden="true"></i> category</li>
-        <li><i class="fa fa-comments" aria-hidden="true"></i> 19</li>
-    </ul>
+    <!-- Date/Time, Author, Categories, Tags, ... -->
+    <p class="lead">
+        <ul class="list-inline">
+            <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</li>
+            <li><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</li>
+            <li><i class="fa fa-folder" aria-hidden="true"></i> category</li>
+            <li><i class="fa fa-comments" aria-hidden="true"></i> 19</li>
+        </ul>
+    </p>
+    <p>
+        <span class="label label-default">keyword</span>
+        <span class="label label-default">tag</span>
+        <span class="label label-default">post</span>
+        <span class="label label-default">keyword</span>
+        <span class="label label-default">tag</span>
+        <span class="label label-default">post</span>
+        <span class="label label-default">keyword</span>
+        <span class="label label-default">tag</span>
+        <span class="label label-default">post</span>
+    </p>
 
     <hr>
 
@@ -30,7 +43,8 @@
 
     <div>
         <a class="btn btn-primary" href="{{ url_for('page.edit', post_id=post.id) }}">{{ _('Edit') }}</a>
-        <a class="btn btn-danger"href="{{ url_for('page.delete', post_id=post.id ) }}">{{ _('Delete') }}</a>
+        <a class="btn btn-danger"href="{{ url_for('page.delete', post_id=post.id) }}">{{ _('Delete') }}</a>
+        <a class="btn btn-info"href="{{ url_for('page.index') }}">{{ _('List') }}</a>
     </div>
     <hr>
 
