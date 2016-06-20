@@ -4,11 +4,10 @@ from flask_babel import gettext
 from flask_login import login_required, current_user
 
 from app import db
+from app.blueprints.auth.models import User
 from . import page
 from .forms import PostForm
 from .models import Post
-
-from app.blueprints.auth.models import User
 
 
 @page.route('/', methods=['GET', 'POST'])
@@ -94,6 +93,17 @@ def delete(post_id):
 def user(username, page_num=1):
     author = User.query.filter(User.username == username).first_or_404()
 
-    posts = Post.query.filter(Post.author == author).order_by(Post.created_timestamp.desc()).paginate(page_num, 10, False)
+    posts = Post.query.filter(Post.author == author).order_by(
+        Post.created_timestamp.desc()).paginate(page_num, 10, False)
 
     return render_template('default/page/user.html', posts=posts)
+
+
+@page.route('/tag', methods=['GET', 'POST'])
+def tag():
+    return 'tag'
+
+
+@page.route('/tag/<tag>', methods=['GET', 'POST'])
+def tag_post(tag):
+    return 'tag_post'
