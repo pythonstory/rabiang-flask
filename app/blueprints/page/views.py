@@ -8,6 +8,8 @@ from . import page
 from .forms import PostForm
 from .models import Post
 
+from app.blueprints.auth.models import User
+
 
 @page.route('/', methods=['GET', 'POST'])
 @page.route('/index', methods=['GET', 'POST'])
@@ -87,6 +89,11 @@ def delete(post_id):
         return render_template('default/page/delete.html', form=form, post=post)
 
 
-@page.route('/user/<username>')
-def user(username):
-    return username
+@page.route('/user/<username>', methods=['GET', 'POST'])
+@page.route('/user/<username>/<int:page_num>', methods=['GET', 'POST'])
+def user(username, page_num=1):
+    author = User.query.filter(User.username == username).first_or_404()
+
+    posts = Post.query.filter(Post.author == author).order_by(Post.created_timestamp.desc()).paginate(page_num, 10, False)
+
+    return render_template('default/page/user.html', posts=posts)

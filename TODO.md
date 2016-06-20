@@ -45,6 +45,14 @@ validators
 - postal code
 - korean registration code
 
+- tag
+- category
+- menu
+- attachment management
+- status, history
+- dashboard
+- archive, feed
+
 * Mail
 * celery
 * Flask-migrate

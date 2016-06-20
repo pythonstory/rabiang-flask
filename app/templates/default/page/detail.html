@@ -12,10 +12,10 @@
     <p class="lead">
         <ul class="list-inline">
             <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</li>
-            <li><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</li>
+            <li><i class="fa fa-user" aria-hidden="true"></i> <a href="{{ url_for('page.user', username=post.author.username) }}">{{ post.author.username }}</a></li>
             <li><i class="fa fa-folder-open-o" aria-hidden="true"></i> category</li>
             <li><i class="fa fa-comments" aria-hidden="true"></i> 19</li>
-            <li><i class="fa fa-link" aria-hidden="true"></i> permalink</li>
+            <li><i class="fa fa-link" aria-hidden="true"></i> <a href="{{ url_for('page.detail_slug', slug=post.slug) }}">permalink</a></li>
         </ul>
     </p>
     <p>
@@ -43,8 +43,10 @@
     <hr>
 
     <div>
-        <a class="btn btn-primary" href="{{ url_for('page.edit', post_id=post.id) }}">{{ _('Edit') }}</a>
-        <a class="btn btn-danger"href="{{ url_for('page.delete', post_id=post.id) }}">{{ _('Delete') }}</a>
+        {% if current_user.is_authenticated %}
+            <a class="btn btn-primary" href="{{ url_for('page.edit', post_id=post.id) }}">{{ _('Edit') }}</a>
+            <a class="btn btn-danger"href="{{ url_for('page.delete', post_id=post.id) }}">{{ _('Delete') }}</a>
+        {% endif %}
         <a class="btn btn-info"href="{{ url_for('page.index') }}">{{ _('List') }}</a>
     </div>
     <hr>

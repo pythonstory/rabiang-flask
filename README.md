@@ -1,5 +1,7 @@
 # Rabiang
 
+Rabiang(ระเบียง) is a Thai word which means wooden terrace. I always dream of developing software with a cup of coffee sitting on the terrace.
+
 This application is currently being developed so that the following features are supported.
 
 We are planning on initial release in September or October 2016.

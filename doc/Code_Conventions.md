@@ -25,3 +25,14 @@ Basic Structure
 ### Jinja2 Template
 
 ## Javascript
+
+## IDE
+
+I use PyCharm Professional Edition in order to develop the Flask application. I recommend to use PyCharm Community Edition if your budget doesn't allow.
+
+I utilize the following features not provided by PyCharm Community Edition:
+
+* Jinja2 Template engine syntax highlight
+* Database/SQL
+
+However, it is not a huge barrier to develop the Flask application. Most of configurations are up to developers because Flask is a micro web framework.
