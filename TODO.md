@@ -37,6 +37,14 @@ cart
 - config/factory pattern refactoring / 블루프린트 로딩 refactoring
 - 회원가입 절차 (약관동의/본인인증/정보입력/이메일 인증/가입완료)
 
+validators
+
+- credit card
+- cellphone
+- local phone
+- postal code
+- korean registration code
+
 * Mail
 * celery
 * Flask-migrate
