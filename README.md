@@ -9,14 +9,14 @@ We are planning on initial release in September or October 2016.
 * Blog
     * WYSIWYG editor and Markdown
 * Cart
-* Authentication
+* Authentication with strong password policy
 * Role-based Access Control
 * Custom config file support
     * ```test.cfg``` is provided, but you **must** have your own settings.
-* Structure with blueprint
+* Scalable structure with blueprint
     * templates and static folders
     * theme supported
-* AlloyUI 3 support
+* Fancy Frontend and Admin interface with AlloyUI 3 support
     * Bootstrap 3
     * YUI 3
 * i18n / l10n support

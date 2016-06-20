@@ -9,12 +9,12 @@
     <h1>{{ post.title }}</h1>
 
     <!-- Date/Time, Author ... -->
-    <p>
-        <span><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</span>
-        <span><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</span>
-        <span><i class="fa fa-folder" aria-hidden="true"></i> category</span>
-        <span><i class="fa fa-comments" aria-hidden="true"></i> 19</span>
-    </p>
+    <ul class="list-inline">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</li>
+        <li><i class="fa fa-user" aria-hidden="true"></i> {{ post.author.username }}</li>
+        <li><i class="fa fa-folder" aria-hidden="true"></i> category</li>
+        <li><i class="fa fa-comments" aria-hidden="true"></i> 19</li>
+    </ul>
 
     <hr>
 
