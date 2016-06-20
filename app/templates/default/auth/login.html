@@ -10,7 +10,8 @@
                     <h3 class="panel-title">Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="{{ url_for('auth.login', next=request.args.get('next', '')) }}" method="post">
+                    <form action="{{ url_for('auth.login', next=request.args.get('next', '')) }}"
+                          method="post">
                         {{ form.csrf_token }}
                         <fieldset>
                             <div class="form-group{% if form.email.errors %} has-error{% endif %}">
@@ -34,10 +35,16 @@
                                     {{ form.remember_me }} {{ _('Keep me logged in') }}
                                 </label>
                             </div>
-
-                            <button class="btn btn-primary" type="submit">{{ _('Login') }}</button>
+                            <button class="btn btn-primary btn-block"
+                                    type="submit">{{ _('Login') }}</button>
                         </fieldset>
                     </form>
+                </div>
+                <div class="panel-footer">
+                    <a class="btn"
+                       href="{{ url_for('auth.reset_password') }}">{{ _('Forgot password?') }}</a>
+                    <a class="btn"
+                       href="{{ url_for('auth.register') }}">{{ _('Sign up') }}</a>
                 </div>
             </div>
         </div>
