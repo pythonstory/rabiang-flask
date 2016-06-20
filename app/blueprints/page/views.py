@@ -93,8 +93,8 @@ def delete(post_id):
 def user(username, page_num=1):
     author = User.query.filter(User.username == username).first_or_404()
 
-    posts = Post.query.filter(Post.author == author).order_by(
-        Post.created_timestamp.desc()).paginate(page_num, 10, False)
+    posts = author.posts.order_by(Post.created_timestamp.desc()).paginate(
+        page_num, 10, False)
 
     return render_template('default/page/user.html', posts=posts)
 

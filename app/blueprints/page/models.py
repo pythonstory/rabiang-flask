@@ -20,7 +20,8 @@ class Post(db.Model):
                                    onupdate=datetime.now)
 
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    author = db.relationship('User', backref=db.backref('posts', lazy='dynamic'))
+    author = db.relationship('User',
+                             backref=db.backref('posts', lazy='dynamic'))
 
     def generate_slug(self):
         self.slug = slugify(self.title)
@@ -42,6 +43,8 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     body = db.Column(db.Text)
+
+    ip_address = db.Column(db.String(64))
 
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
     modified_timestamp = db.Column(db.DateTime, default=datetime.now,
