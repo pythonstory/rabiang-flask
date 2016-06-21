@@ -1,0 +1,57 @@
+{% extends "default/columns-2.html" %}
+
+{% block title %}Rabiang :: Blog{% endblock %}
+
+{% block page_content %}
+    {% for post in posts.items %}
+        <h2>
+            <a href="{{ url_for('page.detail_slug', slug=post.slug) }}">{{ post.title }}</a>
+        </h2>
+        <p class="lead">
+        <ul class="list-inline">
+            <li><i class="fa fa-calendar" aria-hidden="true"></i>
+                {{ post.created_timestamp | datetimeformat(format='short') }}
+            </li>
+            <li><i class="fa fa-user" aria-hidden="true"></i>
+                <a href="{{ url_for('page.user', username=post.author.username) }}">
+                    {{ post.author.username }}
+                </a>
+            </li>
+            <li><i class="fa fa-folder-open-o" aria-hidden="true"></i> category
+            </li>
+            <li><i class="fa fa-comments" aria-hidden="true"></i>
+                <a href="{{ url_for('page.detail_slug', slug=post.slug) }}#comments">
+                    {{ post.comments.count() }}
+                </a>
+            </li>
+            <li><i class="fa fa-link" aria-hidden="true"></i>
+                <a href="{{ url_for('page.detail_slug', slug=post.slug) }}">
+                    permalink
+                </a>
+            </li>
+        </ul>
+        </p>
+        {% if post.tags.count()>0 %}
+            <p>
+                <i class="fa fa-tag" aria-hidden="true"></i>
+                {% for tag in post.tags %}
+                    <a href="{{ url_for('page.tag_post', slug=tag.slug) }}" class="btn btn-success btn-sm">{{ tag.name }}</a>
+                {% endfor %}
+            </p>
+        {% endif %}
+        <hr>
+        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+        <hr>
+        <p>{{ post.body | truncate(255) }}</p>
+        <p class="lead">
+            <a class="btn btn-info btn-sm"
+               href="{{ url_for('page.detail_slug', slug=post.slug) }}">
+                Read More <span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+        </p>
+        <hr>
+    {% endfor %}
+
+    {% include 'default/page/_pagination.html' %}
+
+{% endblock %}

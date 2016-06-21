@@ -136,7 +136,10 @@ def user(username, page_num=1):
 
 @page.route('/tag', methods=['GET', 'POST'])
 def tag():
-    return 'tag'
+    tags = Tag.query \
+        .order_by(Tag.name).all()
+
+    return render_template('default/page/tag.html', tags=tags)
 
 
 @page.route('/tag/<slug>', methods=['GET', 'POST'])
@@ -150,4 +153,4 @@ def tag_post(slug, page_num=1):
         .order_by(Post.created_timestamp.desc()) \
         .paginate(page_num, 10, False)
 
-    return render_template('default/page/tag.html', posts=posts)
+    return render_template('default/page/tag_post.html', posts=posts)
