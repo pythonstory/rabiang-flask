@@ -10,13 +10,19 @@
 
     <!-- Date/Time, Author, Categories, Tags, ... -->
     <p class="lead">
-        <ul class="list-inline">
-            <li><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}</li>
-            <li><i class="fa fa-user" aria-hidden="true"></i> <a href="{{ url_for('page.user', username=post.author.username) }}">{{ post.author.username }}</a></li>
-            <li><i class="fa fa-folder-open-o" aria-hidden="true"></i> category</li>
-            <li><i class="fa fa-comments" aria-hidden="true"></i> 19</li>
-            <li><i class="fa fa-link" aria-hidden="true"></i> <a href="{{ url_for('page.detail_slug', slug=post.slug) }}">permalink</a></li>
-        </ul>
+    <ul class="list-inline">
+        <li><i class="fa fa-calendar"
+               aria-hidden="true"></i> {{ post.created_timestamp | datetimeformat(format='short') }}
+        </li>
+        <li><i class="fa fa-user" aria-hidden="true"></i> <a
+                href="{{ url_for('page.user', username=post.author.username) }}">{{ post.author.username }}</a>
+        </li>
+        <li><i class="fa fa-folder-open-o" aria-hidden="true"></i> category</li>
+        <li><i class="fa fa-comments" aria-hidden="true"></i> <a href="{{ url_for('page.detail_slug', slug=post.slug) }}#comments">{{ post.comments.count() }}</a></li>
+        <li><i class="fa fa-link" aria-hidden="true"></i> <a
+                href="{{ url_for('page.detail_slug', slug=post.slug) }}">permalink</a>
+        </li>
+    </ul>
     </p>
     <p>
         <span class="label label-default">keyword</span>
@@ -44,24 +50,29 @@
 
     <div>
         {% if current_user.is_authenticated %}
-            <a class="btn btn-primary" href="{{ url_for('page.edit', post_id=post.id) }}">{{ _('Edit') }}</a>
-            <a class="btn btn-danger"href="{{ url_for('page.delete', post_id=post.id) }}">{{ _('Delete') }}</a>
+            <a class="btn btn-primary"
+               href="{{ url_for('page.edit', post_id=post.id) }}">{{ _('Edit') }}</a>
+            <a class="btn btn-danger"
+               href="{{ url_for('page.delete', post_id=post.id) }}">{{ _('Delete') }}</a>
         {% endif %}
-        <a class="btn btn-info"href="{{ url_for('page.index') }}">{{ _('List') }}</a>
+        <a class="btn btn-info"
+           href="{{ url_for('page.index') }}">{{ _('List') }}</a>
     </div>
     <hr>
 
     <!-- Blog Comments -->
 
     <!-- Comments Form -->
-    <div class="well">
+    <div id="comments" class="well">
         <h4>{{ _('Leave a Comment') }}</h4>
-        <form action="{{ url_for('page.detail_slug', slug=post.slug) }}" method="post" role="form">
+        <form action="{{ url_for('page.detail_slug', slug=post.slug) }}"
+              method="post" role="form">
             {{ form.csrf_token }}
             <div class="form-group">
                 {{ form.body(class='form-control', rows='3') }}
             </div>
-            <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
+            <button type="submit"
+                    class="btn btn-primary">{{ _('Save') }}</button>
         </form>
     </div>
 
@@ -70,17 +81,18 @@
     <!-- Posted Comments -->
 
     <!-- Comment -->
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">Start Bootstrap
-                <small>August 25, 2014 at 9:30 PM</small>
-            </h4>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras
-            purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-            fringilla. Donec lacinia congue felis in faucibus.
+    {% for comment in comments %}
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="http://placehold.it/64x64"
+                     alt="">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Start Bootstrap
+                    <small>{{ comment.created_timestamp | datetimeformat(format='short') }}</small>
+                </h4>
+                {{ comment.body }}
+            </div>
         </div>
-    </div>
+    {% endfor %}
 {% endblock %}

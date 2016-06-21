@@ -51,7 +51,8 @@ class Comment(db.Model):
                                    onupdate=datetime.now)
 
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-    post = db.relationship('Post', backref='comments')
+    post = db.relationship('Post',
+                           backref=db.backref('comments', lazy='dynamic'))
 
     def __init__(self, *args, **kwargs):
         super(Comment, self).__init__(*args, **kwargs)

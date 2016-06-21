@@ -38,7 +38,12 @@ def detail_slug(slug):
         flash(gettext('Your comment has been published.'))
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
-    return render_template('default/page/detail.html', post=post, form=form)
+    comments = post.comments.order_by(Comment.created_timestamp.asc()).all()
+
+    return render_template('default/page/detail.html',
+                           post=post,
+                           form=form,
+                           comments=comments)
 
 
 @page.route('/<int:post_id>')
