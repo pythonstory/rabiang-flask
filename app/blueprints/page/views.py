@@ -6,8 +6,8 @@ from flask_login import login_required, current_user
 from app import db
 from app.blueprints.auth.models import User
 from . import page
-from .forms import PostForm
-from .models import Post
+from .forms import PostForm, CommentForm
+from .models import Post, Comment
 
 
 @page.route('/', methods=['GET', 'POST'])
@@ -20,15 +20,31 @@ def index(page_num=1):
     return render_template('default/page/index.html', posts=posts)
 
 
-@page.route('/<slug>')
+@page.route('/<slug>', methods=['GET', 'POST'])
 def detail_slug(slug):
     post = Post.query.filter(Post.slug == slug).first_or_404()
-    return render_template('default/page/detail.html', post=post)
+    form = CommentForm()
+
+    if form.validate_on_submit():
+        comment = Comment()
+
+        comment.body = form.body.data
+        comment.ip_address = request.remote_addr
+        comment.post_id = post.id
+
+        db.session.add(comment)
+        db.session.commit()
+
+        flash(gettext('Your comment has been published.'))
+        return redirect(url_for('page.detail_slug', slug=post.slug))
+
+    return render_template('default/page/detail.html', post=post, form=form)
 
 
 @page.route('/<int:post_id>')
 def detail_post_id(post_id):
     post = Post.query.get_or_404(post_id)
+
     return render_template('default/page/detail.html', post=post)
 
 
@@ -39,14 +55,16 @@ def create():
 
     if form.validate_on_submit():
         post = Post()
-        form.populate_obj(post)
+
+        post.title = form.title.data
+        post.slug = form.slug.data
+        post.body = form.body.data
         post.author = current_user
 
         db.session.add(post)
         db.session.commit()
 
         flash(gettext('You wrote a new post.'), 'success')
-
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
     return render_template('default/page/create.html', form=form)
@@ -60,13 +78,15 @@ def edit(post_id):
     form = PostForm(obj=post)
 
     if form.validate_on_submit():
-        form.populate_obj(post)
+        post.title = form.title.data
+        post.slug = form.slug.data
+        post.body = form.body.data
+        post.author = current_user
 
         db.session.add(post)
         db.session.commit()
 
         flash(gettext('You edited your post.'), 'success')
-
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
     return render_template('default/page/edit.html', form=form, post_id=post_id)
@@ -83,6 +103,7 @@ def delete(post_id):
         db.session.delete(post)
         db.session.commit()
 
+        flash(gettext('You deleted your post.'), 'success')
         return redirect(url_for('page.index'))
     else:
         return render_template('default/page/delete.html', form=form, post=post)

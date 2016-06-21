@@ -12,8 +12,12 @@ class PostForm(Form):
     title = StringField(lazy_gettext('Title'),
                         validators=[DataRequired()])
     slug = StringField(lazy_gettext('Slug'),
-                        validators=[DataRequired(),
-                        Unique(Post, Post.slug,
-                               lazy_gettext('Duplicate slug'))])
+                       validators=[DataRequired(),
+                                   Unique(Post, Post.slug,
+                                          lazy_gettext('Duplicate slug'))])
     body = TextAreaField(lazy_gettext('Body'),
-                        validators=[DataRequired()])
+                         validators=[DataRequired()])
+
+
+class CommentForm(Form):
+    body = TextAreaField('', validators=[DataRequired()])

@@ -49,7 +49,11 @@ def register():
 
     if form.validate_on_submit():
         user = User()
-        form.populate_obj(user)
+
+        user.username = form.username.data
+        user.email = form.email.data
+        user.password = form.password.data
+        user.active = True
 
         db.session.add(user)
         db.session.commit()

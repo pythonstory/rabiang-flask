@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-20 20:46+0900\n"
+"POT-Creation-Date: 2016-06-21 15:38+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -73,7 +73,7 @@ msgstr "아이디 또는 비밀번호를 잘못 입력하셨습니다."
 msgid "You have been logged out"
 msgstr "로그아웃했습니다. 이제 컴퓨터를 떠나도 좋습니다."
 
-#: app/blueprints/auth/views.py:57
+#: app/blueprints/auth/views.py:61
 msgid "You can now login."
 msgstr "로그인하세요."
 
@@ -99,20 +99,28 @@ msgstr "중복된 슬러그입니다."
 msgid "Body"
 msgstr "본문"
 
-#: app/blueprints/page/views.py:47
+#: app/blueprints/page/views.py:38
+msgid "Your comment has been published."
+msgstr "댓글을 작성했습니다."
+
+#: app/blueprints/page/views.py:67
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:67
+#: app/blueprints/page/views.py:89
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
+
+#: app/blueprints/page/views.py:106
+msgid "You deleted your post."
+msgstr "게시물을 삭제했습니다."
 
 #: app/templates/default/navigation.html:29
 msgid "Blog"
 msgstr "블로그"
 
 #: app/templates/default/navigation.html:33
-#: app/templates/default/page/detail.html:48
+#: app/templates/default/page/detail.html:50
 msgid "List"
 msgstr "목록"
 
@@ -132,7 +140,7 @@ msgstr "로그아웃"
 msgid "Delete Account"
 msgstr "회원탈퇴"
 
-#: app/templates/default/auth/login.html:46
+#: app/templates/default/auth/login.html:47
 #: app/templates/default/auth/register.html:3
 #: app/templates/default/navigation.html:57
 msgid "Sign up"
@@ -168,6 +176,7 @@ msgstr "비밀번호 찾기"
 
 #: app/templates/default/auth/register.html:54
 #: app/templates/default/page/create.html:43
+#: app/templates/default/page/detail.html:64
 #: app/templates/default/page/edit.html:43
 msgid "Save"
 msgstr "저장"
@@ -188,13 +197,17 @@ msgid "Delete this post?"
 msgstr "게시물을 정말로 삭제합니까?"
 
 #: app/templates/default/page/delete.html:11
-#: app/templates/default/page/detail.html:47
+#: app/templates/default/page/detail.html:48
 msgid "Delete"
 msgstr "삭제"
 
-#: app/templates/default/page/detail.html:46
+#: app/templates/default/page/detail.html:47
 msgid "Edit"
 msgstr "수정"
+
+#: app/templates/default/page/detail.html:58
+msgid "Leave a Comment"
+msgstr "댓글 작성"
 
 #: app/templates/default/page/pagination.html:7
 #: app/templates/default/page/pagination.html:17
