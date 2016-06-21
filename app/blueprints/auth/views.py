@@ -9,11 +9,6 @@ from .forms import LoginForm, RegisterForm
 from .models import User
 
 
-@auth.route('/')
-def index():
-    return render_template('default/auth/index.html')
-
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
