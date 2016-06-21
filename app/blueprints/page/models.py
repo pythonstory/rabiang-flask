@@ -6,6 +6,12 @@ from flask import url_for
 from app import db
 from app.utils.html import slugify
 
+post_tags = db.Table('post_tags',
+                     db.Column('tag_id',
+                               db.Integer, db.ForeignKey('tag.id')),
+                     db.Column('post_id',
+                               db.Integer, db.ForeignKey('post.id')))
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,6 +28,10 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship('User',
                              backref=db.backref('posts', lazy='dynamic'))
+
+    tags = db.relationship('Tag', secondary=post_tags,
+                           backref=db.backref('posts', lazy='dynamic'),
+                           lazy='dynamic')
 
     def generate_slug(self):
         self.slug = slugify(self.title)
@@ -59,3 +69,16 @@ class Comment(db.Model):
 
     def __repr__(self):
         return '<Comment: %r>' % self.body
+
+
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    name = db.Column(db.String(64))
+    slug = db.Column(db.String(64), unique=True)
+
+    def __init__(self, *args, **kwargs):
+        super(Tag, self).__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<Tag: %r>' % self.name

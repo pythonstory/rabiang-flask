@@ -7,7 +7,7 @@ from app import db
 from app.blueprints.auth.models import User
 from . import page
 from .forms import PostForm, CommentForm
-from .models import Post, Comment
+from .models import Post, Comment, Tag
 
 
 @page.route('/', methods=['GET', 'POST'])
@@ -139,6 +139,14 @@ def tag():
     return 'tag'
 
 
-@page.route('/tag/<tag>', methods=['GET', 'POST'])
-def tag_post(tag):
+@page.route('/tag/<slug>', methods=['GET', 'POST'])
+def tag_post(slug):
+    tag = Tag.query \
+        .filter(Tag.slug == slug) \
+        .first_or_404()
+
+    posts = tag.posts.order_by(Post.created_timestamp.desc())
+
+    print(posts)
+
     return 'tag_post'

@@ -6,6 +6,10 @@ body {
     padding-bottom: 20px;
 }
 
+span a {
+    color: #eeeeee;
+}
+
 .sidebar_list_style {
     list-style-type: none;
     padding-left: 20px;

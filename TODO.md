@@ -46,6 +46,7 @@ validators
 - korean registration code
 
 - tag
+태그 입력 처리, 태그 구름, 태그 목록 노출
 - category
 - menu
 - attachment management
