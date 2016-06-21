@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from flask import request, redirect, url_for, render_template, flash
 from flask_babel import gettext
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 from app import db
 from . import auth
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, UnregisterForm
 from .models import User
 
 
@@ -65,7 +65,20 @@ def register():
 @auth.route('/unregister', methods=['GET', 'POST'])
 @login_required
 def unregister():
-    return 'unregister'
+    user = User.query.get(current_user.id)
+
+    form = UnregisterForm()
+
+    if request.method == 'POST':
+        db.session.delete(user)
+        db.session.commit()
+
+        flash(gettext('Your account was deleted.'), 'success')
+        return redirect(url_for('page.index'))
+    else:
+        return render_template('default/auth/unregister.html',
+                               form=form,
+                               user=user)
 
 
 @auth.route('/change-password')

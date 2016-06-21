@@ -55,3 +55,7 @@ class RegisterForm(Form):
                                       message=lazy_gettext(
                                           'There is already an account '
                                           'with that username.'))])
+
+
+class UnregisterForm(Form):
+    submit = SubmitField(lazy_gettext('Unregister'))

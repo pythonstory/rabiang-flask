@@ -1,0 +1,14 @@
+{% extends "default/columns-2.html" %}
+
+{% block title %}Delete a post{% endblock %}
+
+{% block page_content %}
+    <form action="{{ url_for('auth.unregister') }}" method="post">
+        {{ form.csrf_token }}
+        <fieldset>
+            <legend>{{ _('Delete your account?') }}</legend>
+            <button class="btn btn-danger" type="submit">{{ _('Unregister') }}</button>
+            <a class="btn btn-default" href="{{ url_for('page.user', username=user.username) }}">{{ _('Cancel') }}</a>
+        </fieldset>
+    </form>
+{% endblock %}
