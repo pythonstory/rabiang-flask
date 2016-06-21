@@ -6,6 +6,7 @@
 
 * import
     * always use absolute package path but relative path for current directory
+    * Module names from ```from``` are sorted in alphabetical order.
 
 ### Route and methods
 
@@ -23,6 +24,8 @@ Basic Structure
 ## HTML
 
 ### Jinja2 Template
+
+* Included template file name starts with prefix underscore(_).
 
 ## Javascript
 
