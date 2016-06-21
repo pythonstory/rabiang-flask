@@ -14,15 +14,19 @@ from .models import Post, Comment
 @page.route('/index', methods=['GET', 'POST'])
 @page.route('/index/<int:page_num>', methods=['GET', 'POST'])
 def index(page_num=1):
-    posts = Post.query.order_by(Post.created_timestamp.desc()).paginate(
-        page_num, 10, False)
+    posts = Post.query \
+        .order_by(Post.created_timestamp.desc()) \
+        .paginate(page_num, 10, False)
 
     return render_template('default/page/index.html', posts=posts)
 
 
 @page.route('/<slug>', methods=['GET', 'POST'])
 def detail_slug(slug):
-    post = Post.query.filter(Post.slug == slug).first_or_404()
+    post = Post.query \
+        .filter(Post.slug == slug) \
+        .first_or_404()
+
     form = CommentForm()
 
     if form.validate_on_submit():
@@ -38,7 +42,9 @@ def detail_slug(slug):
         flash(gettext('Your comment has been published.'))
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
-    comments = post.comments.order_by(Comment.created_timestamp.asc()).all()
+    comments = post.comments \
+        .order_by(Comment.created_timestamp.asc()) \
+        .all()
 
     return render_template('default/page/detail.html',
                            post=post,
@@ -117,10 +123,13 @@ def delete(post_id):
 @page.route('/user/<username>', methods=['GET', 'POST'])
 @page.route('/user/<username>/<int:page_num>', methods=['GET', 'POST'])
 def user(username, page_num=1):
-    author = User.query.filter(User.username == username).first_or_404()
+    author = User.query \
+        .filter(User.username == username) \
+        .first_or_404()
 
-    posts = author.posts.order_by(Post.created_timestamp.desc()).paginate(
-        page_num, 10, False)
+    posts = author.posts \
+        .order_by(Post.created_timestamp.desc()) \
+        .paginate(page_num, 10, False)
 
     return render_template('default/page/user.html', posts=posts)
 
