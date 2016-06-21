@@ -140,13 +140,14 @@ def tag():
 
 
 @page.route('/tag/<slug>', methods=['GET', 'POST'])
-def tag_post(slug):
+@page.route('/tag/<slug>/<int:page_num>', methods=['GET', 'POST'])
+def tag_post(slug, page_num=1):
     tag = Tag.query \
         .filter(Tag.slug == slug) \
         .first_or_404()
 
-    posts = tag.posts.order_by(Post.created_timestamp.desc())
+    posts = tag.posts \
+        .order_by(Post.created_timestamp.desc()) \
+        .paginate(page_num, 10, False)
 
-    print(posts)
-
-    return 'tag_post'
+    return render_template('default/page/tag.html', posts=posts)

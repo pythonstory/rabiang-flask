@@ -44,7 +44,7 @@
         <hr>
         <p>{{ post.body | truncate(255) }}</p>
         <p class="lead">
-            <a class="btn btn-info"
+            <a class="btn btn-info btn-sm"
                href="{{ url_for('page.detail_slug', slug=post.slug) }}">
                 Read More <span
                     class="glyphicon glyphicon-chevron-right"></span></a>
