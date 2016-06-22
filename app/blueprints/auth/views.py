@@ -73,10 +73,10 @@ def unregister():
 
         flash(gettext('Your account was deleted.'), 'success')
         return redirect(url_for('page.index'))
-    else:
-        return render_template('default/auth/unregister.html',
-                               form=form,
-                               user=user)
+
+    return render_template('default/auth/unregister.html',
+                           form=form,
+                           user=user)
 
 
 @auth.route('/change-password', methods=['GET', 'POST'])

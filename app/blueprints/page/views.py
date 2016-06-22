@@ -147,8 +147,8 @@ def delete(post_id):
 
         flash(gettext('You deleted your post.'), 'success')
         return redirect(url_for('page.index'))
-    else:
-        return render_template('default/page/delete.html', form=form, post=post)
+
+    return render_template('default/page/delete.html', form=form, post=post)
 
 
 @page.route('/user/<username>', methods=['GET', 'POST'])
