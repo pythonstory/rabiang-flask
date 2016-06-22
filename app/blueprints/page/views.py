@@ -65,7 +65,29 @@ def detail_slug(slug):
 def detail_post_id(post_id):
     post = Post.query.get_or_404(post_id)
 
-    return render_template('default/page/detail.html', post=post)
+    form = CommentForm()
+
+    if form.validate_on_submit():
+        comment = Comment()
+
+        comment.body = form.body.data
+        comment.ip_address = request.remote_addr
+        comment.post_id = post.id
+
+        db.session.add(comment)
+        db.session.commit()
+
+        flash(gettext('Your comment has been published.'))
+        return redirect(url_for('page.detail_slug', slug=post.slug))
+
+    comments = post.comments \
+        .order_by(Comment.created_timestamp.asc()) \
+        .all()
+
+    return render_template('default/page/detail.html',
+                           post=post,
+                           form=form,
+                           comments=comments)
 
 
 @page.route('/create', methods=['GET', 'POST'])
