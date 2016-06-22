@@ -122,7 +122,7 @@ def delete(post_id):
 
 @page.route('/user/<username>', methods=['GET', 'POST'])
 @page.route('/user/<username>/<int:page_num>', methods=['GET', 'POST'])
-def user(username, page_num=1):
+def user_index(username, page_num=1):
     author = User.query \
         .filter(User.username == username) \
         .first_or_404()
@@ -135,7 +135,7 @@ def user(username, page_num=1):
 
 
 @page.route('/tag', methods=['GET', 'POST'])
-def tag():
+def tag_index():
     tags = Tag.query \
         .order_by(Tag.name).all()
 

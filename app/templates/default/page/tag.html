@@ -5,7 +5,7 @@
 {% block page_content %}
     <ul>
     {% for tag in tags %}
-        <li><a href="{{ url_for('page.tag_post', slug=tag.slug) }}">{{ tag.name }}</a></li>
+        <li><a href="{{ url_for('page.tag_slug', slug=tag.slug) }}">{{ tag.name }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}
