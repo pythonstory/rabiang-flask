@@ -36,13 +36,12 @@ class RegisterForm(Form):
                                  DataRequired(),
                                  StrongPassword(
                                      message=lazy_gettext('Weak Password'))])
-    password_repeat = PasswordField(lazy_gettext('Password'),
+    password_repeat = PasswordField(lazy_gettext('Password Confirm'),
                                     validators=[
                                         DataRequired(),
-                                        EqualTo(
-                                            'password',
-                                            message=lazy_gettext(
-                                                'Password must match'))])
+                                        EqualTo('password',
+                                                message=lazy_gettext(
+                                                    'Password must match'))])
     username = StringField(lazy_gettext('Username'),
                            validators=[
                                DataRequired(),
@@ -59,3 +58,23 @@ class RegisterForm(Form):
 
 class UnregisterForm(Form):
     submit = SubmitField(lazy_gettext('Unregister'))
+
+
+class ChangePasswordForm(Form):
+    old_password = PasswordField(lazy_gettext('Old Password'),
+                                 validators=[
+                                     DataRequired()])
+
+    password = PasswordField(lazy_gettext('New Password'),
+                             validators=[
+                                 DataRequired(),
+                                 StrongPassword(
+                                     message=lazy_gettext('Weak Password'))])
+
+    password_repeat = PasswordField(lazy_gettext('Password Confirm'),
+                                    validators=[
+                                        DataRequired(),
+                                        EqualTo(
+                                            'password',
+                                            message=lazy_gettext(
+                                                'Password must match'))])

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-22 00:17+0900\n"
+"POT-Creation-Date: 2016-06-22 22:31+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -24,7 +24,7 @@ msgid "Email"
 msgstr "이메일"
 
 #: app/blueprints/auth/forms.py:16 app/blueprints/auth/forms.py:34
-#: app/blueprints/auth/forms.py:39 app/templates/default/auth/login.html:26
+#: app/templates/default/auth/login.html:26
 msgid "Password"
 msgstr "비밀번호"
 
@@ -33,7 +33,7 @@ msgid "Keep me logged in"
 msgstr "로그인 상태 유지"
 
 #: app/blueprints/auth/forms.py:21 app/templates/default/auth/login.html:39
-#: app/templates/default/navigation.html:54
+#: app/templates/default/navigation.html:60
 msgid "Login"
 msgstr "로그인"
 
@@ -41,49 +41,70 @@ msgstr "로그인"
 msgid "There is already an account with that email."
 msgstr "이미 사용 중인 이메일 주소입니다."
 
-#: app/blueprints/auth/forms.py:38
+#: app/blueprints/auth/forms.py:38 app/blueprints/auth/forms.py:72
 msgid "Weak Password"
 msgstr "좀 더 강력한 비밀번호를 입력하세요."
 
-#: app/blueprints/auth/forms.py:44
+#: app/blueprints/auth/forms.py:39 app/blueprints/auth/forms.py:74
+msgid "Password Confirm"
+msgstr "비밀번호 확인"
+
+#: app/blueprints/auth/forms.py:43 app/blueprints/auth/forms.py:79
 msgid "Password must match"
 msgstr "입력한 비밀번호가 서로 일치하지 않습니다."
 
-#: app/blueprints/auth/forms.py:46
+#: app/blueprints/auth/forms.py:45
 msgid "Username"
 msgstr "아이디"
 
-#: app/blueprints/auth/forms.py:51
+#: app/blueprints/auth/forms.py:50
 msgid "Username must have only letters or numbers"
 msgstr "아이디는 알파벳 또는 숫자만 입력 가능합니다."
 
-#: app/blueprints/auth/forms.py:55
+#: app/blueprints/auth/forms.py:54
 msgid "There is already an account with that username."
 msgstr "이미 사용 중인 아이디입니다."
 
-#: app/blueprints/auth/forms.py:61
+#: app/blueprints/auth/forms.py:60
+#: app/templates/default/auth/unregister.html:10
 msgid "Unregister"
 msgstr "탈퇴"
+
+#: app/blueprints/auth/forms.py:64
+msgid "Old Password"
+msgstr "기존 비밀번호"
+
+#: app/blueprints/auth/forms.py:68
+msgid "New Password"
+msgstr "새 비밀번호"
 
 #: app/blueprints/auth/views.py:24
 msgid "You successfully logged in"
 msgstr "로그인했습니다."
 
-#: app/blueprints/auth/views.py:28
+#: app/blueprints/auth/views.py:27
 msgid "Invalid username or password"
 msgstr "아이디 또는 비밀번호를 잘못 입력하셨습니다."
 
-#: app/blueprints/auth/views.py:38
+#: app/blueprints/auth/views.py:37
 msgid "You have been logged out"
 msgstr "로그아웃했습니다. 이제 컴퓨터를 떠나도 좋습니다."
 
-#: app/blueprints/auth/views.py:58
+#: app/blueprints/auth/views.py:57
 msgid "You can now login."
 msgstr "로그인하세요."
 
-#: app/blueprints/auth/views.py:76
+#: app/blueprints/auth/views.py:74
 msgid "Your account was deleted."
 msgstr "계정이 삭제되었습니다."
+
+#: app/blueprints/auth/views.py:96
+msgid "You changed your password."
+msgstr "비밀번호를 안전하게 바꾸셨습니다."
+
+#: app/blueprints/auth/views.py:99
+msgid "Old password is wrong."
+msgstr "기존 비밀번호가 올바르지 않습니다."
 
 #: app/blueprints/main/views.py:13 app/templates/default/forum/index.html:8
 #: app/templates/default/main/index.html:8
@@ -106,19 +127,19 @@ msgstr "중복된 슬러그입니다."
 msgid "Body"
 msgstr "본문"
 
-#: app/blueprints/page/views.py:42
+#: app/blueprints/page/views.py:51 app/blueprints/page/views.py:80
 msgid "Your comment has been published."
 msgstr "댓글을 작성했습니다."
 
-#: app/blueprints/page/views.py:78
+#: app/blueprints/page/views.py:109
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:100
+#: app/blueprints/page/views.py:131
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
-#: app/blueprints/page/views.py:117
+#: app/blueprints/page/views.py:148
 msgid "You deleted your post."
 msgstr "게시물을 삭제했습니다."
 
@@ -127,7 +148,7 @@ msgid "Blog"
 msgstr "블로그"
 
 #: app/templates/default/navigation.html:33
-#: app/templates/default/page/detail.html:59
+#: app/templates/default/page/detail.html:69
 msgid "List"
 msgstr "목록"
 
@@ -135,21 +156,31 @@ msgstr "목록"
 msgid "Write"
 msgstr "쓰기"
 
-#: app/templates/default/navigation.html:42
+#: app/templates/default/navigation.html:39
+#: app/templates/default/sidebar.html:51
+msgid "Tag"
+msgstr "태그"
+
+#: app/templates/default/navigation.html:45
 msgid "Auth"
 msgstr "인증"
 
-#: app/templates/default/navigation.html:47
+#: app/templates/default/navigation.html:50
 msgid "Logout"
 msgstr "로그아웃"
 
-#: app/templates/default/navigation.html:50
+#: app/templates/default/auth/change_password.html:3
+#: app/templates/default/navigation.html:53
+msgid "Change Password"
+msgstr "비밀번호 변경"
+
+#: app/templates/default/navigation.html:56
 msgid "Delete Account"
 msgstr "회원탈퇴"
 
 #: app/templates/default/auth/login.html:47
 #: app/templates/default/auth/register.html:3
-#: app/templates/default/navigation.html:57
+#: app/templates/default/navigation.html:63
 msgid "Sign up"
 msgstr "회원가입"
 
@@ -157,54 +188,46 @@ msgstr "회원가입"
 msgid "Blog Search"
 msgstr "블로그 검색"
 
-#: app/templates/default/sidebar.html:17
+#: app/templates/default/sidebar.html:21
 msgid "Blog Category"
 msgstr "블로그 카테고리"
 
-#: app/templates/default/sidebar.html:29
+#: app/templates/default/sidebar.html:35
 msgid "Recent Posts"
 msgstr "최근 게시물"
 
-#: app/templates/default/sidebar.html:37
+#: app/templates/default/sidebar.html:43
 msgid "Recent Comments"
 msgstr "최근 댓글"
 
-#: app/templates/default/sidebar.html:45
-msgid "Tag"
-msgstr "태그"
-
-#: app/templates/default/sidebar.html:51
+#: app/templates/default/sidebar.html:58
 msgid "Blog Archives"
 msgstr "글보관함"
+
+#: app/templates/default/auth/change_password.html:43
+#: app/templates/default/auth/register.html:54
+#: app/templates/default/page/create.html:10
+#: app/templates/default/page/detail.html:86
+#: app/templates/default/page/edit.html:10
+msgid "Save"
+msgstr "저장"
+
+#: app/templates/default/auth/change_password.html:44
+#: app/templates/default/auth/register.html:55
+#: app/templates/default/auth/unregister.html:11
+#: app/templates/default/page/create.html:11
+#: app/templates/default/page/delete.html:12
+#: app/templates/default/page/edit.html:12
+msgid "Cancel"
+msgstr "취소"
 
 #: app/templates/default/auth/login.html:45
 msgid "Forgot password?"
 msgstr "비밀번호 찾기"
 
-#: app/templates/default/auth/register.html:54
-#: app/templates/default/page/create.html:43
-#: app/templates/default/page/detail.html:75
-#: app/templates/default/page/edit.html:43
-msgid "Save"
-msgstr "저장"
-
-#: app/templates/default/auth/register.html:55
-#: app/templates/default/auth/unregister.html:11
-#: app/templates/default/page/create.html:44
-#: app/templates/default/page/delete.html:12
-#: app/templates/default/page/edit.html:45
-msgid "Cancel"
-msgstr "취소"
-
 #: app/templates/default/auth/unregister.html:9
 msgid "Delete your account?"
 msgstr "정말로 회원 탈퇴하시겠습니까?"
-
-#: app/templates/default/auth/unregister.html:10
-#: app/templates/default/page/delete.html:11
-#: app/templates/default/page/detail.html:56
-msgid "Delete"
-msgstr "삭제"
 
 #: app/templates/default/page/_pagination.html:7
 #: app/templates/default/page/_pagination.html:17
@@ -229,11 +252,20 @@ msgstr "블로그 새 글 작성"
 msgid "Delete this post?"
 msgstr "게시물을 정말로 삭제합니까?"
 
-#: app/templates/default/page/detail.html:54
+#: app/templates/default/page/delete.html:11
+#: app/templates/default/page/detail.html:65
+msgid "Delete"
+msgstr "삭제"
+
+#: app/templates/default/page/detail.html:61
 msgid "Edit"
 msgstr "수정"
 
-#: app/templates/default/page/detail.html:67
+#: app/templates/default/page/detail.html:78
 msgid "Leave a Comment"
 msgstr "댓글 작성"
+
+#: app/templates/default/page/edit.html:3
+msgid "Edit a post"
+msgstr "게시물 수정"
 

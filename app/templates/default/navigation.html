@@ -50,6 +50,9 @@
                                 <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
                             </li>
                             <li>
+                                <a href="{{ url_for('auth.change_password') }}">{{ _('Change Password') }}</a>
+                            </li>
+                            <li>
                                 <a href="{{ url_for('auth.unregister') }}">{{ _('Delete Account') }}</a>
                             </li>
                         {% else %}

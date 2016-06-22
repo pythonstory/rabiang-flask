@@ -11,7 +11,6 @@ cart
 
 /poll
 
-- slug 한글 문제
 - date formatting (posted on, modified on)
 - breadcrumbs / trailers
 - pagination : parameterized

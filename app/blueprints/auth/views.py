@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 
 from app import db
 from . import auth
-from .forms import LoginForm, RegisterForm, UnregisterForm
+from .forms import LoginForm, RegisterForm, UnregisterForm, ChangePasswordForm
 from .models import User
 
 
@@ -22,7 +22,6 @@ def login():
             login_user(user, remember=form.remember_me.data)
 
             flash(gettext('You successfully logged in'), 'success')
-
             return redirect(request.args.get('next') or url_for('main.index'))
 
         flash(gettext('Invalid username or password'), 'success')
@@ -56,7 +55,6 @@ def register():
         db.session.commit()
 
         flash(gettext('You can now login.'), 'success')
-
         return redirect(url_for('auth.login'))
 
     return render_template('default/auth/register.html', form=form)
@@ -81,10 +79,27 @@ def unregister():
                                user=user)
 
 
-@auth.route('/change-password')
+@auth.route('/change-password', methods=['GET', 'POST'])
 @login_required
 def change_password():
-    return 'change password'
+    form = ChangePasswordForm()
+
+    if form.validate_on_submit():
+        user = User.query.get(current_user.id)
+
+        if user is not None and user.verify_password(form.old_password.data):
+            user.password = form.password.data
+
+            db.session.add(user)
+            db.session.commit()
+
+            flash(gettext('You changed your password.'), 'success')
+            return redirect(url_for('page.index'))
+
+        flash(gettext('Old password is wrong.'), 'danger')
+        return redirect(url_for('auth.change_password'))
+
+    return render_template('default/auth/change_password.html', form=form)
 
 
 @auth.route('/reset-password')

@@ -9,7 +9,14 @@ We are planning on initial release in September or October 2016.
 ## Features
 
 * Blog
+    * Search
+    * Revision History and Status
+    * Weighted Tags, Categories
+    * Recent Posts, Recent Comments, Monthly Archives, Feeds
     * WYSIWYG editor and Markdown
+    * Attachment management
+    * Social Share
+    * Widgets
 * Cart
 * Authentication with strong password policy
 * Role-based Access Control
