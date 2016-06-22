@@ -153,4 +153,4 @@ def tag_post(slug, page_num=1):
         .order_by(Post.created_timestamp.desc()) \
         .paginate(page_num, 10, False)
 
-    return render_template('default/page/tag_post.html', posts=posts)
+    return render_template('default/page/tag_slug.html', posts=posts)
