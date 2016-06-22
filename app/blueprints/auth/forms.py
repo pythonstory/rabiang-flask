@@ -39,6 +39,16 @@ class RegisterForm(Form):
             )
         ]
     )
+    """
+        (               # Start of group
+        (?=.*\d)		# must contain one digit from 0-9
+        (?=.*[a-z])		# must contain one lowercase characters
+        (?=.*[A-Z])		# must contain one uppercase characters
+        (?=.*\W)        # must contain one special symbols
+        .               # match anything with previous condition checking
+        {6,20}          # length at least 6 characters and maximum of 20
+        )
+    """
     password = PasswordField(
         lazy_gettext('Password'),
         validators=[
