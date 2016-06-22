@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-22 22:31+0900\n"
+"POT-Creation-Date: 2016-06-23 02:28+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -18,63 +18,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: app/blueprints/auth/forms.py:12 app/blueprints/auth/forms.py:25
+#: app/__init__.py:55
+msgid "Please, log in to access this page."
+msgstr "로그인하세요."
+
+#: app/blueprints/auth/forms.py:27 app/blueprints/auth/forms.py:44
 #: app/templates/default/auth/login.html:18
 msgid "Email"
 msgstr "이메일"
 
-#: app/blueprints/auth/forms.py:16 app/blueprints/auth/forms.py:34
+#: app/blueprints/auth/forms.py:31 app/blueprints/auth/forms.py:56
 #: app/templates/default/auth/login.html:26
 msgid "Password"
 msgstr "비밀번호"
 
-#: app/blueprints/auth/forms.py:19 app/templates/default/auth/login.html:35
+#: app/blueprints/auth/forms.py:35 app/templates/default/auth/login.html:35
 msgid "Keep me logged in"
 msgstr "로그인 상태 유지"
 
-#: app/blueprints/auth/forms.py:21 app/templates/default/auth/login.html:39
+#: app/blueprints/auth/forms.py:38 app/templates/default/auth/login.html:39
 #: app/templates/default/navigation.html:60
 msgid "Login"
 msgstr "로그인"
 
-#: app/blueprints/auth/forms.py:31
+#: app/blueprints/auth/forms.py:50
 msgid "There is already an account with that email."
 msgstr "이미 사용 중인 이메일 주소입니다."
 
-#: app/blueprints/auth/forms.py:38 app/blueprints/auth/forms.py:72
+#: app/blueprints/auth/forms.py:59 app/blueprints/auth/forms.py:98
 msgid "Weak Password"
 msgstr "좀 더 강력한 비밀번호를 입력하세요."
 
-#: app/blueprints/auth/forms.py:39 app/blueprints/auth/forms.py:74
+#: app/blueprints/auth/forms.py:63 app/blueprints/auth/forms.py:102
 msgid "Password Confirm"
 msgstr "비밀번호 확인"
 
-#: app/blueprints/auth/forms.py:43 app/blueprints/auth/forms.py:79
+#: app/blueprints/auth/forms.py:66 app/blueprints/auth/forms.py:105
 msgid "Password must match"
 msgstr "입력한 비밀번호가 서로 일치하지 않습니다."
 
-#: app/blueprints/auth/forms.py:45
+#: app/blueprints/auth/forms.py:70
 msgid "Username"
 msgstr "아이디"
 
-#: app/blueprints/auth/forms.py:50
+#: app/blueprints/auth/forms.py:75
 msgid "Username must have only letters or numbers"
 msgstr "아이디는 알파벳 또는 숫자만 입력 가능합니다."
 
-#: app/blueprints/auth/forms.py:54
+#: app/blueprints/auth/forms.py:78
 msgid "There is already an account with that username."
 msgstr "이미 사용 중인 아이디입니다."
 
-#: app/blueprints/auth/forms.py:60
+#: app/blueprints/auth/forms.py:86
 #: app/templates/default/auth/unregister.html:10
 msgid "Unregister"
 msgstr "탈퇴"
 
-#: app/blueprints/auth/forms.py:64
+#: app/blueprints/auth/forms.py:91
 msgid "Old Password"
 msgstr "기존 비밀번호"
 
-#: app/blueprints/auth/forms.py:68
+#: app/blueprints/auth/forms.py:95
 msgid "New Password"
 msgstr "새 비밀번호"
 
@@ -111,19 +115,19 @@ msgstr "기존 비밀번호가 올바르지 않습니다."
 msgid "Home"
 msgstr "시작화면"
 
-#: app/blueprints/page/forms.py:12
+#: app/blueprints/page/forms.py:13
 msgid "Title"
 msgstr "제목"
 
-#: app/blueprints/page/forms.py:14
+#: app/blueprints/page/forms.py:18
 msgid "Slug"
 msgstr "슬러그"
 
-#: app/blueprints/page/forms.py:17
+#: app/blueprints/page/forms.py:21
 msgid "Duplicate slug"
 msgstr "중복된 슬러그입니다."
 
-#: app/blueprints/page/forms.py:18
+#: app/blueprints/page/forms.py:26
 msgid "Body"
 msgstr "본문"
 

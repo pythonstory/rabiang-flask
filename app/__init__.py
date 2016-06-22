@@ -3,7 +3,7 @@ import logging
 import logging.handlers
 
 from flask import Flask, g, request, current_app, render_template
-from flask_babel import Babel
+from flask_babel import Babel, lazy_gettext
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
@@ -52,6 +52,9 @@ def configure_extensions(app):
     login_manager.init_app(app)
     login_manager.session_protection = 'strong'
     login_manager.login_view = 'auth.login'
+    login_manager.login_message = lazy_gettext('Please, log in '
+                                               'to access this page.')
+    login_manager.login_message_category = 'warning'
 
     @babel.localeselector
     def get_locale():
