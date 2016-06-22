@@ -4,40 +4,7 @@
 
 {% block page_content %}
     <form action="{{ url_for('page.create') }}" method="post" class="form-horizontal">
-        {{ form.csrf_token }}
-        <div class="form-group">
-            {{ form.title.label(class='col-sm-2 control-label') }}
-            <div class="col-sm-10{% if form.title.errors %} has-error{% endif %}">
-                {{ form.title(class='form-control', id='post_title') }}
-                {% if form.title.errors %}
-                    {% for error in form.title.errors %}
-                        <span class="help-block">{{ error }}</span>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form.slug.label(class='col-sm-2 control-label') }}
-            <div class="col-sm-10{% if form.slug.errors %} has-error{% endif %}">
-                {{ form.slug(class='form-control', id='post_slug') }}
-                {% if form.slug.errors %}
-                    {% for error in form.slug.errors %}
-                        <span class="help-block">{{ error }}</span>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form.body.label(class='col-sm-2 control-label') }}
-            <div class="col-sm-10{% if form.body.errors %} has-error{% endif %}">
-                {{ form.body(class='form-control') }}
-                {% if form.body.errors %}
-                    {% for error in form.body.errors %}
-                        <span class="help-block">{{ error }}</span>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
+        {% include 'default/page/_post_form.html' %}
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
