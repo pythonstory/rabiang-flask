@@ -16,7 +16,6 @@ cart
 - pagination : parameterized
 - babel select lang html
 
-- comments
 - widget MVC
 - blueprint dynamic import
 
@@ -25,12 +24,12 @@ cart
 - blog theme work
 
 
+- 댓글에 댓글 달기
 - id: username or email (preferences)
 - verify_password function must be overridden.
 
 - email confirmation
 - reset password
-- change password
 - change email address with confirmation
 
 - config/factory pattern refactoring / 블루프린트 로딩 refactoring

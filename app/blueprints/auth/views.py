@@ -15,7 +15,7 @@ def login():
 
     if form.validate_on_submit():
         user = User.query \
-            .filter_by(email=form.email.data) \
+            .filter(User.email == form.email.data) \
             .first()
 
         if user is not None and user.verify_password(form.password.data):

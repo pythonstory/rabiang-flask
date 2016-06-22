@@ -11,7 +11,7 @@ class Unique(object):
         self.message = message
 
     def __call__(self, form, field):
-        # If form field and existing data field match, it doesn't validate.
+        # If form field and existing data field match, it doesn't check.
         if field.object_data == field.data:
             return
 
@@ -26,7 +26,8 @@ class StrongPassword(object):
         self.message = message
 
     def __call__(self, form, field):
-        check = re.match(r'((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,20})', field.data)
+        check = re.match(r'((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,20})',
+                         field.data)
 
         """
             (               # Start of group
