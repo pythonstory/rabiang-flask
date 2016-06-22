@@ -9,15 +9,27 @@ from .models import Post
 
 
 class PostForm(Form):
-    title = StringField(lazy_gettext('Title'),
-                        validators=[DataRequired()])
-    slug = StringField(lazy_gettext('Slug'),
-                       validators=[DataRequired(),
-                                   Unique(Post, Post.slug,
-                                          lazy_gettext('Duplicate slug'))])
-    body = TextAreaField(lazy_gettext('Body'),
-                         validators=[DataRequired()])
+    title = StringField(
+        lazy_gettext('Title'),
+        validators=[DataRequired()]
+    )
+
+    slug = StringField(
+        lazy_gettext('Slug'),
+        validators=[
+            DataRequired(),
+            Unique(Post, Post.slug, lazy_gettext('Duplicate slug'))
+        ]
+    )
+
+    body = TextAreaField(
+        lazy_gettext('Body'),
+        validators=[DataRequired()]
+    )
 
 
 class CommentForm(Form):
-    body = TextAreaField('', validators=[DataRequired()])
+    body = TextAreaField(
+        '',
+        validators=[DataRequired()]
+    )
