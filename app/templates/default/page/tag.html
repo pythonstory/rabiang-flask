@@ -3,9 +3,9 @@
 {% block title %}Rabiang :: Blog{% endblock %}
 
 {% block page_content %}
-    <ul>
+    <ul class="list-inline">
     {% for tag in tags %}
-        <li><a href="{{ url_for('page.tag_slug', slug=tag.slug) }}">{{ tag.name }}</a></li>
+        <li><a href="{{ url_for('page.tag_slug', slug=tag.slug) }}" class="btn btn-default">{{ tag.name }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}
