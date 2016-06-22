@@ -144,7 +144,7 @@ def tag_index():
 
 @page.route('/tag/<slug>', methods=['GET', 'POST'])
 @page.route('/tag/<slug>/<int:page_num>', methods=['GET', 'POST'])
-def tag_post(slug, page_num=1):
+def tag_slug(slug, page_num=1):
     tag = Tag.query \
         .filter(Tag.slug == slug) \
         .first_or_404()
