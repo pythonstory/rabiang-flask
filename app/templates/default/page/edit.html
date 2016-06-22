@@ -60,7 +60,10 @@
                             'keyup',
                             function () {
                                 // slugify title automatically
-                                slug.val(title.val().toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));
+                                slug.val(title.val()
+                                        .replace(/(^\s*)|(\s*$)/g, '')
+  			                            .replace(/[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]/g, '')
+  			                            .replace(/\s+/g, '-').toLowerCase());
                             }
                     );
                 }
