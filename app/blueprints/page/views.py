@@ -14,7 +14,16 @@ from .models import Post, Comment, Tag
 @page.route('/index', methods=['GET', 'POST'])
 @page.route('/index/<int:page_num>', methods=['GET', 'POST'])
 def index(page_num=1):
-    posts = Post.query \
+    query = Post.query
+
+    search = request.args.get('q')
+
+    if search:
+        query = query \
+            .filter((Post.body.contains(search)) |
+                    (Post.title.contains(search)))
+
+    posts = query \
         .order_by(Post.created_timestamp.desc()) \
         .paginate(page_num, 10, False)
 
@@ -137,7 +146,8 @@ def user_index(username, page_num=1):
 @page.route('/tag', methods=['GET', 'POST'])
 def tag_index():
     tags = Tag.query \
-        .order_by(Tag.name).all()
+        .order_by(Tag.name) \
+        .all()
 
     return render_template('default/page/tag.html', tags=tags)
 
