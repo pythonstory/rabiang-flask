@@ -29,7 +29,7 @@ def login():
     return render_template('default/auth/login.html', form=form)
 
 
-@auth.route('/logout')
+@auth.route('/logout', methods=['POST'])
 @login_required
 def logout():
     logout_user()
