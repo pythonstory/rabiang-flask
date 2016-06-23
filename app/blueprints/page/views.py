@@ -102,6 +102,7 @@ def create():
         post.slug = form.slug.data
         post.body = form.body.data
         post.status = form.status.data
+        post.tags = form.tags.data
         post.author = current_user
 
         db.session.add(post)
@@ -125,6 +126,7 @@ def edit(post_id):
         post.slug = form.slug.data
         post.body = form.body.data
         post.status = form.status.data
+        post.tags = form.tags.data
         post.author = current_user
 
         db.session.add(post)
@@ -176,15 +178,15 @@ def tag_index():
     return render_template('default/page/tag.html', tags=tags)
 
 
-@page.route('/tag/<slug>', methods=['GET', 'POST'])
-@page.route('/tag/<slug>/<int:page_num>', methods=['GET', 'POST'])
-def tag_slug(slug, page_num=1):
+@page.route('/tag/<name>', methods=['GET', 'POST'])
+@page.route('/tag/<name>/<int:page_num>', methods=['GET', 'POST'])
+def tag_name(name, page_num=1):
     tag = Tag.query \
-        .filter(Tag.slug == slug) \
+        .filter(Tag.name == name) \
         .first_or_404()
 
     posts = tag.posts \
         .order_by(Post.created_timestamp.desc()) \
         .paginate(page_num, 10, False)
 
-    return render_template('default/page/tag_slug.html', posts=posts)
+    return render_template('default/page/tag_name.html', posts=posts)

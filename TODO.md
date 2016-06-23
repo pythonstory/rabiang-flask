@@ -44,7 +44,7 @@ validators
 - korean registration code
 
 - tag
-태그 입력 처리, 태그 구름, 태그 목록 노출
+- 태그 입력시 무조건 공백 제거 자바스크립트, 및 폼 필드에서 처리, 태그 구름,
 - category
 - menu
 - attachment management

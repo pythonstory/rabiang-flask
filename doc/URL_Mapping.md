@@ -17,7 +17,7 @@ Blog
 
 /page/ : page list
 /page/tag : tag list
-/page/tag/<slug> : page list with tag
+/page/tag/<name> : page list with tag
 /page/user/<username> : page list with username
 /page/<slug> : detail
 /page/create: new page form GET / save POST

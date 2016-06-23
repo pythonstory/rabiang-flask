@@ -26,14 +26,7 @@
     </li>
 </ul>
 </p>
-{% if post.tags.count()>0 %}
-<p>
-    <i class="fa fa-tag" aria-hidden="true"></i>
-    {% for tag in post.tags %}
-    <a href="{{ url_for('page.tag_slug', slug=tag.slug) }}" class="btn btn-success btn-sm">{{ tag.name }}</a>
-    {% endfor %}
-</p>
-{% endif %}
+{% include 'default/page/_post_tags.html' %}
 <hr>
 <img class="img-responsive" src="http://placehold.it/900x300" alt="">
 <hr>
