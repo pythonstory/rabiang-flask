@@ -5,7 +5,7 @@
 Authentication and Authorization
 
 /auth/login : login form GET / login POST
-/auth/logout : logout POST
+/auth/logout : logout GET
 /auth/register : register form GET / save POST
 /auth/unregister : unregister form GET / delete POST
 /auth/change_password : change password form GET / save POST

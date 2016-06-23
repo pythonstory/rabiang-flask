@@ -61,7 +61,7 @@ def detail_slug(slug):
                            comments=comments)
 
 
-@page.route('/<int:post_id>')
+@page.route('/<int:post_id>', methods=['GET', 'POST'])
 def detail_post_id(post_id):
     post = Post.query.get_or_404(post_id)
 
