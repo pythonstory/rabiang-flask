@@ -4,7 +4,6 @@ from datetime import datetime
 from flask import url_for
 
 from app import db
-from app.utils.html import slugify
 
 post_tags = db.Table('post_tags',
                      db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
@@ -32,9 +31,6 @@ class Post(db.Model):
     tags = db.relationship('Tag', secondary=post_tags,
                            backref=db.backref('posts', lazy='dynamic'),
                            lazy='dynamic')
-
-    def generate_slug(self):
-        self.slug = slugify(self.title)
 
     def get_slug_url(self):
         return url_for('page.detail_slug', slug=self.slug)
