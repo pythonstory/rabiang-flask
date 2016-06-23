@@ -18,7 +18,7 @@ class TagField(StringField):
         """
         if self.data:
             # Display tags as a comma-separated list.
-            return ', '.join([tag.name for tag in self.data])
+            return ','.join([tag.name for tag in self.data])
 
         return ''
 
@@ -36,7 +36,7 @@ class TagField(StringField):
 
     def get_tags_from_string(self, tag_string):
         # User input comma-separated tags
-        raw_tags = tag_string.split(', ')
+        raw_tags = tag_string.split(',')
 
         # Strip whitespaces from user input tags
         tag_names = [name.strip() for name in raw_tags if name.strip()]
