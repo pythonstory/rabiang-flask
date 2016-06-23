@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-23 03:43+0900\n"
+"POT-Creation-Date: 2016-06-24 03:16+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -115,51 +115,56 @@ msgstr "기존 비밀번호가 올바르지 않습니다."
 msgid "Home"
 msgstr "시작화면"
 
-#: app/blueprints/page/forms.py:13
+#: app/blueprints/page/forms.py:59
 msgid "Post Title"
 msgstr "제목"
 
-#: app/blueprints/page/forms.py:17
+#: app/blueprints/page/forms.py:63
 msgid "Post Slug"
 msgstr "슬러그"
 
-#: app/blueprints/page/forms.py:20
+#: app/blueprints/page/forms.py:66
 msgid "Duplicate slug"
 msgstr "중복된 슬러그입니다."
 
-#: app/blueprints/page/forms.py:24
+#: app/blueprints/page/forms.py:70
 msgid "Post Body"
 msgstr "본문"
 
-#: app/blueprints/page/forms.py:28
+#: app/blueprints/page/forms.py:74
 msgid "Post Status"
 msgstr "상태"
 
-#: app/blueprints/page/forms.py:30
+#: app/blueprints/page/forms.py:76
 msgid "Draft"
 msgstr "초안"
 
-#: app/blueprints/page/forms.py:31
+#: app/blueprints/page/forms.py:77
 msgid "Public"
 msgstr "공개"
 
-#: app/blueprints/page/forms.py:32
+#: app/blueprints/page/forms.py:78
 msgid "Private"
 msgstr "비공개"
+
+#: app/blueprints/page/forms.py:81 app/templates/default/navigation.html:39
+#: app/templates/default/sidebar.html:51
+msgid "Tag"
+msgstr "태그"
 
 #: app/blueprints/page/views.py:51 app/blueprints/page/views.py:80
 msgid "Your comment has been published."
 msgstr "댓글을 작성했습니다."
 
-#: app/blueprints/page/views.py:110
+#: app/blueprints/page/views.py:111
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:133
+#: app/blueprints/page/views.py:135
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
-#: app/blueprints/page/views.py:150
+#: app/blueprints/page/views.py:152
 msgid "You deleted your post."
 msgstr "게시물을 삭제했습니다."
 
@@ -168,18 +173,13 @@ msgid "Blog"
 msgstr "블로그"
 
 #: app/templates/default/navigation.html:33
-#: app/templates/default/page/detail.html:69
+#: app/templates/default/page/detail.html:61
 msgid "List"
 msgstr "목록"
 
 #: app/templates/default/navigation.html:36
 msgid "Write"
 msgstr "쓰기"
-
-#: app/templates/default/navigation.html:39
-#: app/templates/default/sidebar.html:51
-msgid "Tag"
-msgstr "태그"
 
 #: app/templates/default/navigation.html:45
 msgid "Auth"
@@ -227,7 +227,7 @@ msgstr "글보관함"
 #: app/templates/default/auth/change_password.html:43
 #: app/templates/default/auth/register.html:54
 #: app/templates/default/page/create.html:10
-#: app/templates/default/page/detail.html:86
+#: app/templates/default/page/detail.html:78
 #: app/templates/default/page/edit.html:10
 msgid "Save"
 msgstr "저장"
@@ -273,18 +273,19 @@ msgid "Delete this post?"
 msgstr "게시물을 정말로 삭제합니까?"
 
 #: app/templates/default/page/delete.html:11
-#: app/templates/default/page/detail.html:65
+#: app/templates/default/page/detail.html:57
 msgid "Delete"
 msgstr "삭제"
 
-#: app/templates/default/page/detail.html:61
+#: app/templates/default/page/detail.html:53
 msgid "Edit"
 msgstr "수정"
 
-#: app/templates/default/page/detail.html:78
+#: app/templates/default/page/detail.html:70
 msgid "Leave a Comment"
 msgstr "댓글 작성"
 
 #: app/templates/default/page/edit.html:3
 msgid "Edit a post"
 msgstr "게시물 수정"
+

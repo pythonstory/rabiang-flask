@@ -7,7 +7,7 @@ from app import db
 from app.blueprints.auth.models import User
 from . import page
 from .forms import PostForm, CommentForm
-from .models import Post, Comment, Tag
+from .models import Post, Comment, Tag, post_tags
 
 
 @page.route('/', methods=['GET', 'POST'])
@@ -172,6 +172,8 @@ def user_index(username, page_num=1):
 @page.route('/tag', methods=['GET', 'POST'])
 def tag_index():
     tags = Tag.query \
+        .join(post_tags) \
+        .distinct() \
         .order_by(Tag.name) \
         .all()
 
