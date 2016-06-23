@@ -7,20 +7,20 @@ from app import db
 from app.utils.html import slugify
 
 post_tags = db.Table('post_tags',
-                     db.Column('tag_id',
-                               db.Integer, db.ForeignKey('tag.id')),
-                     db.Column('post_id',
-                               db.Integer, db.ForeignKey('post.id')))
+                     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
+                     db.Column('post_id', db.Integer, db.ForeignKey('post.id')))
 
 
 class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    STATUS_DRAFT = 0
+    STATUS_PUBLIC = 1
+    STATUS_PRIVATE = 2
 
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     slug = db.Column(db.String(100), unique=True)
-
     body = db.Column(db.Text)
-
+    status = db.Column(db.SmallInteger, default=STATUS_DRAFT)
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
     modified_timestamp = db.Column(db.DateTime, default=datetime.now,
                                    onupdate=datetime.now)
@@ -51,11 +51,8 @@ class Post(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-
     body = db.Column(db.Text)
-
     ip_address = db.Column(db.String(64))
-
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
     modified_timestamp = db.Column(db.DateTime, default=datetime.now,
                                    onupdate=datetime.now)
@@ -73,7 +70,6 @@ class Comment(db.Model):
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-
     name = db.Column(db.String(64))
     slug = db.Column(db.String(64), unique=True)
 

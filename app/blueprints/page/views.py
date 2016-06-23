@@ -101,6 +101,7 @@ def create():
         post.title = form.title.data
         post.slug = form.slug.data
         post.body = form.body.data
+        post.status = form.status.data
         post.author = current_user
 
         db.session.add(post)
@@ -123,6 +124,7 @@ def edit(post_id):
         post.title = form.title.data
         post.slug = form.slug.data
         post.body = form.body.data
+        post.status = form.status.data
         post.author = current_user
 
         db.session.add(post)

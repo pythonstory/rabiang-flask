@@ -56,3 +56,6 @@ validators
 * celery
 * Flask-migrate
 * Fixtures
+
+
+상태에 따른 게시물 노출 문제 - 사용자 권한 유무와 같이 처리할 것

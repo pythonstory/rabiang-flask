@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-23 02:28+0900\n"
+"POT-Creation-Date: 2016-06-23 03:43+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -116,34 +116,50 @@ msgid "Home"
 msgstr "시작화면"
 
 #: app/blueprints/page/forms.py:13
-msgid "Title"
+msgid "Post Title"
 msgstr "제목"
 
-#: app/blueprints/page/forms.py:18
-msgid "Slug"
+#: app/blueprints/page/forms.py:17
+msgid "Post Slug"
 msgstr "슬러그"
 
-#: app/blueprints/page/forms.py:21
+#: app/blueprints/page/forms.py:20
 msgid "Duplicate slug"
 msgstr "중복된 슬러그입니다."
 
-#: app/blueprints/page/forms.py:26
-msgid "Body"
+#: app/blueprints/page/forms.py:24
+msgid "Post Body"
 msgstr "본문"
+
+#: app/blueprints/page/forms.py:28
+msgid "Post Status"
+msgstr "상태"
+
+#: app/blueprints/page/forms.py:30
+msgid "Draft"
+msgstr "초안"
+
+#: app/blueprints/page/forms.py:31
+msgid "Public"
+msgstr "공개"
+
+#: app/blueprints/page/forms.py:32
+msgid "Private"
+msgstr "비공개"
 
 #: app/blueprints/page/views.py:51 app/blueprints/page/views.py:80
 msgid "Your comment has been published."
 msgstr "댓글을 작성했습니다."
 
-#: app/blueprints/page/views.py:109
+#: app/blueprints/page/views.py:110
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:131
+#: app/blueprints/page/views.py:133
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
-#: app/blueprints/page/views.py:148
+#: app/blueprints/page/views.py:150
 msgid "You deleted your post."
 msgstr "게시물을 삭제했습니다."
 
@@ -272,4 +288,3 @@ msgstr "댓글 작성"
 #: app/templates/default/page/edit.html:3
 msgid "Edit a post"
 msgstr "게시물 수정"
-
