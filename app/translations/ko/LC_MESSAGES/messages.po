@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-24 03:16+0900\n"
+"POT-Creation-Date: 2016-06-24 18:02+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -92,7 +92,7 @@ msgstr "아이디 또는 비밀번호를 잘못 입력하셨습니다."
 
 #: app/blueprints/auth/views.py:37
 msgid "You have been logged out"
-msgstr "로그아웃했습니다. 이제 컴퓨터를 떠나도 좋습니다."
+msgstr "안전하게 로그아웃했습니다."
 
 #: app/blueprints/auth/views.py:57
 msgid "You can now login."
@@ -151,6 +151,10 @@ msgstr "비공개"
 #: app/templates/default/sidebar.html:51
 msgid "Tag"
 msgstr "태그"
+
+#: app/blueprints/page/forms.py:82
+msgid "Separate multiple tags with commas. All of whitespaces are ignored."
+msgstr "태그는 콤마(,)로 구분합니다. 태그 입력에 띄어쓰기는 할 수 없습니다."
 
 #: app/blueprints/page/views.py:51 app/blueprints/page/views.py:80
 msgid "Your comment has been published."
@@ -288,4 +292,7 @@ msgstr "댓글 작성"
 #: app/templates/default/page/edit.html:3
 msgid "Edit a post"
 msgstr "게시물 수정"
+
+#~ msgid "Separate multiple tags with commas."
+#~ msgstr "태그는 콤마(,)로 구분합니다. 띄어쓰기는 입력할 수 없습니다."
 

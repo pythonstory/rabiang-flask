@@ -79,7 +79,8 @@ class PostForm(Form):
         coerce=int)
     tags = TagField(
         lazy_gettext('Tag'),
-        description='Separate multiple tags with commas.'
+        description=lazy_gettext('Separate multiple tags with commas. '
+                                 'All of whitespaces are ignored.')
     )
 
 
