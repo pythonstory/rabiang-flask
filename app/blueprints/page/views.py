@@ -297,3 +297,25 @@ def tag_name(name, page_num=1):
         recent_comments=recent_comments,
         top_tags=top_tags,
         monthly_archives=monthly_archives)
+
+
+@page.route('/month/<int:year>/<int:month>', methods=['GET', 'POST'])
+@page.route('/month/<int:year>/<int:month>/<int:page_num>',
+            methods=['GET', 'POST'])
+def month_index(year, month, page_num=1):
+    posts = Post.query \
+        .filter((db.func.extract('year', Post.created_timestamp) == year) &
+                (db.func.extract('month', Post.created_timestamp) == month)) \
+        .order_by(Post.created_timestamp.desc()) \
+        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+                  False)
+
+    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
+        posts=posts,
+        recent_posts=recent_posts,
+        recent_comments=recent_comments,
+        top_tags=top_tags,
+        monthly_archives=monthly_archives)
