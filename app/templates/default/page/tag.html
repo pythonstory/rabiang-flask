@@ -3,9 +3,7 @@
 {% block title %}Rabiang :: Blog{% endblock %}
 
 {% block page_content %}
-    <ul class="list-inline">
-    {% for tag in tags %}
-        <li><a href="{{ url_for('page.tag_name', name=tag.name) }}" class="btn btn-default">{{ tag.name }}</a></li>
+    {% for tag, count in tags %}
+        <a href="{{ url_for('page.tag_name', name=tag.name) }}" class="btn btn-default tag-margin">{{ tag.name }} <span class="badge">{{ count }}</span></a>
     {% endfor %}
-    </ul>
 {% endblock %}
