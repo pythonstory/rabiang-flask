@@ -27,6 +27,10 @@ cart
 - 댓글에 댓글 달기
 - id: username or email (preferences)
 - verify_password function must be overridden.
+- 댓글 닉네임
+- 댓글 gravata
+- 댓글 소셜
+- 댓글 recaptcha
 
 - email confirmation
 - reset password
