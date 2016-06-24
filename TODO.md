@@ -53,6 +53,10 @@ validators
 - dashboard
 - archive, feed
 
+- sidebar 기능 추가
+카테고리 미구현
+글보관함 i18n 및 실제 페이지/링크 미구현
+
 * Mail
 * celery
 * Flask-migrate

@@ -1,7 +1,7 @@
 <!-- Blog Search Well -->
 <div class="well">
     <h4>{{ _('Blog Search') }}</h4>
-    <form method="get" class="form-inline">
+    <form action="{{ url_for('page.index') }}" method="get" class="form-inline">
         <div class="input-group">
             <input type="text" class="form-control"
                    name="q" value="{{ request.args.get('q', '') }}">
@@ -34,32 +34,35 @@
 <div class="well">
     <h4>{{ _('Recent Posts') }}</h4>
     <ul class="sidebar_list_style_outer">
-        <li><a href="#"><i class="fa fa-angle-double-right"></i> test</a></li>
-        <li><a href="#"><i class="fa fa-angle-double-right"></i> test</a></li>
+        {% for post in recent_posts %}
+            <li><a href="{{ url_for('page.detail_slug', slug=post.slug) }}"><i class="fa fa-angle-double-right"></i> {{ post.title }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 
 <div class="well">
     <h4>{{ _('Recent Comments') }}</h4>
     <ul class="sidebar_list_style_outer">
-        <li><a href="#"><i class="fa fa-angle-double-right"></i> test</a></li>
-        <li><a href="#"><i class="fa fa-angle-double-right"></i> test</a></li>
+        {% for comment in recent_comments %}
+            <li><a href="{{ url_for('page.detail_slug', slug=comment.post.slug) }}"><i class="fa fa-angle-double-right"></i> {{ comment.post.title }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 
 <div class="well">
     <h4>{{ _('Tag') }}</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore,
-        perspiciatis adipisci accusamus
-        laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+    <p>
+       {% for tag, count in top_tags %}
+           <a href="{{ url_for('page.tag_name', name=tag.name) }}" class="btn btn-default tag-margin">{{ tag.name }} <span class="badge">{{ count }}</span></a>
+       {% endfor %}
+    </p>
 </div>
 
 <div class="well">
     <h4>{{ _('Blog Archives') }}</h4>
     <ul class="sidebar_list_style_outer">
-        <li><a href="#"><i class="fa fa-angle-double-right"></i> 2016년 5월</a>
-        </li>
-        <li><a href="#"><i class="fa fa-angle-double-right"></i> 2016년 6월</a>
-        </li>
+        {% for t, year, month in monthly_archives %}
+            <li><a href="#"><i class="fa fa-angle-double-right"></i> {{ year }}년 {{ month }}월</a></li>
+        {% endfor %}
     </ul>
 </div>
