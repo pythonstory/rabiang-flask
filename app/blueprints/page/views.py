@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, \
+    current_app
 from flask_babel import gettext
 from flask_login import login_required, current_user
 
@@ -25,9 +26,12 @@ def index(page_num=1):
 
     posts = query \
         .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, 10, False)
+        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+                  False)
 
-    return render_template('default/page/index.html', posts=posts)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/index.html',
+        posts=posts)
 
 
 @page.route('/<slug>', methods=['GET', 'POST'])
@@ -55,10 +59,11 @@ def detail_slug(slug):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
-    return render_template('default/page/detail.html',
-                           post=post,
-                           form=form,
-                           comments=comments)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/detail.html',
+        post=post,
+        form=form,
+        comments=comments)
 
 
 @page.route('/<int:post_id>', methods=['GET', 'POST'])
@@ -84,10 +89,11 @@ def detail_post_id(post_id):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
-    return render_template('default/page/detail.html',
-                           post=post,
-                           form=form,
-                           comments=comments)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/detail.html',
+        post=post,
+        form=form,
+        comments=comments)
 
 
 @page.route('/create', methods=['GET', 'POST'])
@@ -111,7 +117,9 @@ def create():
         flash(gettext('You wrote a new post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
-    return render_template('default/page/create.html', form=form)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/create.html',
+        form=form)
 
 
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
@@ -135,7 +143,9 @@ def edit(post_id):
         flash(gettext('You edited your post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
-    return render_template('default/page/edit.html', form=form, post_id=post_id)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/edit.html',
+        form=form, post_id=post_id)
 
 
 @page.route('/delete/<int:post_id>', methods=['GET', 'POST'])
@@ -152,7 +162,9 @@ def delete(post_id):
         flash(gettext('You deleted your post.'), 'success')
         return redirect(url_for('page.index'))
 
-    return render_template('default/page/delete.html', form=form, post=post)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/delete.html',
+        form=form, post=post)
 
 
 @page.route('/user/<username>', methods=['GET', 'POST'])
@@ -164,9 +176,12 @@ def user_index(username, page_num=1):
 
     posts = author.posts \
         .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, 10, False)
+        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+                  False)
 
-    return render_template('default/page/user.html', posts=posts)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
+        posts=posts)
 
 
 @page.route('/tag', methods=['GET', 'POST'])
@@ -178,7 +193,9 @@ def tag_index():
         .order_by(Tag.name) \
         .all()
 
-    return render_template('default/page/tag.html', tags=tags)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/tag.html',
+        tags=tags)
 
 
 @page.route('/tag/<name>', methods=['GET', 'POST'])
@@ -190,6 +207,9 @@ def tag_name(name, page_num=1):
 
     posts = tag.posts \
         .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, 10, False)
+        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+                  False)
 
-    return render_template('default/page/tag_name.html', posts=posts)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/tag_name.html',
+        posts=posts)

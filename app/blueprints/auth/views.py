@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import request, redirect, url_for, render_template, flash
+from flask import request, redirect, url_for, render_template, flash, \
+    current_app
 from flask_babel import gettext
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -26,7 +27,9 @@ def login():
 
         flash(gettext('Invalid username or password'), 'success')
 
-    return render_template('default/auth/login.html', form=form)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/auth/login.html',
+        form=form)
 
 
 @auth.route('/logout', methods=['GET'])
@@ -57,7 +60,9 @@ def register():
         flash(gettext('You can now login.'), 'success')
         return redirect(url_for('auth.login'))
 
-    return render_template('default/auth/register.html', form=form)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/auth/register.html',
+        form=form)
 
 
 @auth.route('/unregister', methods=['GET', 'POST'])
@@ -74,9 +79,10 @@ def unregister():
         flash(gettext('Your account was deleted.'), 'success')
         return redirect(url_for('page.index'))
 
-    return render_template('default/auth/unregister.html',
-                           form=form,
-                           user=user)
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/auth/unregister.html',
+        form=form,
+        user=user)
 
 
 @auth.route('/change-password', methods=['GET', 'POST'])
@@ -99,7 +105,10 @@ def change_password():
         flash(gettext('Old password is wrong.'), 'danger')
         return redirect(url_for('auth.change_password'))
 
-    return render_template('default/auth/change_password.html', form=form)
+    return render_template(
+        current_app.config.get(
+            'RABIANG_SITE_THEME') + '/auth/change_password.html',
+        form=form)
 
 
 @auth.route('/reset-password')

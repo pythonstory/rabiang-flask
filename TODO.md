@@ -45,11 +45,11 @@ validators
 
 - tag
 태그 구름,
-태그 삭제시 전체 목록에서 노출 안함 (그러나 실제로 레코드 삭제가 일어난 것은 아님)
+삭제된 태그를 실제로 테이블에서 삭제 처리할 것
 - category
 - menu
 - attachment management
-- status, history
+- history
 - dashboard
 - archive, feed
 

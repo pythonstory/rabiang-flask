@@ -1,5 +1,20 @@
 # References
 
+## Skills
+
+* Python 3
+    * Module Namespace, Import, Scope
+    * Package Structure
+    * Closure, Decorators and Factory 
+* Server-side (Flask)
+    * HTTP Request and Response
+    * Form Validation (Flask-WTF)
+    * ORM (Flask-SQLAlchemy)
+* Client-side (AlloyUI)
+    * Bootstrap 3
+    * YUI 3
+    * Template Engine (Jinja2)
+
 ## Books
 
 * Flask Web Development, Miguel Grinberg, O'Reilly
