@@ -174,7 +174,6 @@ def tag_index():
     tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
         .join(post_tags) \
-        .distinct() \
         .group_by(Tag.id) \
         .order_by(Tag.name) \
         .all()
