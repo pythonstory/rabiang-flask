@@ -24,13 +24,13 @@ cart
 - blog theme work
 
 
-- 댓글에 댓글 달기
 - id: username or email (preferences)
 - verify_password function must be overridden.
-- 댓글 닉네임
-- 댓글 gravata
+
+- 댓글에 댓글 달기
 - 댓글 소셜
 - 댓글 recaptcha
+- 가입 후 댓글달기 기능
 
 - email confirmation
 - reset password
@@ -48,7 +48,6 @@ validators
 - korean registration code
 
 - tag
-태그 구름,
 삭제된 태그를 실제로 테이블에서 삭제 처리할 것
 - category
 - menu
