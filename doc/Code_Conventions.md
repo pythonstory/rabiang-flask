@@ -25,7 +25,7 @@ Basic Structure
 
 * Save from Empty Form
 
-```
+```python
 @page.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
@@ -85,9 +85,9 @@ def edit(post_id):
 
 I use PyCharm Professional Edition in order to develop the Flask application. I recommend to use PyCharm Community Edition if your budget doesn't allow.
 
-I utilize the following features not provided by PyCharm Community Edition:
+I often utilize the following features not provided by PyCharm Community Edition:
 
 * Jinja2 Template engine syntax highlight
 * Database/SQL
 
-However, it is not a huge barrier to develop the Flask application. Most of configurations are up to developers because Flask is a micro web framework.
+However, it is not a huge barrier to develop the Flask application with PyCharm Community Edition. Most of configurations are up to developers because Flask is a micro web framework.
