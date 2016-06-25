@@ -33,9 +33,6 @@
                             <a href="{{ url_for('page.index') }}">{{ _('List') }}</a>
                         </li>
                         <li>
-                            <a href="{{ url_for('page.create') }}">{{ _('Write') }}</a>
-                        </li>
-                        <li>
                             <a href="{{ url_for('page.tag_index') }}">{{ _('Tag') }}</a>
                         </li>
                     </ul>
@@ -51,6 +48,12 @@
                             </li>
                             <li>
                                 <a href="{{ url_for('auth.change_password') }}">{{ _('Change Password') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('page.create') }}">{{ _('Write') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('page.user_index', username=current_user.username) }}">{{ _('My Posts') }}</a>
                             </li>
                             <li>
                                 <a href="{{ url_for('auth.unregister') }}">{{ _('Delete Account') }}</a>
