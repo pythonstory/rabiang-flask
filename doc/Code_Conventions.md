@@ -49,7 +49,7 @@ def create():
 
 * Edit from Loaded Form
 
-```
+```python
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
 @login_required
 def edit(post_id):
