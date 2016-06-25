@@ -119,6 +119,8 @@ def detail_post_id(post_id):
     if form.validate_on_submit():
         comment = Comment()
 
+        comment.name = form.name.data
+        comment.email = form.email.data
         comment.body = form.body.data
         comment.ip_address = request.remote_addr
         comment.post_id = post.id

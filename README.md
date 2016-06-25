@@ -1,6 +1,10 @@
 # Rabiang
 
-Rabiang(ระเบียง) is a Thai word which means wooden terrace. I always dream of developing software with a cup of coffee sitting on the terrace.
+Rabiang(ระเบียง) is a Thai word which means wooden terrace.
+
+I always dream of developing software with a cup of coffee sitting on the terrace.
+
+I am not good at web design, so I had to adopt themes from [startbootstrap.com](http://startbootstrap.com/) based on Bootstrap 3. Feel free to email me if you want to contribute your HTML/css files.
 
 This application is currently being developed so that the following features are supported.
 

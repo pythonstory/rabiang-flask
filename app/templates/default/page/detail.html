@@ -69,13 +69,48 @@
     <div id="comments" class="well">
         <h4>{{ _('Leave a Comment') }}</h4>
         <form action="{{ url_for('page.detail_slug', slug=post.slug) }}"
-              method="post" role="form">
+              method="post" role="form" class="form-horizontal">
             {{ form.csrf_token }}
             <div class="form-group">
-                {{ form.body(class='form-control', rows='3') }}
+                {{ form.name.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-10{% if form.name.errors %} has-error{% endif %}">
+                    {{ form.name(class='form-control', id='post_title') }}
+                    {% if form.name.errors %}
+                        {% for error in form.name.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
-            <button type="submit"
-                    class="btn btn-primary">{{ _('Save') }}</button>
+            <div class="form-group">
+                {{ form.email.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-10{% if form.email.errors %} has-error{% endif %}">
+                    {{ form.email(class='form-control', id='post_title') }}
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.body.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-10{% if form.body.errors %} has-error{% endif %}">
+                    {{ form.body(class='form-control') }}
+                    {% if form.body.errors %}
+                        {% for error in form.body.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <button type="submit"
+                            class="btn btn-primary">{{ _('Save') }}</button>
+                </div>
+            </div>
+
         </form>
     </div>
 
@@ -87,11 +122,11 @@
     {% for comment in comments %}
         <div class="media" id="comment-{{ comment.id }}">
             <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64"
+                <img class="media-object" src="{{ comment.name | gravatar(size=64) }}"
                      alt="">
             </a>
             <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
+                <h4 class="media-heading">{{ comment.name }}
                     <small>{{ comment.created_timestamp | datetimeformat(format='short') }}</small>
                 </h4>
                 {{ comment.body }}

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import hashlib
 import logging
 import logging.handlers
 
@@ -24,6 +25,7 @@ def create_app(config=None, app_name=None, blueprints=None):
     configure_hook(app)
     configure_blueprints(app, blueprints)
     configure_extensions(app)
+    configure_jinja_filters(app)
     configure_logging(app)
     configure_error_handlers(app)
     configure_cli(app)
@@ -65,7 +67,8 @@ def configure_extensions(app):
             return user.locale
 
         # Otherwise, choose the language from user browser.
-        return request.accept_languages.best_match(current_app.config['BABEL_LANGUAGES'].keys())
+        return request.accept_languages.best_match(
+            current_app.config['BABEL_LANGUAGES'].keys())
 
     @babel.timezoneselector
     def get_timezone():
@@ -75,10 +78,34 @@ def configure_extensions(app):
             return user.timezone
 
 
+def configure_jinja_filters(app):
+    @app.template_filter()
+    def gravatar(email, size=100, default='identicon', rating='g'):
+        if email is None:
+            return '//placehold.it/64x64'
+
+        if request.is_secure:
+            url = 'https://secure.gravatar.com/avatar'
+        else:
+            url = 'http://www.gravatar.com/avatar'
+
+        hashed = hashlib.md5(email.encode('utf-8')).hexdigest()
+
+        return '{url}/{hashed}?s={size}&d={default}&r={rating}' \
+            .format(url=url,
+                    hashed=hashed,
+                    size=size,
+                    default=default,
+                    rating=rating)
+
+    app.jinja_env.filters['gravatar'] = gravatar
+
+
 def configure_logging(app):
     """Configure rotating file(info) logging."""
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
-    handler = logging.handlers.RotatingFileHandler(app.config['LOGGING_LOCATION'])
+    handler = logging.handlers.RotatingFileHandler(
+        app.config['LOGGING_LOCATION'])
     handler.setLevel(app.config['LOGGING_LEVEL'])
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)

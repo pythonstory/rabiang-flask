@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-25 16:18+0900\n"
+"POT-Creation-Date: 2016-06-26 00:16+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: app/__init__.py:55
+#: app/__init__.py:57
 msgid "Please, log in to access this page."
 msgstr "로그인하세요."
 
 #: app/blueprints/auth/forms.py:27 app/blueprints/auth/forms.py:44
-#: app/templates/default/auth/login.html:18
+#: app/blueprints/page/forms.py:93 app/templates/default/auth/login.html:18
 msgid "Email"
 msgstr "이메일"
 
@@ -156,19 +156,27 @@ msgstr "태그"
 msgid "Separate multiple tags with commas. All of whitespaces are ignored."
 msgstr "태그는 콤마(,)로 구분합니다. 태그 입력에 띄어쓰기는 할 수 없습니다."
 
-#: app/blueprints/page/views.py:96 app/blueprints/page/views.py:129
+#: app/blueprints/page/forms.py:89
+msgid "Name"
+msgstr "이름"
+
+#: app/blueprints/page/forms.py:97
+msgid "Comment"
+msgstr "댓글"
+
+#: app/blueprints/page/views.py:96 app/blueprints/page/views.py:131
 msgid "Your comment has been published."
 msgstr "댓글을 작성했습니다."
 
-#: app/blueprints/page/views.py:164
+#: app/blueprints/page/views.py:166
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:193
+#: app/blueprints/page/views.py:195
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
-#: app/blueprints/page/views.py:216
+#: app/blueprints/page/views.py:218
 msgid "You deleted your post."
 msgstr "게시물을 삭제했습니다."
 
@@ -235,7 +243,7 @@ msgstr "글보관함"
 #: app/templates/default/auth/change_password.html:43
 #: app/templates/default/auth/register.html:54
 #: app/templates/default/page/create.html:10
-#: app/templates/default/page/detail.html:78
+#: app/templates/default/page/detail.html:110
 #: app/templates/default/page/edit.html:10
 msgid "Save"
 msgstr "저장"

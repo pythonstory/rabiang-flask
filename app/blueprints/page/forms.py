@@ -2,7 +2,7 @@
 from flask_babel import lazy_gettext
 from flask_wtf import Form
 from wtforms import StringField, TextAreaField, SelectField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email
 
 from app.utils.validators import Unique
 from .models import Post, Tag
@@ -85,7 +85,15 @@ class PostForm(Form):
 
 
 class CommentForm(Form):
+    name = StringField(
+        lazy_gettext('Name'),
+        validators=[DataRequired()]
+    )
+    email = StringField(
+        lazy_gettext('Email'),
+        validators=[DataRequired(), Email()]
+    )
     body = TextAreaField(
-        '',
+        lazy_gettext('Comment'),
         validators=[DataRequired()]
     )

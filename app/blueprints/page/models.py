@@ -47,6 +47,8 @@ class Post(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    email = db.Column(db.String(64))
     body = db.Column(db.Text)
     ip_address = db.Column(db.String(64))
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
