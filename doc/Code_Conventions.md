@@ -66,10 +66,10 @@ def edit(post_id):
         db.session.add(post)
         db.session.commit()
 
-        flash(gettext('You wrote a new post.'), 'success')
+        flash(gettext('You edited your post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
         
-    return render_template('/default/page/create.html',
+    return render_template('/default/page/edit.html',
         form=form)        
 ```
 
