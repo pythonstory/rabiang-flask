@@ -12,15 +12,21 @@ from .models import Post, Comment, Tag, post_tags
 
 
 def sidebar_data():
+    sidebar = {}
+
     recent_posts = Post.query \
         .order_by(Post.created_timestamp.desc()) \
         .limit(current_app.config.get('RABIANG_RECENT_POSTS')) \
         .all()
 
+    sidebar['recent_posts'] = recent_posts
+
     recent_comments = Comment.query \
         .order_by(Comment.created_timestamp.desc()) \
         .limit(current_app.config.get('RABIANG_RECENT_COMMENTS')) \
         .all()
+
+    sidebar['recent_comments'] = recent_comments
 
     top_tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
@@ -29,6 +35,8 @@ def sidebar_data():
         .order_by(db.func.count(Tag.id).desc()) \
         .all()
 
+    sidebar['top_tags'] = top_tags
+
     monthly_archives = Post.query \
         .add_columns(db.func.extract('year', Post.created_timestamp),
                      db.func.extract('month', Post.created_timestamp)) \
@@ -36,7 +44,9 @@ def sidebar_data():
                   db.func.extract('month', Post.created_timestamp)) \
         .all()
 
-    return recent_posts, recent_comments, top_tags, monthly_archives
+    sidebar['monthly_archives'] = monthly_archives
+
+    return sidebar
 
 
 @page.route('/', methods=['GET', 'POST'])
@@ -57,15 +67,12 @@ def index(page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/index.html',
         posts=posts,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/<slug>', methods=['GET', 'POST'])
@@ -93,17 +100,14 @@ def detail_slug(slug):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/detail.html',
         post=post,
         form=form,
         comments=comments,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/<int:post_id>', methods=['GET', 'POST'])
@@ -129,17 +133,14 @@ def detail_post_id(post_id):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/detail.html',
         post=post,
         form=form,
         comments=comments,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/create', methods=['GET', 'POST'])
@@ -163,15 +164,12 @@ def create():
         flash(gettext('You wrote a new post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/create.html',
         form=form,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
@@ -195,16 +193,13 @@ def edit(post_id):
         flash(gettext('You edited your post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/edit.html',
         form=form,
         post_id=post_id,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/delete/<int:post_id>', methods=['GET', 'POST'])
@@ -221,16 +216,13 @@ def delete(post_id):
         flash(gettext('You deleted your post.'), 'success')
         return redirect(url_for('page.index'))
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/delete.html',
         form=form,
         post=post,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/user/<username>', methods=['GET', 'POST'])
@@ -245,15 +237,12 @@ def user_index(username, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
         posts=posts,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/tag', methods=['GET', 'POST'])
@@ -265,15 +254,12 @@ def tag_index():
         .order_by(Tag.name) \
         .all()
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/tag.html',
         tags=tags,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/tag/<name>', methods=['GET', 'POST'])
@@ -288,15 +274,12 @@ def tag_name(name, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/tag_name.html',
         posts=posts,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
 
 
 @page.route('/month/<int:year>/<int:month>', methods=['GET', 'POST'])
@@ -310,12 +293,9 @@ def month_index(year, month, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
-    recent_posts, recent_comments, top_tags, monthly_archives = sidebar_data()
+    sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
         posts=posts,
-        recent_posts=recent_posts,
-        recent_comments=recent_comments,
-        top_tags=top_tags,
-        monthly_archives=monthly_archives)
+        sidebar=sidebar)
