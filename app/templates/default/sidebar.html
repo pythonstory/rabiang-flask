@@ -44,7 +44,7 @@
     <h4>{{ _('Recent Comments') }}</h4>
     <ul class="sidebar_list_style_outer">
         {% for comment in sidebar['recent_comments'] %}
-            <li><a href="{{ url_for('page.detail_slug', slug=comment.post.slug) }}"><i class="fa fa-angle-double-right"></i> {{ comment.post.title }}</a></li>
+            <li><a href="{{ url_for('page.detail_slug', slug=comment.post.slug) }}#comment-{{ comment.id }}"><i class="fa fa-angle-double-right"></i> {{ comment.post.title }}</a></li>
         {% endfor %}
     </ul>
 </div>
