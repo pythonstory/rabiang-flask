@@ -29,14 +29,17 @@ Basic Structure
 @page.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
+    # Create an empty form
     form = PostForm()
 
     if form.validate_on_submit():
+        # Create an empty instance
         post = Post()
         
-        post.title = form.title.data
         # Set each field explicitly not using form.populate_obj(post)
-        
+        post.title = form.title.data
+        ...
+
         db.session.add(post)
         db.session.commit()
 
@@ -53,16 +56,17 @@ def create():
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
 @login_required
 def edit(post_id):
-    # Get instance to modify from database
+    # Retrieve instance from database for modification
     post = Post.query.get_or_404(post_id)
     
-    # Populates instance into form in order to render template
+    # Populates instance into form before rendering
     form = PostForm(obj=post)
 
     if form.validate_on_submit():
-        post.title = form.title.data
         # Set each field explicitly not using form.populate_obj(post)
-        
+        post.title = form.title.data
+        ...
+
         db.session.add(post)
         db.session.commit()
 
