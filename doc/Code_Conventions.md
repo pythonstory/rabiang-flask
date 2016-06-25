@@ -21,6 +21,58 @@ Basic Structure
 | /edit/<unique_id> | edit | GET/POST |
 | /delete/<unique_id> | index | GET/POST |
 
+### Form Save or Edit Action
+
+* Save from Empty Form
+
+```
+@page.route('/create', methods=['GET', 'POST'])
+@login_required
+def create():
+    form = PostForm()
+
+    if form.validate_on_submit():
+        post = Post()
+        
+        post.title = form.title.data
+        # Set each field explicitly not using form.populate_obj(post)
+        
+        db.session.add(post)
+        db.session.commit()
+
+        flash(gettext('You wrote a new post.'), 'success')
+        return redirect(url_for('page.detail_slug', slug=post.slug))
+        
+    return render_template('/default/page/create.html',
+        form=form)        
+```
+
+* Edit from Loaded Form
+
+```
+@page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def edit(post_id):
+    # Get instance to modify from database
+    post = Post.query.get_or_404(post_id)
+    
+    # Populates instance into form in order to render template
+    form = PostForm(obj=post)
+
+    if form.validate_on_submit():
+        post.title = form.title.data
+        # Set each field explicitly not using form.populate_obj(post)
+        
+        db.session.add(post)
+        db.session.commit()
+
+        flash(gettext('You wrote a new post.'), 'success')
+        return redirect(url_for('page.detail_slug', slug=post.slug))
+        
+    return render_template('/default/page/create.html',
+        form=form)        
+```
+
 ## HTML
 
 ### Jinja2 Template
