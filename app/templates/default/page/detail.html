@@ -36,11 +36,6 @@
     {% include 'default/page/_post_tags.html' %}
     <hr>
 
-    <!-- Preview Image -->
-    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-
-    <hr>
-
     <!-- Post Content -->
     {{ post.body | markdown }}
 
@@ -120,7 +115,7 @@
 
     <!-- Comment -->
     {% for comment in comments %}
-        <div class="media" id="comment-{{ comment.id }}">
+        <div class="media spacer-bottom-50" id="comment-{{ comment.id }}">
             <a class="pull-left" href="#">
                 <img class="media-object" src="{{ comment.name | gravatar(size=64) }}"
                      alt="">

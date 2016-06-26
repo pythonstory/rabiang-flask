@@ -59,8 +59,7 @@ def configure_extensions(app):
                                                'to access this page.')
     login_manager.login_message_category = 'warning'
 
-    Markdown(app, extensions=['fenced_code', 'toc', 'footnotes', 'tables',
-                              'def_list'])
+    Markdown(app, extensions=['codehilite', 'toc', 'tables', 'def_list'])
 
     @babel.localeselector
     def get_locale():
