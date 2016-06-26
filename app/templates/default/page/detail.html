@@ -42,7 +42,7 @@
     <hr>
 
     <!-- Post Content -->
-    {{ post.body }}
+    {{ post.body | markdown }}
 
     <hr>
 
@@ -129,7 +129,7 @@
                 <h4 class="media-heading">{{ comment.name }}
                     <small>{{ comment.created_timestamp | datetimeformat(format='short') }}</small>
                 </h4>
-                {{ comment.body }}
+                {{ comment.body | markdown }}
             </div>
         </div>
     {% endfor %}

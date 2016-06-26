@@ -8,6 +8,7 @@ from flask_babel import Babel, lazy_gettext
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
+from flaskext.markdown import Markdown
 
 # Flask Extensions can be references as global variable.
 db = SQLAlchemy()
@@ -57,6 +58,9 @@ def configure_extensions(app):
     login_manager.login_message = lazy_gettext('Please, log in '
                                                'to access this page.')
     login_manager.login_message_category = 'warning'
+
+    Markdown(app, extensions=['fenced_code', 'toc', 'footnotes', 'tables',
+                              'def_list'])
 
     @babel.localeselector
     def get_locale():

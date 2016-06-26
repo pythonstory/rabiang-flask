@@ -35,7 +35,7 @@
 <div class="form-group">
     {{ form.body.label(class='col-sm-2 control-label') }}
     <div class="col-sm-10{% if form.body.errors %} has-error{% endif %}">
-        {{ form.body(class='form-control') }}
+        {{ form.body(class='form-control', rows='10') }}
         {% if form.body.errors %}
             {% for error in form.body.errors %}
                 <span class="help-block">{{ error }}</span>

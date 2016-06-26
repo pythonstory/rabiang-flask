@@ -55,6 +55,7 @@ validators
 - history
 - dashboard
 - archive, feed
+- gravatar 매번 필터로 계산하는 것보다 디비에 저장하는 게 나을지 생각할 것
 
 - sidebar 기능 추가
 카테고리 미구현
