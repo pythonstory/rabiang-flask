@@ -37,8 +37,139 @@ span a {
 }
 
 .page {
-    font-family: "Malgun Gothic",Helvetica,arial,sans-serif;
+    font-family: "Malgun Gothic", Helvetica, arial, sans-serif;
     font-size: 14px;
     line-height: 1.6;
     padding-bottom: 10px;
+}
+
+.page h1, .page h2, .page h3, .page h4, .page h5, .page h6 {
+    margin: 30px 0 10px;
+    padding: 0;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    cursor: text;
+    /*position: relative;*/
+}
+
+.page h1 {
+    font-size: 28px;
+    color: black;
+}
+
+.page h2 {
+    font-size: 24px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+    color: black;
+}
+
+.page h3 {
+    font-size: 18px;
+}
+
+.page h4 {
+    font-size: 16px;
+}
+
+.page h5 {
+    font-size: 14px;
+}
+
+.page h6 {
+    color: #777777;
+    font-size: 14px;
+}
+
+.page .toc {
+    background: #fefefe none repeat scroll 0 0;
+    border: 1px dotted #ccc;
+    font-size: 12px;
+    padding: 10px;
+}
+.page .toc ul {
+    margin: 0;
+    padding: 5px;
+}
+.page .toc li {
+    list-style: outside none decimal;
+    margin: 0 0 0 20px;
+    padding-bottom: 5px;
+}
+
+.page p, .page blockquote, .page ul, .page ol, .page dl, .page li, .page table, .page pre {
+    margin: 15px 0;
+}
+
+.page li {
+    padding: 0;
+    margin: 5px 0;
+    /*margin:5px;*/
+}
+
+.page li p.first {
+    display: inline-block;
+}
+
+.page ul, .page ol {
+    padding-left: 30px;
+}
+
+.page ul :first-child, .page ol :first-child {
+    margin-top: 0;
+}
+
+.page ul :last-child, .page ol :last-child {
+    margin-bottom: 0;
+}
+
+.page dl {
+    padding: 0;
+}
+
+.page dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px;
+}
+
+.page dl dt:first-child {
+    padding: 0;
+}
+
+.page dl dt > :first-child {
+    margin-top: 0;
+}
+
+.page dl dt > :last-child {
+    margin-bottom: 0;
+}
+
+.page dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+}
+
+.page dl dd > :first-child {
+    margin-top: 0;
+}
+
+.page dl dd > :last-child {
+    margin-bottom: 0;
+}
+
+.page blockquote {
+    border-left: 4px solid #dddddd;
+    padding: 0 15px;
+    color: #000;
+}
+
+.page blockquote > :first-child {
+    margin-top: 0;
+}
+
+.page blockquote > :last-child {
+    margin-bottom: 0;
 }
