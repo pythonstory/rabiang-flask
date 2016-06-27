@@ -6,8 +6,8 @@ from flask import url_for
 from app import db
 
 post_tag = db.Table('post_tag',
-                     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
-                     db.Column('post_id', db.Integer, db.ForeignKey('post.id')))
+                    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
+                    db.Column('post_id', db.Integer, db.ForeignKey('post.id')))
 
 
 class Post(db.Model):
@@ -81,3 +81,22 @@ class Tag(db.Model):
 
     def __repr__(self):
         return '<Tag: %r>' % self.name
+
+
+class PageCategory(db.Model):
+    __tablename__ = 'page_category'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    order = db.Column(db.Integer)
+
+    parent_id = db.Column(db.Integer, db.ForeignKey('page_category.id'))
+    children = db.relationship('PageCategory',
+                               backref=db.backref('parent', remote_side=[id]),
+                               lazy='dynamic')
+
+    def __init__(self, *args, **kwargs):
+        super(PageCategory, self).__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<PageCategory: %r>' % self.name
