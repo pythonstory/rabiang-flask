@@ -66,6 +66,7 @@ def index(page_num=1):
                     (Post.title.contains(search)))
 
     posts = query \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Post.created_timestamp.desc()) \
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
@@ -300,7 +301,9 @@ def delete(post_id):
     form = DeletePostForm()
 
     if form.validate_on_submit():
-        db.session.delete(post)
+        post.status = Post.STATUS_DELETED
+
+        db.session.add(post)
         db.session.commit()
 
         flash(gettext('You deleted your post.'), 'success')

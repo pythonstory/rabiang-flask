@@ -5,6 +5,7 @@ from flask_babel import gettext
 from flask_login import login_user, logout_user, login_required, current_user
 
 from app import db
+from app.blueprints.page.models import Post
 from . import auth
 from .forms import LoginForm, RegisterForm, UnregisterForm, ChangePasswordForm
 from .models import User
@@ -91,6 +92,10 @@ def unregister():
     form = UnregisterForm()
 
     if form.validate_on_submit():
+        Post.query \
+            .filter(Post.author_id == current_user.id) \
+            .update({'status': Post.STATUS_DELETED})
+
         db.session.delete(user)
         db.session.commit()
 
