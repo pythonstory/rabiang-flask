@@ -366,6 +366,7 @@ def user_index(username, page_num=1):
         .first_or_404()
 
     posts = author.posts \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Post.created_timestamp.desc()) \
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
