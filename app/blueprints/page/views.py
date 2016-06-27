@@ -213,7 +213,7 @@ def delete(post_id):
 
     form = PostForm(obj=post)
 
-    if request.method == 'POST':
+    if form.validate_on_submit():
         db.session.delete(post)
         db.session.commit()
 
