@@ -432,7 +432,7 @@ def tag_index():
 
 @page.route('/tag/<tag_name>', methods=['GET', 'POST'])
 @page.route('/tag/<tag_name>/<int:page_num>', methods=['GET', 'POST'])
-def tag_name(tag_name, page_num=1):
+def tag_detail(tag_name, page_num=1):
     tag = Tag.query \
         .filter(Tag.name == tag_name) \
         .first_or_404()

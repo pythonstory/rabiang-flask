@@ -53,7 +53,7 @@
     <h4>{{ _('Tag') }}</h4>
     <p>
        {% for tag, count in sidebar['top_tags'] %}
-           <a href="{{ url_for('page.tag_name', tag_name=tag.name) }}" class="btn btn-default spacer-bottom-10">{{ tag.name }} <span class="badge">{{ count }}</span></a>
+           <a href="{{ url_for('page.tag_detail', tag_name=tag.name) }}" class="btn btn-default spacer-bottom-10">{{ tag.name }} <span class="badge">{{ count }}</span></a>
        {% endfor %}
     </p>
 </div>
