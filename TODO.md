@@ -12,7 +12,6 @@ cart
 /poll
 
 - date formatting (posted on, modified on)
-- breadcrumbs / trailers
 - pagination : parameterized
 - babel select lang html
 
@@ -54,7 +53,6 @@ validators
 - attachment management
 - history
 - dashboard
-- archive, feed
 - gravatar 매번 필터로 계산하는 것보다 디비에 저장하는 게 나을지 생각할 것
 
 - sidebar 기능 추가

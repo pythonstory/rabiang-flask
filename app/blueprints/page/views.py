@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+from urllib.parse import urljoin
+
 from flask import render_template, request, redirect, url_for, flash, \
     current_app
 from flask_babel import gettext
 from flask_login import login_required, current_user
+from werkzeug.contrib.atom import AtomFeed
 
 from app import db
 from app.blueprints.auth.models import User
@@ -82,6 +85,35 @@ def index(page_num=1):
         posts=posts,
         breadcrumbs=breadcrumbs,
         sidebar=sidebar)
+
+
+@page.route('/feed', methods=['GET', 'POST'])
+def recent_feed():
+    feed = AtomFeed(
+        gettext('Latest Blog Posts'),
+        feed_url=request.url,
+        url=request.url_root,
+        author=request.url_root
+    )
+
+    posts = Post.query \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
+        .order_by(Post.created_timestamp.desc()) \
+        .limit(current_app.config.get('RABIANG_RECENT_POSTS_FOR_FEED')) \
+        .all()
+
+    for post in posts:
+        feed.add(
+            post.title,
+            post.body,
+            content_type='html',
+            url=urljoin(request.url_root,
+                        url_for("page.detail_slug", slug=post.slug)),
+            updated=post.modified_timestamp,
+            published=post.created_timestamp
+        )
+
+    return feed.get_response()
 
 
 @page.route('/<slug>', methods=['GET', 'POST'])
