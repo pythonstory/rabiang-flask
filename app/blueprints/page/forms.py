@@ -74,8 +74,7 @@ class PostForm(Form):
         lazy_gettext('Post Status'),
         choices=(
             (Post.STATUS_DRAFT, lazy_gettext('Draft')),
-            (Post.STATUS_PUBLIC, lazy_gettext('Public')),
-            (Post.STATUS_PRIVATE, lazy_gettext('Private'))),
+            (Post.STATUS_PUBLIC, lazy_gettext('Public'))),
         coerce=int)
     tags = TagField(
         lazy_gettext('Tag'),

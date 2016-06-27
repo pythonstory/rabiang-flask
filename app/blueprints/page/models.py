@@ -15,8 +15,7 @@ class Post(db.Model):
 
     STATUS_DRAFT = 0
     STATUS_PUBLIC = 1
-    STATUS_PRIVATE = 2
-    STATUS_DELETED = 3
+    STATUS_DELETED = 2
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
