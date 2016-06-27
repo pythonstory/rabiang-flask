@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask_babel import lazy_gettext
 from flask_wtf import Form
-from wtforms import StringField, TextAreaField, SelectField
+from wtforms import StringField, TextAreaField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Email
 
 from app.utils.validators import Unique
@@ -96,4 +96,10 @@ class CommentForm(Form):
     body = TextAreaField(
         lazy_gettext('Comment'),
         validators=[DataRequired()]
+    )
+
+
+class DeletePostForm(Form):
+    submit = SubmitField(
+        lazy_gettext('Delete')
     )

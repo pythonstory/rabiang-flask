@@ -90,7 +90,7 @@ def unregister():
 
     form = UnregisterForm()
 
-    if request.method == 'POST':
+    if form.validate_on_submit():
         db.session.delete(user)
         db.session.commit()
 

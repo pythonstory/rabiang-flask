@@ -10,7 +10,7 @@ from werkzeug.contrib.atom import AtomFeed
 from app import db
 from app.blueprints.auth.models import User
 from . import page
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, DeletePostForm
 from .models import Post, Comment, Tag, post_tag
 
 
@@ -297,7 +297,7 @@ def edit(post_id):
 def delete(post_id):
     post = Post.query.get_or_404(post_id)
 
-    form = PostForm(obj=post)
+    form = DeletePostForm()
 
     if form.validate_on_submit():
         db.session.delete(post)

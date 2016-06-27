@@ -7,7 +7,7 @@
         {{ form.csrf_token }}
         <fieldset>
             <legend>{{ _('Delete your account?') }}</legend>
-            <button class="btn btn-danger" type="submit">{{ _('Unregister') }}</button>
+            {{ form.submit(class='btn btn-danger') }}
             <a class="btn btn-default" href="{{ url_for('page.user_index', username=user.username) }}">{{ _('Cancel') }}</a>
         </fieldset>
     </form>
