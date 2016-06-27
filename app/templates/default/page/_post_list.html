@@ -28,9 +28,7 @@
 </p>
 {% include 'default/page/_post_tags.html' %}
 <hr>
-<img class="img-responsive" src="http://placehold.it/900x300" alt="">
-<hr>
-<p>{{ post.body | truncate(255) }}</p>
+<p>{{ post.body | markdown | striptags | truncate(200) }}</p>
 <p class="lead">
     <a class="btn btn-info btn-sm"
        href="{{ url_for('page.detail_slug', slug=post.slug) }}">
