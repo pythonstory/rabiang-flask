@@ -1,7 +1,5 @@
 {% extends "default/columns-1.html" %}
 
-{% block title %}{{ _('Write a new post') }}{% endblock %}
-
 {% block page_content %}
     <form action="{{ url_for('page.create') }}" method="post" class="form-horizontal">
         {% include 'default/page/_post_form.html' %}

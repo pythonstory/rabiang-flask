@@ -1,7 +1,5 @@
 {% extends "default/columns-1.html" %}
 
-{% block title %}Delete a post{% endblock %}
-
 {% block page_content %}
     <form action="{{ url_for('auth.unregister') }}" method="post">
         {{ form.csrf_token }}

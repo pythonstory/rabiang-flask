@@ -305,7 +305,7 @@ msgstr "다음"
 
 #: app/templates/default/page/create.html:3
 msgid "Write a new post"
-msgstr "블로그 새 글 작성"
+msgstr "블로그 글쓰기"
 
 #: app/templates/default/page/delete.html:9
 msgid "Delete this post?"

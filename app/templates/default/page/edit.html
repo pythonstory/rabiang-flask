@@ -1,7 +1,5 @@
 {% extends "default/columns-1.html" %}
 
-{% block title %}{{ _('Edit a post') }}{% endblock %}
-
 {% block page_content %}
     <form action="{{ url_for('page.edit', post_id=post_id) }}" method="post" class="form-horizontal">
         {% include 'default/page/_post_form.html' %}

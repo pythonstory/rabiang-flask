@@ -1,7 +1,5 @@
 {% extends "default/columns-1.html" %}
 
-{% block title %}{{ _('Sign up') }}{% endblock %}
-
 {% block page_content %}
     <form action="{{ url_for('auth.register') }}" method="post" class="form-horizontal">
         {{ form.csrf_token }}
