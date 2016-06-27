@@ -1,4 +1,4 @@
-{% extends "default/columns-2.html" %}
+{% extends "default/columns-1.html" %}
 
 {% block title %}{{ _('Write a new post') }}{% endblock %}
 
@@ -6,7 +6,7 @@
     <form action="{{ url_for('page.create') }}" method="post" class="form-horizontal">
         {% include 'default/page/_post_form.html' %}
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-1 col-sm-11">
                 <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
                 <a href="{{ url_for('page.index') }}" class="btn btn-default">{{ _('Cancel') }}</a>
             </div>

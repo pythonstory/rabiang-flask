@@ -1,7 +1,7 @@
 {{ form.csrf_token }}
 <div class="form-group">
-    {{ form.title.label(class='col-sm-2 control-label') }}
-    <div class="col-sm-10{% if form.title.errors %} has-error{% endif %}">
+    {{ form.title.label(class='col-sm-1 control-label') }}
+    <div class="col-sm-11{% if form.title.errors %} has-error{% endif %}">
         {{ form.title(class='form-control', id='post_title') }}
         {% if form.title.errors %}
             {% for error in form.title.errors %}
@@ -11,8 +11,8 @@
     </div>
 </div>
 <div class="form-group">
-    {{ form.slug.label(class='col-sm-2 control-label') }}
-    <div class="col-sm-10{% if form.slug.errors %} has-error{% endif %}">
+    {{ form.slug.label(class='col-sm-1 control-label') }}
+    <div class="col-sm-11{% if form.slug.errors %} has-error{% endif %}">
         {{ form.slug(class='form-control', id='post_slug') }}
         {% if form.slug.errors %}
             {% for error in form.slug.errors %}
@@ -22,8 +22,8 @@
     </div>
 </div>
 <div class="form-group">
-    {{ form.status.label(class='col-sm-2 control-label') }}
-    <div class="col-sm-10{% if form.status.errors %} has-error{% endif %}">
+    {{ form.status.label(class='col-sm-1 control-label') }}
+    <div class="col-sm-11{% if form.status.errors %} has-error{% endif %}">
         {{ form.status(class='form-control') }}
         {% if form.status.errors %}
             {% for error in form.status.errors %}
@@ -33,8 +33,8 @@
     </div>
 </div>
 <div class="form-group">
-    {{ form.body.label(class='col-sm-2 control-label') }}
-    <div class="col-sm-10{% if form.body.errors %} has-error{% endif %}">
+    {{ form.body.label(class='col-sm-1 control-label') }}
+    <div class="col-sm-11{% if form.body.errors %} has-error{% endif %}">
         {{ form.body(class='form-control', rows='10') }}
         {% if form.body.errors %}
             {% for error in form.body.errors %}
@@ -44,8 +44,8 @@
     </div>
 </div>
 <div class="form-group">
-    {{ form.tags.label(class='col-sm-2 control-label') }}
-    <div class="col-sm-10{% if form.tags.errors %} has-error{% endif %}">
+    {{ form.tags.label(class='col-sm-1 control-label') }}
+    <div class="col-sm-11{% if form.tags.errors %} has-error{% endif %}">
         {{ form.tags(class='form-control', id='tag_name') }}
         {% if form.tags.errors %}
             {% for error in form.tags.errors %}

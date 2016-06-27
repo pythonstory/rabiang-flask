@@ -244,13 +244,10 @@ def create():
         'href': False,
     }]
 
-    sidebar = sidebar_data()
-
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/create.html',
         form=form,
-        breadcrumbs=breadcrumbs,
-        sidebar=sidebar)
+        breadcrumbs=breadcrumbs)
 
 
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])

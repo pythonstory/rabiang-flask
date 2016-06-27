@@ -101,7 +101,7 @@ msgstr "아이디 또는 비밀번호를 잘못 입력하셨습니다."
 #: app/blueprints/page/views.py:441 app/templates/default/forum/index.html:8
 #: app/templates/default/main/index.html:8
 msgid "Home"
-msgstr "시작화면"
+msgstr "홈"
 
 #: app/blueprints/auth/views.py:49
 msgid "You have been logged out"
