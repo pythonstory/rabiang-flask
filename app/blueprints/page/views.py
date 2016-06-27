@@ -18,6 +18,7 @@ def sidebar_data():
     sidebar = {}
 
     recent_posts = Post.query \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Post.created_timestamp.desc()) \
         .limit(current_app.config.get('RABIANG_RECENT_POSTS')) \
         .all()
@@ -25,6 +26,8 @@ def sidebar_data():
     sidebar['recent_posts'] = recent_posts
 
     recent_comments = Comment.query \
+        .join(Post) \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Comment.created_timestamp.desc()) \
         .limit(current_app.config.get('RABIANG_RECENT_COMMENTS')) \
         .all()
@@ -34,6 +37,8 @@ def sidebar_data():
     top_tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
         .join(post_tag) \
+        .join(Post) \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
         .group_by(Tag.id) \
         .order_by(db.func.count(Tag.id).desc()) \
         .all()
@@ -41,6 +46,7 @@ def sidebar_data():
     sidebar['top_tags'] = top_tags
 
     monthly_archives = Post.query \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
         .add_columns(db.func.extract('year', Post.created_timestamp),
                      db.func.extract('month', Post.created_timestamp)) \
         .group_by(db.func.extract('year', Post.created_timestamp),
@@ -367,6 +373,8 @@ def tag_index():
     tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
         .join(post_tag) \
+        .join(Post) \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
         .group_by(Tag.id) \
         .order_by(Tag.name) \
         .all()
