@@ -8,7 +8,7 @@ from app import db
 from app.blueprints.auth.models import User
 from . import page
 from .forms import PostForm, CommentForm
-from .models import Post, Comment, Tag, post_tags
+from .models import Post, Comment, Tag, post_tag
 
 
 def sidebar_data():
@@ -30,7 +30,7 @@ def sidebar_data():
 
     top_tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
-        .join(post_tags) \
+        .join(post_tag) \
         .group_by(Tag.id) \
         .order_by(db.func.count(Tag.id).desc()) \
         .all()
@@ -253,7 +253,7 @@ def user_index(username, page_num=1):
 def tag_index():
     tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
-        .join(post_tags) \
+        .join(post_tag) \
         .group_by(Tag.id) \
         .order_by(Tag.name) \
         .all()

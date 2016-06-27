@@ -5,12 +5,14 @@ from flask import url_for
 
 from app import db
 
-post_tags = db.Table('post_tags',
+post_tag = db.Table('post_tag',
                      db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
                      db.Column('post_id', db.Integer, db.ForeignKey('post.id')))
 
 
 class Post(db.Model):
+    __tablename__ = 'post'
+
     STATUS_DRAFT = 0
     STATUS_PUBLIC = 1
     STATUS_PRIVATE = 2
@@ -28,7 +30,7 @@ class Post(db.Model):
     author = db.relationship('User',
                              backref=db.backref('posts', lazy='dynamic'))
 
-    tags = db.relationship('Tag', secondary=post_tags,
+    tags = db.relationship('Tag', secondary=post_tag,
                            backref=db.backref('posts', lazy='dynamic'),
                            lazy='dynamic')
 
@@ -46,6 +48,8 @@ class Post(db.Model):
 
 
 class Comment(db.Model):
+    __tablename__ = 'comment'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     email = db.Column(db.String(64))
@@ -67,6 +71,8 @@ class Comment(db.Model):
 
 
 class Tag(db.Model):
+    __tablename__ = 'tag'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
 
