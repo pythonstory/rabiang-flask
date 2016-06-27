@@ -12,6 +12,8 @@ This application is currently being developed so that the following features are
 
 I am planning on initial release in September or October 2016.
 
+My mother tongue is Korean, so the commit message will be written in Korean until the first official release.
+
 ## Features
 
 * Blog

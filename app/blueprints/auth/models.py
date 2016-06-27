@@ -24,7 +24,7 @@ class User(UserMixin, db.Model):
 
     @property
     def password(self):
-        # password field is hidden even on the table.
+        # password field is hidden and not added even on the table.
         raise AttributeError('password is not a readable attribute')
 
     @password.setter

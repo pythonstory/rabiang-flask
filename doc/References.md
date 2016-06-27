@@ -19,11 +19,11 @@
 
 * Flask Web Development, Miguel Grinberg, O'Reilly
 * Learning Flask Framework, Matt Copperwaite & Charles Leifer, Packtpub
-* Mastering Flask, Jack Stouffer, Pactpub
+* Mastering Flask, Jack Stouffer, Packtpub
 * Flask Framework Cookbook, Shalabh Aggarwal, Packtpub
 * Flask By Example, Gareth Dwyer, Packtpub
 
-## Websites
+## Websites and Tutorials
 
 * [Flask Mega Tutorial](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
 
