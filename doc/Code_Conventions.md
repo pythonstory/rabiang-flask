@@ -85,6 +85,12 @@ def edit(post_id):
 
 ## Javascript
 
+## Database & SQLAlchemy
+
+* Tables, views, and other relations that hold data should have singular names, not plural.
+* Table names are explicitly specified by ```__tablename__``` property.
+* All names with tables, views, columns and everything else are written entirely in lowercase, and multiple words are separated by underscores.
+
 ## IDE
 
 I use PyCharm Professional Edition in order to develop the Flask application. I recommend to use PyCharm Community Edition if your budget doesn't allow.

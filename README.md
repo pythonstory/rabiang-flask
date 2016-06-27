@@ -4,11 +4,13 @@ Rabiang(ระเบียง) is a Thai word which means wooden terrace.
 
 I always dream of developing software with a cup of coffee sitting on the terrace.
 
-I am not good at web design, so I had to adopt themes from [startbootstrap.com](http://startbootstrap.com/) based on Bootstrap 3. Feel free to email me if you want to contribute your HTML/css files.
+I am not good at web design, so I had to adopt themes from [startbootstrap.com](http://startbootstrap.com/) based on Bootstrap 3.
+
+Feel free to email me if you want to contribute your HTML/css files.
 
 This application is currently being developed so that the following features are supported.
 
-We are planning on initial release in September or October 2016.
+I am planning on initial release in September or October 2016.
 
 ## Features
 
@@ -18,10 +20,12 @@ We are planning on initial release in September or October 2016.
     * Weighted Tags, Categories
     * Recent Posts, Recent Comments, Monthly Archives, Feeds
     * WYSIWYG editor and Markdown
+    * Role-based Access Control
     * Attachment management
     * Social Share
     * Widgets
 * Cart
+    * Products, Brands, Vendors, Customers
 * Authentication with strong password policy
 * Role-based Access Control
 * Custom config file support
@@ -46,3 +50,4 @@ Rabiang is based on Flask/Python3, and it requires the following packages:
 * **Flask-WTP** with **WTForms**
 * **Flask-Babel** with **Babel** and **pytz**
 * **Flask-Login**
+* **Flask-Markdown** with **Markdown**, **Pygments** and **Bleach**

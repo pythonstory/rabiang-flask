@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+from urllib.parse import urljoin
+
 from flask import render_template, request, redirect, url_for, flash, \
     current_app
 from flask_babel import gettext
 from flask_login import login_required, current_user
+from werkzeug.contrib.atom import AtomFeed
 
 from app import db
 from app.blueprints.auth.models import User
 from . import page
 from .forms import PostForm, CommentForm
-from .models import Post, Comment, Tag, post_tags
+from .models import Post, Comment, Tag, post_tag
 
 
 def sidebar_data():
@@ -30,7 +33,7 @@ def sidebar_data():
 
     top_tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
-        .join(post_tags) \
+        .join(post_tag) \
         .group_by(Tag.id) \
         .order_by(db.func.count(Tag.id).desc()) \
         .all()
@@ -67,12 +70,50 @@ def index(page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/index.html',
         posts=posts,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
+
+
+@page.route('/feed', methods=['GET', 'POST'])
+def recent_feed():
+    feed = AtomFeed(
+        gettext('Latest Blog Posts'),
+        feed_url=request.url,
+        url=request.url_root,
+        author=request.url_root
+    )
+
+    posts = Post.query \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
+        .order_by(Post.created_timestamp.desc()) \
+        .limit(current_app.config.get('RABIANG_RECENT_POSTS_FOR_FEED')) \
+        .all()
+
+    for post in posts:
+        feed.add(
+            post.title,
+            post.body,
+            content_type='html',
+            url=urljoin(request.url_root,
+                        url_for("page.detail_slug", slug=post.slug)),
+            updated=post.modified_timestamp,
+            published=post.created_timestamp
+        )
+
+    return feed.get_response()
 
 
 @page.route('/<slug>', methods=['GET', 'POST'])
@@ -102,6 +143,17 @@ def detail_slug(slug):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': post.title,
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
@@ -109,6 +161,7 @@ def detail_slug(slug):
         post=post,
         form=form,
         comments=comments,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -137,6 +190,17 @@ def detail_post_id(post_id):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': post.title,
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
@@ -144,6 +208,7 @@ def detail_post_id(post_id):
         post=post,
         form=form,
         comments=comments,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -168,12 +233,21 @@ def create():
         flash(gettext('You wrote a new post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
-    sidebar = sidebar_data()
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Write'),
+        'href': False,
+    }]
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/create.html',
         form=form,
-        sidebar=sidebar)
+        breadcrumbs=breadcrumbs)
 
 
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
@@ -197,12 +271,24 @@ def edit(post_id):
         flash(gettext('You edited your post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Edit'),
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/edit.html',
         form=form,
         post_id=post_id,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -220,12 +306,24 @@ def delete(post_id):
         flash(gettext('You deleted your post.'), 'success')
         return redirect(url_for('page.index'))
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Delete'),
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/delete.html',
         form=form,
         post=post,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -241,11 +339,23 @@ def user_index(username, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': username,
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
         posts=posts,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -253,24 +363,36 @@ def user_index(username, page_num=1):
 def tag_index():
     tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
-        .join(post_tags) \
+        .join(post_tag) \
         .group_by(Tag.id) \
         .order_by(Tag.name) \
         .all()
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Tag'),
+        'href': False,
+    }]
 
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/tag.html',
         tags=tags,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
-@page.route('/tag/<name>', methods=['GET', 'POST'])
-@page.route('/tag/<name>/<int:page_num>', methods=['GET', 'POST'])
-def tag_name(name, page_num=1):
+@page.route('/tag/<tag_name>', methods=['GET', 'POST'])
+@page.route('/tag/<tag_name>/<int:page_num>', methods=['GET', 'POST'])
+def tag_name(tag_name, page_num=1):
     tag = Tag.query \
-        .filter(Tag.name == name) \
+        .filter(Tag.name == tag_name) \
         .first_or_404()
 
     posts = tag.posts \
@@ -278,11 +400,26 @@ def tag_name(name, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Tag'),
+        'href': url_for('page.tag_index'),
+    }, {
+        'text': tag_name,
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/tag_name.html',
         posts=posts,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -297,9 +434,21 @@ def month_index(year, month, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Blog Archives'),
+        'href': url_for('page.tag_index'),
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
         posts=posts,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)

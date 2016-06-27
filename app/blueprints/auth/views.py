@@ -27,9 +27,18 @@ def login():
 
         flash(gettext('Invalid username or password'), 'success')
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Login'),
+        'href': False,
+    }]
+
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/auth/login.html',
-        form=form)
+        form=form,
+        breadcrumbs=breadcrumbs)
 
 
 @auth.route('/logout', methods=['GET'])
@@ -60,9 +69,18 @@ def register():
         flash(gettext('You can now login.'), 'success')
         return redirect(url_for('auth.login'))
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Sign up'),
+        'href': False,
+    }]
+
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/auth/register.html',
-        form=form)
+        form=form,
+        breadcrumbs=breadcrumbs)
 
 
 @auth.route('/unregister', methods=['GET', 'POST'])
@@ -79,10 +97,19 @@ def unregister():
         flash(gettext('Your account was deleted.'), 'success')
         return redirect(url_for('page.index'))
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Delete Account'),
+        'href': False,
+    }]
+
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/auth/unregister.html',
         form=form,
-        user=user)
+        user=user,
+        breadcrumbs=breadcrumbs)
 
 
 @auth.route('/change-password', methods=['GET', 'POST'])
@@ -105,10 +132,19 @@ def change_password():
         flash(gettext('Old password is wrong.'), 'danger')
         return redirect(url_for('auth.change_password'))
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Change Password'),
+        'href': False,
+    }]
+
     return render_template(
         current_app.config.get(
             'RABIANG_SITE_THEME') + '/auth/change_password.html',
-        form=form)
+        form=form,
+        breadcrumbs=breadcrumbs)
 
 
 @auth.route('/reset-password')
