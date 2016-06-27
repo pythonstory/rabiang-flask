@@ -1,6 +1,15 @@
+{% if breadcrumbs is defined %}
 <div class="container">
-	<ol class="breadcrumb">
-		<li><a href="/index.html">Start Bootstrap</a></li>
-		<li class="active">All Templates</li>
-	</ol>
+    <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            <li>
+                {% if breadcrumb.href %}
+                    <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+                {% else %}
+                    {{ breadcrumb.text }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ol>
 </div>
+{% endif %}

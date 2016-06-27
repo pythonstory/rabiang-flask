@@ -67,11 +67,20 @@ def index(page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/index.html',
         posts=posts,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -102,6 +111,17 @@ def detail_slug(slug):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': post.title,
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
@@ -109,6 +129,7 @@ def detail_slug(slug):
         post=post,
         form=form,
         comments=comments,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -137,6 +158,17 @@ def detail_post_id(post_id):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': post.title,
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
@@ -144,6 +176,7 @@ def detail_post_id(post_id):
         post=post,
         form=form,
         comments=comments,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -168,11 +201,23 @@ def create():
         flash(gettext('You wrote a new post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Write'),
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/create.html',
         form=form,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -197,12 +242,24 @@ def edit(post_id):
         flash(gettext('You edited your post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Edit'),
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/edit.html',
         form=form,
         post_id=post_id,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -220,12 +277,24 @@ def delete(post_id):
         flash(gettext('You deleted your post.'), 'success')
         return redirect(url_for('page.index'))
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Delete'),
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/delete.html',
         form=form,
         post=post,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -241,11 +310,23 @@ def user_index(username, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': username,
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
         posts=posts,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -258,19 +339,31 @@ def tag_index():
         .order_by(Tag.name) \
         .all()
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Tag'),
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/tag.html',
         tags=tags,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
-@page.route('/tag/<name>', methods=['GET', 'POST'])
-@page.route('/tag/<name>/<int:page_num>', methods=['GET', 'POST'])
-def tag_name(name, page_num=1):
+@page.route('/tag/<tag_name>', methods=['GET', 'POST'])
+@page.route('/tag/<tag_name>/<int:page_num>', methods=['GET', 'POST'])
+def tag_name(tag_name, page_num=1):
     tag = Tag.query \
-        .filter(Tag.name == name) \
+        .filter(Tag.name == tag_name) \
         .first_or_404()
 
     posts = tag.posts \
@@ -278,11 +371,26 @@ def tag_name(name, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Tag'),
+        'href': url_for('page.tag_index'),
+    }, {
+        'text': tag_name,
+        'href': False,
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/tag_name.html',
         posts=posts,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
 
 
@@ -297,9 +405,21 @@ def month_index(year, month, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Blog Archives'),
+        'href': url_for('page.tag_index'),
+    }]
+
     sidebar = sidebar_data()
 
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
         posts=posts,
+        breadcrumbs=breadcrumbs,
         sidebar=sidebar)
