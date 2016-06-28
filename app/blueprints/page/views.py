@@ -11,7 +11,7 @@ from app import db
 from app.blueprints.auth.models import User
 from . import page
 from .forms import PostForm, CommentForm, DeletePostForm
-from .models import Post, Comment, Tag, post_tag
+from .models import Post, Comment, Tag, post_tag, PageCategory
 
 
 def sidebar_data():
@@ -499,5 +499,52 @@ def month_index(year, month, page_num=1):
     return render_template(
         current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
         posts=posts,
+        title=title,
         breadcrumbs=breadcrumbs,
         sidebar=sidebar)
+
+
+@page.route('/category', methods=['GET', 'POST'])
+def category_index():
+    categories = PageCategory.query \
+        .filter(PageCategory.parent_id == None).all()
+
+    title = gettext('Category') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Category'),
+        'href': False,
+    }]
+
+    sidebar = sidebar_data()
+
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/category.html',
+        categories=categories,
+        title=title,
+        breadcrumbs=breadcrumbs,
+        sidebar=sidebar)
+
+
+@page.route('/category/<category_name>', methods=['GET', 'POST'])
+def category_detail(category_name):
+    pass
+
+
+def category_create():
+    pass
+
+
+def category_edit():
+    pass
+
+
+def category_delete():
+    pass

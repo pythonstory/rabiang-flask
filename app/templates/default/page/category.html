@@ -1,0 +1,10 @@
+{% extends "default/columns-2.html" %}
+
+{% block page_content %}
+    {% for category in categories %}
+        <a href="{{ url_for('page.category_detail', category_name=category.name) }}"
+           class="btn btn-default spacer-bottom-10">
+            {{ category.name }}
+        </a>
+    {% endfor %}
+{% endblock %}
