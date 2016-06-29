@@ -19,15 +19,28 @@
 <!-- Blog Categories Well -->
 <div class="well">
     <h4>{{ _('Blog Category') }}</h4>
-    <ul class="sidebar_list_style_outer">
-        <li><a href="#"><i class="fa fa-angle-double-right"></i> Python</a></li>
-        <ul class="sidebar_list_style">
-            <li><a href="#"><i class="fa fa-angle-double-right"></i> Flask</a>
+    {% for category in categories['children'] %}
+        {% if loop.first %}<ul class="sidebar_list_style_outer">{% endif %}
+            <li>
+                <i class="fa fa-angle-double-right"></i>
+                <a href="{{ url_for('page.category_detail', category_name=category['node'].name) }}">
+                {{ category['node'].name }}
+                </a>
+
+                    {% for category1 in category['children'] %}
+                        {% if loop.first %}<ul class="sidebar_list_style">{% endif %}
+                        <li>
+                            <i class="fa fa-angle-double-right"></i>
+                            <a href="{{ url_for('page.category_detail', category_name=category1['node'].name) }}">
+                            {{ category1['node'].name }}
+                            </a>
+                        </li>
+                        {% if loop.last %}</ul>{% endif %}
+                    {% endfor %}
+
             </li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i> Django</a>
-            </li>
-        </ul>
-    </ul>
+        {% if loop.last %}</ul>{% endif %}
+    {% endfor %}
 </div>
 
 <!-- Side Widget Well -->

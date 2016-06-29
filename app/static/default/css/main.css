@@ -52,11 +52,16 @@ span a {
 .sidebar_list_style {
     list-style-type: none;
     padding-left: 20px;
+    margin-top: 5px;
 }
 
 .sidebar_list_style_outer {
     list-style-type: none;
     padding-left: 0px;
+}
+
+.sidebar_list_style_outer li {
+    margin-bottom: 5px;
 }
 
 .spacer-bottom-5 {

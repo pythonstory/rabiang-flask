@@ -18,6 +18,10 @@ from .models import Post, Comment, Tag, post_tag, PageCategory
 def sidebar_data():
     sidebar = {}
 
+    categories = build_tree_dictionary(PageCategory)
+
+    sidebar['categories'] = categories
+
     recent_posts = Post.query \
         .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Post.created_timestamp.desc()) \
