@@ -9,7 +9,7 @@ from werkzeug.contrib.atom import AtomFeed
 
 from app import db
 from app.blueprints.auth.models import User
-from app.utils.structure import build_tree_dictionary
+from app.utils.structure import build_tree_dictionary, build_tree_tuple_list
 from . import page
 from .forms import PostForm, CommentForm, DeletePostForm, CategoryForm
 from .models import Post, Comment, Tag, post_tag, PageCategory
@@ -563,6 +563,13 @@ def category_create():
 
         flash(gettext('You added a new category.'), 'success')
         return redirect(url_for('page.category_index'))
+
+    categories = build_tree_tuple_list(PageCategory)
+
+    current_app.logger.debug(categories)
+
+    form.parent.choices = [(0, gettext('Root Category'))]
+    form.parent.choices.extend(categories)
 
     return render_template(
         current_app.config.get(
