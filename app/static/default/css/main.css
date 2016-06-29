@@ -104,7 +104,7 @@ span a {
 }
 
 .page p, .page blockquote, .page ul, .page ol, .page dl, .page li, .page table, .page pre {
-    margin: 15px 0;
+    margin: 5px 0;
 }
 
 .page li {

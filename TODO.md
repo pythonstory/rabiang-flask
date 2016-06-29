@@ -53,7 +53,8 @@ validators
 - attachment management
 - history
 - dashboard
-- gravatar 매번 필터로 계산하는 것보다 디비에 저장하는 게 나을지 생각할 것
+
+- null 값의 root 카테고리 노드 필요
 
 - sidebar 기능 추가
 카테고리 미구현
@@ -69,3 +70,10 @@ validators
 공개 게시물만 목록 노출함
 게시물 detail 보기는 public 조건 아직 없음
 게시물 진짜로 삭제 (erase) 기능 만들 것
+
+
+고민 사항 (성능 관련)
+
+- 카테고리 가져올 때 n-join eager-loading (prefetch) 처리 여부
+- gravatar 매번 필터로 계산하는 것보다 디비에 저장 여부
+- 태그 카운트를 post_tag 테이블에 저장하는 방안

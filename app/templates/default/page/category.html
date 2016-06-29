@@ -1,10 +1,29 @@
 {% extends "default/columns-2.html" %}
 
 {% block page_content %}
-    {% for category in categories %}
-        <a href="{{ url_for('page.category_detail', category_name=category.name) }}"
-           class="btn btn-default spacer-bottom-10">
-            {{ category.name }}
-        </a>
+    {% for category in categories['children'] %}
+        {% if loop.first %}<ul>{% endif %}
+            <li>
+                <a href="{{ url_for('page.category_detail', category_name=category['node'].name) }}">
+                {{ category['node'].name }}
+                </a>
+
+                    {% for category1 in category['children'] %}
+                        {% if loop.first %}<ul>{% endif %}
+                        <li>
+                            <a href="{{ url_for('page.category_detail', category_name=category1['node'].name) }}">
+                            {{ category1['node'].name }}
+                            </a>
+                        </li>
+                        {% if loop.last %}</ul>{% endif %}
+                    {% endfor %}
+
+            </li>
+        {% if loop.last %}</ul>{% endif %}
     {% endfor %}
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+    </script>
 {% endblock %}

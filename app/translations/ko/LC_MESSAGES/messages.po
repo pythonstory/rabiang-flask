@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-27 22:01+0900\n"
+"POT-Creation-Date: 2016-06-29 22:21+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -23,22 +23,22 @@ msgid "Please, log in to access this page."
 msgstr "로그인하세요."
 
 #: app/blueprints/auth/forms.py:27 app/blueprints/auth/forms.py:44
-#: app/blueprints/page/forms.py:92 app/templates/default/auth/login.html:18
+#: app/blueprints/page/forms.py:92 app/templates/default/auth/login.html:16
 msgid "Email"
 msgstr "이메일"
 
 #: app/blueprints/auth/forms.py:31 app/blueprints/auth/forms.py:56
-#: app/templates/default/auth/login.html:26
+#: app/templates/default/auth/login.html:24
 msgid "Password"
 msgstr "비밀번호"
 
-#: app/blueprints/auth/forms.py:35 app/templates/default/auth/login.html:35
+#: app/blueprints/auth/forms.py:35 app/templates/default/auth/login.html:33
 msgid "Keep me logged in"
 msgstr "로그인 상태 유지"
 
-#: app/blueprints/auth/forms.py:38 app/blueprints/auth/views.py:35
-#: app/templates/default/auth/login.html:39
-#: app/templates/default/navigation.html:54
+#: app/blueprints/auth/forms.py:38 app/blueprints/auth/views.py:31
+#: app/blueprints/auth/views.py:38 app/templates/default/auth/login.html:37
+#: app/templates/default/navigation.html:57
 msgid "Login"
 msgstr "로그인"
 
@@ -90,51 +90,52 @@ msgstr "로그인했습니다."
 msgid "Invalid username or password"
 msgstr "아이디 또는 비밀번호를 잘못 입력하셨습니다."
 
-#: app/blueprints/auth/views.py:32 app/blueprints/auth/views.py:74
-#: app/blueprints/auth/views.py:106 app/blueprints/auth/views.py:141
-#: app/blueprints/main/views.py:13 app/blueprints/page/views.py:75
-#: app/blueprints/page/views.py:148 app/blueprints/page/views.py:195
-#: app/blueprints/page/views.py:238 app/blueprints/page/views.py:276
-#: app/blueprints/page/views.py:313 app/blueprints/page/views.py:346
-#: app/blueprints/page/views.py:375 app/blueprints/page/views.py:407
-#: app/blueprints/page/views.py:441 app/templates/default/forum/index.html:8
+#: app/blueprints/auth/views.py:35 app/blueprints/auth/views.py:81
+#: app/blueprints/auth/views.py:117 app/blueprints/auth/views.py:156
+#: app/blueprints/main/views.py:13 app/blueprints/page/views.py:85
+#: app/blueprints/page/views.py:161 app/blueprints/page/views.py:211
+#: app/blueprints/page/views.py:258 app/blueprints/page/views.py:300
+#: app/blueprints/page/views.py:341 app/blueprints/page/views.py:379
+#: app/blueprints/page/views.py:414 app/blueprints/page/views.py:450
+#: app/blueprints/page/views.py:488 app/blueprints/page/views.py:520
+#: app/templates/default/forum/index.html:8
 #: app/templates/default/main/index.html:8
 msgid "Home"
 msgstr "홈"
 
-#: app/blueprints/auth/views.py:50
+#: app/blueprints/auth/views.py:54
 msgid "You have been logged out"
 msgstr "안전하게 로그아웃했습니다."
 
-#: app/blueprints/auth/views.py:70
+#: app/blueprints/auth/views.py:74
 msgid "You can now login."
 msgstr "로그인하세요."
 
-#: app/blueprints/auth/views.py:77 app/templates/default/auth/login.html:47
-#: app/templates/default/auth/register.html:3
-#: app/templates/default/navigation.html:57
+#: app/blueprints/auth/views.py:77 app/blueprints/auth/views.py:84
+#: app/templates/default/auth/login.html:45
+#: app/templates/default/navigation.html:60
 msgid "Sign up"
 msgstr "회원가입"
 
-#: app/blueprints/auth/views.py:102
+#: app/blueprints/auth/views.py:110
 msgid "Your account was deleted."
 msgstr "계정이 삭제되었습니다."
 
-#: app/blueprints/auth/views.py:109 app/templates/default/navigation.html:50
+#: app/blueprints/auth/views.py:113 app/blueprints/auth/views.py:120
+#: app/templates/default/navigation.html:53
 msgid "Delete Account"
 msgstr "회원탈퇴"
 
-#: app/blueprints/auth/views.py:134
+#: app/blueprints/auth/views.py:146
 msgid "You changed your password."
 msgstr "비밀번호를 안전하게 바꾸셨습니다."
 
-#: app/blueprints/auth/views.py:137
+#: app/blueprints/auth/views.py:149
 msgid "Old password is wrong."
 msgstr "기존 비밀번호가 올바르지 않습니다."
 
-#: app/blueprints/auth/views.py:144
-#: app/templates/default/auth/change_password.html:3
-#: app/templates/default/navigation.html:41
+#: app/blueprints/auth/views.py:152 app/blueprints/auth/views.py:159
+#: app/templates/default/navigation.html:44
 msgid "Change Password"
 msgstr "비밀번호 변경"
 
@@ -166,8 +167,9 @@ msgstr "초안"
 msgid "Public"
 msgstr "공개"
 
-#: app/blueprints/page/forms.py:80 app/blueprints/page/views.py:381
-#: app/blueprints/page/views.py:413 app/templates/default/navigation.html:27
+#: app/blueprints/page/forms.py:80 app/blueprints/page/views.py:410
+#: app/blueprints/page/views.py:420 app/blueprints/page/views.py:446
+#: app/blueprints/page/views.py:456 app/templates/default/navigation.html:27
 #: app/templates/default/sidebar.html:53
 msgid "Tag"
 msgstr "태그"
@@ -184,66 +186,75 @@ msgstr "이름"
 msgid "Comment"
 msgstr "댓글"
 
-#: app/blueprints/page/forms.py:103 app/blueprints/page/views.py:319
-#: app/templates/default/page/detail.html:52
+#: app/blueprints/page/forms.py:103 app/blueprints/page/views.py:337
+#: app/blueprints/page/views.py:347 app/templates/default/page/detail.html:50
 msgid "Delete"
 msgstr "삭제"
 
-#: app/blueprints/page/views.py:78 app/blueprints/page/views.py:151
-#: app/blueprints/page/views.py:198 app/blueprints/page/views.py:241
-#: app/blueprints/page/views.py:279 app/blueprints/page/views.py:316
-#: app/blueprints/page/views.py:349 app/blueprints/page/views.py:378
-#: app/blueprints/page/views.py:410 app/blueprints/page/views.py:444
+#: app/blueprints/page/views.py:81 app/blueprints/page/views.py:88
+#: app/blueprints/page/views.py:164 app/blueprints/page/views.py:214
+#: app/blueprints/page/views.py:261 app/blueprints/page/views.py:303
+#: app/blueprints/page/views.py:344 app/blueprints/page/views.py:382
+#: app/blueprints/page/views.py:417 app/blueprints/page/views.py:453
+#: app/blueprints/page/views.py:491 app/blueprints/page/views.py:523
 #: app/templates/default/navigation.html:20
 msgid "Blog"
 msgstr "블로그"
 
-#: app/blueprints/page/views.py:94
+#: app/blueprints/page/views.py:105
 msgid "Latest Blog Posts"
 msgstr "블로그 최근 게시물"
 
-#: app/blueprints/page/views.py:140 app/blueprints/page/views.py:187
+#: app/blueprints/page/views.py:151 app/blueprints/page/views.py:201
 msgid "Your comment has been published."
 msgstr "댓글을 작성했습니다."
 
-#: app/blueprints/page/views.py:234
+#: app/blueprints/page/views.py:251
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:244 app/templates/default/navigation.html:44
-msgid "Write"
-msgstr "쓰기"
+#: app/blueprints/page/views.py:254 app/blueprints/page/views.py:264
+#: app/templates/default/navigation.html:47
+msgid "Write a new post"
+msgstr "블로그 글쓰기"
 
-#: app/blueprints/page/views.py:272
+#: app/blueprints/page/views.py:293
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
-#: app/blueprints/page/views.py:282 app/templates/default/page/detail.html:48
+#: app/blueprints/page/views.py:296 app/blueprints/page/views.py:306
+#: app/templates/default/page/detail.html:46
 msgid "Edit"
 msgstr "수정"
 
-#: app/blueprints/page/views.py:309
+#: app/blueprints/page/views.py:334
 msgid "You deleted your post."
 msgstr "게시물을 삭제했습니다."
 
-#: app/blueprints/page/views.py:447 app/templates/default/sidebar.html:62
+#: app/blueprints/page/views.py:484 app/blueprints/page/views.py:494
+#: app/templates/default/sidebar.html:62
 msgid "Blog Archives"
 msgstr "글보관함"
 
+#: app/blueprints/page/views.py:516 app/blueprints/page/views.py:526
+#: app/templates/default/navigation.html:30
+msgid "Category"
+msgstr "카테고리"
+
 #: app/templates/default/navigation.html:24
-#: app/templates/default/page/detail.html:56
+#: app/templates/default/page/detail.html:54
 msgid "List"
 msgstr "목록"
 
-#: app/templates/default/navigation.html:33
+#: app/templates/default/navigation.html:36
 msgid "Auth"
 msgstr "인증"
 
-#: app/templates/default/navigation.html:38
+#: app/templates/default/navigation.html:41
 msgid "Logout"
 msgstr "로그아웃"
 
-#: app/templates/default/navigation.html:47
+#: app/templates/default/navigation.html:50
 msgid "My Posts"
 msgstr "내 게시물"
 
@@ -263,28 +274,28 @@ msgstr "최근 게시물"
 msgid "Recent Comments"
 msgstr "최근 댓글"
 
-#: app/templates/default/auth/change_password.html:43
-#: app/templates/default/auth/register.html:54
-#: app/templates/default/page/create.html:10
-#: app/templates/default/page/detail.html:105
-#: app/templates/default/page/edit.html:10
+#: app/templates/default/auth/change_password.html:41
+#: app/templates/default/auth/register.html:52
+#: app/templates/default/page/create.html:8
+#: app/templates/default/page/detail.html:103
+#: app/templates/default/page/edit.html:8
 msgid "Save"
 msgstr "저장"
 
-#: app/templates/default/auth/change_password.html:44
-#: app/templates/default/auth/register.html:55
-#: app/templates/default/auth/unregister.html:11
-#: app/templates/default/page/create.html:11
-#: app/templates/default/page/delete.html:11
-#: app/templates/default/page/edit.html:12
+#: app/templates/default/auth/change_password.html:42
+#: app/templates/default/auth/register.html:53
+#: app/templates/default/auth/unregister.html:9
+#: app/templates/default/page/create.html:9
+#: app/templates/default/page/delete.html:9
+#: app/templates/default/page/edit.html:10
 msgid "Cancel"
 msgstr "취소"
 
-#: app/templates/default/auth/login.html:45
+#: app/templates/default/auth/login.html:43
 msgid "Forgot password?"
 msgstr "비밀번호 찾기"
 
-#: app/templates/default/auth/unregister.html:9
+#: app/templates/default/auth/unregister.html:7
 msgid "Delete your account?"
 msgstr "정말로 회원 탈퇴하시겠습니까?"
 
@@ -303,25 +314,10 @@ msgstr "이전"
 msgid "Next"
 msgstr "다음"
 
-#: app/templates/default/page/create.html:3
-msgid "Write a new post"
-msgstr "블로그 글쓰기"
-
-#: app/templates/default/page/delete.html:9
+#: app/templates/default/page/delete.html:7
 msgid "Delete this post?"
 msgstr "게시물을 정말로 삭제합니까?"
 
-#: app/templates/default/page/detail.html:65
+#: app/templates/default/page/detail.html:63
 msgid "Leave a Comment"
 msgstr "댓글 작성"
-
-#: app/templates/default/page/edit.html:3
-msgid "Edit a post"
-msgstr "게시물 수정"
-
-#~ msgid "Separate multiple tags with commas."
-#~ msgstr "태그는 콤마(,)로 구분합니다. 띄어쓰기는 입력할 수 없습니다."
-
-#~ msgid "Private"
-#~ msgstr "비공개"
-

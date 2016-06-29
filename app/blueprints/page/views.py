@@ -9,6 +9,7 @@ from werkzeug.contrib.atom import AtomFeed
 
 from app import db
 from app.blueprints.auth.models import User
+from app.utils.structure import build_tree_dictionary
 from . import page
 from .forms import PostForm, CommentForm, DeletePostForm
 from .models import Post, Comment, Tag, post_tag, PageCategory
@@ -506,8 +507,11 @@ def month_index(year, month, page_num=1):
 
 @page.route('/category', methods=['GET', 'POST'])
 def category_index():
-    categories = PageCategory.query \
-        .filter(PageCategory.parent_id == None).all()
+    root = PageCategory.query \
+        .filter(PageCategory.parent_id == None) \
+        .first()
+
+    categories = build_tree_dictionary(root, PageCategory)
 
     title = gettext('Category') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
