@@ -18,3 +18,23 @@ def build_tree_dictionary(model, node=None, level=0):
                 .append(build_tree_dictionary(model, child, level + 1))
 
     return dic
+
+
+def build_tree_list(model, node=None):
+    if node is None:
+        children = model.query \
+            .filter(model.parent_id == None) \
+            .order_by(model.name.asc()) \
+            .all()
+    else:
+        children = node.children \
+            .order_by(model.name.asc()) \
+            .all()
+
+    tree = children
+
+    if len(children) > 0:
+        for child in children:
+            tree.extend(build_tree_list(model, child))
+
+    return tree
