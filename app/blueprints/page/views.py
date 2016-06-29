@@ -507,11 +507,7 @@ def month_index(year, month, page_num=1):
 
 @page.route('/category', methods=['GET', 'POST'])
 def category_index():
-    root = PageCategory.query \
-        .filter(PageCategory.parent_id == None) \
-        .first()
-
-    categories = build_tree_dictionary(root, PageCategory)
+    categories = build_tree_dictionary(PageCategory)
 
     title = gettext('Category') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
