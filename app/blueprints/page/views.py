@@ -11,7 +11,7 @@ from app import db
 from app.blueprints.auth.models import User
 from app.utils.structure import build_tree_dictionary
 from . import page
-from .forms import PostForm, CommentForm, DeletePostForm
+from .forms import PostForm, CommentForm, DeletePostForm, CategoryForm
 from .models import Post, Comment, Tag, post_tag, PageCategory
 
 
@@ -542,8 +542,33 @@ def category_detail(category_name):
     pass
 
 
+@page.route('/category/create', methods=['GET', 'POST'])
+@login_required
 def category_create():
-    pass
+    form = CategoryForm()
+
+    if form.validate_on_submit():
+        page_category = PageCategory()
+
+        page_category.name = form.name.data
+        page_category.order = form.order.data
+
+        if form.parent.data == 0:
+            page_category.parent_id = None
+        else:
+            page_category.parent_id = form.parent.data
+
+        db.session.add(page_category)
+        db.session.commit()
+
+        flash(gettext('You added a new category.'), 'success')
+        return redirect(url_for('page.category_index'))
+
+    return render_template(
+        current_app.config.get(
+            'RABIANG_SITE_THEME') + '/page/category_create.html',
+        form=form
+    )
 
 
 def category_edit():

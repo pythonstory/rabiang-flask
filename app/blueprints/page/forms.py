@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask_babel import lazy_gettext
 from flask_wtf import Form
-from wtforms import StringField, TextAreaField, SelectField, SubmitField
-from wtforms.validators import DataRequired, Email
+from wtforms import StringField, TextAreaField, SelectField, SubmitField, \
+    IntegerField
+from wtforms.validators import DataRequired, Email, Optional
 
 from app.utils.validators import Unique
 from .models import Post, Tag
@@ -101,4 +102,19 @@ class CommentForm(Form):
 class DeletePostForm(Form):
     submit = SubmitField(
         lazy_gettext('Delete')
+    )
+
+
+class CategoryForm(Form):
+    name = StringField(
+        lazy_gettext('Name'),
+        validators=[DataRequired()]
+    )
+    order = IntegerField(
+        lazy_gettext('Order'),
+        validators=[DataRequired()]
+    )
+    parent = IntegerField(
+        lazy_gettext('Parent Category'),
+        validators=[Optional()]
     )

@@ -3,10 +3,11 @@ def build_tree_dictionary(model, node=None, level=0):
     if node is None:
         children = model.query \
             .filter(model.parent_id == None) \
+            .order_by(model.name.asc()) \
             .all()
     else:
         children = node.children \
-            .order_by(model.order.asc()) \
+            .order_by(model.name.asc()) \
             .all()
 
     dic = {'node': node, 'level': level, 'children': []}
