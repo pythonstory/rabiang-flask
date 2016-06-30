@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-30 17:53+0900\n"
+"POT-Creation-Date: 2016-06-30 23:29+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -123,7 +123,7 @@ msgstr "계정이 삭제되었습니다."
 
 #: app/blueprints/auth/views.py:113 app/blueprints/auth/views.py:120
 #: app/templates/default/navigation.html:56
-msgid "Delete Account"
+msgid "Delete account"
 msgstr "회원탈퇴"
 
 #: app/blueprints/auth/views.py:146
@@ -136,7 +136,7 @@ msgstr "기존 비밀번호가 올바르지 않습니다."
 
 #: app/blueprints/auth/views.py:152 app/blueprints/auth/views.py:159
 #: app/templates/default/navigation.html:44
-msgid "Change Password"
+msgid "Change password"
 msgstr "비밀번호 변경"
 
 #: app/blueprints/page/forms.py:60
@@ -249,17 +249,17 @@ msgstr "글보관함"
 msgid "Category"
 msgstr "카테고리"
 
-#: app/blueprints/page/views.py:564
+#: app/blueprints/page/views.py:551
+msgid "Root Category"
+msgstr "최상위 카테고리"
+
+#: app/blueprints/page/views.py:567
 msgid "You added a new category."
 msgstr "새 카테고리를 추가했습니다."
 
-#: app/blueprints/page/views.py:567 app/templates/default/navigation.html:47
-msgid "Add a category"
-msgstr "카테고리 추가"
-
-#: app/blueprints/page/views.py:571
-msgid "Root Category"
-msgstr "최상위 카테고리"
+#: app/blueprints/page/views.py:570 app/templates/default/navigation.html:47
+msgid "Edit categories"
+msgstr "카테고리 편집"
 
 #: app/templates/default/navigation.html:24
 #: app/templates/default/page/detail.html:54
@@ -275,7 +275,7 @@ msgid "Logout"
 msgstr "로그아웃"
 
 #: app/templates/default/navigation.html:53
-msgid "My Posts"
+msgid "My posts"
 msgstr "내 게시물"
 
 #: app/templates/default/sidebar.html:3
@@ -296,7 +296,7 @@ msgstr "최근 댓글"
 
 #: app/templates/default/auth/change_password.html:41
 #: app/templates/default/auth/register.html:52
-#: app/templates/default/page/category_create.html:45
+#: app/templates/default/page/category_create.html:41
 #: app/templates/default/page/create.html:8
 #: app/templates/default/page/detail.html:103
 #: app/templates/default/page/edit.html:8
@@ -306,7 +306,7 @@ msgstr "저장"
 #: app/templates/default/auth/change_password.html:42
 #: app/templates/default/auth/register.html:53
 #: app/templates/default/auth/unregister.html:9
-#: app/templates/default/page/category_create.html:46
+#: app/templates/default/page/category_create.html:42
 #: app/templates/default/page/create.html:9
 #: app/templates/default/page/delete.html:9
 #: app/templates/default/page/edit.html:10

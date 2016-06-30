@@ -110,14 +110,14 @@ def unregister():
         flash(gettext('Your account was deleted.'), 'success')
         return redirect(url_for('page.index'))
 
-    title = gettext('Delete Account') + ' - ' + current_app.config.get(
+    title = gettext('Delete account') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
 
     breadcrumbs = [{
         'text': gettext('Home'),
         'href': url_for('main.index'),
     }, {
-        'text': gettext('Delete Account'),
+        'text': gettext('Delete account'),
         'href': False,
     }]
 
@@ -149,14 +149,14 @@ def change_password():
         flash(gettext('Old password is wrong.'), 'danger')
         return redirect(url_for('auth.change_password'))
 
-    title = gettext('Change Password') + ' - ' + current_app.config.get(
+    title = gettext('Change password') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
 
     breadcrumbs = [{
         'text': gettext('Home'),
         'href': url_for('main.index'),
     }, {
-        'text': gettext('Change Password'),
+        'text': gettext('Change password'),
         'href': False,
     }]
 

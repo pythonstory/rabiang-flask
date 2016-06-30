@@ -567,14 +567,26 @@ def category_create():
         flash(gettext('You added a new category.'), 'success')
         return redirect(url_for('page.category_index'))
 
-    title = gettext('Add a category') + ' - ' + current_app.config.get(
+    title = gettext('Edit categories') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Edit categories'),
+        'href': False,
+    }]
 
     return render_template(
         current_app.config.get(
             'RABIANG_SITE_THEME') + '/page/category_create.html',
         form=form,
-        title=title
+        title=title,
+        breadcrumbs=breadcrumbs
     )
 
 

@@ -41,19 +41,19 @@
                                 <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('auth.change_password') }}">{{ _('Change Password') }}</a>
+                                <a href="{{ url_for('auth.change_password') }}">{{ _('Change password') }}</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('page.category_create') }}">{{ _('Add a category') }}</a>
+                                <a href="{{ url_for('page.category_create') }}">{{ _('Edit categories') }}</a>
                             </li>
                             <li>
                                 <a href="{{ url_for('page.create') }}">{{ _('Write a new post') }}</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('page.user_index', username=current_user.username) }}">{{ _('My Posts') }}</a>
+                                <a href="{{ url_for('page.user_index', username=current_user.username) }}">{{ _('My posts') }}</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('auth.unregister') }}">{{ _('Delete Account') }}</a>
+                                <a href="{{ url_for('auth.unregister') }}">{{ _('Delete account') }}</a>
                             </li>
                         {% else %}
                             <li>

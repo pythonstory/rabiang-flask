@@ -48,7 +48,6 @@ validators
 
 - tag
 삭제된 태그를 실제로 테이블에서 삭제 처리할 것
-- category
 - menu
 - attachment management
 - history
@@ -57,7 +56,6 @@ validators
 - null 값의 root 카테고리 노드 필요
 
 - sidebar 기능 추가
-카테고리 미구현
 글보관함 i18n
 
 * Mail
@@ -71,6 +69,7 @@ validators
 게시물 detail 보기는 public 조건 아직 없음
 게시물 진짜로 삭제 (erase) 기능 만들 것
 카테고리 추가시 '-'를 '&nbsp;'로 변경 할지
+sidebar 위젯 방식으로 구현
 
 고민 사항 (성능 관련)
 
