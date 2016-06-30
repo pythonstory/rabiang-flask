@@ -547,7 +547,7 @@ def category_detail(category_name):
 def category_create():
     form = CategoryForm()
 
-    form.parent.choices = build_tree_tuple_list(PageCategory)
+    form.parent.choices = build_tree_tuple_list(PageCategory, prefix=True)
     form.parent.choices.insert(0, (0, gettext('Root Category')))
 
     if form.validate_on_submit():

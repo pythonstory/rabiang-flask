@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
-def build_tree_dictionary(model, node=None, level=0):
+def get_children(model, node):
     if node is None:
-        children = model.query \
+        return model.query \
             .filter(model.parent_id == None) \
             .order_by(model.name.asc()) \
             .all()
     else:
-        children = node.children \
+        return node.children \
             .order_by(model.name.asc()) \
             .all()
+
+
+def build_tree_dictionary(model, node=None, level=0):
+    children = get_children(model, node)
 
     dic = {'node': node, 'level': level, 'children': []}
 
@@ -21,15 +25,7 @@ def build_tree_dictionary(model, node=None, level=0):
 
 
 def build_tree_list(model, node=None):
-    if node is None:
-        children = model.query \
-            .filter(model.parent_id == None) \
-            .order_by(model.name.asc()) \
-            .all()
-    else:
-        children = node.children \
-            .order_by(model.name.asc()) \
-            .all()
+    children = get_children(model, node)
 
     tree = children
 
@@ -40,44 +36,23 @@ def build_tree_list(model, node=None):
     return tree
 
 
-def build_tree_tuple_list_with_level(model, node=None, level=0):
-    if node is None:
-        children = model.query \
-            .filter(model.parent_id == None) \
-            .order_by(model.name.asc()) \
-            .all()
-    else:
-        children = node.children \
-            .order_by(model.name.asc()) \
-            .all()
+def build_tree_tuple_list(model, node=None, level=0, prefix=False):
+    children = get_children(model, node)
 
     tree = []
 
     if len(children) > 0:
         for child in children:
-            tree.append((child.id, child.name, level))
-            tree.extend(
-                build_tree_tuple_list_with_level(model, child, level + 1))
-
-    return tree
-
-
-def build_tree_tuple_list(model, node=None, level=0):
-    if node is None:
-        children = model.query \
-            .filter(model.parent_id == None) \
-            .order_by(model.name.asc()) \
-            .all()
-    else:
-        children = node.children \
-            .order_by(model.name.asc()) \
-            .all()
-
-    tree = []
-
-    if len(children) > 0:
-        for child in children:
-            tree.append((child.id, '---' * level + child.name))
-            tree.extend(build_tree_tuple_list(model, child, level + 1))
+            """
+            If prefix is set for select option, it is indented with prefix.
+            Otherwise, tuple list is returned with depth level.
+            """
+            if prefix:
+                tree.append((child.id, '---' * level + child.name))
+                tree.extend(
+                    build_tree_tuple_list(model, child, level + 1, True))
+            else:
+                tree.append((child.id, child.name, level))
+                tree.extend(build_tree_tuple_list(model, child, level + 1))
 
     return tree

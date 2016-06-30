@@ -19,7 +19,7 @@
 <!-- Blog Categories Well -->
 <div class="well">
     <h4>{{ _('Blog Category') }}</h4>
-    {% for category in categories['children'] %}
+    {% for category in sidebar['categories']['children'] %}
         {% if loop.first %}<ul class="sidebar_list_style_outer">{% endif %}
             <li>
                 <i class="fa fa-angle-double-right"></i>
