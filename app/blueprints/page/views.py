@@ -642,9 +642,13 @@ def category_create():
     )
 
 
-def category_edit():
-    pass
+@page.route('/category/edit/<int:category_id>', methods=['GET', 'POST'])
+@login_required
+def category_edit(category_id):
+    return '/category/edit'
 
 
-def category_delete():
-    pass
+@page.route('/delete/<int:category_id>', methods=['GET', 'POST'])
+@login_required
+def category_delete(category_id):
+    return '/category/delete'
