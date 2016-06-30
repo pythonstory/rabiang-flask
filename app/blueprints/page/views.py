@@ -9,7 +9,8 @@ from werkzeug.contrib.atom import AtomFeed
 
 from app import db
 from app.blueprints.auth.models import User
-from app.utils.structure import build_tree_dictionary, build_tree_tuple_list
+from app.utils.structure import build_tree_dictionary, build_tree_tuple_list, \
+    build_tree_list
 from . import page
 from .forms import PostForm, CommentForm, DeletePostForm, CategoryForm
 from .models import Post, Comment, Tag, post_tag, PageCategory
@@ -543,8 +544,54 @@ def category_index():
 
 
 @page.route('/category/<category_name>', methods=['GET', 'POST'])
-def category_detail(category_name):
-    return '/page/category'
+@page.route('/category/<category_name>/<int:page_num>', methods=['GET', 'POST'])
+def category_detail(category_name, page_num=1):
+    category = PageCategory.query \
+        .filter(PageCategory.name == category_name) \
+        .first_or_404()
+
+    categories = build_tree_list(PageCategory, category)
+
+    # Lookup posts with specified category and its descendants.
+    category_names = [category.name]
+    category_names.extend([category.name for category in categories])
+
+    posts = Post.query \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
+        .join(PageCategory) \
+        .filter(PageCategory.name.in_(category_names)) \
+        .order_by(Post.created_timestamp.desc()) \
+        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+                  False)
+
+    current_app.logger.debug(posts)
+
+    title = gettext('Category') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Category'),
+        'href': False,
+    }, {
+        'text': category_name,
+        'href': False,
+    }]
+
+    sidebar = sidebar_data()
+
+    return render_template(
+        current_app.config.get(
+            'RABIANG_SITE_THEME') + '/page/category_detail.html',
+        title=title,
+        posts=posts,
+        breadcrumbs=breadcrumbs,
+        sidebar=sidebar)
 
 
 @page.route('/category/create', methods=['GET', 'POST'])
