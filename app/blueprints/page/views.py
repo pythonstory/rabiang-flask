@@ -547,6 +547,9 @@ def category_detail(category_name):
 def category_create():
     form = CategoryForm()
 
+    form.parent.choices = build_tree_tuple_list(PageCategory)
+    form.parent.choices.insert(0, (0, gettext('Root Category')))
+
     if form.validate_on_submit():
         page_category = PageCategory()
 
@@ -564,17 +567,14 @@ def category_create():
         flash(gettext('You added a new category.'), 'success')
         return redirect(url_for('page.category_index'))
 
-    categories = build_tree_tuple_list(PageCategory)
-
-    current_app.logger.debug(categories)
-
-    form.parent.choices = [(0, gettext('Root Category'))]
-    form.parent.choices.extend(categories)
+    title = gettext('Add a category') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
 
     return render_template(
         current_app.config.get(
             'RABIANG_SITE_THEME') + '/page/category_create.html',
-        form=form
+        form=form,
+        title=title
     )
 
 

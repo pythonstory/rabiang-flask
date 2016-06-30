@@ -14,6 +14,17 @@
                             <a href="{{ url_for('page.category_detail', category_name=category1['node'].name) }}">
                             {{ category1['node'].name }}
                             </a>
+
+                            {% for category2 in category1['children'] %}
+                                {% if loop.first %}<ul>{% endif %}
+                                <li>
+                                    <a href="{{ url_for('page.category_detail', category_name=category2['node'].name) }}">
+                                    {{ category2['node'].name }}
+                                    </a>
+                                </li>
+                                {% if loop.last %}</ul>{% endif %}
+                            {% endfor %}
+
                         </li>
                         {% if loop.last %}</ul>{% endif %}
                     {% endfor %}

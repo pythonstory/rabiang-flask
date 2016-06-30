@@ -116,6 +116,6 @@ class CategoryForm(Form):
     )
     parent = SelectField(
         lazy_gettext('Parent Category'),
-        validators=[Optional()],
+        validators=[DataRequired()],
         coerce=int
     )

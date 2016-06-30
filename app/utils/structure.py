@@ -40,6 +40,28 @@ def build_tree_list(model, node=None):
     return tree
 
 
+def build_tree_tuple_list_with_level(model, node=None, level=0):
+    if node is None:
+        children = model.query \
+            .filter(model.parent_id == None) \
+            .order_by(model.name.asc()) \
+            .all()
+    else:
+        children = node.children \
+            .order_by(model.name.asc()) \
+            .all()
+
+    tree = []
+
+    if len(children) > 0:
+        for child in children:
+            tree.append((child.id, child.name, level))
+            tree.extend(
+                build_tree_tuple_list_with_level(model, child, level + 1))
+
+    return tree
+
+
 def build_tree_tuple_list(model, node=None, level=0):
     if node is None:
         children = model.query \
@@ -55,7 +77,7 @@ def build_tree_tuple_list(model, node=None, level=0):
 
     if len(children) > 0:
         for child in children:
-            tree.append((child.id, '   ' * level + child.name))
+            tree.append((child.id, '---' * level + child.name))
             tree.extend(build_tree_tuple_list(model, child, level + 1))
 
     return tree
