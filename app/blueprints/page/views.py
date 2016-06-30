@@ -239,6 +239,8 @@ def detail_post_id(post_id):
 def create():
     form = PostForm()
 
+    form.category.choices = build_tree_tuple_list(PageCategory, prefix=True)
+
     if form.validate_on_submit():
         post = Post()
 
@@ -246,6 +248,7 @@ def create():
         post.slug = form.slug.data
         post.body = form.body.data
         post.status = form.status.data
+        post.category_id = form.category.data
         post.tags = form.tags.data
         post.author = current_user
 
@@ -282,6 +285,8 @@ def edit(post_id):
     post = Post.query.get_or_404(post_id)
 
     form = PostForm(obj=post)
+
+    form.category.choices = build_tree_tuple_list(PageCategory, prefix=True)
 
     if form.validate_on_submit():
         post.title = form.title.data
@@ -539,7 +544,7 @@ def category_index():
 
 @page.route('/category/<category_name>', methods=['GET', 'POST'])
 def category_detail(category_name):
-    pass
+    return '/page/category'
 
 
 @page.route('/category/create', methods=['GET', 'POST'])

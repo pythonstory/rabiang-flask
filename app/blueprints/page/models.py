@@ -30,6 +30,10 @@ class Post(db.Model):
     author = db.relationship('User',
                              backref=db.backref('posts', lazy='dynamic'))
 
+    category_id = db.Column(db.Integer, db.ForeignKey('page_category.id'))
+    category = db.relationship('PageCategory',
+                               backref=db.backref('posts', lazy='dynamic'))
+
     tags = db.relationship('Tag', secondary=post_tag,
                            backref=db.backref('posts', lazy='dynamic'),
                            lazy='dynamic')

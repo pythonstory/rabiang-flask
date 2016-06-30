@@ -15,7 +15,6 @@ cart
 - pagination : parameterized
 - babel select lang html
 
-- widget MVC
 - blueprint dynamic import
 
 - error page -> 테마/사이트 무관하게 만들 것
@@ -53,8 +52,6 @@ validators
 - history
 - dashboard
 
-- null 값의 root 카테고리 노드 필요
-
 - sidebar 기능 추가
 글보관함 i18n
 
@@ -69,7 +66,8 @@ validators
 게시물 detail 보기는 public 조건 아직 없음
 게시물 진짜로 삭제 (erase) 기능 만들 것
 카테고리 추가시 '-'를 '&nbsp;'로 변경 할지
-sidebar 위젯 방식으로 구현
+sidebar 위젯 방식(MVC)으로 구현
+글보관함 i18n
 
 고민 사항 (성능 관련)
 

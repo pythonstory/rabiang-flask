@@ -17,7 +17,10 @@
                 {{ post.author.username }}
             </a>
         </li>
-        <li><i class="fa fa-folder-open-o" aria-hidden="true"></i> category
+        <li><i class="fa fa-folder-open-o" aria-hidden="true"></i>
+            <a href="{{ url_for('page.category_detail', category_name=post.category.name) }}">
+                {{ post.category.name }}
+            </a>
         </li>
         <li><i class="fa fa-comments" aria-hidden="true"></i>
             <a href="{{ url_for('page.detail_slug', slug=post.slug) }}#comments">

@@ -33,6 +33,17 @@
     </div>
 </div>
 <div class="form-group">
+    {{ form.category.label(class='col-sm-1 control-label') }}
+    <div class="col-sm-11{% if form.category.errors %} has-error{% endif %}">
+        {{ form.category(class='form-control') }}
+        {% if form.category.errors %}
+            {% for error in form.category.errors %}
+                <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="form-group">
     {{ form.body.label(class='col-sm-1 control-label') }}
     <div class="col-sm-11{% if form.body.errors %} has-error{% endif %}">
         {{ form.body(class='form-control', rows='10') }}

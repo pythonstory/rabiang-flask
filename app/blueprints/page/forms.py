@@ -82,6 +82,10 @@ class PostForm(Form):
         description=lazy_gettext('Separate multiple tags with commas. '
                                  'All of whitespaces are ignored.')
     )
+    category = SelectField(
+        lazy_gettext('Category'),
+        coerce=int
+    )
 
 
 class CommentForm(Form):
@@ -116,6 +120,6 @@ class CategoryForm(Form):
     )
     parent = SelectField(
         lazy_gettext('Parent Category'),
-        validators=[DataRequired()],
+        validators=[Optional()],
         coerce=int
     )
