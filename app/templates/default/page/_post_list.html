@@ -3,7 +3,7 @@
     <a href="{{ url_for('page.detail_slug', slug=post.slug) }}">{{ post.title }}</a>
 </h2>
 <p class="lead">
-<ul class="list-inline">
+<ul class="list-inline post_head">
     <li><i class="fa fa-calendar" aria-hidden="true"></i>
         {{ post.created_timestamp | datetimeformat(format='short') }}
     </li>

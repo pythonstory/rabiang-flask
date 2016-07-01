@@ -184,3 +184,7 @@ span a {
 .page blockquote > :last-child {
     margin-bottom: 0;
 }
+
+.page .post_head {
+    padding-left: 0;
+}
