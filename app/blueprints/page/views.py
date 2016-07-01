@@ -285,15 +285,18 @@ def create():
 def edit(post_id):
     post = Post.query.get_or_404(post_id)
 
+    categories = build_tree_tuple_list(PageCategory, prefix=True)
+
     form = PostForm(obj=post)
 
-    form.category.choices = build_tree_tuple_list(PageCategory, prefix=True)
+    form.category.choices = categories
 
     if form.validate_on_submit():
         post.title = form.title.data
         post.slug = form.slug.data
         post.body = form.body.data
         post.status = form.status.data
+        post.category_id = form.category.data
         post.tags = form.tags.data
         post.author = current_user
 
@@ -302,6 +305,8 @@ def edit(post_id):
 
         flash(gettext('You edited your post.'), 'success')
         return redirect(url_for('page.detail_slug', slug=post.slug))
+
+    form.category.data = post.category_id if post.category_id else 0
 
     title = gettext('Edit') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
@@ -564,8 +569,6 @@ def category_detail(category_name, page_num=1):
         .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
                   False)
 
-    current_app.logger.debug(posts)
-
     title = gettext('Category') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
 
@@ -599,8 +602,10 @@ def category_detail(category_name, page_num=1):
 def category_create():
     form = CategoryForm()
 
-    form.parent.choices = build_tree_tuple_list(PageCategory, prefix=True)
-    form.parent.choices.insert(0, (0, gettext('Root Category')))
+    categories = build_tree_tuple_list(PageCategory, prefix=True)
+
+    form.parent.choices = [(0, gettext('Root Category'))]
+    form.parent.choices.extend(categories)
 
     if form.validate_on_submit():
         page_category = PageCategory()
@@ -617,7 +622,62 @@ def category_create():
         db.session.commit()
 
         flash(gettext('You added a new category.'), 'success')
-        return redirect(url_for('page.category_index'))
+        return redirect(url_for('page.category_create'))
+
+    title = gettext('Add categories') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.index'),
+    }, {
+        'text': gettext('Add categories'),
+        'href': False,
+    }]
+
+    return render_template(
+        current_app.config.get(
+            'RABIANG_SITE_THEME') + '/page/category_create.html',
+        form=form,
+        title=title,
+        breadcrumbs=breadcrumbs,
+        categories=categories
+    )
+
+
+@page.route('/category/edit/<int:category_id>', methods=['GET', 'POST'])
+@login_required
+def category_edit(category_id):
+    category = PageCategory.query.get_or_404(category_id)
+
+    categories = build_tree_tuple_list(PageCategory, prefix=True)
+
+    form = CategoryForm(obj=category)
+
+    form.parent.choices = [(0, gettext('Root Category'))]
+    form.parent.choices.extend(categories)
+
+    if form.validate_on_submit():
+        page_category = PageCategory()
+
+        page_category.name = form.name.data
+        page_category.order = form.order.data
+
+        if form.parent.data == 0:
+            page_category.parent_id = None
+        else:
+            page_category.parent_id = form.parent.data
+
+        db.session.add(page_category)
+        db.session.commit()
+
+        flash(gettext('You updated the category.'), 'success')
+        return redirect(url_for('page.category_create'))
+
+    form.parent.data = category.parent_id if category.parent_id else 0
 
     title = gettext('Edit categories') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
@@ -638,17 +698,12 @@ def category_create():
             'RABIANG_SITE_THEME') + '/page/category_create.html',
         form=form,
         title=title,
-        breadcrumbs=breadcrumbs
+        breadcrumbs=breadcrumbs,
+        categories=categories
     )
 
 
-@page.route('/category/edit/<int:category_id>', methods=['GET', 'POST'])
-@login_required
-def category_edit(category_id):
-    return '/category/edit'
-
-
-@page.route('/delete/<int:category_id>', methods=['GET', 'POST'])
+@page.route('/category/delete/<int:category_id>', methods=['GET', 'POST'])
 @login_required
 def category_delete(category_id):
     return '/category/delete'
