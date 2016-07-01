@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-01 23:53+0900\n"
+"POT-Creation-Date: 2016-07-02 00:01+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -182,6 +182,8 @@ msgstr "태그는 콤마(,)로 구분합니다. 태그 입력에 띄어쓰기는
 #: app/blueprints/page/forms.py:86 app/blueprints/page/views.py:527
 #: app/blueprints/page/views.py:537 app/blueprints/page/views.py:572
 #: app/blueprints/page/views.py:582 app/templates/default/navigation.html:30
+#: app/templates/default/page/category_create.html:55
+#: app/templates/default/page/category_edit.html:55
 msgid "Category"
 msgstr "카테고리"
 
@@ -349,6 +351,11 @@ msgstr "이전"
 #: app/templates/default/page/_pagination.html:40
 msgid "Next"
 msgstr "다음"
+
+#: app/templates/default/page/category_create.html:56
+#: app/templates/default/page/category_edit.html:56
+msgid "Actions"
+msgstr "작업"
 
 #: app/templates/default/page/delete.html:7
 msgid "Delete this post?"
