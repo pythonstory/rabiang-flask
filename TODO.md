@@ -73,6 +73,7 @@ validators
 카테고리 추가시 '-'를 '&nbsp;'로 변경 할지
 sidebar 위젯 방식(MVC)으로 구현
 글보관함 i18n
+카테고리 부모를 자신으로 선택할 경우 validator 작성
 
 고민 사항 (성능 관련)
 

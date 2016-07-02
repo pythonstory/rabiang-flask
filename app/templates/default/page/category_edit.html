@@ -3,7 +3,7 @@
 {% block page_content %}
     <div class="row">
         <div class="col-md-6">
-            <form action="{{ url_for('page.category_edit') }}" method="post"
+            <form action="{{ url_for('page.category_edit', category_id=category_id) }}" method="post"
                   class="form-horizontal">
                 {{ form.csrf_token }}
                 <div class="form-group">

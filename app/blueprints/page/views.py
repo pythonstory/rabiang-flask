@@ -651,33 +651,32 @@ def category_create():
 @page.route('/category/edit/<int:category_id>', methods=['GET', 'POST'])
 @login_required
 def category_edit(category_id):
-    category = PageCategory.query.get_or_404(category_id)
+    page_category = PageCategory.query.get_or_404(category_id)
 
     categories = build_tree_tuple_list(PageCategory, prefix=True)
 
-    form = CategoryForm(obj=category)
+    form = CategoryForm(obj=page_category)
 
     form.parent.choices = [(0, gettext('Root Category'))]
     form.parent.choices.extend(categories)
 
     if form.validate_on_submit():
-        page_category = PageCategory()
+        if form.parent.data != page_category.id:
+            page_category.name = form.name.data
+            page_category.order = form.order.data
 
-        page_category.name = form.name.data
-        page_category.order = form.order.data
+            if form.parent.data == 0:
+                page_category.parent_id = None
+            else:
+                page_category.parent_id = form.parent.data
 
-        if form.parent.data == 0:
-            page_category.parent_id = None
-        else:
-            page_category.parent_id = form.parent.data
-
-        db.session.add(page_category)
-        db.session.commit()
+            db.session.add(page_category)
+            db.session.commit()
 
         flash(gettext('You updated the category.'), 'success')
-        return redirect(url_for('page.category_create'))
+        return redirect(url_for('page.category_edit', category_id=category_id))
 
-    form.parent.data = category.parent_id if category.parent_id else 0
+    form.parent.data = page_category.parent_id if page_category.parent_id else 0
 
     title = gettext('Edit categories') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
@@ -695,8 +694,9 @@ def category_edit(category_id):
 
     return render_template(
         current_app.config.get(
-            'RABIANG_SITE_THEME') + '/page/category_create.html',
+            'RABIANG_SITE_THEME') + '/page/category_edit.html',
         form=form,
+        category_id=category_id,
         title=title,
         breadcrumbs=breadcrumbs,
         categories=categories
