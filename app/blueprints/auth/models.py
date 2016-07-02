@@ -46,18 +46,6 @@ class User(UserMixin, Base):
         return '<User: %r>' % self.username
 
 
-class Role(Base):
-    __tablename__ = 'role'
-
-    name = db.Column(db.String(64))
-
-    def __init__(self, *args, **kwargs):
-        super(Role, self).__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<Role: %r>' % self.name
-
-
 @login_manager.user_loader
 def _user_loader(user_id):
     # User loader callback function
