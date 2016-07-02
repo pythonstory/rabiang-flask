@@ -11,6 +11,8 @@ from app import login_manager
 class Base(db.Model):
     __abstract__ = True
 
+    id = db.Column(db.Integer, primary_key=True)
+
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
     modified_timestamp = db.Column(db.DateTime, default=datetime.now,
                                    onupdate=datetime.now)
@@ -19,7 +21,6 @@ class Base(db.Model):
 class User(UserMixin, Base):
     __tablename__ = 'user'
 
-    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64))
     email = db.Column(db.String(64), unique=True)
     password = db.Column(db.String(255))
@@ -43,6 +44,18 @@ class User(UserMixin, Base):
 
     def __repr__(self):
         return '<User: %r>' % self.username
+
+
+class Role(Base):
+    __tablename__ = 'role'
+
+    name = db.Column(db.String(64))
+
+    def __init__(self, *args, **kwargs):
+        super(Role, self).__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<Role: %r>' % self.name
 
 
 @login_manager.user_loader

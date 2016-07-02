@@ -13,6 +13,7 @@ post_tag = db.Table('post_tag',
 class Base(db.Model):
     __abstract__ = True
 
+    id = db.Column(db.Integer, primary_key=True)
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
     modified_timestamp = db.Column(db.DateTime, default=datetime.now,
                                    onupdate=datetime.now)
@@ -25,7 +26,6 @@ class Post(Base):
     STATUS_PUBLIC = 1
     STATUS_DELETED = 2
 
-    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     slug = db.Column(db.String(100), unique=True)
     body = db.Column(db.Text)
@@ -59,7 +59,6 @@ class Post(Base):
 class Comment(Base):
     __tablename__ = 'comment'
 
-    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     email = db.Column(db.String(64))
     body = db.Column(db.Text)
@@ -79,7 +78,6 @@ class Comment(Base):
 class Tag(Base):
     __tablename__ = 'tag'
 
-    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
 
     def __init__(self, *args, **kwargs):
@@ -92,13 +90,13 @@ class Tag(Base):
 class PageCategory(Base):
     __tablename__ = 'page_category'
 
-    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     order = db.Column(db.Integer)
 
     parent_id = db.Column(db.Integer, db.ForeignKey('page_category.id'))
     children = db.relationship('PageCategory',
-                               backref=db.backref('parent', remote_side=[id]),
+                               backref=db.backref('parent',
+                                                  remote_side='PageCategory.id'),
                                lazy='dynamic')
 
     def __init__(self, *args, **kwargs):
