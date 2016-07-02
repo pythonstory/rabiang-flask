@@ -8,7 +8,15 @@ from app import db
 from app import login_manager
 
 
-class User(UserMixin, db.Model):
+class Base(db.Model):
+    __abstract__ = True
+
+    created_timestamp = db.Column(db.DateTime, default=datetime.now)
+    modified_timestamp = db.Column(db.DateTime, default=datetime.now,
+                                   onupdate=datetime.now)
+
+
+class User(UserMixin, Base):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +25,6 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(255))
     password_hash = db.Column(db.String(255))
     active = db.Column(db.Boolean, default=True)
-    created_timestamp = db.Column(db.DateTime, default=datetime.now)
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)

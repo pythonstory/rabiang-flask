@@ -79,4 +79,4 @@ sidebar 위젯 방식(MVC)으로 구현
 - 카테고리 가져올 때 n-join eager-loading (prefetch) 처리 여부
 - gravatar 매번 필터로 계산하는 것보다 디비에 저장 여부
 - 태그 카운트를 post_tag 테이블에 저장하는 방안
-
+- 모델 클래스는 Base 모델을 상속 정의 (블루프린트 공통으로 뽑기)

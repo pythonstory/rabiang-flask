@@ -10,7 +10,15 @@ post_tag = db.Table('post_tag',
                     db.Column('post_id', db.Integer, db.ForeignKey('post.id')))
 
 
-class Post(db.Model):
+class Base(db.Model):
+    __abstract__ = True
+
+    created_timestamp = db.Column(db.DateTime, default=datetime.now)
+    modified_timestamp = db.Column(db.DateTime, default=datetime.now,
+                                   onupdate=datetime.now)
+
+
+class Post(Base):
     __tablename__ = 'post'
 
     STATUS_DRAFT = 0
@@ -22,9 +30,6 @@ class Post(db.Model):
     slug = db.Column(db.String(100), unique=True)
     body = db.Column(db.Text)
     status = db.Column(db.SmallInteger, default=STATUS_DRAFT)
-    created_timestamp = db.Column(db.DateTime, default=datetime.now)
-    modified_timestamp = db.Column(db.DateTime, default=datetime.now,
-                                   onupdate=datetime.now)
 
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship('User',
@@ -51,7 +56,7 @@ class Post(db.Model):
         return '<Post: %r>' % self.title
 
 
-class Comment(db.Model):
+class Comment(Base):
     __tablename__ = 'comment'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -59,9 +64,6 @@ class Comment(db.Model):
     email = db.Column(db.String(64))
     body = db.Column(db.Text)
     ip_address = db.Column(db.String(64))
-    created_timestamp = db.Column(db.DateTime, default=datetime.now)
-    modified_timestamp = db.Column(db.DateTime, default=datetime.now,
-                                   onupdate=datetime.now)
 
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     post = db.relationship('Post',
@@ -74,7 +76,7 @@ class Comment(db.Model):
         return '<Comment: %r>' % self.body
 
 
-class Tag(db.Model):
+class Tag(Base):
     __tablename__ = 'tag'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -87,7 +89,7 @@ class Tag(db.Model):
         return '<Tag: %r>' % self.name
 
 
-class PageCategory(db.Model):
+class PageCategory(Base):
     __tablename__ = 'page_category'
 
     id = db.Column(db.Integer, primary_key=True)
