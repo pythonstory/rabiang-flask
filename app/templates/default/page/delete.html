@@ -1,12 +1,12 @@
 {% extends "default/columns-2.html" %}
 
 {% block page_content %}
-    <form action="{{ url_for('page.delete', post_id=post.id) }}" method="post">
+    <form action="{{ url_for('page.post_delete', post_id=post.id) }}" method="post">
         {{ form.csrf_token }}
         <fieldset>
             <legend>{{ _('Delete this post?') }}</legend>
             {{ form.submit(class='btn btn-danger') }}
-            <a class="btn btn-default" href="{{ url_for('page.detail_post_id', post_id=post.id) }}">{{ _('Cancel') }}</a>
+            <a class="btn btn-default" href="{{ url_for('page.post_detail_id', post_id=post.id) }}">{{ _('Cancel') }}</a>
         </fieldset>
     </form>
 {% endblock %}

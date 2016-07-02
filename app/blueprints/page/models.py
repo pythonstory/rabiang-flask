@@ -44,10 +44,10 @@ class Post(Base):
                            lazy='dynamic')
 
     def get_slug_url(self):
-        return url_for('page.detail_slug', slug=self.slug)
+        return url_for('page.post_detail_slug', slug=self.slug)
 
     def get_permanent_url(self):
-        return url_for('page.detail_post_id', post_id=self.id)
+        return url_for('page.post_detail_id', post_id=self.id)
 
     def __init__(self, *args, **kwargs):
         super(Post, self).__init__(*args, **kwargs)

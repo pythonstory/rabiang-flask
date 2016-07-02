@@ -12,7 +12,8 @@ from app.blueprints.auth.models import User
 from app.utils.structure import build_tree_dictionary, build_tree_tuple_list, \
     build_tree_list
 from . import page
-from .forms import PostForm, CommentForm, DeletePostForm, CategoryForm
+from .forms import PostForm, CommentForm, DeletePostForm, CategoryForm, \
+    DeleteCategoryForm
 from .models import Post, Comment, Tag, post_tag, PageCategory
 
 
@@ -67,7 +68,7 @@ def sidebar_data():
 @page.route('/', methods=['GET', 'POST'])
 @page.route('/index', methods=['GET', 'POST'])
 @page.route('/index/<int:page_num>', methods=['GET', 'POST'])
-def index(page_num=1):
+def post_index(page_num=1):
     query = Post.query
 
     search = request.args.get('q')
@@ -104,37 +105,8 @@ def index(page_num=1):
         sidebar=sidebar)
 
 
-@page.route('/feed', methods=['GET', 'POST'])
-def recent_feed():
-    feed = AtomFeed(
-        gettext('Latest Blog Posts'),
-        feed_url=request.url,
-        url=request.url_root,
-        author=request.url_root
-    )
-
-    posts = Post.query \
-        .filter(Post.status == Post.STATUS_PUBLIC) \
-        .order_by(Post.created_timestamp.desc()) \
-        .limit(current_app.config.get('RABIANG_RECENT_POSTS_FOR_FEED')) \
-        .all()
-
-    for post in posts:
-        feed.add(
-            post.title,
-            post.body,
-            content_type='html',
-            url=urljoin(request.url_root,
-                        url_for("page.detail_slug", slug=post.slug)),
-            updated=post.modified_timestamp,
-            published=post.created_timestamp
-        )
-
-    return feed.get_response()
-
-
 @page.route('/<slug>', methods=['GET', 'POST'])
-def detail_slug(slug):
+def post_detail_slug(slug):
     post = Post.query \
         .filter(Post.slug == slug) \
         .first_or_404()
@@ -154,7 +126,7 @@ def detail_slug(slug):
         db.session.commit()
 
         flash(gettext('Your comment has been published.'))
-        return redirect(url_for('page.detail_slug', slug=post.slug))
+        return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
     comments = post.comments \
         .order_by(Comment.created_timestamp.asc()) \
@@ -167,7 +139,7 @@ def detail_slug(slug):
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': post.title,
         'href': False,
@@ -186,7 +158,7 @@ def detail_slug(slug):
 
 
 @page.route('/<int:post_id>', methods=['GET', 'POST'])
-def detail_post_id(post_id):
+def post_detail_id(post_id):
     post = Post.query.get_or_404(post_id)
 
     form = CommentForm()
@@ -204,7 +176,7 @@ def detail_post_id(post_id):
         db.session.commit()
 
         flash(gettext('Your comment has been published.'))
-        return redirect(url_for('page.detail_slug', slug=post.slug))
+        return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
     comments = post.comments \
         .order_by(Comment.created_timestamp.asc()) \
@@ -217,7 +189,7 @@ def detail_post_id(post_id):
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': post.title,
         'href': False,
@@ -237,7 +209,7 @@ def detail_post_id(post_id):
 
 @page.route('/create', methods=['GET', 'POST'])
 @login_required
-def create():
+def post_create():
     form = PostForm()
 
     form.category.choices = build_tree_tuple_list(PageCategory, prefix=True)
@@ -257,7 +229,7 @@ def create():
         db.session.commit()
 
         flash(gettext('You wrote a new post.'), 'success')
-        return redirect(url_for('page.detail_slug', slug=post.slug))
+        return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
     title = gettext('Write a new post') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
@@ -267,7 +239,7 @@ def create():
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': gettext('Write a new post'),
         'href': False,
@@ -282,7 +254,7 @@ def create():
 
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
 @login_required
-def edit(post_id):
+def post_edit(post_id):
     post = Post.query.get_or_404(post_id)
 
     categories = build_tree_tuple_list(PageCategory, prefix=True)
@@ -304,7 +276,7 @@ def edit(post_id):
         db.session.commit()
 
         flash(gettext('You edited your post.'), 'success')
-        return redirect(url_for('page.detail_slug', slug=post.slug))
+        return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
     form.category.data = post.category_id if post.category_id else 0
 
@@ -316,9 +288,9 @@ def edit(post_id):
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
-        'text': gettext('Edit'),
+        'text': '{} - {}'.format(gettext('Edit'), post.title),
         'href': False,
     }]
 
@@ -335,7 +307,7 @@ def edit(post_id):
 
 @page.route('/delete/<int:post_id>', methods=['GET', 'POST'])
 @login_required
-def delete(post_id):
+def post_delete(post_id):
     post = Post.query.get_or_404(post_id)
 
     form = DeletePostForm()
@@ -347,7 +319,7 @@ def delete(post_id):
         db.session.commit()
 
         flash(gettext('You deleted your post.'), 'success')
-        return redirect(url_for('page.index'))
+        return redirect(url_for('page.post_index'))
 
     title = gettext('Delete') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
@@ -357,9 +329,9 @@ def delete(post_id):
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
-        'text': gettext('Delete'),
+        'text': '{} - {}'.format(gettext('Delete'), post.title),
         'href': False,
     }]
 
@@ -374,9 +346,38 @@ def delete(post_id):
         sidebar=sidebar)
 
 
+@page.route('/feed', methods=['GET', 'POST'])
+def post_recent_feed():
+    feed = AtomFeed(
+        gettext('Latest Blog Posts'),
+        feed_url=request.url,
+        url=request.url_root,
+        author=request.url_root
+    )
+
+    posts = Post.query \
+        .filter(Post.status == Post.STATUS_PUBLIC) \
+        .order_by(Post.created_timestamp.desc()) \
+        .limit(current_app.config.get('RABIANG_RECENT_POSTS_FOR_FEED')) \
+        .all()
+
+    for post in posts:
+        feed.add(
+            post.title,
+            post.body,
+            content_type='html',
+            url=urljoin(request.url_root,
+                        url_for("page.post_detail_slug", slug=post.slug)),
+            updated=post.modified_timestamp,
+            published=post.created_timestamp
+        )
+
+    return feed.get_response()
+
+
 @page.route('/user/<username>', methods=['GET', 'POST'])
 @page.route('/user/<username>/<int:page_num>', methods=['GET', 'POST'])
-def user_index(username, page_num=1):
+def post_user_index(username, page_num=1):
     author = User.query \
         .filter(User.username == username) \
         .first_or_404()
@@ -395,10 +396,45 @@ def user_index(username, page_num=1):
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': username,
         'href': False,
+    }]
+
+    sidebar = sidebar_data()
+
+    return render_template(
+        current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
+        posts=posts,
+        title=title,
+        breadcrumbs=breadcrumbs,
+        sidebar=sidebar)
+
+
+@page.route('/month/<int:year>/<int:month>', methods=['GET', 'POST'])
+@page.route('/month/<int:year>/<int:month>/<int:page_num>',
+            methods=['GET', 'POST'])
+def post_month_index(year, month, page_num=1):
+    posts = Post.query \
+        .filter((db.func.extract('year', Post.created_timestamp) == year) &
+                (db.func.extract('month', Post.created_timestamp) == month)) \
+        .order_by(Post.created_timestamp.desc()) \
+        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+                  False)
+
+    title = gettext('Blog Archives') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.post_index'),
+    }, {
+        'text': gettext('Blog Archives'),
+        'href': url_for('page.tag_index'),
     }]
 
     sidebar = sidebar_data()
@@ -430,7 +466,7 @@ def tag_index():
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': gettext('Tag'),
         'href': False,
@@ -466,7 +502,7 @@ def tag_detail(tag_name, page_num=1):
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': gettext('Tag'),
         'href': url_for('page.tag_index'),
@@ -485,41 +521,6 @@ def tag_detail(tag_name, page_num=1):
         sidebar=sidebar)
 
 
-@page.route('/month/<int:year>/<int:month>', methods=['GET', 'POST'])
-@page.route('/month/<int:year>/<int:month>/<int:page_num>',
-            methods=['GET', 'POST'])
-def month_index(year, month, page_num=1):
-    posts = Post.query \
-        .filter((db.func.extract('year', Post.created_timestamp) == year) &
-                (db.func.extract('month', Post.created_timestamp) == month)) \
-        .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
-                  False)
-
-    title = gettext('Blog Archives') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
-
-    breadcrumbs = [{
-        'text': gettext('Home'),
-        'href': url_for('main.index'),
-    }, {
-        'text': gettext('Blog'),
-        'href': url_for('page.index'),
-    }, {
-        'text': gettext('Blog Archives'),
-        'href': url_for('page.tag_index'),
-    }]
-
-    sidebar = sidebar_data()
-
-    return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
-        posts=posts,
-        title=title,
-        breadcrumbs=breadcrumbs,
-        sidebar=sidebar)
-
-
 @page.route('/category', methods=['GET', 'POST'])
 def category_index():
     categories = build_tree_dictionary(PageCategory)
@@ -532,7 +533,7 @@ def category_index():
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': gettext('Category'),
         'href': False,
@@ -577,7 +578,7 @@ def category_detail(category_name, page_num=1):
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': gettext('Category'),
         'href': False,
@@ -632,7 +633,7 @@ def category_create():
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
         'text': gettext('Add categories'),
         'href': False,
@@ -686,9 +687,10 @@ def category_edit(category_id):
         'href': url_for('main.index'),
     }, {
         'text': gettext('Blog'),
-        'href': url_for('page.index'),
+        'href': url_for('page.post_index'),
     }, {
-        'text': gettext('Edit categories'),
+        'text': '{} - {}'.format(gettext('Edit categories'),
+                                 page_category.name),
         'href': False,
     }]
 
@@ -706,4 +708,39 @@ def category_edit(category_id):
 @page.route('/category/delete/<int:category_id>', methods=['GET', 'POST'])
 @login_required
 def category_delete(category_id):
-    return '/category/delete'
+    page_category = PageCategory.query.get_or_404(category_id)
+
+    form = DeleteCategoryForm()
+
+    if form.validate_on_submit():
+        db.session.delete(page_category)
+        db.session.commit()
+
+        flash(gettext('You deleted the category.'), 'success')
+        return redirect(url_for('page.category_create'))
+
+    title = gettext('Delete') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.post_index'),
+    }, {
+        'text': '{} - {}'.format(gettext('Delete a category'),
+                                 page_category.name),
+        'href': False,
+    }]
+
+    sidebar = sidebar_data()
+
+    return render_template(
+        current_app.config.get(
+            'RABIANG_SITE_THEME') + '/page/category_delete.html',
+        form=form,
+        page_category=page_category,
+        title=title,
+        breadcrumbs=breadcrumbs,
+        sidebar=sidebar)

@@ -13,7 +13,7 @@
             {{ post.created_timestamp | datetimeformat(format='short') }}
         </li>
         <li><i class="fa fa-user" aria-hidden="true"></i>
-            <a href="{{ url_for('page.user_index', username=post.author.username) }}">
+            <a href="{{ url_for('page.post_user_index', username=post.author.username) }}">
                 {{ post.author.username }}
             </a>
         </li>
@@ -23,12 +23,12 @@
             </a>
         </li>
         <li><i class="fa fa-comments" aria-hidden="true"></i>
-            <a href="{{ url_for('page.detail_slug', slug=post.slug) }}#comments">
+            <a href="{{ url_for('page.post_detail_slug', slug=post.slug) }}#comments">
                 {{ post.comments.count() }}
             </a>
         </li>
         <li><i class="fa fa-link" aria-hidden="true"></i>
-            <a href="{{ url_for('page.detail_post_id', post_id=post.id) }}">
+            <a href="{{ url_for('page.post_detail_id', post_id=post.id) }}">
                 permalink
             </a>
         </li>
@@ -45,15 +45,15 @@
     <div>
         {% if current_user.is_authenticated %}
             <a class="btn btn-primary"
-               href="{{ url_for('page.edit', post_id=post.id) }}">
+               href="{{ url_for('page.post_edit', post_id=post.id) }}">
                 {{ _('Edit') }}
             </a>
             <a class="btn btn-danger"
-               href="{{ url_for('page.delete', post_id=post.id) }}">
+               href="{{ url_for('page.post_delete', post_id=post.id) }}">
                 {{ _('Delete') }}
             </a>
         {% endif %}
-        <a class="btn btn-info" href="{{ url_for('page.index') }}">
+        <a class="btn btn-info" href="{{ url_for('page.post_index') }}">
             {{ _('List') }}
         </a>
     </div>
@@ -64,7 +64,7 @@
     <!-- Comments Form -->
     <div id="comments" class="well">
         <h4>{{ _('Leave a Comment') }}</h4>
-        <form action="{{ url_for('page.detail_slug', slug=post.slug) }}"
+        <form action="{{ url_for('page.post_detail_slug', slug=post.slug) }}"
               method="post" role="form" class="form-horizontal">
             {{ form.csrf_token }}
             <div class="form-group">

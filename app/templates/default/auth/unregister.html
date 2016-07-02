@@ -6,7 +6,7 @@
         <fieldset>
             <legend>{{ _('Delete your account?') }}</legend>
             {{ form.submit(class='btn btn-danger') }}
-            <a class="btn btn-default" href="{{ url_for('page.user_index', username=user.username) }}">{{ _('Cancel') }}</a>
+            <a class="btn btn-default" href="{{ url_for('page.post_user_index', username=user.username) }}">{{ _('Cancel') }}</a>
         </fieldset>
     </form>
 {% endblock %}

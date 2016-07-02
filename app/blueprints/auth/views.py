@@ -108,7 +108,7 @@ def unregister():
         db.session.commit()
 
         flash(gettext('Your account was deleted.'), 'success')
-        return redirect(url_for('page.index'))
+        return redirect(url_for('page.post_index'))
 
     title = gettext('Delete account') + ' - ' + current_app.config.get(
         'RABIANG_SITE_NAME')
@@ -144,7 +144,7 @@ def change_password():
             db.session.commit()
 
             flash(gettext('You changed your password.'), 'success')
-            return redirect(url_for('page.index'))
+            return redirect(url_for('page.post_index'))
 
         flash(gettext('Old password is wrong.'), 'danger')
         return redirect(url_for('auth.change_password'))

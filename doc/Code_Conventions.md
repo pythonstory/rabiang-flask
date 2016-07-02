@@ -44,7 +44,7 @@ def create():
         db.session.commit()
 
         flash(gettext('You wrote a new post.'), 'success')
-        return redirect(url_for('page.detail_slug', slug=post.slug))
+        return redirect(url_for('page.post_detail_slug', slug=post.slug))
         
     return render_template('/default/page/create.html',
         form=form)        
@@ -71,7 +71,7 @@ def edit(post_id):
         db.session.commit()
 
         flash(gettext('You edited your post.'), 'success')
-        return redirect(url_for('page.detail_slug', slug=post.slug))
+        return redirect(url_for('page.post_detail_slug', slug=post.slug))
         
     return render_template('/default/page/edit.html',
         form=form)        

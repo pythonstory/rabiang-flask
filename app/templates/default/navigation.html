@@ -21,7 +21,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{ url_for('page.index') }}">{{ _('List') }}</a>
+                            <a href="{{ url_for('page.post_index') }}">{{ _('List') }}</a>
                         </li>
                         <li>
                             <a href="{{ url_for('page.tag_index') }}">{{ _('Tag') }}</a>
@@ -47,10 +47,10 @@
                                 <a href="{{ url_for('page.category_create') }}">{{ _('Edit categories') }}</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('page.create') }}">{{ _('Write a new post') }}</a>
+                                <a href="{{ url_for('page.post_create') }}">{{ _('Write a new post') }}</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('page.user_index', username=current_user.username) }}">{{ _('My posts') }}</a>
+                                <a href="{{ url_for('page.post_user_index', username=current_user.username) }}">{{ _('My posts') }}</a>
                             </li>
                             <li>
                                 <a href="{{ url_for('auth.unregister') }}">{{ _('Delete account') }}</a>

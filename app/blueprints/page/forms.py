@@ -123,3 +123,9 @@ class CategoryForm(Form):
         validators=[Optional()],
         coerce=int
     )
+
+
+class DeleteCategoryForm(Form):
+    submit = SubmitField(
+        lazy_gettext('Delete')
+    )
