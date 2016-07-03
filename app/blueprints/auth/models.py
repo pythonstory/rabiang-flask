@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import db
@@ -16,6 +16,24 @@ class Base(db.Model):
     created_timestamp = db.Column(db.DateTime, default=datetime.now)
     modified_timestamp = db.Column(db.DateTime, default=datetime.now,
                                    onupdate=datetime.now)
+
+
+class Permission(Base):
+    __tablename__ = 'permission'
+
+    name = db.Column(db.String(64))
+    bit = db.Column(db.Integer)
+
+    resource_id = db.Column(db.Integer, db.ForeignKey('resource.id'))
+    resource = db.relationship('Resource',
+                               backref=db.backref('permissions',
+                                                  lazy='dynamic'))
+
+    def __init__(self, *args, **kwargs):
+        super(Permission, self).__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<Permission: %r>' % self.name
 
 
 class User(UserMixin, Base):
@@ -43,11 +61,37 @@ class User(UserMixin, Base):
     def password(self, password):
         self.password_hash = generate_password_hash(password)
 
+    def can(self, permission=None, resource=None):
+        p = Permission.query \
+            .filter(Permission.name == permission) \
+            .first()
+
+        if not p:
+            return
+
+        return RolePermissionResource.query \
+            .join(Role) \
+            .join(User) \
+            .join(Resource) \
+            .filter((User.id == self.id)
+                    & (Resource.name == resource)
+                    & (RolePermissionResource.permission.op('&')(p.bit) == \
+                       p.bit)) \
+            .first()
+
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
 
     def __repr__(self):
         return '<User: %r>' % self.username
+
+
+class AnonymousUser(AnonymousUserMixin):
+    def can(self, permissions):
+        return False
+
+    def is_administrator(self):
+        return False
 
 
 class Role(Base):
@@ -74,24 +118,6 @@ class Resource(Base):
         return '<Resource: %r>' % self.name
 
 
-class Permission(Base):
-    __tablename__ = 'permission'
-
-    name = db.Column(db.String(64))
-    bit = db.Column(db.Integer)
-
-    resource_id = db.Column(db.Integer, db.ForeignKey('resource.id'))
-    resource = db.relationship('Resource',
-                               backref=db.backref('permissions',
-                                                  lazy='dynamic'))
-
-    def __init__(self, *args, **kwargs):
-        super(Permission, self).__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<Permission: %r>' % self.name
-
-
 class RolePermissionResource(Base):
     __tablename__ = 'role_permission_resource'
 
@@ -106,11 +132,54 @@ class RolePermissionResource(Base):
                                backref=db.backref('role_permissions',
                                                   lazy='dynamic'))
 
+    @staticmethod
+    def insert_role_permission():
+        role = Role(name='admin')
+        db.session.add(role)
+
+        user = User(username='test', email='test@example.com', password='test',
+                    active=True, role=role)
+        db.session.add(user)
+
+        resource = Resource(name='post')
+        db.session.add(resource)
+        permission = Permission(name='create', bit=1, resource=resource)
+        db.session.add(permission)
+        permission = Permission(name='edit', bit=2, resource=resource)
+        db.session.add(permission)
+        permission = Permission(name='delete', bit=4, resource=resource)
+        db.session.add(permission)
+        permission = Permission(name='view', bit=8, resource=resource)
+        db.session.add(permission)
+
+        role_permission = RolePermissionResource(role=role, permission=11,
+                                                 resource=resource)
+
+        db.session.add(role_permission)
+
+        resource = Resource(name='user')
+        db.session.add(resource)
+        permission = Permission(name='create', bit=1, resource=resource)
+        db.session.add(permission)
+        permission = Permission(name='edit', bit=2, resource=resource)
+        db.session.add(permission)
+        permission = Permission(name='delete', bit=4, resource=resource)
+        db.session.add(permission)
+        permission = Permission(name='view', bit=8, resource=resource)
+        db.session.add(permission)
+
+        role_permission = RolePermissionResource(role=role, permission=11,
+                                                 resource=resource)
+        db.session.add(role_permission)
+
+        db.session.commit()
+
     def __init__(self, *args, **kwargs):
         super(RolePermissionResource, self).__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<RolePermissionResource: %r>' % self.role.name
+        return '<RolePermissionResource: %r on %r>' \
+               % (self.role.name, self.resource.name)
 
 
 @login_manager.user_loader

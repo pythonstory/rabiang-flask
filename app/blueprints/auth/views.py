@@ -168,6 +168,6 @@ def change_password():
         breadcrumbs=breadcrumbs)
 
 
-@auth.route('/reset-password')
+@auth.route('/reset-password', methods=['GET', 'POST'])
 def reset_password():
     return 'reset password'
