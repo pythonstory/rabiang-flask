@@ -103,7 +103,7 @@ class RolePermissionResource(Base):
 
     resource_id = db.Column(db.Integer, db.ForeignKey('resource.id'))
     resource = db.relationship('Resource',
-                               backref=db.backref('permissions',
+                               backref=db.backref('role_permissions',
                                                   lazy='dynamic'))
 
     def __init__(self, *args, **kwargs):
