@@ -3,7 +3,7 @@ import hashlib
 import logging
 import logging.handlers
 
-from flask import Flask, g, request, current_app, render_template
+from flask import Flask, g, request, render_template
 from flask_babel import Babel, lazy_gettext
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -71,7 +71,7 @@ def configure_extensions(app):
 
         # Otherwise, choose the language from user browser.
         return request.accept_languages.best_match(
-            current_app.config['BABEL_LANGUAGES'].keys())
+            app.config['BABEL_LANGUAGES'].keys())
 
     @babel.timezoneselector
     def get_timezone():
