@@ -18,24 +18,6 @@ class Base(db.Model):
                                    onupdate=datetime.now)
 
 
-class Permission(Base):
-    __tablename__ = 'permission'
-
-    name = db.Column(db.String(64))
-    bit = db.Column(db.Integer)
-
-    resource_id = db.Column(db.Integer, db.ForeignKey('resource.id'))
-    resource = db.relationship('Resource',
-                               backref=db.backref('permissions',
-                                                  lazy='dynamic'))
-
-    def __init__(self, *args, **kwargs):
-        super(Permission, self).__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<Permission: %r>' % self.name
-
-
 class User(UserMixin, Base):
     __tablename__ = 'user'
 
@@ -61,7 +43,7 @@ class User(UserMixin, Base):
     def password(self, password):
         self.password_hash = generate_password_hash(password)
 
-    def can(self, permission=None, resource=None):
+    def can(self, resource=None, permission=None):
         p = Permission.query \
             .filter(Permission.name == permission) \
             .first()
@@ -87,7 +69,7 @@ class User(UserMixin, Base):
 
 
 class AnonymousUser(AnonymousUserMixin):
-    def can(self, permissions):
+    def can(self, resources, permissions):
         return False
 
     def is_administrator(self):
@@ -116,6 +98,24 @@ class Resource(Base):
 
     def __repr__(self):
         return '<Resource: %r>' % self.name
+
+
+class Permission(Base):
+    __tablename__ = 'permission'
+
+    name = db.Column(db.String(64))
+    bit = db.Column(db.Integer)
+
+    resource_id = db.Column(db.Integer, db.ForeignKey('resource.id'))
+    resource = db.relationship('Resource',
+                               backref=db.backref('permissions',
+                                                  lazy='dynamic'))
+
+    def __init__(self, *args, **kwargs):
+        super(Permission, self).__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<Permission: %r>' % self.name
 
 
 class RolePermissionResource(Base):

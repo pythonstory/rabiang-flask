@@ -8,6 +8,7 @@ from flask_login import login_required, current_user
 from werkzeug.contrib.atom import AtomFeed
 
 from app import db
+from app.blueprints.auth.decorators import permission_required
 from app.blueprints.auth.models import User
 from app.utils.structure import build_tree_dictionary, build_tree_tuple_list, \
     build_tree_list
@@ -307,6 +308,7 @@ def post_edit(post_id):
 
 @page.route('/delete/<int:post_id>', methods=['GET', 'POST'])
 @login_required
+@permission_required('post', 'delete')
 def post_delete(post_id):
     post = Post.query.get_or_404(post_id)
 
