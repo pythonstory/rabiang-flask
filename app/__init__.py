@@ -10,7 +10,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
 from flaskext.markdown import Markdown
 
-from app.blueprints.auth.models import AnonymousUser
 
 # Flask Extensions can be references as global variable.
 db = SQLAlchemy()
@@ -60,7 +59,6 @@ def configure_extensions(app):
     login_manager.login_message = lazy_gettext('Please, log in '
                                                'to access this page.')
     login_manager.login_message_category = 'warning'
-    login_manager.anonymous_user = AnonymousUser
 
     Markdown(app, extensions=['codehilite', 'toc', 'tables', 'def_list'])
 

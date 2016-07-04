@@ -184,3 +184,6 @@ class RolePermissionResource(Base):
 def _user_loader(user_id):
     # User loader callback function
     return User.query.get(int(user_id))
+
+
+login_manager.anonymous_user = AnonymousUser
