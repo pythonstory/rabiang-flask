@@ -79,6 +79,7 @@ unittest 관련 Babel 데코레이터 등록 오류 문제
 사용자 추가(회원가입)시 role 지정
 기본 롤 정보 insert_role_permission 메소드 리팩토링
 admin 롤 정의 및 데코레이터 정의
+anonymous 롤 정의 및 AnonymousUser can() 메소드 정의
 
 고민 사항 (성능 관련)
 

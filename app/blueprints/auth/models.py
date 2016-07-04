@@ -157,15 +157,13 @@ class RolePermissionResource(Base):
 
         db.session.add(role_permission)
 
-        resource = Resource(name='user')
+        resource = Resource(name='auth')
         db.session.add(resource)
-        permission = Permission(name='create', bit=1, resource=resource)
+        permission = Permission(name='register', bit=1, resource=resource)
         db.session.add(permission)
-        permission = Permission(name='edit', bit=2, resource=resource)
+        permission = Permission(name='login', bit=2, resource=resource)
         db.session.add(permission)
-        permission = Permission(name='delete', bit=4, resource=resource)
-        db.session.add(permission)
-        permission = Permission(name='view', bit=8, resource=resource)
+        permission = Permission(name='manage', bit=4, resource=resource)
         db.session.add(permission)
 
         role_permission = RolePermissionResource(role=role, permission=11,
