@@ -235,6 +235,37 @@ def permission_index():
         breadcrumbs=breadcrumbs)
 
 
+@auth.route('/permission/<resource>', methods=['GET', 'POST'])
+def permission_resource(resource):
+    permissions = Permission.query \
+        .join(Resource) \
+        .join(RolePermissionResource) \
+        .filter(Resource.name == resource) \
+        .order_by(Resource.name.asc(), Permission.bit.asc()) \
+        .all()
+
+    title = gettext('Permission') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Permission'),
+        'href': url_for('auth.permission_index'),
+    }, {
+        'text': '{} - {}'.format(gettext('Resource'), resource),
+        'href': False,
+    }]
+
+    return render_template(
+        current_app.config.get(
+            'RABIANG_SITE_THEME') + '/auth/permission_resource.html',
+        permissions=permissions,
+        title=title,
+        breadcrumbs=breadcrumbs)
+
+
 @auth.route('/resource', methods=['GET', 'POST'])
 def resource_index():
     resources = Resource.query \
