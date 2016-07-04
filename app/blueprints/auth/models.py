@@ -55,10 +55,10 @@ class User(UserMixin, Base):
             .join(Role) \
             .join(User) \
             .join(Resource) \
-            .filter((User.id == self.id)
-                    & (Resource.name == resource)
-                    & (RolePermissionResource.permission.op('&')(p.bit) == \
-                       p.bit)) \
+            .filter((User.id == self.id) &
+                    (Resource.name == resource) &
+                    (RolePermissionResource.permission.op('&')(p.bit) ==
+                     p.bit)) \
             .first()
 
     def __init__(self, *args, **kwargs):

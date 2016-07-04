@@ -8,7 +8,7 @@ from app import db
 from app.blueprints.page.models import Post
 from . import auth
 from .forms import LoginForm, RegisterForm, UnregisterForm, ChangePasswordForm
-from .models import User
+from .models import User, RolePermissionResource, Permission, Resource
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -171,3 +171,38 @@ def change_password():
 @auth.route('/reset-password', methods=['GET', 'POST'])
 def reset_password():
     return 'reset password'
+
+
+@auth.route('/role', methods=['GET', 'POST'])
+def role_index():
+    p = Permission.query \
+        .join(Resource) \
+        .join(RolePermissionResource) \
+        .filter((RolePermissionResource.permission.op('&')(Permission.bit) ==
+                 Permission.bit)) \
+        .order_by(Resource.name.asc(), Permission.bit.asc()) \
+        .all()
+
+    current_app.logger.info(p)
+
+    return 'role'
+
+
+@auth.route('/role/user/<int:user_id>', methods=['GET', 'POST'])
+def role_user_index(user_id):
+    user = User.query.filter(User.id == user_id).first()
+
+    p = Permission.query \
+        .join(Resource) \
+        .join(RolePermissionResource) \
+        .filter((RolePermissionResource.role_id == user.role_id) &
+                (RolePermissionResource.permission.op('&')(Permission.bit) ==
+                 Permission.bit)) \
+        .order_by(Resource.name.asc(), Permission.bit.asc()) \
+        .all()
+
+    current_app.logger.info(user)
+    current_app.logger.info(user.role.name)
+    current_app.logger.info(p)
+
+    return 'user'
