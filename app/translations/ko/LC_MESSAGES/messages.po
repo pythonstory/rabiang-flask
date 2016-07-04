@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-02 00:01+0900\n"
+"POT-Creation-Date: 2016-07-04 21:10+0900\n"
 "PO-Revision-Date: 2016-06-12 02:56+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ko\n"
@@ -92,14 +92,15 @@ msgstr "아이디 또는 비밀번호를 잘못 입력하셨습니다."
 
 #: app/blueprints/auth/views.py:35 app/blueprints/auth/views.py:81
 #: app/blueprints/auth/views.py:117 app/blueprints/auth/views.py:156
-#: app/blueprints/main/views.py:13 app/blueprints/page/views.py:90
-#: app/blueprints/page/views.py:166 app/blueprints/page/views.py:216
-#: app/blueprints/page/views.py:266 app/blueprints/page/views.py:315
-#: app/blueprints/page/views.py:356 app/blueprints/page/views.py:394
-#: app/blueprints/page/views.py:429 app/blueprints/page/views.py:465
-#: app/blueprints/page/views.py:503 app/blueprints/page/views.py:531
-#: app/blueprints/page/views.py:576 app/blueprints/page/views.py:631
-#: app/blueprints/page/views.py:686 app/templates/default/forum/index.html:8
+#: app/blueprints/auth/views.py:223 app/blueprints/main/views.py:13
+#: app/blueprints/page/views.py:92 app/blueprints/page/views.py:139
+#: app/blueprints/page/views.py:189 app/blueprints/page/views.py:239
+#: app/blueprints/page/views.py:288 app/blueprints/page/views.py:330
+#: app/blueprints/page/views.py:397 app/blueprints/page/views.py:432
+#: app/blueprints/page/views.py:467 app/blueprints/page/views.py:503
+#: app/blueprints/page/views.py:534 app/blueprints/page/views.py:579
+#: app/blueprints/page/views.py:634 app/blueprints/page/views.py:688
+#: app/blueprints/page/views.py:728 app/templates/default/forum/index.html:8
 #: app/templates/default/main/index.html:8
 msgid "Home"
 msgstr "홈"
@@ -140,6 +141,10 @@ msgstr "기존 비밀번호가 올바르지 않습니다."
 msgid "Change password"
 msgstr "비밀번호 변경"
 
+#: app/blueprints/auth/views.py:219 app/blueprints/auth/views.py:226
+msgid "Permission"
+msgstr "허가권"
+
 #: app/blueprints/page/forms.py:60
 msgid "Post Title"
 msgstr "제목"
@@ -168,9 +173,9 @@ msgstr "초안"
 msgid "Public"
 msgstr "공개"
 
-#: app/blueprints/page/forms.py:81 app/blueprints/page/views.py:425
-#: app/blueprints/page/views.py:435 app/blueprints/page/views.py:461
-#: app/blueprints/page/views.py:471 app/templates/default/navigation.html:27
+#: app/blueprints/page/forms.py:81 app/blueprints/page/views.py:463
+#: app/blueprints/page/views.py:473 app/blueprints/page/views.py:499
+#: app/blueprints/page/views.py:509 app/templates/default/navigation.html:27
 #: app/templates/default/sidebar.html:66
 msgid "Tag"
 msgstr "태그"
@@ -179,9 +184,9 @@ msgstr "태그"
 msgid "Separate multiple tags with commas. All of whitespaces are ignored."
 msgstr "태그는 콤마(,)로 구분합니다. 태그 입력에 띄어쓰기는 할 수 없습니다."
 
-#: app/blueprints/page/forms.py:86 app/blueprints/page/views.py:527
-#: app/blueprints/page/views.py:537 app/blueprints/page/views.py:572
-#: app/blueprints/page/views.py:582 app/templates/default/navigation.html:30
+#: app/blueprints/page/forms.py:86 app/blueprints/page/views.py:530
+#: app/blueprints/page/views.py:540 app/blueprints/page/views.py:575
+#: app/blueprints/page/views.py:585 app/templates/default/navigation.html:30
 #: app/templates/default/page/category_create.html:55
 #: app/templates/default/page/category_edit.html:55
 msgid "Category"
@@ -195,8 +200,9 @@ msgstr "이름"
 msgid "Comment"
 msgstr "댓글"
 
-#: app/blueprints/page/forms.py:108 app/blueprints/page/views.py:352
-#: app/blueprints/page/views.py:362 app/templates/default/page/detail.html:53
+#: app/blueprints/page/forms.py:108 app/blueprints/page/forms.py:130
+#: app/blueprints/page/views.py:326 app/blueprints/page/views.py:336
+#: app/blueprints/page/views.py:724 app/templates/default/page/detail.html:53
 msgid "Delete"
 msgstr "삭제"
 
@@ -208,72 +214,81 @@ msgstr "순서"
 msgid "Parent Category"
 msgstr "부모 카테고리"
 
-#: app/blueprints/page/views.py:86 app/blueprints/page/views.py:93
-#: app/blueprints/page/views.py:169 app/blueprints/page/views.py:219
-#: app/blueprints/page/views.py:269 app/blueprints/page/views.py:318
-#: app/blueprints/page/views.py:359 app/blueprints/page/views.py:397
-#: app/blueprints/page/views.py:432 app/blueprints/page/views.py:468
-#: app/blueprints/page/views.py:506 app/blueprints/page/views.py:534
-#: app/blueprints/page/views.py:579 app/blueprints/page/views.py:634
-#: app/blueprints/page/views.py:689 app/templates/default/navigation.html:20
+#: app/blueprints/page/views.py:88 app/blueprints/page/views.py:95
+#: app/blueprints/page/views.py:142 app/blueprints/page/views.py:192
+#: app/blueprints/page/views.py:242 app/blueprints/page/views.py:291
+#: app/blueprints/page/views.py:333 app/blueprints/page/views.py:400
+#: app/blueprints/page/views.py:435 app/blueprints/page/views.py:470
+#: app/blueprints/page/views.py:506 app/blueprints/page/views.py:537
+#: app/blueprints/page/views.py:582 app/blueprints/page/views.py:637
+#: app/blueprints/page/views.py:691 app/blueprints/page/views.py:731
+#: app/templates/default/navigation.html:20
 msgid "Blog"
 msgstr "블로그"
 
-#: app/blueprints/page/views.py:110
-msgid "Latest Blog Posts"
-msgstr "블로그 최근 게시물"
-
-#: app/blueprints/page/views.py:156 app/blueprints/page/views.py:206
+#: app/blueprints/page/views.py:129 app/blueprints/page/views.py:179
 msgid "Your comment has been published."
 msgstr "댓글을 작성했습니다."
 
-#: app/blueprints/page/views.py:259
+#: app/blueprints/page/views.py:232
 msgid "You wrote a new post."
 msgstr "새 게시물을 작성했습니다."
 
-#: app/blueprints/page/views.py:262 app/blueprints/page/views.py:272
+#: app/blueprints/page/views.py:235 app/blueprints/page/views.py:245
 #: app/templates/default/navigation.html:50
 msgid "Write a new post"
 msgstr "블로그 글쓰기"
 
-#: app/blueprints/page/views.py:306
+#: app/blueprints/page/views.py:279
 msgid "You edited your post."
 msgstr "게시물을 수정했습니다."
 
-#: app/blueprints/page/views.py:311 app/blueprints/page/views.py:321
+#: app/blueprints/page/views.py:284 app/blueprints/page/views.py:294
 #: app/templates/default/page/detail.html:49
 msgid "Edit"
 msgstr "수정"
 
-#: app/blueprints/page/views.py:349
+#: app/blueprints/page/views.py:323
 msgid "You deleted your post."
 msgstr "게시물을 삭제했습니다."
 
-#: app/blueprints/page/views.py:499 app/blueprints/page/views.py:509
+#: app/blueprints/page/views.py:354
+msgid "Latest Blog Posts"
+msgstr "블로그 최근 게시물"
+
+#: app/blueprints/page/views.py:428 app/blueprints/page/views.py:438
 #: app/templates/default/sidebar.html:75
 msgid "Blog Archives"
 msgstr "글보관함"
 
-#: app/blueprints/page/views.py:607 app/blueprints/page/views.py:660
+#: app/blueprints/page/views.py:610 app/blueprints/page/views.py:663
 msgid "Root Category"
 msgstr "최상위 카테고리"
 
-#: app/blueprints/page/views.py:624
+#: app/blueprints/page/views.py:627
 msgid "You added a new category."
 msgstr "새 카테고리를 추가했습니다."
 
-#: app/blueprints/page/views.py:627 app/blueprints/page/views.py:637
+#: app/blueprints/page/views.py:630 app/blueprints/page/views.py:640
 msgid "Add categories"
 msgstr "카테고리 추가"
 
-#: app/blueprints/page/views.py:677
+#: app/blueprints/page/views.py:679
 msgid "You updated the category."
 msgstr "카테고리를 변경했습니다."
 
-#: app/blueprints/page/views.py:682 app/blueprints/page/views.py:692
+#: app/blueprints/page/views.py:684 app/blueprints/page/views.py:694
 #: app/templates/default/navigation.html:47
 msgid "Edit categories"
 msgstr "카테고리 편집"
+
+#: app/blueprints/page/views.py:721
+msgid "You deleted the category."
+msgstr "카테고리를 삭제했습니다."
+
+#: app/blueprints/page/views.py:734
+msgid "Delete a category"
+msgstr "카테고리 삭제"
 
 #: app/templates/default/navigation.html:24
 #: app/templates/default/page/detail.html:57
@@ -322,6 +337,7 @@ msgstr "저장"
 #: app/templates/default/auth/register.html:53
 #: app/templates/default/auth/unregister.html:9
 #: app/templates/default/page/category_create.html:47
+#: app/templates/default/page/category_delete.html:9
 #: app/templates/default/page/category_edit.html:47
 #: app/templates/default/page/create.html:9
 #: app/templates/default/page/delete.html:9
@@ -332,6 +348,18 @@ msgstr "취소"
 #: app/templates/default/auth/login.html:43
 msgid "Forgot password?"
 msgstr "비밀번호 찾기"
+
+#: app/templates/default/auth/permission_index.html:6
+msgid "Resource"
+msgstr "리소스"
+
+#: app/templates/default/auth/permission_index.html:7
+msgid "Permission Name"
+msgstr "허가권 이름"
+
+#: app/templates/default/auth/permission_index.html:8
+msgid "Permission Bit"
+msgstr "허가권 비트"
 
 #: app/templates/default/auth/unregister.html:7
 msgid "Delete your account?"
@@ -356,6 +384,10 @@ msgstr "다음"
 #: app/templates/default/page/category_edit.html:56
 msgid "Actions"
 msgstr "작업"
+
+#: app/templates/default/page/category_delete.html:7
+msgid "Delete this category?"
+msgstr "카테고리를 정말로 삭제합니까?"
 
 #: app/templates/default/page/delete.html:7
 msgid "Delete this post?"

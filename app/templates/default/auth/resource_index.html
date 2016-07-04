@@ -1,0 +1,14 @@
+{% extends "default/columns-1.html" %}
+
+{% block page_content %}
+    <table class="table">
+        <tr>
+            <th>{{ _('Resource') }}</th>
+        </tr>
+        {% for resource in resources %}
+            <tr>
+                <td>{{ resource.name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

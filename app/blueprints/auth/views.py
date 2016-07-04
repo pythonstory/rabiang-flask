@@ -206,3 +206,54 @@ def role_user_index(user_id):
     current_app.logger.info(p)
 
     return 'user'
+
+
+@auth.route('/permission', methods=['GET', 'POST'])
+def permission_index():
+    permissions = Permission.query \
+        .join(Resource) \
+        .join(RolePermissionResource) \
+        .order_by(Resource.name.asc(), Permission.bit.asc()) \
+        .all()
+
+    title = gettext('Permission') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Permission'),
+        'href': False,
+    }]
+
+    return render_template(
+        current_app.config.get(
+            'RABIANG_SITE_THEME') + '/auth/permission_index.html',
+        permissions=permissions,
+        title=title,
+        breadcrumbs=breadcrumbs)
+
+
+@auth.route('/resource', methods=['GET', 'POST'])
+def resource_index():
+    resources = Resource.query \
+        .all()
+
+    title = gettext('Resource') + ' - ' + current_app.config.get(
+        'RABIANG_SITE_NAME')
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Resource'),
+        'href': False,
+    }]
+
+    return render_template(
+        current_app.config.get(
+            'RABIANG_SITE_THEME') + '/auth/resource_index.html',
+        resources=resources,
+        title=title,
+        breadcrumbs=breadcrumbs)

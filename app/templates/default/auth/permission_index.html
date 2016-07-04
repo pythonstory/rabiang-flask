@@ -1,0 +1,18 @@
+{% extends "default/columns-1.html" %}
+
+{% block page_content %}
+    <table class="table">
+        <tr>
+            <th>{{ _('Resource') }}</th>
+            <th>{{ _('Permission Name') }}</th>
+            <th>{{ _('Permission Bit') }}</th>
+        </tr>
+        {% for permission in permissions %}
+            <tr>
+                <td>{{ permission.resource.name }}</td>
+                <td>{{ permission.name }}</td>
+                <td>{{ permission.bit }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
