@@ -7,7 +7,7 @@
         </tr>
         {% for resource in resources %}
             <tr>
-                <td>{{ resource.name }}</td>
+                <td><a href="{{ url_for('auth.permission_resource', resource=resource.name) }}">{{ resource.name }}</a></td>
             </tr>
         {% endfor %}
     </table>
