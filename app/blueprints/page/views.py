@@ -69,6 +69,7 @@ def sidebar_data():
 @page.route('/', methods=['GET', 'POST'])
 @page.route('/index', methods=['GET', 'POST'])
 @page.route('/index/<int:page_num>', methods=['GET', 'POST'])
+@permission_required('post', 'view')
 def post_index(page_num=1):
     query = Post.query
 
@@ -107,6 +108,7 @@ def post_index(page_num=1):
 
 
 @page.route('/<slug>', methods=['GET', 'POST'])
+@permission_required('post', 'view')
 def post_detail_slug(slug):
     post = Post.query \
         .filter(Post.slug == slug) \
@@ -159,6 +161,7 @@ def post_detail_slug(slug):
 
 
 @page.route('/<int:post_id>', methods=['GET', 'POST'])
+@permission_required('post', 'view')
 def post_detail_id(post_id):
     post = Post.query.get_or_404(post_id)
 
@@ -210,6 +213,7 @@ def post_detail_id(post_id):
 
 @page.route('/create', methods=['GET', 'POST'])
 @login_required
+@permission_required('post', 'create')
 def post_create():
     form = PostForm()
 
@@ -255,6 +259,7 @@ def post_create():
 
 @page.route('/edit/<int:post_id>', methods=['GET', 'POST'])
 @login_required
+@permission_required('post', 'edit')
 def post_edit(post_id):
     post = Post.query.get_or_404(post_id)
 
@@ -349,6 +354,7 @@ def post_delete(post_id):
 
 
 @page.route('/feed', methods=['GET', 'POST'])
+@permission_required('post', 'view')
 def post_recent_feed():
     feed = AtomFeed(
         gettext('Latest Blog Posts'),
@@ -379,6 +385,7 @@ def post_recent_feed():
 
 @page.route('/user/<username>', methods=['GET', 'POST'])
 @page.route('/user/<username>/<int:page_num>', methods=['GET', 'POST'])
+@permission_required('post', 'view')
 def post_user_index(username, page_num=1):
     author = User.query \
         .filter(User.username == username) \
@@ -417,6 +424,7 @@ def post_user_index(username, page_num=1):
 @page.route('/month/<int:year>/<int:month>', methods=['GET', 'POST'])
 @page.route('/month/<int:year>/<int:month>/<int:page_num>',
             methods=['GET', 'POST'])
+@permission_required('post', 'view')
 def post_month_index(year, month, page_num=1):
     posts = Post.query \
         .filter((db.func.extract('year', Post.created_timestamp) == year) &
@@ -450,6 +458,7 @@ def post_month_index(year, month, page_num=1):
 
 
 @page.route('/tag', methods=['GET', 'POST'])
+@permission_required('post', 'view')
 def tag_index():
     tags = Tag.query \
         .add_columns(db.func.count(Tag.id)) \
@@ -486,6 +495,7 @@ def tag_index():
 
 @page.route('/tag/<tag_name>', methods=['GET', 'POST'])
 @page.route('/tag/<tag_name>/<int:page_num>', methods=['GET', 'POST'])
+@permission_required('post', 'view')
 def tag_detail(tag_name, page_num=1):
     tag = Tag.query \
         .filter(Tag.name == tag_name) \
@@ -524,6 +534,7 @@ def tag_detail(tag_name, page_num=1):
 
 
 @page.route('/category', methods=['GET', 'POST'])
+@permission_required('post', 'create')
 def category_index():
     categories = build_tree_dictionary(PageCategory)
 
@@ -553,6 +564,7 @@ def category_index():
 
 @page.route('/category/<category_name>', methods=['GET', 'POST'])
 @page.route('/category/<category_name>/<int:page_num>', methods=['GET', 'POST'])
+@permission_required('post', 'create')
 def category_detail(category_name, page_num=1):
     category = PageCategory.query \
         .filter(PageCategory.name == category_name) \
@@ -602,6 +614,7 @@ def category_detail(category_name, page_num=1):
 
 @page.route('/category/create', methods=['GET', 'POST'])
 @login_required
+@permission_required('post', 'create')
 def category_create():
     form = CategoryForm()
 
@@ -653,6 +666,7 @@ def category_create():
 
 @page.route('/category/edit/<int:category_id>', methods=['GET', 'POST'])
 @login_required
+@permission_required('post', 'create')
 def category_edit(category_id):
     page_category = PageCategory.query.get_or_404(category_id)
 
@@ -709,6 +723,7 @@ def category_edit(category_id):
 
 @page.route('/category/delete/<int:category_id>', methods=['GET', 'POST'])
 @login_required
+@permission_required('post', 'create')
 def category_delete(category_id):
     page_category = PageCategory.query.get_or_404(category_id)
 
