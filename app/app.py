@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import hashlib
+
 import logging
 import logging.handlers
 
@@ -9,6 +9,7 @@ from flaskext.markdown import Markdown
 
 from app.blueprints.auth.models import User, AnonymousUser
 from app.extensions import db, babel, csrf, login_manager
+from app.filters import gravatar
 
 
 def create_app(config=None, app_name=None, blueprints=None):
@@ -90,25 +91,6 @@ def configure_extensions(app):
 
 
 def configure_jinja_filters(app):
-    @app.template_filter()
-    def gravatar(email, size=100, default='identicon', rating='g'):
-        if email is None:
-            return '//placehold.it/64x64'
-
-        if request.is_secure:
-            url = 'https://secure.gravatar.com/avatar'
-        else:
-            url = 'http://www.gravatar.com/avatar'
-
-        hashed = hashlib.md5(email.encode('utf-8')).hexdigest()
-
-        return '{url}/{hashed}?s={size}&d={default}&r={rating}' \
-            .format(url=url,
-                    hashed=hashed,
-                    size=size,
-                    default=default,
-                    rating=rating)
-
     app.jinja_env.filters['gravatar'] = gravatar
 
 

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from app import create_app, db
+from app import create_app
 from app.blueprints.auth import auth
 from app.blueprints.forum import forum
 from app.blueprints.main import main
 from app.blueprints.page import page
+from app.extensions import db
 
 
 class BasicsTestCase(unittest.TestCase):
