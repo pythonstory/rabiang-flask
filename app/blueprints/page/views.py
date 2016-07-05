@@ -7,15 +7,17 @@ from flask_babel import gettext
 from flask_login import login_required, current_user
 from werkzeug.contrib.atom import AtomFeed
 
-from app import db
+from . import page
 from app.blueprints.auth.decorators import permission_required
 from app.blueprints.auth.models import User
+from app.blueprints.page.forms import PostForm, CommentForm, DeletePostForm, \
+    CategoryForm, \
+    DeleteCategoryForm
+from app.blueprints.page.models import Post, Comment, Tag, post_tag, \
+    PageCategory
+from app.extensions import db
 from app.utils.structure import build_tree_dictionary, build_tree_tuple_list, \
     build_tree_list
-from . import page
-from .forms import PostForm, CommentForm, DeletePostForm, CategoryForm, \
-    DeleteCategoryForm
-from .models import Post, Comment, Tag, post_tag, PageCategory
 
 
 def sidebar_data():

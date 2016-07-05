@@ -4,8 +4,7 @@ from datetime import datetime
 from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db
-from app import login_manager
+from app.extensions import db
 
 
 class Base(db.Model):
@@ -178,12 +177,3 @@ class RolePermissionResource(Base):
     def __repr__(self):
         return '<RolePermissionResource: %r on %r>' \
                % (self.role.name, self.resource.name)
-
-
-@login_manager.user_loader
-def _user_loader(user_id):
-    # User loader callback function
-    return User.query.get(int(user_id))
-
-
-login_manager.anonymous_user = AnonymousUser

@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask import url_for
 
-from app import db
+from app.extensions import db
 
 post_tag = db.Table('post_tag',
                     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),

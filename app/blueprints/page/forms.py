@@ -6,7 +6,7 @@ from wtforms import StringField, TextAreaField, SelectField, SubmitField, \
 from wtforms.validators import DataRequired, Email, Optional
 
 from app.utils.validators import Unique
-from .models import Post, Tag
+from app.blueprints.page.models import Post, Tag
 
 
 class TagField(StringField):

@@ -4,8 +4,8 @@ from flask_wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
 
+from app.blueprints.auth.models import User
 from app.utils.validators import Unique
-from .models import User
 
 """
     (               # Start of group

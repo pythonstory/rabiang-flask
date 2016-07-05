@@ -3,4 +3,4 @@ from flask import Blueprint
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
-from . import views, models
+from app.blueprints.auth import views, models
