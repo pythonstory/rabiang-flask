@@ -74,7 +74,6 @@ validators
 sidebar 위젯 방식(MVC)으로 구현
 글보관함 i18n
 카테고리 부모를 자신으로 선택할 경우 validator 작성
-unittest 관련 Babel 데코레이터 등록 오류 문제
 메소드별 허용 permission 지정
 사용자 추가(회원가입)시 role 지정
 기본 롤 정보 insert_role_permission 메소드 리팩토링

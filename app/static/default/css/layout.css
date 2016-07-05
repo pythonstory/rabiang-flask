@@ -1,0 +1,33 @@
+/*
+Styles for Layout and Theme
+*/
+.sidebar_list_style {
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.sidebar_list_style_outer {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.sidebar_list_style_outer li {
+    margin-bottom: 5px;
+}
+
+.spacer-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.spacer-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.spacer-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.spacer-bottom-50 {
+    margin-bottom: 50px;
+}

@@ -130,7 +130,7 @@ def post_detail_slug(slug):
         db.session.add(comment)
         db.session.commit()
 
-        flash(gettext('Your comment has been published.'))
+        flash(gettext('Your comment has been published.'), 'success')
         return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
     comments = post.comments \
@@ -182,7 +182,7 @@ def post_detail_id(post_id):
         db.session.add(comment)
         db.session.commit()
 
-        flash(gettext('Your comment has been published.'))
+        flash(gettext('Your comment has been published.'), 'success')
         return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
     comments = post.comments \
