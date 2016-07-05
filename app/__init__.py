@@ -10,7 +10,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
 from flaskext.markdown import Markdown
 
-
 # Flask Extensions can be references as global variable.
 db = SQLAlchemy()
 babel = Babel()
@@ -42,13 +41,18 @@ def configure_hook(app):
 
 
 def configure_blueprints(app, blueprints):
-    """Configure blueprints in views."""
+    """
+    Configure blueprints in views.
+    """
+
     for blueprint in blueprints:
         app.register_blueprint(blueprint)
 
 
 def configure_extensions(app):
-    """Initialize Flask Extensions."""
+    """
+    Initialize Flask Extensions.
+    """
     db.init_app(app)
     babel.init_app(app)
     csrf.init_app(app)
@@ -59,6 +63,9 @@ def configure_extensions(app):
     login_manager.login_message = lazy_gettext('Please, log in '
                                                'to access this page.')
     login_manager.login_message_category = 'warning'
+
+    # login_manager settings are additionally configured in the end of the file
+    # app.blueprints.auth.models.py because it requires User/Anonymous models.
 
     Markdown(app, extensions=['codehilite', 'toc', 'tables', 'def_list'])
 
@@ -106,7 +113,9 @@ def configure_jinja_filters(app):
 
 
 def configure_logging(app):
-    """Configure rotating file(info) logging."""
+    """
+    Configure rotating file(info) logging.
+    """
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
     handler = logging.handlers.RotatingFileHandler(
         app.config['LOGGING_LOCATION'])
@@ -130,13 +139,17 @@ def configure_error_handlers(app):
 def configure_cli(app):
     @app.cli.command()
     def initdb():
-        """Initialize database setup."""
+        """
+        Initialize database setup.
+        """
         db.drop_all()
         db.create_all()
 
     @app.cli.command()
     def test():
-        """Run the unit tests."""
+        """
+        Run the unit tests.
+        """
         import unittest
         tests = unittest.TestLoader().discover('tests')
         unittest.TextTestRunner(verbosity=2).run(tests)
