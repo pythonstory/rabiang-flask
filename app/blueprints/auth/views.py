@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, request, redirect, url_for, render_template, flash, \
-    current_app
+from flask import Blueprint, request, redirect, url_for, render_template, \
+    flash, current_app
 from flask_babel import gettext
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -32,7 +32,7 @@ def login():
         flash(gettext('Invalid username or password'), 'success')
 
     title = gettext('Login') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -78,7 +78,7 @@ def register():
         return redirect(url_for('auth.login'))
 
     title = gettext('Sign up') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -114,7 +114,7 @@ def unregister():
         return redirect(url_for('page.post_index'))
 
     title = gettext('Delete account') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -153,7 +153,7 @@ def change_password():
         return redirect(url_for('auth.change_password'))
 
     title = gettext('Change password') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -219,7 +219,7 @@ def permission_index():
         .all()
 
     title = gettext('Permission') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -247,7 +247,7 @@ def permission_resource(resource):
         .all()
 
     title = gettext('Permission') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -274,7 +274,7 @@ def resource_index():
         .all()
 
     title = gettext('Resource') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),

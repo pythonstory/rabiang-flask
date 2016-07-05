@@ -89,7 +89,7 @@ def post_index(page_num=1):
                   False)
 
     title = gettext('Blog') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -138,7 +138,7 @@ def post_detail_slug(slug):
         .all()
 
     title = post.title + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -190,7 +190,7 @@ def post_detail_id(post_id):
         .all()
 
     title = post.title + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -241,7 +241,7 @@ def post_create():
         return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
     title = gettext('Write a new post') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -291,7 +291,7 @@ def post_edit(post_id):
     form.category.data = post.category_id if post.category_id else 0
 
     title = gettext('Edit') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -333,7 +333,7 @@ def post_delete(post_id):
         return redirect(url_for('page.post_index'))
 
     title = gettext('Delete') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -402,7 +402,7 @@ def post_user_index(username, page_num=1):
                   False)
 
     title = username + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -438,7 +438,7 @@ def post_month_index(year, month, page_num=1):
                   False)
 
     title = gettext('Blog Archives') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -474,7 +474,7 @@ def tag_index():
         .all()
 
     title = gettext('Tag') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -511,7 +511,7 @@ def tag_detail(tag_name, page_num=1):
                   False)
 
     title = gettext('Tag') + ' - ' + tag_name + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -543,7 +543,7 @@ def category_index():
     categories = build_tree_dictionary(PageCategory)
 
     title = gettext('Category') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -590,7 +590,7 @@ def category_detail(category_name, page_num=1):
                   False)
 
     title = gettext('Category') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -645,7 +645,7 @@ def category_create():
         return redirect(url_for('page.category_create'))
 
     title = gettext('Add categories') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -699,7 +699,7 @@ def category_edit(category_id):
     form.parent.data = page_category.parent_id if page_category.parent_id else 0
 
     title = gettext('Edit categories') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -739,7 +739,7 @@ def category_delete(category_id):
         return redirect(url_for('page.category_create'))
 
     title = gettext('Delete') + ' - ' + \
-            current_app.config['RABIANG_SITE_NAME']
+        current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
