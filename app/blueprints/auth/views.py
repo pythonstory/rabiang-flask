@@ -4,13 +4,13 @@ from flask import request, redirect, url_for, render_template, flash, \
 from flask_babel import gettext
 from flask_login import login_user, logout_user, login_required, current_user
 
+from app.blueprints.auth import auth
 from app.blueprints.auth.forms import LoginForm, RegisterForm, UnregisterForm, \
     ChangePasswordForm
-from app.blueprints.auth.models import User, RolePermissionResource, Permission, \
-    Resource
+from app.blueprints.auth.models import User, RolePermissionResource, \
+    Permission, Resource
 from app.blueprints.page.models import Post
 from app.extensions import db
-from . import auth
 
 
 @auth.route('/login', methods=['GET', 'POST'])

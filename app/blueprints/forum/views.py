@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, current_app
 
-from . import forum
+from app.blueprints.forum import forum
 
 
 @forum.route('/')

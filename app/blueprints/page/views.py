@@ -7,12 +7,11 @@ from flask_babel import gettext
 from flask_login import login_required, current_user
 from werkzeug.contrib.atom import AtomFeed
 
-from . import page
 from app.blueprints.auth.decorators import permission_required
 from app.blueprints.auth.models import User
+from app.blueprints.page import page
 from app.blueprints.page.forms import PostForm, CommentForm, DeletePostForm, \
-    CategoryForm, \
-    DeleteCategoryForm
+    CategoryForm, DeleteCategoryForm
 from app.blueprints.page.models import Post, Comment, Tag, post_tag, \
     PageCategory
 from app.extensions import db

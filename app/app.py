@@ -7,11 +7,8 @@ from flask import Flask, g, request, render_template
 from flask_babel import lazy_gettext
 from flaskext.markdown import Markdown
 
-from app.extensions import db, babel, csrf, login_manager
 from app.blueprints.auth.models import User, AnonymousUser
-
-# For import
-__all__ = ['create_app']
+from app.extensions import db, babel, csrf, login_manager
 
 
 def create_app(config=None, app_name=None, blueprints=None):
