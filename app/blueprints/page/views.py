@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 from urllib.parse import urljoin
 
-from flask import render_template, request, redirect, url_for, flash, \
-    current_app
+from flask import Blueprint, render_template, request, redirect, url_for, \
+    flash, current_app
 from flask_babel import gettext
 from flask_login import login_required, current_user
 from werkzeug.contrib.atom import AtomFeed
 
 from app.blueprints.auth.decorators import permission_required
 from app.blueprints.auth.models import User
-from app.blueprints.page import page
 from app.blueprints.page.forms import PostForm, CommentForm, DeletePostForm, \
     CategoryForm, DeleteCategoryForm
 from app.blueprints.page.models import Post, Comment, Tag, post_tag, \
@@ -17,6 +16,8 @@ from app.blueprints.page.models import Post, Comment, Tag, post_tag, \
 from app.extensions import db
 from app.utils.structure import build_tree_dictionary, build_tree_tuple_list, \
     build_tree_list
+
+page = Blueprint('page', __name__, url_prefix='/page')
 
 
 def sidebar_data():

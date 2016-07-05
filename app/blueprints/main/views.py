@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from flask import render_template, current_app
+from flask import Blueprint, render_template, current_app
 from flask_babel import gettext, format_datetime
 
-from app.blueprints.main import main
+main = Blueprint('main', __name__, url_prefix='/')
 
 
 @main.route('/')
