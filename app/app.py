@@ -3,7 +3,7 @@
 import logging
 import logging.handlers
 
-from flask import Flask, g, request, render_template
+from flask import Flask, render_template
 from flask_babel import lazy_gettext
 from flaskext.markdown import Markdown
 
@@ -60,34 +60,12 @@ def configure_extensions(app):
     login_manager.login_message_category = 'warning'
     login_manager.anonymous_user = AnonymousUser
 
-    # login_manager settings are additionally configured in the end of the file
-    # app.blueprints.auth.models.py because it requires User/Anonymous models.
-
     Markdown(app, extensions=['codehilite', 'toc', 'tables', 'def_list'])
 
     @login_manager.user_loader
     def _user_loader(user_id):
         # User loader callback function
         return User.query.get(int(user_id))
-
-    @babel.localeselector
-    def get_locale():
-        # If logged in, load user locale settings.
-        user = getattr(g, 'user', None)
-
-        if user is not None:
-            return user.locale
-
-        # Otherwise, choose the language from user browser.
-        return request.accept_languages.best_match(
-            app.config['BABEL_LANGUAGES'].keys())
-
-    @babel.timezoneselector
-    def get_timezone():
-        user = getattr(g, 'user', None)
-
-        if user is not None:
-            return user.timezone
 
 
 def configure_jinja_filters(app):

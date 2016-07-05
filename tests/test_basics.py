@@ -10,22 +10,18 @@ from app.extensions import db
 
 
 class BasicsTestCase(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         blueprints = [main, page, auth, forum]
-
         app = create_app(config='../test.cfg', blueprints=blueprints)
-        cls.app = app.test_client()
-
+        self.app = app.test_client()
         db.create_all()
 
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         db.session.remove()
         db.drop_all()
 
     def test_app_exists(self):
-        self.assertFalse(BasicsTestCase.app is None)
+        self.assertFalse(self.app is None)
 
 
 if __name__ == '__main__':
