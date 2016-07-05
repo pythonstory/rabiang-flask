@@ -31,3 +31,19 @@ Styles for Layout and Theme
 .spacer-bottom-50 {
     margin-bottom: 50px;
 }
+
+.spacer-left-5 {
+    margin-left: 5px;
+}
+
+.spacer-left-10 {
+    margin-left: 10px;
+}
+
+.spacer-left-20 {
+    margin-left: 20px;
+}
+
+.spacer-left-50 {
+    margin-left: 50px;
+}
