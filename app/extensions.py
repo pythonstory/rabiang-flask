@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CsrfProtect
 
 """
-Flask Extensions can be references as global variable.
+Flask Extensions variables are globally referenced.
 """
 db = SQLAlchemy()
 babel = Babel()
@@ -14,6 +14,9 @@ csrf = CsrfProtect()
 login_manager = LoginManager()
 
 
+# localeselector and timezoneselector decorated functions are not defined
+# in the function configure_extensions of app.py module
+# because it causes error when running unittest.
 @babel.localeselector
 def get_locale():
     # If logged in, load user locale settings.
