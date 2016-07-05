@@ -7,4 +7,4 @@ forum = Blueprint('forum', __name__, url_prefix='/forum')
 @forum.route('/')
 def index():
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/forum/index.html')
+        current_app.config['RABIANG_SITE_THEME'] + '/forum/index.html')

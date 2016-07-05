@@ -30,7 +30,7 @@ def sidebar_data():
     recent_posts = Post.query \
         .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Post.created_timestamp.desc()) \
-        .limit(current_app.config.get('RABIANG_RECENT_POSTS')) \
+        .limit(current_app.config['RABIANG_RECENT_POSTS']) \
         .all()
 
     sidebar['recent_posts'] = recent_posts
@@ -39,7 +39,7 @@ def sidebar_data():
         .join(Post) \
         .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Comment.created_timestamp.desc()) \
-        .limit(current_app.config.get('RABIANG_RECENT_COMMENTS')) \
+        .limit(current_app.config['RABIANG_RECENT_COMMENTS']) \
         .all()
 
     sidebar['recent_comments'] = recent_comments
@@ -85,11 +85,11 @@ def post_index(page_num=1):
     posts = query \
         .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+        .paginate(page_num, current_app.config['RABIANG_POSTS_PER_PAGE'],
                   False)
 
-    title = gettext('Blog') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Blog') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -102,7 +102,7 @@ def post_index(page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/index.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/index.html',
         posts=posts,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -137,7 +137,8 @@ def post_detail_slug(slug):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
-    title = post.title + ' - ' + current_app.config.get('RABIANG_SITE_NAME')
+    title = post.title + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -153,7 +154,7 @@ def post_detail_slug(slug):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/detail.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/detail.html',
         post=post,
         form=form,
         comments=comments,
@@ -188,7 +189,8 @@ def post_detail_id(post_id):
         .order_by(Comment.created_timestamp.asc()) \
         .all()
 
-    title = post.title + ' - ' + current_app.config.get('RABIANG_SITE_NAME')
+    title = post.title + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -204,7 +206,7 @@ def post_detail_id(post_id):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/detail.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/detail.html',
         post=post,
         form=form,
         comments=comments,
@@ -238,8 +240,8 @@ def post_create():
         flash(gettext('You wrote a new post.'), 'success')
         return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
-    title = gettext('Write a new post') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Write a new post') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -253,7 +255,7 @@ def post_create():
     }]
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/create.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/create.html',
         form=form,
         title=title,
         breadcrumbs=breadcrumbs)
@@ -288,8 +290,8 @@ def post_edit(post_id):
 
     form.category.data = post.category_id if post.category_id else 0
 
-    title = gettext('Edit') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Edit') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -305,7 +307,7 @@ def post_edit(post_id):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/edit.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/edit.html',
         form=form,
         post_id=post_id,
         title=title,
@@ -330,8 +332,8 @@ def post_delete(post_id):
         flash(gettext('You deleted your post.'), 'success')
         return redirect(url_for('page.post_index'))
 
-    title = gettext('Delete') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Delete') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -347,7 +349,7 @@ def post_delete(post_id):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/delete.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/delete.html',
         form=form,
         post=post,
         title=title,
@@ -368,7 +370,7 @@ def post_recent_feed():
     posts = Post.query \
         .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Post.created_timestamp.desc()) \
-        .limit(current_app.config.get('RABIANG_RECENT_POSTS_FOR_FEED')) \
+        .limit(current_app.config['RABIANG_RECENT_POSTS_FOR_FEED']) \
         .all()
 
     for post in posts:
@@ -396,11 +398,11 @@ def post_user_index(username, page_num=1):
     posts = author.posts \
         .filter(Post.status == Post.STATUS_PUBLIC) \
         .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+        .paginate(page_num, current_app.config['RABIANG_POSTS_PER_PAGE'],
                   False)
 
-    title = username + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = username + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -416,7 +418,7 @@ def post_user_index(username, page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/user.html',
         posts=posts,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -432,11 +434,11 @@ def post_month_index(year, month, page_num=1):
         .filter((db.func.extract('year', Post.created_timestamp) == year) &
                 (db.func.extract('month', Post.created_timestamp) == month)) \
         .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+        .paginate(page_num, current_app.config['RABIANG_POSTS_PER_PAGE'],
                   False)
 
-    title = gettext('Blog Archives') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Blog Archives') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -452,7 +454,7 @@ def post_month_index(year, month, page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/user.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/user.html',
         posts=posts,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -471,8 +473,8 @@ def tag_index():
         .order_by(Tag.name) \
         .all()
 
-    title = gettext('Tag') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Tag') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -488,7 +490,7 @@ def tag_index():
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/tag.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/tag.html',
         tags=tags,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -505,11 +507,11 @@ def tag_detail(tag_name, page_num=1):
 
     posts = tag.posts \
         .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+        .paginate(page_num, current_app.config['RABIANG_POSTS_PER_PAGE'],
                   False)
 
-    title = gettext('Tag') + ' - ' + tag_name + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Tag') + ' - ' + tag_name + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -528,7 +530,7 @@ def tag_detail(tag_name, page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/tag_name.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/tag_name.html',
         posts=posts,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -540,8 +542,8 @@ def tag_detail(tag_name, page_num=1):
 def category_index():
     categories = build_tree_dictionary(PageCategory)
 
-    title = gettext('Category') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Category') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -557,7 +559,7 @@ def category_index():
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/page/category.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/category.html',
         categories=categories,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -583,11 +585,12 @@ def category_detail(category_name, page_num=1):
         .join(PageCategory) \
         .filter(PageCategory.name.in_(category_names)) \
         .order_by(Post.created_timestamp.desc()) \
-        .paginate(page_num, current_app.config.get('RABIANG_POSTS_PER_PAGE'),
+        .paginate(page_num,
+                  current_app.config['RABIANG_POSTS_PER_PAGE'],
                   False)
 
-    title = gettext('Category') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Category') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -606,8 +609,7 @@ def category_detail(category_name, page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get(
-            'RABIANG_SITE_THEME') + '/page/category_detail.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/category_detail.html',
         title=title,
         posts=posts,
         breadcrumbs=breadcrumbs,
@@ -642,8 +644,8 @@ def category_create():
         flash(gettext('You added a new category.'), 'success')
         return redirect(url_for('page.category_create'))
 
-    title = gettext('Add categories') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Add categories') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -657,8 +659,7 @@ def category_create():
     }]
 
     return render_template(
-        current_app.config.get(
-            'RABIANG_SITE_THEME') + '/page/category_create.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/category_create.html',
         form=form,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -697,8 +698,8 @@ def category_edit(category_id):
 
     form.parent.data = page_category.parent_id if page_category.parent_id else 0
 
-    title = gettext('Edit categories') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Edit categories') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -713,8 +714,7 @@ def category_edit(category_id):
     }]
 
     return render_template(
-        current_app.config.get(
-            'RABIANG_SITE_THEME') + '/page/category_edit.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/category_edit.html',
         form=form,
         category_id=category_id,
         title=title,
@@ -738,8 +738,8 @@ def category_delete(category_id):
         flash(gettext('You deleted the category.'), 'success')
         return redirect(url_for('page.category_create'))
 
-    title = gettext('Delete') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Delete') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -756,8 +756,7 @@ def category_delete(category_id):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config.get(
-            'RABIANG_SITE_THEME') + '/page/category_delete.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/category_delete.html',
         form=form,
         page_category=page_category,
         title=title,

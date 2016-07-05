@@ -31,8 +31,8 @@ def login():
 
         flash(gettext('Invalid username or password'), 'success')
 
-    title = gettext('Login') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Login') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -43,7 +43,7 @@ def login():
     }]
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/auth/login.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/auth/login.html',
         form=form,
         title=title,
         breadcrumbs=breadcrumbs)
@@ -77,8 +77,8 @@ def register():
         flash(gettext('You can now login.'), 'success')
         return redirect(url_for('auth.login'))
 
-    title = gettext('Sign up') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Sign up') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -89,7 +89,7 @@ def register():
     }]
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/auth/register.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/auth/register.html',
         form=form,
         title=title,
         breadcrumbs=breadcrumbs)
@@ -113,8 +113,8 @@ def unregister():
         flash(gettext('Your account was deleted.'), 'success')
         return redirect(url_for('page.post_index'))
 
-    title = gettext('Delete account') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Delete account') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -125,7 +125,7 @@ def unregister():
     }]
 
     return render_template(
-        current_app.config.get('RABIANG_SITE_THEME') + '/auth/unregister.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/auth/unregister.html',
         form=form,
         user=user,
         title=title,
@@ -152,8 +152,8 @@ def change_password():
         flash(gettext('Old password is wrong.'), 'danger')
         return redirect(url_for('auth.change_password'))
 
-    title = gettext('Change password') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Change password') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -164,8 +164,7 @@ def change_password():
     }]
 
     return render_template(
-        current_app.config.get(
-            'RABIANG_SITE_THEME') + '/auth/change_password.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/auth/change_password.html',
         form=form,
         title=title,
         breadcrumbs=breadcrumbs)
@@ -219,8 +218,8 @@ def permission_index():
         .order_by(Resource.name.asc(), Permission.bit.asc()) \
         .all()
 
-    title = gettext('Permission') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Permission') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -231,8 +230,8 @@ def permission_index():
     }]
 
     return render_template(
-        current_app.config.get(
-            'RABIANG_SITE_THEME') + '/auth/permission_index.html',
+        current_app.config['RABIANG_SITE_THEME'] +
+        '/auth/permission_index.html',
         permissions=permissions,
         title=title,
         breadcrumbs=breadcrumbs)
@@ -247,8 +246,8 @@ def permission_resource(resource):
         .order_by(Resource.name.asc(), Permission.bit.asc()) \
         .all()
 
-    title = gettext('Permission') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Permission') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -262,8 +261,8 @@ def permission_resource(resource):
     }]
 
     return render_template(
-        current_app.config.get(
-            'RABIANG_SITE_THEME') + '/auth/permission_resource.html',
+        current_app.config['RABIANG_SITE_THEME'] +
+        '/auth/permission_resource.html',
         permissions=permissions,
         title=title,
         breadcrumbs=breadcrumbs)
@@ -274,8 +273,8 @@ def resource_index():
     resources = Resource.query \
         .all()
 
-    title = gettext('Resource') + ' - ' + current_app.config.get(
-        'RABIANG_SITE_NAME')
+    title = gettext('Resource') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
 
     breadcrumbs = [{
         'text': gettext('Home'),
@@ -286,8 +285,7 @@ def resource_index():
     }]
 
     return render_template(
-        current_app.config.get(
-            'RABIANG_SITE_THEME') + '/auth/resource_index.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/auth/resource_index.html',
         resources=resources,
         title=title,
         breadcrumbs=breadcrumbs)
