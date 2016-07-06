@@ -415,8 +415,15 @@ def post_user_index(username, page_num=1):
         .filter(User.username == username) \
         .first_or_404()
 
-    posts = author.posts \
-        .filter(Post.status == Post.STATUS_PUBLIC) \
+    query = author.posts
+
+    if current_user.is_authenticated and current_user.id == author.id:
+        query = query.filter((Post.status == Post.STATUS_PUBLIC) |
+                             (Post.status == Post.STATUS_DRAFT))
+    else:
+        query = query.filter(Post.status == Post.STATUS_PUBLIC)
+
+    posts = query \
         .order_by(Post.created_timestamp.desc()) \
         .paginate(page_num, current_app.config['RABIANG_POSTS_PER_PAGE'],
                   False)
