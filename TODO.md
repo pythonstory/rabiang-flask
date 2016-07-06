@@ -49,10 +49,6 @@ validators
 * Flask-migrate
 * Fixtures
 
-게시물 공개 여부
-
-* 사용자별 게시물 보기에서 자신의 것일 경우에는 draft 노출
-
 댓글 기능
 
 * 댓글에 댓글 달기
@@ -74,7 +70,6 @@ sidebar 위젯 방식(MVC)으로 구현
 글보관함 i18n
 카테고리 부모를 자신으로 선택할 경우 validator 작성
 기본 롤 정보 insert_role_permission 메소드 리팩토링
-로그인과 로그인 후 개인정보 이용 관련 permission 분리할 것
 babel.localeselector, babel.timezoneselector 구현
 자신의 게시물만 삭제 (o) -> 관리자는 삭제 가능 처리
 

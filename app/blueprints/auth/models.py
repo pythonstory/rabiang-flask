@@ -151,6 +151,9 @@ class RolePermissionResource(Base):
         user_role = Role(name='User')
         db.session.add(user_role)
 
+        moderator_role = Role(name='Moderator')
+        db.session.add(moderator_role)
+
         anonymous_role = Role(name='Anonymous')
         db.session.add(anonymous_role)
 
@@ -162,8 +165,12 @@ class RolePermissionResource(Base):
         demo = User(username='demo', email='demo@example.com',
                     password='demo',
                     active=True, role=user_role)
-
         db.session.add(demo)
+
+        power = User(username='moderator', email='power@example.com',
+                     password='power',
+                     active=True, role=user_role)
+        db.session.add(power)
 
         # anonymous_role is not assigned to a specific user.
 
@@ -177,14 +184,21 @@ class RolePermissionResource(Base):
         db.session.add(permission)
         permission = Permission(name='view', bit=8, resource=resource)
         db.session.add(permission)
+        permission = Permission(name='moderate', bit=16, resource=resource)
+        db.session.add(permission)
 
         role_permission = RolePermissionResource(role=admin_role,
-                                                 permission=15,
+                                                 permission=31,
                                                  resource=resource)
         db.session.add(role_permission)
 
         role_permission = RolePermissionResource(role=user_role,
                                                  permission=11,
+                                                 resource=resource)
+        db.session.add(role_permission)
+
+        role_permission = RolePermissionResource(role=moderator_role,
+                                                 permission=31,
                                                  resource=resource)
         db.session.add(role_permission)
 
@@ -199,16 +213,23 @@ class RolePermissionResource(Base):
         db.session.add(permission)
         permission = Permission(name='login', bit=2, resource=resource)
         db.session.add(permission)
-        permission = Permission(name='manage', bit=4, resource=resource)
+        permission = Permission(name='authenticated', bit=4, resource=resource)
+        db.session.add(permission)
+        permission = Permission(name='manage', bit=8, resource=resource)
         db.session.add(permission)
 
         role_permission = RolePermissionResource(role=admin_role,
-                                                 permission=7,
+                                                 permission=15,
                                                  resource=resource)
         db.session.add(role_permission)
 
         role_permission = RolePermissionResource(role=user_role,
-                                                 permission=2,
+                                                 permission=6,
+                                                 resource=resource)
+        db.session.add(role_permission)
+
+        role_permission = RolePermissionResource(role=moderator_role,
+                                                 permission=6,
                                                  resource=resource)
         db.session.add(role_permission)
 

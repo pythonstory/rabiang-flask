@@ -53,7 +53,7 @@ def login():
 
 @auth.route('/logout', methods=['GET'])
 @login_required
-@permission_required('auth', 'login')
+@permission_required('auth', 'authenticated')
 def logout():
     logout_user()
 
@@ -106,7 +106,7 @@ def register():
 
 @auth.route('/unregister', methods=['GET', 'POST'])
 @login_required
-@permission_required('auth', 'login')
+@permission_required('auth', 'authenticated')
 def unregister():
     user = User.query.get(current_user.id)
 
@@ -144,7 +144,7 @@ def unregister():
 
 @auth.route('/change-password', methods=['GET', 'POST'])
 @login_required
-@permission_required('auth', 'login')
+@permission_required('auth', 'authenticated')
 def change_password():
     form = ChangePasswordForm()
 
@@ -183,7 +183,7 @@ def change_password():
 
 @auth.route('/reset-password', methods=['GET', 'POST'])
 @login_required
-@permission_required('auth', 'login')
+@permission_required('auth', 'authenticated')
 def reset_password():
     return 'reset password'
 
