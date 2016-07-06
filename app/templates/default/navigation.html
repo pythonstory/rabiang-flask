@@ -71,13 +71,13 @@
                         <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
+                            <a href="{{ url_for('auth.role_index') }}">{{ _('Role') }}</a>
+                        </li>
+                        <li>
                             <a href="{{ url_for('auth.resource_index') }}">{{ _('Resource') }}</a>
                         </li>
                         <li>
                             <a href="{{ url_for('auth.permission_index') }}">{{ _('Permission') }}</a>
-                        </li>
-                        <li>
-                            <a href="blog-post.html">Brand</a>
                         </li>
                     </ul>
                 </li>

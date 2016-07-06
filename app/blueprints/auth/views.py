@@ -7,7 +7,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from app.blueprints.auth.forms import LoginForm, RegisterForm, UnregisterForm, \
     ChangePasswordForm
 from app.blueprints.auth.models import User, RolePermissionResource, \
-    Permission, Resource
+    Permission, Resource, Role
 from app.blueprints.page.models import Post
 from app.extensions import db
 
@@ -177,37 +177,48 @@ def reset_password():
 
 @auth.route('/role', methods=['GET', 'POST'])
 def role_index():
-    p = Permission.query \
-        .join(Resource) \
-        .join(RolePermissionResource) \
-        .filter((RolePermissionResource.permission.op('&')(Permission.bit) ==
-                 Permission.bit)) \
-        .order_by(Resource.name.asc(), Permission.bit.asc()) \
+    roles = Role.query \
+        .order_by(Role.name.asc()) \
         .all()
 
-    current_app.logger.info(p)
+    title = gettext('Role') + ' - ' + \
+        current_app.config['RABIANG_SITE_NAME']
 
-    return 'role'
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Role'),
+        'href': False,
+    }]
+
+    return render_template(
+        current_app.config['RABIANG_SITE_THEME'] + '/auth/role_index.html',
+        roles=roles,
+        title=title,
+        breadcrumbs=breadcrumbs)
 
 
 @auth.route('/role/user/<int:user_id>', methods=['GET', 'POST'])
 def role_user_index(user_id):
-    user = User.query.filter(User.id == user_id).first()
+    user = User.query.get_or_404(user_id)
 
-    p = Permission.query \
-        .join(Resource) \
-        .join(RolePermissionResource) \
-        .filter((RolePermissionResource.role_id == user.role_id) &
-                (RolePermissionResource.permission.op('&')(Permission.bit) ==
-                 Permission.bit)) \
-        .order_by(Resource.name.asc(), Permission.bit.asc()) \
-        .all()
+    title = gettext('Role') + ' - ' + \
+        current_app.config['RABIANG_SITE_NAME']
 
-    current_app.logger.info(user)
-    current_app.logger.info(user.role.name)
-    current_app.logger.info(p)
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Role'),
+        'href': False,
+    }]
 
-    return 'user'
+    return render_template(
+        current_app.config['RABIANG_SITE_THEME'] + '/auth/role_user_index.html',
+        role=user.role,
+        title=title,
+        breadcrumbs=breadcrumbs)
 
 
 @auth.route('/permission', methods=['GET', 'POST'])
