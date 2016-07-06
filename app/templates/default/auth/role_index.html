@@ -7,7 +7,7 @@
         </tr>
         {% for role in roles %}
             <tr>
-                <td><a href="">{{ role.name }}</a></td>
+                <td><a href="{{ url_for('auth.permission_role', role_id=role.id) }}">{{ role.name }}</a></td>
             </tr>
         {% endfor %}
     </table>

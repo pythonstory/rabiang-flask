@@ -9,7 +9,7 @@
         </tr>
         {% for permission in permissions %}
             <tr>
-                <td>{{ permission.resource.name }}</td>
+                <td><a href="{{ url_for('auth.permission_resource', resource_name=permission.resource.name) }}">{{ permission.resource.name }}</a></td>
                 <td>{{ permission.name }}</td>
                 <td>{{ permission.bit }}</td>
             </tr>

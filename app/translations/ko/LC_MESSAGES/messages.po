@@ -155,7 +155,7 @@ msgstr "역할"
 #: app/blueprints/auth/views.py:260 app/blueprints/auth/views.py:267
 #: app/templates/default/navigation.html:80
 msgid "Permission"
-msgstr "허가권"
+msgstr "권한"
 
 #: app/blueprints/auth/views.py:270 app/blueprints/auth/views.py:287
 #: app/blueprints/auth/views.py:294
@@ -164,7 +164,7 @@ msgstr "허가권"
 #: app/templates/default/auth/resource_index.html:6
 #: app/templates/default/navigation.html:77
 msgid "Resource"
-msgstr "리소스"
+msgstr "객체"
 
 #: app/blueprints/page/forms.py:60
 msgid "Post Title"
@@ -373,12 +373,12 @@ msgstr "비밀번호 찾기"
 #: app/templates/default/auth/permission_index.html:7
 #: app/templates/default/auth/permission_resource.html:7
 msgid "Permission Name"
-msgstr "허가권 이름"
+msgstr "권한 이름"
 
 #: app/templates/default/auth/permission_index.html:8
 #: app/templates/default/auth/permission_resource.html:8
 msgid "Permission Bit"
-msgstr "허가권 비트"
+msgstr "권한 비트"
 
 #: app/templates/default/auth/unregister.html:7
 msgid "Delete your account?"
