@@ -188,7 +188,7 @@ class RolePermissionResource(Base):
         db.session.add(permission)
 
         role_permission = RolePermissionResource(role=admin_role,
-                                                 permission=11,
+                                                 permission=7,
                                                  resource=resource)
         db.session.add(role_permission)
 

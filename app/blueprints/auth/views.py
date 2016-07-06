@@ -4,6 +4,7 @@ from flask import Blueprint, request, redirect, url_for, render_template, \
 from flask_babel import gettext
 from flask_login import login_user, logout_user, login_required, current_user
 
+from app.blueprints.auth.decorators import permission_required
 from app.blueprints.auth.forms import LoginForm, RegisterForm, UnregisterForm, \
     ChangePasswordForm
 from app.blueprints.auth.models import User, RolePermissionResource, \
@@ -15,6 +16,7 @@ auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 @auth.route('/login', methods=['GET', 'POST'])
+@permission_required('auth', 'login')
 def login():
     form = LoginForm()
 
@@ -51,6 +53,7 @@ def login():
 
 @auth.route('/logout', methods=['GET'])
 @login_required
+@permission_required('auth', 'logout')
 def logout():
     logout_user()
 
@@ -60,6 +63,7 @@ def logout():
 
 
 @auth.route('/register', methods=['GET', 'POST'])
+@permission_required('auth', 'register')
 def register():
     form = RegisterForm()
 
@@ -97,6 +101,7 @@ def register():
 
 @auth.route('/unregister', methods=['GET', 'POST'])
 @login_required
+@permission_required('auth', 'login')
 def unregister():
     user = User.query.get(current_user.id)
 
@@ -134,6 +139,7 @@ def unregister():
 
 @auth.route('/change-password', methods=['GET', 'POST'])
 @login_required
+@permission_required('auth', 'login')
 def change_password():
     form = ChangePasswordForm()
 
@@ -171,11 +177,15 @@ def change_password():
 
 
 @auth.route('/reset-password', methods=['GET', 'POST'])
+@login_required
+@permission_required('auth', 'login')
 def reset_password():
     return 'reset password'
 
 
 @auth.route('/role', methods=['GET', 'POST'])
+@login_required
+@permission_required('auth', 'manage')
 def role_index():
     roles = Role.query \
         .order_by(Role.name.asc()) \
@@ -200,6 +210,8 @@ def role_index():
 
 
 @auth.route('/role/user/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+@permission_required('auth', 'manage')
 def role_user_index(user_id):
     user = User.query.get_or_404(user_id)
 
@@ -222,6 +234,8 @@ def role_user_index(user_id):
 
 
 @auth.route('/permission', methods=['GET', 'POST'])
+@login_required
+@permission_required('auth', 'manage')
 def permission_index():
     permissions = Permission.query \
         .join(Resource) \
@@ -249,6 +263,8 @@ def permission_index():
 
 
 @auth.route('/permission/<resource>', methods=['GET', 'POST'])
+@login_required
+@permission_required('auth', 'manage')
 def permission_resource(resource):
     permissions = Permission.query \
         .join(Resource) \
@@ -280,6 +296,8 @@ def permission_resource(resource):
 
 
 @auth.route('/resource', methods=['GET', 'POST'])
+@login_required
+@permission_required('auth', 'manage')
 def resource_index():
     resources = Resource.query \
         .all()

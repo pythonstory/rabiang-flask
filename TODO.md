@@ -13,14 +13,10 @@ cart
 
 - date formatting (posted on, modified on)
 - pagination : parameterized
-- babel select lang html
-
-- blueprint dynamic import
 
 - error page -> 테마/사이트 무관하게 만들 것
 
 - blog theme work
-
 
 - id: username or email (preferences)
 - verify_password function must be overridden.
@@ -54,14 +50,10 @@ validators
 - history
 - dashboard
 
-- sidebar 기능 추가
-글보관함 i18n
-
 * Mail
 * celery
 * Flask-migrate
 * Fixtures
-
 
 상태에 따른 게시물 노출 문제 - 사용자 권한 유무와 같이 처리할 것
 공개 게시물만 목록 노출함
@@ -75,6 +67,7 @@ sidebar 위젯 방식(MVC)으로 구현
 메소드별 허용 permission 지정
 사용자 추가(회원가입)시 role 지정
 기본 롤 정보 insert_role_permission 메소드 리팩토링
+babel.localeselector, babel.timezoneselector 구현
 
 고민 사항 (성능 관련)
 
@@ -82,3 +75,4 @@ sidebar 위젯 방식(MVC)으로 구현
 - gravatar 매번 필터로 계산하는 것보다 디비에 저장 여부
 - 태그 카운트를 post_tag 테이블에 저장하는 방안
 - 모델 클래스는 Base 모델을 상속 정의 (블루프린트 공통으로 뽑기)
+- Admin/Guest 롤을 매번 DB 질의하는 것에 대한 문제-캐시?
