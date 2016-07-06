@@ -18,18 +18,6 @@ cart
 
 * blog theme work
 
-* id: username or email (preferences)
-* verify_password function must be overridden.
-
-
-auth 블루프린트
-
-* 이메일 인증(Email confirmation)
-* 이메일 주소 변경시 인증(change email address with confirmation)
-* 회원가입 절차 (약관동의/본인인증/정보입력/이메일 인증/가입완료)
-* 로그인 내역 기록 (IP, 일시, user-agent)
-* 회원 가입 금지 기능(비회원제)
-
 validators
 
 * credit card
@@ -38,16 +26,31 @@ validators
 * postal code
 * korean registration code
 
-* tag
 * menu
-* attachment management
-* history
 * dashboard
 
 * Mail
 * celery
 * Flask-migrate
 * Fixtures
+
+auth 블루프린트
+
+* 이메일 인증(Email confirmation)
+* 이메일 주소 변경시 인증(change email address with confirmation)
+* 회원가입 절차 (약관동의/본인인증/정보입력/이메일 인증/가입완료)
+* 로그인 내역 기록 (IP, 일시, user-agent)
+* 회원 가입 금지 기능(비회원제)
+* 로그인: 이메일 or 아이디 선택가능
+* 해시함수 지정 가능
+
+글쓰기
+
+* WYSIWYG tinymce
+* 파일 업로드 AJAX
+* 이미지 링크
+* 히스토리, 리비전 관리
+* 첨부 파일 관리
 
 댓글 기능
 
@@ -56,22 +59,17 @@ validators
 * 댓글 recaptcha
 * 가입 후 댓글달기 기능
 
-글쓰기
-
-- WYSIWYG
-- 파일 업로드 AJAX
-- 이미지 링크
-
-삭제된 태그를 실제로 테이블에서 삭제 처리할 것
-카테고리 삭제시 기존 게시물의 카테고리 null 지정 문제
-게시물 진짜로 삭제 (erase) 기능 만들 것
-카테고리 추가시 '-'를 '&nbsp;'로 변경 할지
-sidebar 위젯 방식(MVC)으로 구현
-글보관함 i18n
-카테고리 부모를 자신으로 선택할 경우 validator 작성
-기본 롤 정보 insert_role_permission 메소드 리팩토링
-babel.localeselector, babel.timezoneselector 구현
-자신의 게시물만 삭제 (o) -> 관리자는 삭제 가능 처리
+* 삭제된 태그를 실제로 테이블에서 삭제 처리할 것
+* 카테고리 삭제시 기존 게시물의 카테고리 null 지정 문제
+* 게시물 진짜로 삭제 (erase) 기능 만들 것
+* 카테고리 추가시 '-'를 '&nbsp;'로 변경 할지
+* sidebar 위젯 방식(MVC)으로 구현
+* 글보관함 i18n
+* 카테고리 부모를 자신으로 선택할 경우 validator 작성
+* 카테고리 tree 템플릿 매크로
+* 기본 롤 정보 insert_role_permission 메소드 리팩토링
+* babel.localeselector, babel.timezoneselector 구현
+* 자신의 게시물만 삭제 (o) -> 관리자는 삭제 가능 처리
 
 고민 사항 (성능 관련)
 
