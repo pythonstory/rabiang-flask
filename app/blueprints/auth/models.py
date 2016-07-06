@@ -43,11 +43,11 @@ class User(UserMixin, Base):
         self.password_hash = generate_password_hash(password)
 
     def can(self, resource=None, permission=None):
-        p = Permission.query \
+        perm = Permission.query \
             .filter(Permission.name == permission) \
             .first()
 
-        if not p:
+        if not perm:
             return
 
         return RolePermissionResource.query \
@@ -56,8 +56,8 @@ class User(UserMixin, Base):
             .join(Resource) \
             .filter((User.id == self.id) &
                     (Resource.name == resource) &
-                    (RolePermissionResource.permission.op('&')(p.bit) ==
-                     p.bit)) \
+                    (RolePermissionResource.permission.op('&')
+                     (perm.bit) == perm.bit)) \
             .first()
 
     def __init__(self, *args, **kwargs):
@@ -68,11 +68,23 @@ class User(UserMixin, Base):
 
 
 class AnonymousUser(AnonymousUserMixin):
-    def can(self, resources, permissions):
-        return False
+    @staticmethod
+    def can(resource, permission):
+        perm = Permission.query \
+            .filter(Permission.name == permission) \
+            .first()
 
-    def is_administrator(self):
-        return False
+        if not perm:
+            return
+
+        return RolePermissionResource.query \
+            .join(Role) \
+            .join(Resource) \
+            .filter((Role.name == 'Anonymous') &
+                    (Resource.name == resource) &
+                    (RolePermissionResource.permission.op('&')
+                     (perm.bit) == perm.bit)) \
+            .first()
 
 
 class Role(Base):
@@ -133,12 +145,17 @@ class RolePermissionResource(Base):
 
     @staticmethod
     def insert_role_permission():
-        role = Role(name='admin')
-        db.session.add(role)
+        admin_role = Role(name='Admin')
+        db.session.add(admin_role)
+
+        anonymous_role = Role(name='Anonymous')
+        db.session.add(anonymous_role)
 
         user = User(username='test', email='test@example.com', password='test',
-                    active=True, role=role)
+                    active=True, role=admin_role)
         db.session.add(user)
+
+        # anonymous_role is not assigned to a specific user.
 
         resource = Resource(name='post')
         db.session.add(resource)
@@ -151,9 +168,14 @@ class RolePermissionResource(Base):
         permission = Permission(name='view', bit=8, resource=resource)
         db.session.add(permission)
 
-        role_permission = RolePermissionResource(role=role, permission=11,
+        role_permission = RolePermissionResource(role=admin_role,
+                                                 permission=11,
                                                  resource=resource)
+        db.session.add(role_permission)
 
+        role_permission = RolePermissionResource(role=anonymous_role,
+                                                 permission=8,
+                                                 resource=resource)
         db.session.add(role_permission)
 
         resource = Resource(name='auth')
@@ -165,7 +187,13 @@ class RolePermissionResource(Base):
         permission = Permission(name='manage', bit=4, resource=resource)
         db.session.add(permission)
 
-        role_permission = RolePermissionResource(role=role, permission=11,
+        role_permission = RolePermissionResource(role=admin_role,
+                                                 permission=11,
+                                                 resource=resource)
+        db.session.add(role_permission)
+
+        role_permission = RolePermissionResource(role=anonymous_role,
+                                                 permission=3,
                                                  resource=resource)
         db.session.add(role_permission)
 

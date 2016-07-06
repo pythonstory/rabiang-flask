@@ -40,8 +40,6 @@ auth 블루프린트
 - 로그인 내역 기록 (IP, 일시, user-agent)
 - 회원 가입 금지 기능(비회원제)
 
-- config/factory pattern refactoring / 블루프린트 로딩 refactoring
-
 validators
 
 - credit card
@@ -51,7 +49,6 @@ validators
 - korean registration code
 
 - tag
-삭제된 태그를 실제로 테이블에서 삭제 처리할 것
 - menu
 - attachment management
 - history
@@ -69,6 +66,7 @@ validators
 상태에 따른 게시물 노출 문제 - 사용자 권한 유무와 같이 처리할 것
 공개 게시물만 목록 노출함
 게시물 detail 보기는 public 조건 아직 없음
+삭제된 태그를 실제로 테이블에서 삭제 처리할 것
 게시물 진짜로 삭제 (erase) 기능 만들 것
 카테고리 추가시 '-'를 '&nbsp;'로 변경 할지
 sidebar 위젯 방식(MVC)으로 구현
@@ -77,8 +75,6 @@ sidebar 위젯 방식(MVC)으로 구현
 메소드별 허용 permission 지정
 사용자 추가(회원가입)시 role 지정
 기본 롤 정보 insert_role_permission 메소드 리팩토링
-admin 롤 정의 및 데코레이터 정의
-anonymous 롤 정의 및 AnonymousUser can() 메소드 정의
 
 고민 사항 (성능 관련)
 
