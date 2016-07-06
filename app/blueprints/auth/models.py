@@ -148,12 +148,22 @@ class RolePermissionResource(Base):
         admin_role = Role(name='Admin')
         db.session.add(admin_role)
 
+        user_role = Role(name='User')
+        db.session.add(user_role)
+
         anonymous_role = Role(name='Anonymous')
         db.session.add(anonymous_role)
 
-        user = User(username='test', email='test@example.com', password='test',
-                    active=True, role=admin_role)
-        db.session.add(user)
+        admin = User(username='admin', email='admin@example.com',
+                     password='admin',
+                     active=True, role=admin_role)
+        db.session.add(admin)
+
+        demo = User(username='demo', email='demo@example.com',
+                    password='demo',
+                    active=True, role=user_role)
+
+        db.session.add(demo)
 
         # anonymous_role is not assigned to a specific user.
 
@@ -173,6 +183,11 @@ class RolePermissionResource(Base):
                                                  resource=resource)
         db.session.add(role_permission)
 
+        role_permission = RolePermissionResource(role=user_role,
+                                                 permission=11,
+                                                 resource=resource)
+        db.session.add(role_permission)
+
         role_permission = RolePermissionResource(role=anonymous_role,
                                                  permission=8,
                                                  resource=resource)
@@ -189,6 +204,11 @@ class RolePermissionResource(Base):
 
         role_permission = RolePermissionResource(role=admin_role,
                                                  permission=7,
+                                                 resource=resource)
+        db.session.add(role_permission)
+
+        role_permission = RolePermissionResource(role=user_role,
+                                                 permission=2,
                                                  resource=resource)
         db.session.add(role_permission)
 

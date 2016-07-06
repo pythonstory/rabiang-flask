@@ -53,7 +53,7 @@ def login():
 
 @auth.route('/logout', methods=['GET'])
 @login_required
-@permission_required('auth', 'logout')
+@permission_required('auth', 'login')
 def logout():
     logout_user()
 
@@ -70,9 +70,14 @@ def register():
     if form.validate_on_submit():
         user = User()
 
+        role = Role.query \
+            .filter(Role.name == 'User') \
+            .first()
+
         user.username = form.username.data
         user.email = form.email.data
         user.password = form.password.data
+        user.role = role
         user.active = True
 
         db.session.add(user)
