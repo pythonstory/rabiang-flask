@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import hashlib
+from datetime import datetime
+from flask_babel import format_datetime
 
 from flask import request
 
@@ -21,3 +23,8 @@ def gravatar(email, size=100, default='identicon', rating='g'):
                 size=size,
                 default=default,
                 rating=rating)
+
+
+def monthly_format(format, year, month):
+    dt = datetime(year, month, 1, 0, 0)
+    return format_datetime(dt, format)

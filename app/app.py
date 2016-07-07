@@ -9,7 +9,7 @@ from flaskext.markdown import Markdown
 
 from app.blueprints.auth.models import User, AnonymousUser
 from app.extensions import db, babel, csrf, login_manager
-from app.filters import gravatar
+from app.filters import gravatar, monthly_format
 
 
 def create_app(config=None, app_name=None, blueprints=None):
@@ -70,6 +70,7 @@ def configure_extensions(app):
 
 def configure_jinja_filters(app):
     app.jinja_env.filters['gravatar'] = gravatar
+    app.jinja_env.filters['monthly_format'] = monthly_format
 
 
 def configure_logging(app):
