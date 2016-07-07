@@ -25,6 +25,7 @@ def gravatar(email, size=100, default='identicon', rating='g'):
                 rating=rating)
 
 
-def monthly_format(format, year, month):
+def monthly_format(value, format='MMMM yyyy'):
+    year, month = value
     dt = datetime(year, month, 1, 0, 0)
     return format_datetime(dt, format)
