@@ -2,22 +2,20 @@
 
 # Configuration and Environment Variable
 
-This application provides ```test.cfg```, but it is totally not recommended to use it as your production server settings.
+This application repository provides ```test.cfg```, but it is totally not recommended to use it as your production server settings.
 
-You **must** have your own config file such as ```production.cfg```.
+You **must** have your own config file ```prod.cfg```. Otherwise, you may create ```dev.cfg``` for your development environment. These names ```prod.cfg```, ```dev.cfg```, ```test.cfg``` cannot be changed. 
 
 * Windows
 
 ```
 (venv) > SET FLASK_APP=run.py
-(venv) > SET FLASK_CONFIG=production.cfg
 ```
 
 * Linux
 
 ```
 (venv) $ export FLASK_APP=run.py
-(venv) $ export FLASK_CONFIG=production.cfg
 ```
 
 # Build Translations
@@ -41,3 +39,7 @@ Please, double-check what you're doing.
 # Additional Useful Commands
 
 ## Test
+
+```
+(venv) > python -m flask test
+```
