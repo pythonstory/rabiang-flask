@@ -283,11 +283,9 @@ def post_edit(post_id):
         return render_template(current_app.config['RABIANG_SITE_THEME'] +
                                '/404.html'), 404
 
-    categories = build_tree_tuple_list(PageCategory, prefix=True)
-
     form = PostForm(obj=post)
 
-    form.category.choices = categories
+    form.category.choices = build_tree_tuple_list(PageCategory, prefix=True)
 
     if form.validate_on_submit():
         post.title = form.title.data
@@ -304,6 +302,7 @@ def post_edit(post_id):
         flash(gettext('You edited your post.'), 'success')
         return redirect(url_for('page.post_detail_slug', slug=post.slug))
 
+    # Set default category option when written
     form.category.data = post.category_id if post.category_id else 0
 
     title = gettext('Edit') + ' - ' + \
@@ -649,10 +648,9 @@ def category_detail(category_name, page_num=1):
 def category_create():
     form = CategoryForm()
 
-    categories = build_tree_tuple_list(PageCategory, prefix=True)
-
+    categories = build_tree_tuple_list(PageCategory, prefix=False)
     form.parent.choices = [(0, gettext('Root Category'))]
-    form.parent.choices.extend(categories)
+    form.parent.choices.extend([(cid, name) for cid, name, level in categories])
 
     if form.validate_on_submit():
         page_category = PageCategory()
@@ -700,12 +698,11 @@ def category_create():
 def category_edit(category_id):
     page_category = PageCategory.query.get_or_404(category_id)
 
-    categories = build_tree_tuple_list(PageCategory, prefix=True)
-
     form = CategoryForm(obj=page_category)
 
+    categories = build_tree_tuple_list(PageCategory, prefix=False)
     form.parent.choices = [(0, gettext('Root Category'))]
-    form.parent.choices.extend(categories)
+    form.parent.choices.extend([(cid, name) for cid, name, level in categories])
 
     if form.validate_on_submit():
         if form.parent.data != page_category.id:

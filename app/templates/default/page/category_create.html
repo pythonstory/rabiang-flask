@@ -55,9 +55,9 @@
                     <th>{{ _('Category') }}</th>
                     <th>{{ _('Actions') }}</th>
                 </tr>
-                {% for id, name in categories %}
+                {% for id, name, level in categories %}
                     <tr>
-                        <td>{{ name }}</td>
+                        <td>{{ ('&nbsp;&nbsp;&nbsp;&nbsp;' | safe) * level }}{{ name }}</td>
                         <td>
                             <a href="{{ url_for('page.category_edit', category_id=id) }}" class="btn btn-primary">Edit</a>
                             <a href="{{ url_for('page.category_delete', category_id=id) }}" class="btn btn-danger">Delete</a>
