@@ -1,10 +1,14 @@
 # Installation
 
-# Configuration and Environment Variable
+# Configuration
 
 This application repository provides ```test.cfg```, but it is totally not recommended to use it as your production server settings.
 
-You **must** have your own config file ```prod.cfg```. Otherwise, you may create ```dev.cfg``` for your development environment. These names ```prod.cfg```, ```dev.cfg```, ```test.cfg``` cannot be changed. 
+You **must** have your own config file ```prod.cfg```. Otherwise, you may create ```dev.cfg``` for your development environment.
+
+These names ```prod.cfg```, ```dev.cfg```, ```test.cfg``` cannot be changed.
+
+This application tries to read them in order. Thus, ```prod.cfg``` file is the highest priority.  
 
 * Windows
 
