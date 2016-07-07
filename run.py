@@ -9,7 +9,17 @@ from app.blueprints.page import page
 
 BASE_DIR = os.path.dirname(__file__)
 
-config = '%s/%s' % (BASE_DIR, (os.getenv('FLASK_CONFIG') or 'test.cfg'))
+CFG_LIST = [
+    'prod.cfg',  # for production server
+    'dev.cfg',   # for development
+    'test.cfg'   # for test server (default)
+]
+
+for cfg in CFG_LIST:
+    if os.path.isfile(os.path.join(BASE_DIR, cfg)):
+        config = os.path.join(BASE_DIR, cfg)
+        break
+
 blueprints = [main, page, auth, forum]
 
 app = create_app(config=config, blueprints=blueprints)

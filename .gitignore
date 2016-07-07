@@ -143,4 +143,5 @@ ENV/
 *.db
 
 # config files for test/dev/production
-config_*.py
+prod.cfg
+dev.cfg
