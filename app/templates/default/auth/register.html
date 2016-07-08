@@ -48,6 +48,9 @@
             </div>
         </div>
         <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">{{ form.recaptcha }}</div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
                 <a href="{{ url_for('page.post_index') }}" class="btn btn-default">{{ _('Cancel') }}</a>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask_babel import lazy_gettext
-from flask_wtf import Form
+from flask_wtf import Form, RecaptchaField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
 
@@ -80,6 +80,7 @@ class RegisterForm(Form):
             )
         ]
     )
+    recaptcha = RecaptchaField()
 
 
 class UnregisterForm(Form):
