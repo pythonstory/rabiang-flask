@@ -48,7 +48,14 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">{{ form.recaptcha }}</div>
+            <div class="col-sm-offset-2 col-sm-10{% if form.recaptcha.errors %} has-error{% endif %}">
+                {{ form.recaptcha(class='form-control') }}
+                {% if form.recaptcha.errors %}
+                    {% for error in form.recaptcha.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
