@@ -60,6 +60,9 @@ class User(UserMixin, Base):
                      (perm.bit) == perm.bit)) \
             .first()
 
+    def has_role(self, role):
+        return self.role.name == role
+
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
 
@@ -85,6 +88,10 @@ class AnonymousUser(AnonymousUserMixin):
                     (RolePermissionResource.permission.op('&')
                      (perm.bit) == perm.bit)) \
             .first()
+
+    @staticmethod
+    def has_role():
+        return False
 
 
 class Role(Base):
