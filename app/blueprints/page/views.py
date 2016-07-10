@@ -160,7 +160,7 @@ def post_detail_slug(slug):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/detail.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/post_detail.html',
         post=post,
         form=form,
         comments=comments,
@@ -218,7 +218,7 @@ def post_detail_id(post_id):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/detail.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/post_detail.html',
         post=post,
         form=form,
         comments=comments,
@@ -267,7 +267,7 @@ def post_create():
     }]
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/create.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/post_create.html',
         form=form,
         title=title,
         breadcrumbs=breadcrumbs)
@@ -322,7 +322,7 @@ def post_edit(post_id):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/edit.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/post_edit.html',
         form=form,
         post_id=post_id,
         title=title,
@@ -368,7 +368,7 @@ def post_delete(post_id):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/delete.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/post_delete.html',
         form=form,
         post=post,
         title=title,
@@ -444,7 +444,7 @@ def post_user_index(username, page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/user.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/post_user_index.html',
         posts=posts,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -480,7 +480,7 @@ def post_month_index(year, month, page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/user.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/post_month_index.html',
         posts=posts,
         title=title,
         breadcrumbs=breadcrumbs,
@@ -585,7 +585,7 @@ def category_index():
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/category.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/category_index.html',
         categories=categories,
         title=title,
         breadcrumbs=breadcrumbs,
