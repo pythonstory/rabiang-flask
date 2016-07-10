@@ -1,3 +1,27 @@
+{% macro render_categories(children, level) %}
+    {% for child in children %}
+        {% if loop.first %}
+            {% if level == 0 %}
+                <ul class="sidebar_list_style_outer">
+            {% else %}
+                <ul class="sidebar_list_style">
+            {% endif %}
+        {% endif %}
+
+        <li>
+            <i class="fa fa-angle-double-right"></i>
+            <a href="{{ url_for('page.category_detail', category_name=child['node'].name) }}">
+                {{ child['node'].name }}
+            </a>
+            {% if child['children'] %}
+                {{ render_categories(child['children'], child['level']) }}
+            {% endif %}
+        </li>
+
+        {% if loop.last %}</ul>{% endif %}
+    {% endfor %}
+{%- endmacro %}
+
 <!-- Blog Search Well -->
 <div class="well">
     <h4>{{ _('Blog Search') }}</h4>
@@ -19,28 +43,7 @@
 <!-- Blog Categories Well -->
 <div class="well">
     <h4>{{ _('Blog Category') }}</h4>
-    {% for category in sidebar['categories']['children'] %}
-        {% if loop.first %}<ul class="sidebar_list_style_outer">{% endif %}
-            <li>
-                <i class="fa fa-angle-double-right"></i>
-                <a href="{{ url_for('page.category_detail', category_name=category['node'].name) }}">
-                {{ category['node'].name }}
-                </a>
-
-                    {% for category1 in category['children'] %}
-                        {% if loop.first %}<ul class="sidebar_list_style">{% endif %}
-                        <li>
-                            <i class="fa fa-angle-double-right"></i>
-                            <a href="{{ url_for('page.category_detail', category_name=category1['node'].name) }}">
-                            {{ category1['node'].name }}
-                            </a>
-                        </li>
-                        {% if loop.last %}</ul>{% endif %}
-                    {% endfor %}
-
-            </li>
-        {% if loop.last %}</ul>{% endif %}
-    {% endfor %}
+    {{ render_categories(sidebar['categories']['children'], sidebar['categories']['level']) }}
 </div>
 
 <!-- Side Widget Well -->
