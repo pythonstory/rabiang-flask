@@ -46,7 +46,6 @@ auth 블루프린트
 
 글쓰기
 
-* WYSIWYG tinymce
 * 파일 업로드 AJAX
 * 이미지 링크
 * 히스토리, 리비전 관리
@@ -58,6 +57,7 @@ auth 블루프린트
 * 댓글 소셜
 * 가입 후 댓글달기 기능
 
+* WYSIWYG tinymce -> HTML sanitize by Bleach
 * 삭제된 태그를 실제로 테이블에서 삭제 처리할 것
 * 카테고리 삭제시 기존 게시물의 카테고리 null 지정 문제
 * 게시물 진짜로 삭제 (erase) 기능 만들 것

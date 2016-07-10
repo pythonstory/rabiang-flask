@@ -26,10 +26,15 @@ class Post(Base):
     STATUS_PUBLIC = 1
     STATUS_DELETED = 2
 
+    FORMAT_MARKDOWN = 0
+    FORMAT_HTML = 1
+    FORMAT_TEXT = 2
+
     title = db.Column(db.String(100))
     slug = db.Column(db.String(100), unique=True)
     body = db.Column(db.Text)
     status = db.Column(db.SmallInteger, default=STATUS_DRAFT)
+    format = db.Column(db.SmallInteger, default=FORMAT_MARKDOWN)
 
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship('User',

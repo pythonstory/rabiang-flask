@@ -38,7 +38,13 @@
     <hr>
 
     <!-- Post Content -->
-    <div class="page">{{ post.body | markdown }}</div>
+    <div class="page">
+        {% if post.format == Post.FORMAT_MARKDOWN %}
+            {{ post.body | markdown }}
+        {% elif post.format == Post.FORMAT_HTML %}
+            {{ post.body | safe }}
+        {% endif %}
+    </div>
 
     <hr>
 

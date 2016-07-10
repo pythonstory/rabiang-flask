@@ -111,6 +111,7 @@ def post_detail_slug(slug):
     return render_template(
         current_app.config['RABIANG_SITE_THEME'] + '/page/post_detail.html',
         post=post,
+        Post=Post,
         form=form,
         comments=comments,
         title=title,
@@ -169,6 +170,7 @@ def post_detail_id(post_id):
     return render_template(
         current_app.config['RABIANG_SITE_THEME'] + '/page/post_detail.html',
         post=post,
+        Post=Post,
         form=form,
         comments=comments,
         title=title,
@@ -191,6 +193,7 @@ def post_create():
         post.slug = form.slug.data
         post.body = form.body.data
         post.status = form.status.data
+        post.format = current_app.config['RABIANG_POST_HTML_FORMAT']
         post.category_id = form.category.data
         post.tags = form.tags.data
         post.author = current_user
@@ -218,6 +221,7 @@ def post_create():
     return render_template(
         current_app.config['RABIANG_SITE_THEME'] + '/page/post_create.html',
         form=form,
+        Post=Post,
         title=title,
         breadcrumbs=breadcrumbs)
 
@@ -241,6 +245,7 @@ def post_edit(post_id):
         post.slug = form.slug.data
         post.body = form.body.data
         post.status = form.status.data
+        post.format = current_app.config['RABIANG_POST_HTML_FORMAT']
         post.category_id = form.category.data
         post.tags = form.tags.data
         post.author = current_user
@@ -273,7 +278,8 @@ def post_edit(post_id):
     return render_template(
         current_app.config['RABIANG_SITE_THEME'] + '/page/post_edit.html',
         form=form,
-        post_id=post_id,
+        post=post,
+        Post=Post,
         title=title,
         breadcrumbs=breadcrumbs,
         sidebar=sidebar)

@@ -13,6 +13,14 @@
 {% endblock %}
 
 {% block extra_scripts %}
+    {% if config['RABIANG_POST_HTML_FORMAT'] == Post.FORMAT_HTML %}
+        <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+        <script>
+            tinymce.init({
+                selector: '#post_body'
+            });
+        </script>
+    {% endif %}
     <script>
         YUI().use(
                 'aui-node',
