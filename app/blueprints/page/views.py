@@ -564,7 +564,7 @@ def tag_detail(tag_name, page_num=1):
 
 
 @page.route('/category', methods=['GET', 'POST'])
-@permission_required('post', 'create')
+@permission_required('post', 'view')
 def category_index():
     categories = build_tree_dictionary(PageCategory)
 
@@ -594,7 +594,7 @@ def category_index():
 
 @page.route('/category/<category_name>', methods=['GET', 'POST'])
 @page.route('/category/<category_name>/<int:page_num>', methods=['GET', 'POST'])
-@permission_required('post', 'create')
+@permission_required('post', 'view')
 def category_detail(category_name, page_num=1):
     category = PageCategory.query \
         .filter(PageCategory.name == category_name) \
@@ -626,7 +626,7 @@ def category_detail(category_name, page_num=1):
         'href': url_for('page.post_index'),
     }, {
         'text': gettext('Category'),
-        'href': False,
+        'href': url_for('page.post_index'),
     }, {
         'text': category_name,
         'href': False,
