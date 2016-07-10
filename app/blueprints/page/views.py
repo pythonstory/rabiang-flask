@@ -474,7 +474,7 @@ def post_month_index(year, month, page_num=1):
         'href': url_for('page.post_index'),
     }, {
         'text': gettext('Blog Archives'),
-        'href': url_for('page.tag_index'),
+        'href': False,
     }]
 
     sidebar = sidebar_data()
