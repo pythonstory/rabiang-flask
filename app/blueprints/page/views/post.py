@@ -51,7 +51,7 @@ def post_index(page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config['RABIANG_SITE_THEME'] + '/page/index.html',
+        current_app.config['RABIANG_SITE_THEME'] + '/page/post_index.html',
         posts=posts,
         title=title,
         breadcrumbs=breadcrumbs,
