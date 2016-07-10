@@ -650,7 +650,8 @@ def category_create():
 
     categories = build_tree_tuple_list(PageCategory, prefix=False)
     form.parent.choices = [(0, gettext('Root Category'))]
-    form.parent.choices.extend([(cid, name) for cid, name, level in categories])
+    form.parent.choices.extend([(cid, '----' * level + name)
+                                for cid, name, level in categories])
 
     if form.validate_on_submit():
         page_category = PageCategory()
@@ -702,7 +703,8 @@ def category_edit(category_id):
 
     categories = build_tree_tuple_list(PageCategory, prefix=False)
     form.parent.choices = [(0, gettext('Root Category'))]
-    form.parent.choices.extend([(cid, name) for cid, name, level in categories])
+    form.parent.choices.extend([(cid, '----' * level + name)
+                                for cid, name, level in categories])
 
     if form.validate_on_submit():
         if form.parent.data != page_category.id:
