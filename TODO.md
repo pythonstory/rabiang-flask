@@ -61,9 +61,7 @@ auth 블루프린트
 * 삭제된 태그를 실제로 테이블에서 삭제 처리할 것
 * 카테고리 삭제시 기존 게시물의 카테고리 null 지정 문제
 * 게시물 진짜로 삭제 (erase) 기능 만들 것
-* 카테고리 추가시 목록은 '&nbsp;' 인덴트, 셀렉트박스는 '-' 인덴트
 * sidebar 위젯 방식(MVC)으로 구현
-* 카테고리 부모를 자신으로 선택할 경우 validator 작성
 * 기본 롤 정보 insert_role_permission 메소드 리팩토링
 * babel.localeselector, babel.timezoneselector 구현
 * 자신의 게시물만 삭제 (o) -> 관리자는 삭제 가능 처리
@@ -75,3 +73,4 @@ auth 블루프린트
 * 태그 카운트를 post_tag 테이블에 저장하는 방안
 * 모델 클래스는 Base 모델을 상속 정의 (블루프린트 공통으로 뽑기)
 * Admin/Guest 롤을 매번 DB 질의하는 것에 대한 문제-캐시?
+* 카테고리 부모를 자신으로 선택할 경우 validator 작성

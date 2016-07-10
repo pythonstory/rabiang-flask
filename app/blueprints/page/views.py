@@ -707,6 +707,7 @@ def category_edit(category_id):
                                 for cid, name, level in categories])
 
     if form.validate_on_submit():
+        # The self node can't be the parent.
         if form.parent.data != page_category.id:
             page_category.name = form.name.data
             page_category.order = form.order.data
