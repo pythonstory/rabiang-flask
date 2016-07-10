@@ -1,0 +1,15 @@
+{% macro render_categories(children) %}
+    {% for child in children %}
+        {% if loop.first %}
+            <ul>{% endif %}
+                <li>
+                    <a href="{{ url_for('page.category_detail', category_name=child['node'].name) }}">
+                        {{ child['node'].name }}
+                    </a>
+                    {% if child['children'] %}
+                        {{ render_categories(child['children']) }}
+                    {% endif %}
+                </li>
+        {% if loop.last %}</ul>{% endif %}
+    {% endfor %}
+{%- endmacro %}
