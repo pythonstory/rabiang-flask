@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask_babel import lazy_gettext
-from flask_wtf import Form
+from flask_wtf import Form, RecaptchaField
 from wtforms import StringField, TextAreaField, SelectField, SubmitField, \
     IntegerField
 from wtforms.validators import DataRequired, Email, Optional
@@ -101,6 +101,7 @@ class CommentForm(Form):
         lazy_gettext('Comment'),
         validators=[DataRequired()]
     )
+    recaptcha = RecaptchaField()
 
 
 class DeletePostForm(Form):

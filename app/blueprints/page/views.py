@@ -117,8 +117,8 @@ def post_detail_slug(slug):
         .first_or_404()
 
     if post.status != Post.STATUS_PUBLIC \
-        and not current_user.is_authenticated \
-            or current_user.id != post.author_id:
+        and (not current_user.is_authenticated
+             or current_user.id != post.author_id):
         return render_template(current_app.config['RABIANG_SITE_THEME'] +
                                '/404.html'), 404
 
@@ -175,8 +175,8 @@ def post_detail_id(post_id):
     post = Post.query.get_or_404(post_id)
 
     if post.status != Post.STATUS_PUBLIC \
-            and not current_user.is_authenticated \
-            or current_user.id != post.author_id:
+            and (not current_user.is_authenticated
+                 or current_user.id != post.author_id):
         return render_template(current_app.config['RABIANG_SITE_THEME'] +
                                '/404.html'), 404
 
