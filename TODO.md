@@ -26,9 +26,6 @@ validators
 * postal code
 * korean registration code
 
-* menu
-* dashboard
-
 * Mail
 * celery
 * Flask-migrate
@@ -57,6 +54,8 @@ auth 블루프린트
 * 댓글 소셜
 * 가입 후 댓글달기 기능
 
+* 메뉴 구현
+* 관리자 대시보드 구현
 * WYSIWYG tinymce -> HTML sanitize by Bleach
 * 삭제된 태그를 실제로 테이블에서 삭제 처리할 것
 * 카테고리 삭제시 기존 게시물의 카테고리 null 지정 문제

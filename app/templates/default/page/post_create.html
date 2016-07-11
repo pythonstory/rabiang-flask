@@ -39,6 +39,15 @@
                 ]
             });
         </script>
+    {% elif config['RABIANG_POST_HTML_FORMAT'] == Post.FORMAT_MARKDOWN %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script>
+            var simplemde = new SimpleMDE({
+                element: document.getElementById("post_body"),
+                spellChecker: false,
+            });
+        </script>
     {% endif %}
     <script>
         YUI().use(
