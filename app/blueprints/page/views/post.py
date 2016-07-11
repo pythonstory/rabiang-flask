@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from urllib.parse import urljoin
 
 from flask import render_template, request, redirect, url_for, \
@@ -6,10 +7,12 @@ from flask import render_template, request, redirect, url_for, \
 from flask_babel import gettext
 from flask_login import login_required, current_user
 from werkzeug.contrib.atom import AtomFeed
+from werkzeug.utils import secure_filename
 
 from app.blueprints.auth.decorators import permission_required
 from app.blueprints.auth.models import User
-from app.blueprints.page.forms import PostForm, CommentForm, DeletePostForm
+from app.blueprints.page.forms import PostForm, CommentForm, DeletePostForm, \
+    PhotoForm
 from app.blueprints.page.models import Post, Comment, PageCategory
 from app.blueprints.page.views import page
 from app.blueprints.page.views.sidebar import sidebar_data
@@ -435,9 +438,48 @@ def post_month_index(year, month, page_num=1):
     sidebar = sidebar_data()
 
     return render_template(
-        current_app.config[
-            'RABIANG_SITE_THEME'] + '/page/post_month_index.html',
+        current_app.config['RABIANG_SITE_THEME']
+        + '/page/post_month_index.html',
         posts=posts,
+        title=title,
+        breadcrumbs=breadcrumbs,
+        sidebar=sidebar)
+
+
+@page.route('/upload/', methods=('GET', 'POST'))
+def post_upload():
+    form = PhotoForm()
+
+    if form.validate_on_submit():
+        filename = secure_filename(form.photo.data.filename)
+        form.photo.data.save(
+            os.path.join(current_app.config['RABIANG_UPLOAD_FOLDER'], filename))
+
+        flash(gettext('You uploaded a file.'), 'success')
+        return redirect(url_for('page.post_upload'))
+    else:
+        filename = None
+
+    title = gettext('Image Upload') + ' - ' + \
+            current_app.config['RABIANG_SITE_NAME']
+
+    breadcrumbs = [{
+        'text': gettext('Home'),
+        'href': url_for('main.index'),
+    }, {
+        'text': gettext('Blog'),
+        'href': url_for('page.post_index'),
+    }, {
+        'text': gettext('Upload'),
+        'href': False,
+    }]
+
+    sidebar = sidebar_data()
+
+    return render_template(
+        current_app.config['RABIANG_SITE_THEME'] + '/page/upload.html',
+        form=form,
+        filename=filename,
         title=title,
         breadcrumbs=breadcrumbs,
         sidebar=sidebar)

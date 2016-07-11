@@ -1,0 +1,24 @@
+{% extends "default/columns-2.html" %}
+
+{% block page_content %}
+    <form action="{{ url_for('page.post_upload') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.photo.label(class='col-sm-1 control-label') }}
+            <div class="col-sm-11{% if form.photo.errors %} has-error{% endif %}">
+                {{ form.photo(class='form-control') }}
+                {% if form.photo.errors %}
+                    {% for error in form.photo.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+                <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
+                <a href="{{ url_for('page.post_upload_image') }}" class="btn btn-default">{{ _('Cancel') }}</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}

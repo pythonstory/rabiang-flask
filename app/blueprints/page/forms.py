@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from flask_babel import lazy_gettext
 from flask_wtf import Form, RecaptchaField
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, TextAreaField, SelectField, SubmitField, \
-    IntegerField
+    IntegerField, FileField
 from wtforms.validators import DataRequired, Email, Optional
 
-from app.utils.validators import Unique
 from app.blueprints.page.models import Post, Tag
+from app.utils.validators import Unique
 
 
 class TagField(StringField):
@@ -129,4 +130,10 @@ class CategoryForm(Form):
 class DeleteCategoryForm(Form):
     submit = SubmitField(
         lazy_gettext('Delete')
+    )
+
+
+class PhotoForm(Form):
+    photo = FileField(
+        'Your photo',
     )
