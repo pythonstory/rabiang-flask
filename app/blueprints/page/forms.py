@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask_babel import lazy_gettext
 from flask_wtf import Form, RecaptchaField
-from flask_wtf.file import FileField, FileAllowed
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, TextAreaField, SelectField, SubmitField, \
-    IntegerField, FileField
+    IntegerField
 from wtforms.validators import DataRequired, Email, Optional
 
 from app.blueprints.page.models import Post, Tag
@@ -136,4 +136,8 @@ class DeleteCategoryForm(Form):
 class PhotoForm(Form):
     photo = FileField(
         'Your photo',
+        validators=[
+            FileRequired(),
+            FileAllowed(['jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp'],
+                        'Images only!')]
     )

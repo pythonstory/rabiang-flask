@@ -31,6 +31,12 @@ validators
 * Flask-migrate
 * Fixtures
 
+파일업로드
+
+* 이미지 확장자 검사
+* 임의이름으로 변경 /uploads/yyyymmdd_uid/username_random/filename.ext
+* 이미지는 공개 static 경로로 노출
+
 auth 블루프린트
 
 * 이메일 인증(Email confirmation)

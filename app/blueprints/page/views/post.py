@@ -447,6 +447,7 @@ def post_month_index(year, month, page_num=1):
 
 
 @page.route('/upload/', methods=('GET', 'POST'))
+@permission_required('post', 'create')
 def post_upload():
     form = PhotoForm()
 
