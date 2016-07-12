@@ -90,7 +90,7 @@ class AnonymousUser(AnonymousUserMixin):
             .first()
 
     @staticmethod
-    def has_role():
+    def has_role(role):
         return False
 
 
