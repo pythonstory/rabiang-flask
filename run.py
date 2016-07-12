@@ -6,6 +6,7 @@ from app.blueprints.auth import auth
 from app.blueprints.forum import forum
 from app.blueprints.main import main
 from app.blueprints.page import page
+from app.blueprints.admin import admin
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -20,7 +21,7 @@ for cfg in CFG_LIST:
         config = os.path.join(BASE_DIR, cfg)
         break
 
-blueprints = [main, page, auth, forum]
+blueprints = [main, page, auth, forum, admin]
 
 app = create_app(config=config, blueprints=blueprints)
 
