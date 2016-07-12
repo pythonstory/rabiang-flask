@@ -13,7 +13,8 @@
     <title>{{ title }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
     <!-- AUI/Bootstrap Core CSS -->
     <link rel="stylesheet" href="//cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css">
