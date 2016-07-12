@@ -13,7 +13,7 @@ Styles for Page content
     margin-bottom: 15px;
 }
 
-.page table, th, td {
+.page table, .page table th, .page table td {
     border: 1px solid #999999;
     padding: 5px 15px;
 }
@@ -30,4 +30,10 @@ Styles for Page content
 .page pre {
     margin-top: 15px;
     margin-bottom: 15px;
+    border-radius: 0px;
+}
+
+.codehilitetable, .codehilitetable th, .codehilitetable td {
+    border: none !important;
+    padding: 0px !important;
 }

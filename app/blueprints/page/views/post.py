@@ -248,7 +248,7 @@ def post_edit(post_id):
         post.slug = form.slug.data
         post.body = form.body.data
         post.status = form.status.data
-        post.format = current_app.config['RABIANG_POST_HTML_FORMAT']
+        # post.format = current_app.config['RABIANG_POST_HTML_FORMAT']
         post.category_id = form.category.data
         post.tags = form.tags.data
         post.author = current_user
