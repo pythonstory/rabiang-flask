@@ -18,25 +18,10 @@
                 <li>
                     <a href="{{ url_for('page.post_index') }}">{{ _('Blog') }}</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop
-                        <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="blog-home-1.html">Products</a>
-                        </li>
-                        <li>
-                            <a href="blog-home-2.html">Categories</a>
-                        </li>
-                        <li>
-                            <a href="blog-post.html">Brand</a>
-                        </li>
-                    </ul>
-                </li>
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{ _('Auth') }} <b class="caret"></b>
+                        {{ current_user.username }} <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
 
@@ -49,6 +34,15 @@
                             <li>
                                 <a href="{{ url_for('auth.unregister') }}">{{ _('Delete account') }}</a>
                             </li>
+
+                            {% if current_user.has_role('Admin') %}
+                                <li>
+                                    <a href="{{ url_for('page.post_create') }}">{{ _('Write a new post') }}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('page.category_create') }}">{{ _('Edit categories') }}</a>
+                                </li>
+                            {% endif %}
                     </ul>
                 </li>
                 {% else %}
