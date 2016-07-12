@@ -78,7 +78,7 @@ def category_detail(category_name, page_num=1):
         'href': url_for('page.post_index'),
     }, {
         'text': gettext('Category'),
-        'href': url_for('page.post_index'),
+        'href': url_for('page.category_index'),
     }, {
         'text': category_name,
         'href': False,
