@@ -2,9 +2,9 @@
     {% for child in children %}
         {% if loop.first %}
             {% if level == 0 %}
-                <ul class="sidebar_list_style_outer">
+                <ul class="list_outer">
             {% else %}
-                <ul class="sidebar_list_style">
+                <ul class="list">
             {% endif %}
         {% endif %}
 
@@ -49,7 +49,7 @@
 <!-- Side Widget Well -->
 <div class="well">
     <h4>{{ _('Blog Recent Posts') }}</h4>
-    <ul class="sidebar_list_style_outer">
+    <ul class="list_outer">
         {% for post in sidebar['recent_posts'] %}
             <li><a href="{{ url_for('page.post_detail_slug', slug=post.slug) }}"><i class="fa fa-angle-double-right"></i> {{ post.title }}</a></li>
         {% endfor %}
@@ -58,7 +58,7 @@
 
 <div class="well">
     <h4>{{ _('Blog Recent Comments') }}</h4>
-    <ul class="sidebar_list_style_outer">
+    <ul class="list_outer">
         {% for comment in sidebar['recent_comments'] %}
             <li><a href="{{ url_for('page.post_detail_slug', slug=comment.post.slug) }}#comment-{{ comment.id }}"><i class="fa fa-angle-double-right"></i> {{ comment.post.title }}</a></li>
         {% endfor %}
@@ -76,7 +76,7 @@
 
 <div class="well">
     <h4>{{ _('Blog Archives') }}</h4>
-    <ul class="sidebar_list_style_outer">
+    <ul class="list_outer">
         {% for t, year, month in sidebar['monthly_archives'] %}
             <li><a href="{{ url_for('page.post_month_index', year=year, month=month) }}"><i class="fa fa-angle-double-right"></i> {{ (year, month) | monthly_format(_('MMMM yyyy')) }}</a></li>
         {% endfor %}

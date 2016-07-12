@@ -1,20 +1,6 @@
 /*
 Styles for Layout and Theme
 */
-.sidebar_list_style {
-    list-style-type: none;
-    padding-left: 20px;
-    margin-top: 5px;
-}
-
-.sidebar_list_style_outer {
-    list-style-type: none;
-    padding-left: 0px;
-}
-
-.sidebar_list_style_outer li {
-    margin-bottom: 5px;
-}
 
 .spacer-bottom-5 {
     margin-bottom: 5px;
@@ -46,4 +32,23 @@ Styles for Layout and Theme
 
 .spacer-left-50 {
     margin-left: 50px;
+}
+
+.sidebar .list_outer {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.sidebar .list {
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.sidebar li {
+    margin-bottom: 5px;
+}
+
+.sidebar .well h4 {
+    margin-top: 0;
 }
