@@ -10,6 +10,11 @@
             </div>
         </div>
     </form>
+    <form enctype="multipart/form-data" id="upload_image_form" style="display:none;">
+        <input id="photo" name="photo" type="file" onchange="ajax_upload(this);" />
+        <input id="field_name" type="hidden" value="" />
+        <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+    </form>
 {% endblock %}
 
 {% block extra_scripts %}
@@ -26,21 +31,49 @@
                     'insertdatetime media nonbreaking save table contextmenu directionality',
                     'emoticons template paste textcolor colorpicker textpattern imagetools'
                 ],
-                toolbar1: 'insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media emoticons | print preview',
+                toolbar1: 'insertfile undo redo | styleselect | bold italic forecolor backcolor fontselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image quickimage media emoticons | print preview',
                 image_advtab: true,
+                /*
                 templates: [
                     { title: 'Test template 1', content: 'Test 1' },
                     { title: 'Test template 2', content: 'Test 2' }
                 ],
+                */
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
                     '//www.tinymce.com/css/codepen.min.css'
-                ]
+                ],
+                file_browser_callback: function(field_name, url, type, win) {
+                    if (type == 'image') {
+                        // Open file browser
+                        document.getElementById('photo').click();
+
+                        // hidden field in order to pass the popup field name
+                        document.getElementById('field_name').value = field_name;
+                    }
+                },
             });
+
+        function ajax_upload(element) {
+            // Retrieve field_name from hidden field.
+            var field_name = document.getElementById('field_name').value;
+
+            var formData = new FormData(document.getElementById('upload_image_form'));
+
+            // ajax upload
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(e){
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById(field_name).value = xhr.responseText;
+                }
+            }
+            xhr.open('POST', '{{ url_for('page.post_upload_image') }}', false);
+            xhr.send(formData);
+        }
         </script>
     {% elif config['RABIANG_POST_HTML_FORMAT'] == Post.FORMAT_MARKDOWN %}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <link rel="stylesheet" href=//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+        <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
         <script>
             var simplemde = new SimpleMDE({
                 element: document.getElementById("post_body"),

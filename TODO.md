@@ -50,7 +50,6 @@ auth 블루프린트
 글쓰기
 
 * 파일 업로드 AJAX
-* 이미지 링크
 * 히스토리, 리비전 관리
 * 첨부 파일 관리
 
@@ -70,6 +69,7 @@ auth 블루프린트
 * 기본 롤 정보 insert_role_permission 메소드 리팩토링
 * babel.localeselector, babel.timezoneselector 구현
 * 자신의 게시물만 삭제 (o) -> 관리자는 삭제 가능 처리
+* 이미지 업로드 구현 but 수정할 때 상대경로 오류 문제 발생
 
 고민 사항 (성능 관련)
 

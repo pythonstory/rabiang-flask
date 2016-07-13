@@ -489,4 +489,11 @@ def post_upload():
 @page.route('/ajax-upload-image/', methods=('POST',))
 @permission_required('post', 'create')
 def post_upload_image():
-    return "{ location : '/uploaded/image/path/image.png' }"
+    form = PhotoForm()
+
+    if form.validate_on_submit():
+        filename = secure_filename(form.photo.data.filename)
+        form.photo.data.save(
+            os.path.join(current_app.config['RABIANG_IMAGE_FOLDER'], filename))
+
+        return '/static/images/' + filename;
