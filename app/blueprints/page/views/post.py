@@ -484,3 +484,9 @@ def post_upload():
         title=title,
         breadcrumbs=breadcrumbs,
         sidebar=sidebar)
+
+
+@page.route('/ajax-upload-image/', methods=('POST',))
+@permission_required('post', 'create')
+def post_upload_image():
+    return "{ location : '/uploaded/image/path/image.png' }"
