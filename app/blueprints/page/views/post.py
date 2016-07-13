@@ -454,7 +454,7 @@ def post_upload():
     if form.validate_on_submit():
         filename = secure_filename(form.photo.data.filename)
         form.photo.data.save(
-            os.path.join(current_app.config['RABIANG_UPLOAD_FOLDER'], filename))
+            os.path.join(current_app.config['RABIANG_IMAGE_FOLDER'], filename))
 
         flash(gettext('You uploaded a file.'), 'success')
         return redirect(url_for('page.post_upload'))

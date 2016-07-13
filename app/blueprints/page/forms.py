@@ -135,9 +135,9 @@ class DeleteCategoryForm(Form):
 
 class PhotoForm(Form):
     photo = FileField(
-        'Your photo',
+        lazy_gettext('Image'),
         validators=[
             FileRequired(),
             FileAllowed(['jpg', 'jpe', 'jpeg', 'png', 'gif', 'svg', 'bmp'],
-                        'Images only!')]
+                        lazy_gettext('You can upload only image files.'), )]
     )

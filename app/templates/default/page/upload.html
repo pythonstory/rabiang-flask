@@ -4,8 +4,8 @@
     <form action="{{ url_for('page.post_upload') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
         {{ form.csrf_token }}
         <div class="form-group">
-            {{ form.photo.label(class='col-sm-1 control-label') }}
-            <div class="col-sm-11{% if form.photo.errors %} has-error{% endif %}">
+            {{ form.photo.label(class='col-sm-2 control-label') }}
+            <div class="col-sm-10{% if form.photo.errors %} has-error{% endif %}">
                 {{ form.photo() }}
                 {% if form.photo.errors %}
                     {% for error in form.photo.errors %}
@@ -15,9 +15,9 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-11">
-                <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
-                <a href="{{ url_for('page.post_upload') }}" class="btn btn-default">{{ _('Cancel') }}</a>
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary btn-sm">{{ _('Save') }}</button>
+                <a href="{{ url_for('page.post_upload') }}" class="btn btn-default btn-sm">{{ _('Cancel') }}</a>
             </div>
         </div>
     </form>
