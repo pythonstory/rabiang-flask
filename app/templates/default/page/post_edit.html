@@ -43,6 +43,9 @@
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
                     '//www.tinymce.com/css/codepen.min.css'
                 ],
+                relative_urls: false,
+                remove_script_host : false,
+                convert_urls : true,
                 file_browser_callback: function(field_name, url, type, win) {
                     if (type == 'image') {
                         // Open file browser
@@ -87,6 +90,7 @@
                 function (Y) {
                     var title = Y.one('#post_title');
                     var slug = Y.one('#post_slug');
+                    var tag_name = Y.one('#tag_name');
 
                     title.on(
                             'keyup',

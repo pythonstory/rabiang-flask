@@ -496,4 +496,4 @@ def post_upload_image():
         form.photo.data.save(
             os.path.join(current_app.config['RABIANG_IMAGE_FOLDER'], filename))
 
-        return '/static/images/' + filename;
+        return url_for('static', filename='images/' + filename)
