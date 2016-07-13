@@ -139,9 +139,16 @@ ENV/
 # Rope project settings
 .ropeproject
 
+
+# Rabiang
+
 # SQLite3 database
 *.db
 
 # config files for test/dev/production
 prod.cfg
 dev.cfg
+
+# upload directories
+uploads/*
+app/static/images/*
