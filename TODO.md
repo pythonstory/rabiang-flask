@@ -31,12 +31,6 @@ validators
 * Flask-migrate
 * Fixtures
 
-파일업로드
-
-* 이미지 확장자 검사
-* 임의이름으로 변경 /uploads/yyyymmdd_uid/username_random/filename.ext
-* 이미지는 공개 static 경로로 노출
-
 auth 블루프린트
 
 * 이메일 인증(Email confirmation)
@@ -52,6 +46,12 @@ auth 블루프린트
 * 파일 업로드 AJAX
 * 히스토리, 리비전 관리
 * 첨부 파일 관리
+
+이미지 파일업로드
+
+* 동일 파일 이름 중복 문제
+* 임의이름으로 변경 /uploads/yyyymmdd_uid/username_random/filename.ext
+* 데이터베이스 경로 저장 및 첨부 이미지 파일 관리
 
 댓글 기능
 
@@ -69,7 +69,6 @@ auth 블루프린트
 * 기본 롤 정보 insert_role_permission 메소드 리팩토링
 * babel.localeselector, babel.timezoneselector 구현
 * 자신의 게시물만 삭제 (o) -> 관리자는 삭제 가능 처리
-* 이미지 업로드 구현 but 수정할 때 상대경로 오류 문제 발생
 
 고민 사항 (성능 관련)
 
