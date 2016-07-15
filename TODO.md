@@ -51,6 +51,8 @@ auth 블루프린트
 
 * 동일 파일 이름 중복 문제
 * 임의이름으로 변경 /uploads/yyyymmdd_uid/username_random/filename.ext
+/static/images/post/yyyymmdd_uid/image.jpg
+
 * 데이터베이스 경로 저장 및 첨부 이미지 파일 관리
 
 댓글 기능
@@ -61,7 +63,6 @@ auth 블루프린트
 
 * 메뉴 구현
 * 관리자 대시보드 구현
-* WYSIWYG tinymce -> HTML sanitize by Bleach
 * 삭제된 태그를 실제로 테이블에서 삭제 처리할 것
 * 카테고리 삭제시 기존 게시물의 카테고리 null 지정 문제
 * 게시물 진짜로 삭제 (erase) 기능 만들 것

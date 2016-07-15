@@ -18,6 +18,7 @@ from app.blueprints.page.views import page
 from app.blueprints.page.views.sidebar import sidebar_data
 from app.extensions import db
 from app.utils.structure import build_tree_tuple_list
+from app.utils.html import clean_and_linkify
 
 
 @page.route('/', methods=['GET', 'POST'])
@@ -194,7 +195,7 @@ def post_create():
 
         post.title = form.title.data
         post.slug = form.slug.data
-        post.body = form.body.data
+        post.body = clean_and_linkify(form.body.data)
         post.status = form.status.data
         post.format = current_app.config['RABIANG_POST_HTML_FORMAT']
         post.category_id = form.category.data
@@ -246,7 +247,7 @@ def post_edit(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.slug = form.slug.data
-        post.body = form.body.data
+        post.body = clean_and_linkify(form.body.data)
         post.status = form.status.data
         # post.format = current_app.config['RABIANG_POST_HTML_FORMAT']
         post.category_id = form.category.data
